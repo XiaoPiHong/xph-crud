@@ -23,7 +23,7 @@ export default defineConfig({
           react: "React",
           "react-dom": "ReactDOM",
           "@ant-design/icons": "AntDesignIcons",
-          antd: "antd",
+          antd: "Antd",
         },
       },
     },
