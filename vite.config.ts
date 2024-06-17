@@ -10,4 +10,22 @@ export default defineConfig({
       { find: "xph-crud", replacement: path.resolve(__dirname, "packages") },
     ],
   },
+  build: {
+    lib: {
+      entry: path.resolve(__dirname, "packages/index.ts"),
+      name: "xph-crud",
+      fileName: "index",
+    },
+    rollupOptions: {
+      external: ["react", "react-dom", "antd", "@ant-design/icons"],
+      output: {
+        globals: {
+          react: "React",
+          "react-dom": "ReactDOM",
+          "@ant-design/icons": "AntDesignIcons",
+          antd: "antd",
+        },
+      },
+    },
+  },
 });

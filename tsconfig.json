@@ -16,11 +16,11 @@
 
     /* Linting */
     "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-
     "noImplicitAny": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+
     "paths": {
       "xph-crud/*": ["./packages/*"]
     }
