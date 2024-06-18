@@ -1,19 +1,12 @@
 import React from "react";
-// import {
-//   XphForm,
-//   useXphForm,
-//   IXphFormProps,
-//   IXphFormActionType,
-// } from "xph-crud";
-import XphForm from "xph-crud/form/src/form";
-import { useForm as useXphForm } from "xph-crud/form/src/hooks";
-import {
-  IFormProps as IXphFormProps,
-  IFormActionType as IXphFormActionType,
-} from "xph-crud/form/src/types";
-
 import { InputNumber } from "antd";
 import dayjs from "dayjs";
+import {
+  XphForm,
+  useXphForm,
+  IXphFormProps,
+  IXphFormActionType,
+} from "xph-crud/form";
 
 const ReactApp: React.FC = () => {
   const props: IXphFormProps = {
