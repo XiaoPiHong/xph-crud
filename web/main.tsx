@@ -16,8 +16,8 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       },
     }}
   >
-    {/* <FormApp /> */}
-    <TableApp />
+    <FormApp />
+    {/* <TableApp /> */}
     {/* <Test /> */}
   </ConfigProvider>
   // </React.StrictMode>
