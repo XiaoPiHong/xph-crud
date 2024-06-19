@@ -63,4 +63,4 @@ export default App;
 
 ## 注意事项
 
-xph-crud 是基于 ant-design、ant-design-icons 开发的组件库，所以使用时，需同时引入 [antd](https://github.com/ant-design/ant-design)、[@ant-design/icons](https://github.com/ant-design/ant-design-icons/tree/master)
+xph-crud 是基于 ant-design、ant-design-icons 开发的组件库，所以使用时需同时引入 [antd](https://github.com/ant-design/ant-design)、[@ant-design/icons](https://github.com/ant-design/ant-design-icons/tree/master)

@@ -27,6 +27,7 @@ const sidebars: SidebarsConfig = {
     },
   ],
    */
+  guide: ["guide/getStarted"],
   comp: ["comp/form"],
 };
 

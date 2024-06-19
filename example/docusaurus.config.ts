@@ -64,7 +64,12 @@ const config: Config = {
         src: "img/logo.svg",
       },
       items: [
-        { to: "/docs/guide/getStarted", label: "文档", position: "left" },
+        {
+          type: "docSidebar",
+          sidebarId: "guide",
+          position: "left",
+          label: "文档",
+        },
         {
           type: "docSidebar",
           sidebarId: "comp",
