@@ -17,8 +17,11 @@ function HomepageHeader() {
         </Heading>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
         <div className={styles.buttons}>
-          <Link className="button button--secondary button--lg" to="/blog">
-            xph-crud简介
+          <Link
+            className="button button--secondary button--lg"
+            to="/docs/guide/getStarted"
+          >
+            xph-crud快速上手
           </Link>
         </div>
       </div>

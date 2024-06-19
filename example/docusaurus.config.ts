@@ -25,8 +25,8 @@ const config: Config = {
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: "en",
-    locales: ["en"],
+    defaultLocale: "zh-Hans",
+    locales: ["zh-Hans"],
   },
 
   presets: [
@@ -37,15 +37,15 @@ const config: Config = {
           sidebarPath: "./sidebars.ts",
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
+          // editUrl:
+          //   "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
+          // editUrl:
+          //   "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
         },
         theme: {
           customCss: "./src/css/custom.css",
@@ -64,10 +64,10 @@ const config: Config = {
         src: "img/logo.svg",
       },
       items: [
-        { to: "/blog", label: "简介", position: "left" },
+        { to: "/docs/guide/getStarted", label: "文档", position: "left" },
         {
           type: "docSidebar",
-          sidebarId: "tutorialSidebar",
+          sidebarId: "comp",
           position: "left",
           label: "组件",
         },
@@ -85,18 +85,23 @@ const config: Config = {
           title: "文档",
           items: [
             {
+              label: "快速上手",
+              to: "/docs/guide/getStarted",
+            },
+          ],
+        },
+        {
+          title: "组件",
+          items: [
+            {
               label: "组件",
-              to: "/docs/intro",
+              to: "/docs/comp/form",
             },
           ],
         },
         {
           title: "更多",
           items: [
-            {
-              label: "简介",
-              to: "/blog",
-            },
             {
               label: "GitHub",
               href: "https://github.com/XiaoPiHong/xph-crud",
