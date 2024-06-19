@@ -1,10 +1,15 @@
 {
   "name": "xph-crud",
-  "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
+  "description": "This is a configurable component library based on React",
+  "keywords": [
+    "react",
+    "ant-design",
+    "configurable-component"
+  ],
   "scripts": {
     "web": "vite",
     "build": "tsc && vite build",
@@ -40,5 +45,19 @@
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
     "vite-plugin-dts": "^3.9.1"
+  },
+  "license": "ISC",
+  "author": "XiaoPiHong",
+  "homepage": "https://github.com/XiaoPiHong/xph-crud",
+  "bugs": {
+    "url": "https://github.com/XiaoPiHong/xph-crud/issues",
+    "email": "260094892@qq.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/XiaoPiHong/xph-crud.git"
+  },
+  "engines": {
+    "node": ">=16"
   }
 }
