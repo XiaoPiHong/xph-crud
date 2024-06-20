@@ -91,7 +91,7 @@ importers:
         specifier: ^18.0.0
         version: 18.2.0(react@18.2.0)
       xph-crud:
-        specifier: workspace:^
+        specifier: latest
         version: link:..
     devDependencies:
       '@docusaurus/module-type-aliases':
