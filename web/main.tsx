@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import FormApp from "./FormApp.tsx";
-import TableApp from "./TableApp.tsx";
-import Test from "./Test.tsx";
+import FormApp from "./FormApp.jsx";
+import TableApp from "./TableApp.jsx";
+import Test from "./Test.jsx";
 import "./index.css";
 import { ConfigProvider } from "antd";
 
@@ -16,8 +16,8 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       },
     }}
   >
-    {/* <FormApp /> */}
-    <TableApp />
+    <FormApp />
+    {/* <TableApp /> */}
     {/* <Test /> */}
   </ConfigProvider>
   // </React.StrictMode>

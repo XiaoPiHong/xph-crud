@@ -4171,7 +4171,7 @@ packages:
       '@vue/compiler-dom': 3.4.29
       '@vue/shared': 3.4.29
       computeds: 0.0.1
-      minimatch: 9.0.3
+      minimatch: 9.0.4
       muggle-string: 0.3.1
       path-browserify: 1.0.1
       typescript: 5.2.2
@@ -8049,6 +8049,13 @@ packages:
 
   /minimatch@9.0.3:
     resolution: {integrity: sha512-RHiac9mvaRw0x3AYRgDC1CxAP7HTcNrrECeA8YYJeWnpo+2Q5CegtZjaotWTWxDG3UeGA1coE05iH1mPjT/2mg==}
+    engines: {node: '>=16 || 14 >=14.17'}
+    dependencies:
+      brace-expansion: 2.0.1
+    dev: true
+
+  /minimatch@9.0.4:
+    resolution: {integrity: sha512-KqWh+VchfxcMNRAJjj2tnsSJdNbHsVgnkBhTNrW7AjVo6OvLtxw8zfT9oLw1JSohlFzJ8jCoTgaoXvJ+kHt6fw==}
     engines: {node: '>=16 || 14 >=14.17'}
     dependencies:
       brace-expansion: 2.0.1
