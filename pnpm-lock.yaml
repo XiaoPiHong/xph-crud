@@ -90,6 +90,9 @@ importers:
       react-dom:
         specifier: ^18.0.0
         version: 18.2.0(react@18.2.0)
+      xph-crud:
+        specifier: workspace:^
+        version: link:..
     devDependencies:
       '@docusaurus/module-type-aliases':
         specifier: 3.4.0
