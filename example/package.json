@@ -15,10 +15,14 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@ant-design/icons": "5.3.2",
     "@docusaurus/core": "3.4.0",
     "@docusaurus/preset-classic": "3.4.0",
     "@mdx-js/react": "^3.0.0",
+    "antd": "^5.14.2",
     "clsx": "^2.0.0",
+    "dayjs": "^1.11.10",
+    "lodash-es": "^4.17.21",
     "prism-react-renderer": "^2.3.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
