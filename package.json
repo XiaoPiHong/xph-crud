@@ -13,8 +13,8 @@
   "scripts": {
     "test": "vite",
     "build": "tsc && vite build",
-    "example": "cd example && npm run start",
-    "build:example": "cd example && npm run build",
+    "docs": "cd docs && npm run start",
+    "build:docs": "cd docs && npm run build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
   "files": [
