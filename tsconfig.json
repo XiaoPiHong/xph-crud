@@ -25,6 +25,6 @@
       "xph-crud/*": ["./packages/*"]
     }
   },
-  "include": ["web", "packages"],
+  "include": ["test", "packages"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
