@@ -6,7 +6,7 @@ import {
   useXphForm,
   IXphFormProps,
   IXphFormActionType,
-} from "xph-crud";
+} from "xph-crud/form";
 
 const ReactApp: React.FC = () => {
   const props: IXphFormProps = {
