@@ -11,7 +11,7 @@
     "configurable-component"
   ],
   "scripts": {
-    "test": "vite",
+    "examples": "vite",
     "build": "tsc && vite build",
     "docs": "cd docs && npm run start",
     "build:docs": "cd docs && npm run build",
