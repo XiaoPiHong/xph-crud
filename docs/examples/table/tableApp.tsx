@@ -1,6 +1,13 @@
 import React, { useRef } from "react";
-import { XphTable, TXphTableProps, TXphTableActionType } from "xph-crud/table";
-import { XphExtendCompPropsProvider } from "xph-crud/common";
+import {
+  XphTable,
+  TXphTableProps,
+  TXphTableActionType,
+  XphExtendCompPropsProvider,
+} from "xph-crud";
+import { Card } from "antd";
+import "xph-crud/dist/style.css";
+import "antd/dist/reset.css";
 
 interface DataType {
   key: React.Key;
@@ -439,17 +446,21 @@ const ReactApp: React.FC = () => {
   const xphTableRef = useRef<TXphTableActionType>(null);
 
   return (
-    <XphExtendCompPropsProvider
-      value={{ extendProps: { actions: { type: "link", max: 0 } } }}
-    >
-      <XphTable<DataType>
-        ref={xphTableRef}
-        {...props}
-        onRowSelectionChange={(selectRowKeys, selectedRows) => {
-          console.log(selectRowKeys, selectedRows);
-        }}
-      />
-    </XphExtendCompPropsProvider>
+    <Card title="XphTable组件">
+      <div style={{ height: "500px" }}>
+        <XphExtendCompPropsProvider
+          value={{ extendProps: { actions: { type: "link", max: 0 } } }}
+        >
+          <XphTable<DataType>
+            ref={xphTableRef}
+            {...props}
+            onRowSelectionChange={(selectRowKeys, selectedRows) => {
+              console.log(selectRowKeys, selectedRows);
+            }}
+          />
+        </XphExtendCompPropsProvider>
+      </div>
+    </Card>
   );
 };
 

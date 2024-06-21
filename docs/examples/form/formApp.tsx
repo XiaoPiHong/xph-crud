@@ -1,12 +1,14 @@
 import React from "react";
-import { InputNumber } from "antd";
+import { Card, InputNumber } from "antd";
 import dayjs from "dayjs";
 import {
   XphForm,
   useXphForm,
   IXphFormProps,
   IXphFormActionType,
-} from "xph-crud/form";
+} from "xph-crud";
+import "xph-crud/dist/style.css";
+import "antd/dist/reset.css";
 
 const ReactApp: React.FC = () => {
   const props: IXphFormProps = {
@@ -706,9 +708,13 @@ const ReactApp: React.FC = () => {
   const [register, { setFieldsValue, getFieldsValue, resetFields, validator }] =
     useXphForm();
   return (
-    <section>
-      <XphForm register={register} ref={reactFormRef} {...props}></XphForm>
-    </section>
+    <Card title="XphForm组件">
+      <div style={{ overflow: "auto" }}>
+        <div style={{ width: "1200px" }}>
+          <XphForm register={register} ref={reactFormRef} {...props}></XphForm>
+        </div>
+      </div>
+    </Card>
   );
 };
 
