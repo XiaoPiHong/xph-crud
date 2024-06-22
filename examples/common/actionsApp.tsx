@@ -1,8 +1,5 @@
 import React from "react";
-import { Card } from "antd";
 import { XphActions, IXphActionsProps } from "xph-crud";
-import "xph-crud/dist/style.css";
-import "antd/dist/reset.css";
 
 const ReactApp: React.FC = () => {
   const props: IXphActionsProps = {
@@ -47,11 +44,9 @@ const ReactApp: React.FC = () => {
   };
 
   return (
-    <Card title="XphActions组件">
-      <div style={{ display: "flex", gap: "8px" }}>
-        <XphActions {...props} />
-      </div>
-    </Card>
+    <div style={{ display: "flex", gap: "8px" }}>
+      <XphActions {...props} />
+    </div>
   );
 };
 

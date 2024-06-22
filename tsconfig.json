@@ -22,9 +22,10 @@
     "noUnusedParameters": false,
 
     "paths": {
-      "xph-crud/*": ["./packages/*"]
+      "xph-crud/*": ["./packages/*"],
+      "xph-crud": ["./packages"]
     }
   },
-  "include": ["packages"],
+  "include": ["packages", "examples"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, InputNumber } from "antd";
+import { InputNumber } from "antd";
 import dayjs from "dayjs";
 import {
   XphForm,
@@ -7,8 +7,6 @@ import {
   IXphFormProps,
   IXphFormActionType,
 } from "xph-crud";
-import "xph-crud/dist/style.css";
-import "antd/dist/reset.css";
 
 const ReactApp: React.FC = () => {
   const props: IXphFormProps = {
@@ -708,13 +706,7 @@ const ReactApp: React.FC = () => {
   const [register, { setFieldsValue, getFieldsValue, resetFields, validator }] =
     useXphForm();
   return (
-    <Card title="XphForm组件">
-      <div style={{ overflow: "auto" }}>
-        <div style={{ width: "1200px" }}>
-          <XphForm register={register} ref={reactFormRef} {...props}></XphForm>
-        </div>
-      </div>
-    </Card>
+    <XphForm register={register} ref={reactFormRef} {...props}></XphForm>
   );
 };
 
