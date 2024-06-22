@@ -1,14 +1,10 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
-import FormApp from "./form/formApp";
-import TableApp from "./table/tableApp";
-import ActionsApp from "./common/actionsApp";
-import Test from "./test";
+import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import { ConfigProvider } from "antd";
+import App from './App'
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  // <React.StrictMode>
   <ConfigProvider
     theme={{
       token: {
@@ -17,10 +13,8 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       },
     }}
   >
-    {/* <ActionsApp /> */}
-    {/* <FormApp /> */}
-    <TableApp />
-    {/* <Test /> */}
-  </ConfigProvider>
-  // </React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </ConfigProvider>,
 );

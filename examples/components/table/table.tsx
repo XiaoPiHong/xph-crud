@@ -443,17 +443,19 @@ const ReactApp: React.FC = () => {
   const xphTableRef = useRef<TXphTableActionType>(null);
 
   return (
-    <XphExtendCompPropsProvider
-      value={{ extendProps: { actions: { type: "link", max: 0 } } }}
-    >
-      <XphTable<DataType>
-        ref={xphTableRef}
-        {...props}
-        onRowSelectionChange={(selectRowKeys, selectedRows) => {
-          console.log(selectRowKeys, selectedRows);
-        }}
-      />
-    </XphExtendCompPropsProvider>
+    <div style={{ width: "1200px", height: "600px" }}>
+      <XphExtendCompPropsProvider
+        value={{ extendProps: { actions: { type: "link", max: 0 } } }}
+      >
+        <XphTable<DataType>
+          ref={xphTableRef}
+          {...props}
+          onRowSelectionChange={(selectRowKeys, selectedRows) => {
+            console.log(selectRowKeys, selectedRows);
+          }}
+        />
+      </XphExtendCompPropsProvider>
+    </div>
   );
 };
 
