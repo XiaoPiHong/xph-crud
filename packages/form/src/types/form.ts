@@ -6,10 +6,8 @@ export interface IRegister {
   (methods: IFormActionType): void;
 }
 
-export interface IFormProps<
-  IExtendComponentPropsMap extends Record<string, any> = {}
-> {
-  items: TFormItemProps<IExtendComponentPropsMap>[] /** 表单项配置集合 */;
+export interface IFormProps<T extends Record<string, any> = {}> {
+  items: TFormItemProps<T>[] /** 表单项配置集合 */;
   /**
    * @description 表单布局方式（默认horizontal）
    * @description 排除了antd的inline，因为可以使用colProps实现inline布局
