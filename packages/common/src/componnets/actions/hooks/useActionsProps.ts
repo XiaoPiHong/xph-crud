@@ -2,7 +2,9 @@ import { IActionsProps } from "../types";
 import { merge } from "lodash-es";
 import { useExtendActions } from "../hooks";
 
-export default function useActionsProps(props: IActionsProps) {
+export default function useActionsProps<T extends Record<string, any>>(
+  props: IActionsProps<T>
+) {
   const { extendActionsProps } = useExtendActions();
   const baseActionsProps = {
     items: [],

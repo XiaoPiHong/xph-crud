@@ -3,7 +3,9 @@ import { IActionsProps } from "./types";
 import { useActionsProps, useActionItems, useRenderContent } from "./hooks";
 import More from "./components/more";
 
-const Actions = (props: IActionsProps) => {
+const Actions = <T extends Record<string, any> = {}>(
+  props: IActionsProps<T>
+) => {
   const { actionsProps } = useActionsProps(props);
 
   const { showActionItems, ellipsisActionItems } = useActionItems(actionsProps);
