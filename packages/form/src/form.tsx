@@ -140,8 +140,12 @@ const XphForm = (props: IFormProps, ref: ForwardedRef<IFormActionType>) => {
   );
 };
 
-const ForwardedXphForm = forwardRef(XphForm) as (
-  props: IFormProps & { ref?: ForwardedRef<IFormActionType> }
+const ForwardedXphForm = forwardRef(XphForm) as <
+  IExtendComponentPropsMap extends Record<string, any> = {}
+>(
+  props: IFormProps<IExtendComponentPropsMap> & {
+    ref?: ForwardedRef<IFormActionType>;
+  }
 ) => ReturnType<typeof XphForm>;
 
 export default ForwardedXphForm;

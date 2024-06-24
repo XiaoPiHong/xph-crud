@@ -398,7 +398,7 @@ const ReactApp: React.FC = () => {
             api: async (params) => {
               console.log(
                 params,
-                "GET ApiTreeSelect===========================",
+                "GET ApiTreeSelect==========================="
               );
               return [
                 {
@@ -489,7 +489,7 @@ const ReactApp: React.FC = () => {
             api: async (params) => {
               console.log(
                 params,
-                "GET ApiAutoComplete===========================",
+                "GET ApiAutoComplete==========================="
               );
               return [
                 { value: "Burns Bay Road" },
@@ -651,7 +651,7 @@ const ReactApp: React.FC = () => {
                 ApiAutoComplete: "Burns Bay Road Test",
                 Upload: [],
                 AutoUpload: [],
-              }),
+              })
             );
             // console.log(getFieldsValue(["RangePicker"]));
             // console.log(await resetFields());

@@ -45,8 +45,10 @@ export interface IRenderFormItemProps extends IBaseFormItemProps {
   render: (props: IFRenderProps) => React.ReactNode /** 自定义渲染组件 */;
 }
 /** component props */
-export interface IComponentFormItemProps extends IBaseFormItemProps {
-  component: keyof TComponentPropsMap /** 映射组件 */;
+export interface IComponentFormItemProps<
+  IExtendComponentPropsMap extends Record<string, any> = {}
+> extends IBaseFormItemProps {
+  component: keyof TComponentPropsMap<IExtendComponentPropsMap> /** 映射组件 */;
 }
 
 type Without<T, K> = { [P in Exclude<keyof T, K>]?: never };
@@ -55,7 +57,12 @@ type XOR<T, U> = T | U extends object
   ? (Without<T, keyof U> & U) | (Without<U, keyof T> & T)
   : T | U;
 
-export type TFormItemProps = XOR<IRenderFormItemProps, IComponentFormItemProps>;
+export type TFormItemProps<
+  IExtendComponentPropsMap extends Record<string, any> = {}
+> = XOR<
+  IRenderFormItemProps,
+  IComponentFormItemProps<IExtendComponentPropsMap>
+>;
 
 export function isComponentFormItemProps(
   item: TFormItemProps

@@ -20,7 +20,9 @@ import { IApiTransferProps } from "../components/ApiTransfer";
 import { IApiAutoCompleteProps } from "../components/ApiAutoComplete";
 import { IAutoUploadProps } from "../components/AutoUpload";
 
-export type TComponentPropsMap = {
+export type TComponentPropsMap<
+  IExtendComponentPropsMap extends Record<string, any> = {}
+> = {
   Select: SelectProps;
   Input: InputProps;
   InputNumber: InputNumberProps;
@@ -47,4 +49,4 @@ export type TComponentPropsMap = {
   ApiTransfer: IApiTransferProps;
   ApiAutoComplete: IApiAutoCompleteProps;
   AutoUpload: IAutoUploadProps;
-};
+} & IExtendComponentPropsMap;
