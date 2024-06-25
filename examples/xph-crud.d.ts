@@ -19,6 +19,9 @@ declare global {
       },
       {
         MyToolbarComponentName: {};
+      },
+      {
+        MyFormComponentName: {};
       }
     >;
 }
