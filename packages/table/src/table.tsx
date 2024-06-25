@@ -4,6 +4,7 @@ import SearchForm from "./components/searchForm";
 import { useSearchForm, useTableProps } from "./hooks";
 import Table from "./components/table";
 import style from "./table.module.css";
+import { TXphExtendComponentPropsMap } from "xph-crud/common";
 
 const XphTable = <T extends TDataSourceItem>(
   props: TTableProps<T>,
@@ -42,9 +43,17 @@ const XphTable = <T extends TDataSourceItem>(
 };
 
 const ForwardedXphTable = forwardRef(XphTable) as <
-  RecordType extends TDataSourceItem = TDataSourceItem
+  RecordType extends TDataSourceItem = TDataSourceItem,
+  CellFuncExtendPropsMap extends TXphExtendComponentPropsMap = {},
+  ActionsExtendPropsMap extends TXphExtendComponentPropsMap = {}
 >(
-  props: TTableProps<RecordType> & { ref?: ForwardedRef<TTableActionType> }
+  props: TTableProps<
+    RecordType,
+    CellFuncExtendPropsMap,
+    ActionsExtendPropsMap
+  > & {
+    ref?: ForwardedRef<TTableActionType>;
+  }
 ) => ReturnType<typeof XphTable>;
 
 export default ForwardedXphTable;

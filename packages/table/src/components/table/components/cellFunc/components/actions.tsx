@@ -5,7 +5,7 @@ import style from "../styles/actions.module.css";
 
 const Actions = (
   Comp: React.ReactElement,
-  curCellFuncProps: ICurCellFuncProps<"actions">,
+  curCellFuncProps: ICurCellFuncProps<{}, {}, "actions">,
   mainProps: IMainProps
 ) => {
   const { curComponentProps, cellFuncProps } = curCellFuncProps;

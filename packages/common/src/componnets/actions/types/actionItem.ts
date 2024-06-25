@@ -1,4 +1,5 @@
 import { ButtonProps, MenuProps } from "antd";
+import { TXphExtendComponentPropsMap } from "../../../types";
 
 export interface IBaseActionProps {
   /** 唯一标识 */
@@ -6,7 +7,7 @@ export interface IBaseActionProps {
 }
 
 export type TComponentType<
-  IExtendComponentType extends Record<string, any> = {}
+  IExtendComponentType extends TXphExtendComponentPropsMap = {}
 > = {
   Button: IButtonProps;
   Dropdown: IDropdownProps;
@@ -27,7 +28,7 @@ interface IDropdownProps extends Omit<ButtonProps, "onClick"> {
 /** 组件类型 */
 export interface IComponentActionProps<
   T extends keyof TComponentType<K>,
-  K extends Record<string, any> = {}
+  K extends TXphExtendComponentPropsMap = {}
 > extends IBaseActionProps {
   /** 组件 */
   component: T;
@@ -75,13 +76,13 @@ type XOR<T extends any[]> = T extends [infer A, infer B, ...infer Rest]
   : never;
 
 // 将组件类型映射为 IComponentActionProps
-type MapComponentActionProps<T extends Record<string, any>> = {
+type TMapComponentActionProps<T extends TXphExtendComponentPropsMap> = {
   [K in keyof TComponentType<T>]: IComponentActionProps<K, T>;
 }[keyof TComponentType<T>];
 
 // 合并 IComponentActionProps 和 IRenderActionProps
-export type TActionItemProps<T extends Record<string, any> = {}> = XOR<
-  [MapComponentActionProps<T>, IRenderActionProps]
+export type TActionItemProps<T extends TXphExtendComponentPropsMap = {}> = XOR<
+  [TMapComponentActionProps<T>, IRenderActionProps]
 >;
 
 /** 判断是哪种类型的action */

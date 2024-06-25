@@ -1,7 +1,8 @@
 import { TActionItemProps } from "./actionItem";
 import { ButtonProps } from "antd/lib/button";
+import { TXphExtendComponentPropsMap } from "../../../types";
 
-export interface IActionsProps<T extends Record<string, any> = {}> {
+export interface IActionsProps<T extends TXphExtendComponentPropsMap = {}> {
   /** 类型 */
   type?: ButtonProps["type"];
   /** 操作项 */

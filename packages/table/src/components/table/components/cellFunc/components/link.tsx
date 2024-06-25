@@ -6,7 +6,7 @@ const { useToken } = theme;
 
 const Link = (
   Comp: React.JSXElementConstructor<any>,
-  curCellFuncProps: ICurCellFuncProps<"link">,
+  curCellFuncProps: ICurCellFuncProps<{}, {}, "link">,
   mainProps: IMainProps
 ) => {
   const { curComponentProps, cellFuncProps } = curCellFuncProps;

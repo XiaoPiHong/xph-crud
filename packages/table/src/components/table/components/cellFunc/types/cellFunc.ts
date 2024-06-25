@@ -1,39 +1,80 @@
-import { IXphActionsProps } from "xph-crud/common";
-
-export type TCellComponentType = "link" | "actions";
+import { IXphActionsProps, TXphExtendComponentPropsMap } from "xph-crud/common";
 
 /** cellFunc中每一项对应的组件componentProps属性映射  */
-export interface ICellComponentPropsMap {
+export type TCellComponentPropsMap<
+  CellFuncExtendPropsMap extends TXphExtendComponentPropsMap = {},
+  ActionsExtendPropsMap extends TXphExtendComponentPropsMap = {}
+> = {
   link: {
     /** 超链接，点击超链接跳转 */
     url?: string;
     /** 点击事件（优先级最高） */
     onClick?: () => void;
   };
-  actions: IXphActionsProps;
-}
+  actions: IXphActionsProps<ActionsExtendPropsMap>;
+} & CellFuncExtendPropsMap;
+
+// ============================================================================== TCellProps start ==================================
+type Without<T, K> = { [P in Exclude<keyof T, K>]?: never };
+
+type XOR<T extends any[]> = T extends [infer A, infer B, ...infer Rest]
+  ? A | B extends object
+    ?
+        | (Without<A, keyof B> & B)
+        | (Without<B, keyof A> & A)
+        | XOR<[A | B, ...Rest]>
+    : A | B
+  : T extends [infer A]
+  ? A
+  : never;
 
 /** cellFunc中每一项的配置  */
-export interface ICellProps<T extends TCellComponentType = TCellComponentType> {
+interface ICellProps<
+  T extends keyof TCellComponentPropsMap<J, K>,
+  J extends TXphExtendComponentPropsMap = {},
+  K extends TXphExtendComponentPropsMap = {}
+> {
   component: T;
-  componentProps?: ICellComponentPropsMap[T];
+  componentProps?: TCellComponentPropsMap<J, K>[T];
 }
+
+type TCellFuncPropsMap<
+  J extends TXphExtendComponentPropsMap = {},
+  K extends TXphExtendComponentPropsMap = {}
+> = {
+  [T in keyof TCellComponentPropsMap<J, K>]: ICellProps<T, J, K>;
+}[keyof TCellComponentPropsMap<J, K>];
+
+export type TCellProps<
+  J extends TXphExtendComponentPropsMap = {},
+  K extends TXphExtendComponentPropsMap = {}
+> = XOR<[TCellFuncPropsMap<J, K>]>;
+// ============================================================================== TCellProps end ===========================================
 
 /** CellFunc组件的props */
 export interface ICellFuncProps<
+  /** 行数据类型 */
   T = unknown,
-  U extends TCellComponentType = TCellComponentType
+  /** 单元格的扩展组件props映射 */
+  J extends TXphExtendComponentPropsMap = {},
+  /** 操作组的扩展组件props映射 */
+  K extends TXphExtendComponentPropsMap = {}
 > {
-  dslConfig: ICellProps<U>[];
+  dslConfig: TCellProps<J, K>[];
   renderPrams: { text: any; record: T; index: number };
 }
 
 /** cellFunc中每一项对应的组件的props */
 export interface ICurCellFuncProps<
-  T extends TCellComponentType = TCellComponentType
+  J extends TXphExtendComponentPropsMap = {},
+  K extends TXphExtendComponentPropsMap = {},
+  T extends keyof TCellComponentPropsMap<J, K> = keyof TCellComponentPropsMap<
+    J,
+    K
+  >
 > {
-  curComponentProps?: ICellComponentPropsMap[T];
-  cellFuncProps: ICellFuncProps<unknown, T>;
+  curComponentProps?: TCellComponentPropsMap<J, K>[T];
+  cellFuncProps: ICellFuncProps<unknown, J, K>;
 }
 
 /**

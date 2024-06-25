@@ -2,14 +2,26 @@ import { TableRef } from "antd/es/table";
 import { TSearchFormProps } from "./searchForm";
 import { TCrudFormProps } from "./crudForm";
 import { TApiTableProps } from "./apiTable";
+import { TXphExtendComponentPropsMap } from "xph-crud/common";
 
 /** 行数据 */
 export type TDataSourceItem = Record<PropertyKey, any>;
 
 /** 整个组件的配置 */
-export type TTableProps<RecordType = TDataSourceItem> = {
+export type TTableProps<
+  /** 行数据类型 */
+  RecordType = TDataSourceItem,
+  /** 单元格扩展组件props映射 */
+  CellFuncExtendPropsMap extends TXphExtendComponentPropsMap = {},
+  /** 操作组扩展组件props映射 */
+  ActionsExtendPropsMap extends TXphExtendComponentPropsMap = {}
+> = {
   /** 表格配置 */
-  table?: TApiTableProps<RecordType>;
+  table?: TApiTableProps<
+    RecordType,
+    CellFuncExtendPropsMap,
+    ActionsExtendPropsMap
+  >;
   /** 搜索表单配置项 */
   searchForm?: TSearchFormProps;
   /** 新增 / 修改表单配置项 */

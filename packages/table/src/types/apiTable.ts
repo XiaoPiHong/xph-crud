@@ -3,6 +3,7 @@ import { TableRowSelection, RowSelectionType } from "antd/lib/table/interface";
 import { IXphActionsProps } from "xph-crud/common";
 import { TDataSourceItem } from "./table";
 import { TColumnProps } from "./column";
+import { TXphExtendComponentPropsMap } from "xph-crud/common";
 
 export interface IFunctionToolbarParams<RecordType = TDataSourceItem> {
   loading: boolean;
@@ -10,9 +11,13 @@ export interface IFunctionToolbarParams<RecordType = TDataSourceItem> {
 }
 
 /** 扩展antd table的属性 */
-export type TApiTableProps<RecordType = TDataSourceItem> = {
+export type TApiTableProps<
+  RecordType = TDataSourceItem,
+  J extends TXphExtendComponentPropsMap = {},
+  K extends TXphExtendComponentPropsMap = {}
+> = {
   /** 列配置项 */
-  columns?: TColumnProps<RecordType>[];
+  columns?: TColumnProps<RecordType, J, K>[];
   /** 首次是否自动请求 */
   autoRequest?: boolean;
   /** 获取datasource的api */
