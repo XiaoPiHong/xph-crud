@@ -45,12 +45,16 @@ const XphTable = <T extends TDataSourceItem>(
 const ForwardedXphTable = forwardRef(XphTable) as <
   RecordType extends TDataSourceItem = TDataSourceItem,
   CellFuncExtendPropsMap extends TXphExtendComponentPropsMap = {},
-  ActionsExtendPropsMap extends TXphExtendComponentPropsMap = {}
+  ActionsExtendPropsMap extends TXphExtendComponentPropsMap = {},
+  ToolbarExtendPropsMap extends TXphExtendComponentPropsMap = {},
+  FormExtendPropsMap extends TXphExtendComponentPropsMap = {}
 >(
   props: TTableProps<
     RecordType,
     CellFuncExtendPropsMap,
-    ActionsExtendPropsMap
+    ActionsExtendPropsMap,
+    ToolbarExtendPropsMap,
+    FormExtendPropsMap
   > & {
     ref?: ForwardedRef<TTableActionType>;
   }

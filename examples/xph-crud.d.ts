@@ -8,20 +8,19 @@ declare global {
   interface INewXphActionsProps
     extends IXphActionsProps<{ MyComponentName: {} }> {}
   /** 表格的映射 */
-  type TNewXphTableProps<T extends Record<string, any> = unknown> =
-    TXphTableProps<
-      T,
-      {
-        MyCellFuncComponentName: {};
-      },
-      {
-        MyActionsComponentName: {};
-      },
-      {
-        MyToolbarComponentName: {};
-      },
-      {
-        MyFormComponentName: {};
-      }
-    >;
+  type TNewXphTableProps<T = unknown> = TXphTableProps<
+    T,
+    {
+      MyCellFuncComponentName: {};
+    },
+    {
+      MyActionsComponentName: {};
+    },
+    {
+      MyToolbarComponentName: {};
+    },
+    {
+      MyFormComponentName: {};
+    }
+  >;
 }
