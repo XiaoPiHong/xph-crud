@@ -1,8 +1,9 @@
 import { IActionsProps } from "../types";
 import { merge } from "lodash-es";
 import { useExtendActions } from "../hooks";
+import { TXphExtendComponentPropsMap } from "../../../types";
 
-export default function useActionsProps<T extends Record<string, any>>(
+export default function useActionsProps<T extends TXphExtendComponentPropsMap>(
   props: IActionsProps<T>
 ) {
   const { extendActionsProps } = useExtendActions();

@@ -1,12 +1,13 @@
 import { TFormItemProps, Recordable } from "./formItem";
 import { ColProps } from "antd";
 import { NamePath } from "antd/lib/form/interface";
+import { TXphExtendComponentPropsMap } from "xph-crud/common";
 
 export interface IRegister {
   (methods: IFormActionType): void;
 }
 
-export interface IFormProps<T extends Record<string, any> = {}> {
+export interface IFormProps<T extends TXphExtendComponentPropsMap = {}> {
   items: TFormItemProps<T>[] /** 表单项配置集合 */;
   /**
    * @description 表单布局方式（默认horizontal）

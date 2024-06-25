@@ -19,9 +19,10 @@ import { IApiTreeSelectProps } from "../components/ApiTreeSelect";
 import { IApiTransferProps } from "../components/ApiTransfer";
 import { IApiAutoCompleteProps } from "../components/ApiAutoComplete";
 import { IAutoUploadProps } from "../components/AutoUpload";
+import { TXphExtendComponentPropsMap } from "xph-crud/common";
 
 export type TComponentPropsMap<
-  IExtendComponentPropsMap extends Record<string, any> = {}
+  IExtendComponentPropsMap extends TXphExtendComponentPropsMap = {}
 > = {
   Select: SelectProps;
   Input: InputProps;

@@ -2,8 +2,9 @@ import { Fragment } from "react";
 import { IActionsProps } from "./types";
 import { useActionsProps, useActionItems, useRenderContent } from "./hooks";
 import More from "./components/more";
+import { TXphExtendComponentPropsMap } from "../../types";
 
-const Actions = <T extends Record<string, any> = {}>(
+const Actions = <T extends TXphExtendComponentPropsMap = {}>(
   props: IActionsProps<T>
 ) => {
   const { actionsProps } = useActionsProps(props);

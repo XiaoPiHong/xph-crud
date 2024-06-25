@@ -3,6 +3,7 @@ import { Rule } from "antd/es/form";
 import React from "react";
 import { ColProps } from "antd";
 import { IFormActionType } from "./form";
+import { TXphExtendComponentPropsMap } from "xph-crud/common";
 
 /**
  * 字符串类型对象
@@ -45,8 +46,9 @@ export interface IRenderFormItemProps extends IBaseFormItemProps {
   render: (props: IFRenderProps) => React.ReactNode /** 自定义渲染组件 */;
 }
 /** component props */
-export interface IComponentFormItemProps<T extends Record<string, any> = {}>
-  extends IBaseFormItemProps {
+export interface IComponentFormItemProps<
+  T extends TXphExtendComponentPropsMap = {}
+> extends IBaseFormItemProps {
   component: keyof TComponentPropsMap<T> /** 映射组件 */;
 }
 
@@ -56,7 +58,7 @@ type XOR<T, U> = T | U extends object
   ? (Without<T, keyof U> & U) | (Without<U, keyof T> & T)
   : T | U;
 
-export type TFormItemProps<T extends Record<string, any> = {}> = XOR<
+export type TFormItemProps<T extends TXphExtendComponentPropsMap = {}> = XOR<
   IRenderFormItemProps,
   IComponentFormItemProps<T>
 >;

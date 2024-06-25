@@ -19,6 +19,7 @@ import {
   useFormValues,
   useFormCollapse,
 } from "./hooks";
+import { TXphExtendComponentPropsMap } from "xph-crud/common";
 
 const XphForm = (props: IFormProps, ref: ForwardedRef<IFormActionType>) => {
   console.log("render Form");
@@ -141,7 +142,7 @@ const XphForm = (props: IFormProps, ref: ForwardedRef<IFormActionType>) => {
 };
 
 const ForwardedXphForm = forwardRef(XphForm) as <
-  T extends Record<string, any> = {}
+  T extends TXphExtendComponentPropsMap = {}
 >(
   props: IFormProps<T> & { ref?: ForwardedRef<IFormActionType> }
 ) => ReturnType<typeof XphForm>;

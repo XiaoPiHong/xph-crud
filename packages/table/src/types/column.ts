@@ -55,11 +55,9 @@ export type TColumnProps<
   ]
 >;
 
-export function isComponentColumnProps<
-  T,
-  J extends TXphExtendComponentPropsMap = {},
-  K extends TXphExtendComponentPropsMap = {}
->(column: TColumnProps<T>): column is IComponentColumnProps<T, J, K> {
+export function isComponentColumnProps<T>(
+  column: TColumnProps<T>
+): column is IComponentColumnProps<T> {
   return "cellFunc" in column;
 }
 
