@@ -14,7 +14,8 @@ export interface IFunctionToolbarParams<T = TDataSourceItem> {
 export type TApiTableProps<
   T = TDataSourceItem,
   J extends TXphExtendComponentPropsMap = {},
-  K extends TXphExtendComponentPropsMap = {}
+  K extends TXphExtendComponentPropsMap = {},
+  L extends TXphExtendComponentPropsMap = {}
 > = {
   /** 列配置项 */
   columns?: TColumnProps<T, J, K>[];
@@ -34,8 +35,8 @@ export type TApiTableProps<
   fullHeight?: boolean;
   /** 顶部操作栏配置，函数时可以传递参数，参数是什么由调用方决定 */
   toolbar?:
-    | IXphActionsProps
-    | ((e: IFunctionToolbarParams<T>) => IXphActionsProps);
+    | IXphActionsProps<L>
+    | ((e: IFunctionToolbarParams<T>) => IXphActionsProps<L>);
   /** 排序、筛选变化时触发 */
   onChange?: (filters: any, sorter: any, extra: any) => void;
 } & Omit<

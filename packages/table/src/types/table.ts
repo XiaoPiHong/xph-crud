@@ -14,13 +14,16 @@ export type TTableProps<
   /** 单元格扩展组件props映射 */
   CellFuncExtendPropsMap extends TXphExtendComponentPropsMap = {},
   /** 操作组扩展组件props映射 */
-  ActionsExtendPropsMap extends TXphExtendComponentPropsMap = {}
+  ActionsExtendPropsMap extends TXphExtendComponentPropsMap = {},
+  /** 顶部操作栏扩展组件props映射 */
+  ToolbarExtendPropsMap extends TXphExtendComponentPropsMap = {}
 > = {
   /** 表格配置 */
   table?: TApiTableProps<
     RecordType,
     CellFuncExtendPropsMap,
-    ActionsExtendPropsMap
+    ActionsExtendPropsMap,
+    ToolbarExtendPropsMap
   >;
   /** 搜索表单配置项 */
   searchForm?: TSearchFormProps;

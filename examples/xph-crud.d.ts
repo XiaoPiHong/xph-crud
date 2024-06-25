@@ -12,10 +12,13 @@ declare global {
     TXphTableProps<
       T,
       {
-        MyCellFuncComponentName: { a: 1 };
+        MyCellFuncComponentName: {};
       },
       {
         MyActionsComponentName: {};
+      },
+      {
+        MyToolbarComponentName: {};
       }
     >;
 }
