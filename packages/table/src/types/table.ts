@@ -16,7 +16,9 @@ export type TTableProps<
   /** 操作组扩展组件props映射 */
   ActionsExtendPropsMap extends TXphExtendComponentPropsMap = {},
   /** 顶部操作栏扩展组件props映射 */
-  ToolbarExtendPropsMap extends TXphExtendComponentPropsMap = {}
+  ToolbarExtendPropsMap extends TXphExtendComponentPropsMap = {},
+  /** 表单扩展组件props映射（包括：搜素表单 & 新增/修改表单） */
+  FormExtendPropsMap extends TXphExtendComponentPropsMap = {}
 > = {
   /** 表格配置 */
   table?: TApiTableProps<
@@ -26,9 +28,9 @@ export type TTableProps<
     ToolbarExtendPropsMap
   >;
   /** 搜索表单配置项 */
-  searchForm?: TSearchFormProps;
+  searchForm?: TSearchFormProps<FormExtendPropsMap>;
   /** 新增 / 修改表单配置项 */
-  crudForm?: TCrudFormProps;
+  crudForm?: TCrudFormProps<FormExtendPropsMap>;
 
   /** 分页改变事件 */
   onPaginationChange?: (page: number, pageSize: number) => void;
