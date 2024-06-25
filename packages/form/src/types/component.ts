@@ -21,9 +21,7 @@ import { IApiAutoCompleteProps } from "../components/ApiAutoComplete";
 import { IAutoUploadProps } from "../components/AutoUpload";
 import { TXphExtendComponentPropsMap } from "xph-crud/common";
 
-export type TComponentPropsMap<
-  IExtendComponentPropsMap extends TXphExtendComponentPropsMap = {}
-> = {
+export type TComponentPropsMap<T extends TXphExtendComponentPropsMap = {}> = {
   Select: SelectProps;
   Input: InputProps;
   InputNumber: InputNumberProps;
@@ -50,4 +48,4 @@ export type TComponentPropsMap<
   ApiTransfer: IApiTransferProps;
   ApiAutoComplete: IApiAutoCompleteProps;
   AutoUpload: IAutoUploadProps;
-} & IExtendComponentPropsMap;
+} & T;

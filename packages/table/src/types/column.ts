@@ -44,14 +44,14 @@ type XOR<T extends any[]> = T extends [infer A, infer B, ...infer Rest]
   : never;
 
 export type TColumnProps<
-  RecordType = TDataSourceItem,
+  T = TDataSourceItem,
   J extends TXphExtendComponentPropsMap = {},
   K extends TXphExtendComponentPropsMap = {}
 > = XOR<
   [
-    IComponentColumnProps<RecordType, J, K>,
-    IRenderColumnProps<RecordType>,
-    IGroupColumnProps<RecordType, J, K>
+    IComponentColumnProps<T, J, K>,
+    IRenderColumnProps<T>,
+    IGroupColumnProps<T, J, K>
   ]
 >;
 

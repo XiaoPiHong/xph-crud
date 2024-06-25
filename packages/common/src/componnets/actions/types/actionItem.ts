@@ -6,12 +6,10 @@ export interface IBaseActionProps {
   key?: string;
 }
 
-export type TComponentType<
-  IExtendComponentType extends TXphExtendComponentPropsMap = {}
-> = {
+export type TComponentType<T extends TXphExtendComponentPropsMap = {}> = {
   Button: IButtonProps;
   Dropdown: IDropdownProps;
-} & IExtendComponentType;
+} & T;
 
 interface IButtonProps extends ButtonProps {}
 interface IDropdownProps extends Omit<ButtonProps, "onClick"> {
