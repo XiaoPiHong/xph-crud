@@ -1,7 +1,7 @@
 import { extend } from "dayjs";
 import { IXphFormProps, IXphActionsProps, TXphTableProps } from "xph-crud";
 
-/** 若需自己扩展组件，可以在这里声明类型 */
+/** 若需自己扩展组件，可以在这里声明类型(声明后使用该类型定义变量) */
 declare global {
   /** 表单的映射 */
   interface INewXphFormProps extends IXphFormProps<{ MyComponentName: {} }> {}
