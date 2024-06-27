@@ -12,7 +12,7 @@
     "examples": {
       "name": "examples",
       "command": "pnpm examples",
-      "runAtStart": false,
+      "runAtStart": true,
       "preview": {
         "port": 5173
       }
