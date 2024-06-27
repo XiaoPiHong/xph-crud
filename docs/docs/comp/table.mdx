@@ -445,13 +445,15 @@ const ReactApp: React.FC = () => {
   const xphTableRef = useRef<TXphTableActionType>(null);
 
   return (
-    <XphTable<DataType>
-      ref={xphTableRef}
-      {...props}
-      onRowSelectionChange={(selectRowKeys, selectedRows) => {
-        console.log(selectRowKeys, selectedRows);
-      }}
-    />
+    <div style={{ minWidth: "1200px", height: "600px" }}>
+      <XphTable<DataType>
+        ref={xphTableRef}
+        {...props}
+        onRowSelectionChange={(selectRowKeys, selectedRows) => {
+          console.log(selectRowKeys, selectedRows);
+        }}
+      />
+    </div>
   );
 };
 

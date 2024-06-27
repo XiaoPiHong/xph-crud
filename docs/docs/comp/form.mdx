@@ -713,9 +713,9 @@ const ReactApp: React.FC = () => {
   const [register, { setFieldsValue, getFieldsValue, resetFields, validator }] =
     useXphForm();
   return (
-    <section>
+    <div style={{ minWidth: "1200px" }}>
       <XphForm register={register} ref={reactFormRef} {...props}></XphForm>
-    </section>
+    </div>
   );
 };
 
