@@ -443,7 +443,7 @@ const ReactApp: React.FC = () => {
   const xphTableRef = useRef<TXphTableActionType>(null);
 
   return (
-    <div style={{ minWidth: "1200px", height: "600px" }}>
+    <div style={{ minWidth: "1400px", height: "600px" }}>
       <XphExtendCompPropsProvider
         value={{ extendProps: { actions: { type: "link", max: 0 } } }}
       >

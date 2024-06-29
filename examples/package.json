@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "examples",
-  "main": "index.js",
+  "main": "dist/entry.ts",
   "scripts": {},
   "dependencies": {
     "@ant-design/icons": "5.3.2",

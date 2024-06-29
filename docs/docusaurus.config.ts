@@ -1,6 +1,7 @@
 import { themes as prismThemes } from "prism-react-renderer";
 import type { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
+import path from "path";
 
 const config: Config = {
   title: "xph-crud",
@@ -28,6 +29,23 @@ const config: Config = {
     defaultLocale: "zh-Hans",
     locales: ["zh-Hans"],
   },
+  plugins: [
+    // async function ignoreBuffer(context, options) {
+    //   return {
+    //     name: "examples-alias",
+    //     configureWebpack(config) {
+    //       return {
+    //         resolve: {
+    //           alias: {
+    //             examples: path.resolve(__dirname, "../examples"),
+    //             "xph-crud": path.resolve(__dirname, "../packages"),
+    //           },
+    //         },
+    //       };
+    //     },
+    //   };
+    // },
+  ],
   themes: ["@docusaurus/theme-live-codeblock"],
   presets: [
     [
@@ -48,7 +66,7 @@ const config: Config = {
           //   "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
         },
         theme: {
-          customCss: "./src/css/custom.css",
+          customCss: ["./src/css/custom.css"],
         },
       } satisfies Preset.Options,
     ],
