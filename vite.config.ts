@@ -1,9 +1,9 @@
 import { defineConfig, BuildOptions } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
-import dts from "vite-plugin-dts";
+import dts, { PluginOptions } from "vite-plugin-dts";
 
-const getBuildConfig = (mode: string): BuildOptions => {
+const getLibBuildConfig = (mode: string): BuildOptions => {
   return {
     main: {
       lib: {
@@ -26,7 +26,7 @@ const getBuildConfig = (mode: string): BuildOptions => {
     examples: {
       outDir: path.resolve(__dirname, "examples/dist"),
       lib: {
-        entry: path.resolve(__dirname, "examples/entry.ts"),
+        entry: path.resolve(__dirname, "examples/index.ts"),
         name: "examples",
         fileName: "index",
       },
@@ -47,21 +47,28 @@ const getBuildConfig = (mode: string): BuildOptions => {
   }[mode]!;
 };
 
+const getDtsBuildConfig = (mode: string): PluginOptions => {
+  return {
+    main: {
+      entryRoot: path.resolve(__dirname, "packages"),
+      outDir: path.resolve(__dirname, "dist/types"),
+    },
+    examples: {
+      entryRoot: path.resolve(__dirname, "examples"),
+      outDir: path.resolve(__dirname, "examples/dist/types"),
+    },
+  }[mode]!;
+};
+
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   return {
-    plugins: [
-      react(),
-      dts({
-        entryRoot: path.resolve(__dirname, "packages"),
-        outDir: path.resolve(__dirname, "dist/types"),
-      }),
-    ],
+    plugins: [react(), dts(getDtsBuildConfig(mode))],
     resolve: {
       alias: [
         { find: "xph-crud", replacement: path.resolve(__dirname, "packages") },
       ],
     },
-    build: getBuildConfig(mode),
+    build: getLibBuildConfig(mode),
   };
 });

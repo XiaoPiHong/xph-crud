@@ -1,43 +1,53 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import { createRoot } from "react-dom/client";
 import ErrorBoundary from "@docusaurus/ErrorBoundary";
 import { StyleProvider } from "@ant-design/cssinjs";
-import { useRef, useEffect } from "react";
-import { createRoot } from "react-dom/client";
 
-const ExampleWrapper = ({ Comp }: any) => {
-  const divDom = useRef<HTMLDivElement>(null);
+const IframeWrapper = ({ Comp }: { Comp: React.ComponentType }) => {
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   useEffect(() => {
-    if (divDom.current) {
-      // 创建 Shadow DOM
-      const shadowRoot = divDom.current.attachShadow({ mode: "open" });
-      const container = document.createElement("div");
-      shadowRoot.appendChild(container);
-      const root = createRoot(container);
+    if (iframeRef.current) {
+      const iframeDoc =
+        iframeRef.current.contentDocument ||
+        iframeRef.current.contentWindow?.document;
+      if (iframeDoc) {
+        // 创建一个根元素容器
+        const container = iframeDoc.createElement("div");
+        iframeDoc.body.appendChild(container);
 
-      // 渲染组件到 Shadow DOM 中
-      root.render(
-        <ErrorBoundary>
-          <StyleProvider container={shadowRoot}>
-            <Comp />
-          </StyleProvider>
-        </ErrorBoundary>
-      );
+        // 创建根节点
+        const root = createRoot(container);
+
+        // 将 Ant Design 的样式链接添加到 iframe 中
+        const link = iframeDoc.createElement("link");
+        link.rel = "stylesheet";
+        link.href =
+          "https://cdnjs.cloudflare.com/ajax/libs/antd/4.15.2/antd.min.css"; // 替换为 Ant Design 样式表的路径
+        iframeDoc.head.appendChild(link);
+
+        // 渲染组件到 iframe 中
+        root.render(
+          <ErrorBoundary>
+            <StyleProvider container={iframeDoc.head}>
+              <Comp />
+            </StyleProvider>
+          </ErrorBoundary>
+        );
+      }
     }
   }, [Comp]);
 
   return (
-    <div
-      ref={divDom}
+    <iframe
+      ref={iframeRef}
       style={{
         width: "100%",
-        overflow: "auto",
-        borderRadius: "4px",
-        border: "2px solid #f2f2f2",
-        padding: "16px",
+        height: "500px",
+        border: "none",
       }}
-    ></div>
+    ></iframe>
   );
 };
 
-export default ExampleWrapper;
+export default IframeWrapper;

@@ -15,7 +15,7 @@
     "build": "tsc && vite build --mode main",
     "build:examples": "tsc && vite build --mode examples",
     "docs": "cd docs && npm run start",
-    "build:docs": "cd docs && npm run build",
+    "build:docs": "npm run build:examples && cd docs && npm run build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
   "files": [
