@@ -40,7 +40,6 @@ const getLibBuildConfig = (mode: string): BuildOptions => {
             "react-dom": "ReactDOM",
             "@ant-design/icons": "AntDesignIcons",
             "lodash-es": "LodashEs",
-            "@ant-design/cssinjs": "AntDesignCssinjs",
           },
         },
       },

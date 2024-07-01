@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom";
-import { Form, Table, Actions } from "../components";
+import { Form, Table, Actions } from "../demo";
 const routes = [
   { path: "/form", element: <Form /> },
   { path: "/table", element: <Table /> },
