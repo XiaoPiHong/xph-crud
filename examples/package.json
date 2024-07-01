@@ -1,8 +1,7 @@
 {
   "private": true,
   "name": "examples",
-  "main": "dist/index.js",
-  "types": "dist/types/index.d.ts",
+  "main": "index.js",
   "scripts": {},
   "peerDependencies": {
     "react": "^18.2.0",

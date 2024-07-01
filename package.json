@@ -12,8 +12,7 @@
   ],
   "scripts": {
     "examples": "vite",
-    "build": "tsc && vite build --mode main",
-    "build:examples": "tsc && vite build --mode examples",
+    "build": "tsc && vite build",
     "docs": "cd docs && npm run start",
     "build:docs": "cd docs && npm run build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"

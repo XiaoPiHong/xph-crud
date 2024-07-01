@@ -1,10 +1,16 @@
 import ErrorBoundary from "@docusaurus/ErrorBoundary";
-import React, { useRef } from "react";
+import React from "react";
+import root from "react-shadow";
+import styles from "!raw-loader!/node_modules/antd/dist/reset.css";
 
 const DemoWrapper: React.FC<any> = ({ children }) => {
-  const divRef = useRef<HTMLDivElement>(null);
-
-  return <div ref={divRef}>{children}</div>;
+  console.log(styles);
+  return (
+    <root.div className="quote">
+      <style type="text/css">{styles}</style>
+      {children}
+    </root.div>
+  );
 };
 
 export default DemoWrapper;

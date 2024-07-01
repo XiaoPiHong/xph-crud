@@ -30,21 +30,21 @@ const config: Config = {
     locales: ["zh-Hans"],
   },
   plugins: [
-    // async function ignoreBuffer(context, options) {
-    //   return {
-    //     name: "examples-alias",
-    //     configureWebpack(config) {
-    //       return {
-    //         resolve: {
-    //           alias: {
-    //             examples: path.resolve(__dirname, "../examples"),
-    //             "xph-crud": path.resolve(__dirname, "../packages"),
-    //           },
-    //         },
-    //       };
-    //     },
-    //   };
-    // },
+    async function examplesAlias(context, options) {
+      return {
+        name: "examples-alias",
+        configureWebpack(config) {
+          return {
+            resolve: {
+              alias: {
+                examples: path.resolve(__dirname, "../examples"),
+                "xph-crud": path.resolve(__dirname, "../packages"),
+              },
+            },
+          };
+        },
+      };
+    },
   ],
   themes: ["@docusaurus/theme-live-codeblock"],
   presets: [

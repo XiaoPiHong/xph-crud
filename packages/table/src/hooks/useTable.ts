@@ -51,8 +51,7 @@ export default function useTable(
       lastTableState.current = newModel;
 
       /** 这里是loading表单 */
-      const { setFormLoading } = searchFormRef.current!;
-      setFormLoading(newModel.loading);
+      searchFormRef.current?.setFormLoading(newModel.loading);
     },
   };
 

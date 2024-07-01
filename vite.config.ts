@@ -1,11 +1,24 @@
-import { defineConfig, BuildOptions } from "vite";
+import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
-import dts, { PluginOptions } from "vite-plugin-dts";
+import dts from "vite-plugin-dts";
 
-const getLibBuildConfig = (mode: string): BuildOptions => {
+// https://vitejs.dev/config/
+export default defineConfig(({ mode }) => {
   return {
-    main: {
+    plugins: [
+      react(),
+      dts({
+        entryRoot: path.resolve(__dirname, "packages"),
+        outDir: path.resolve(__dirname, "dist/types"),
+      }),
+    ],
+    resolve: {
+      alias: [
+        { find: "xph-crud", replacement: path.resolve(__dirname, "packages") },
+      ],
+    },
+    build: {
       lib: {
         entry: path.resolve(__dirname, "packages/index.ts"),
         name: "xph-crud",
@@ -23,52 +36,5 @@ const getLibBuildConfig = (mode: string): BuildOptions => {
         },
       },
     },
-    examples: {
-      outDir: path.resolve(__dirname, "examples/dist"),
-      lib: {
-        entry: path.resolve(__dirname, "examples/index.ts"),
-        name: "examples",
-        fileName: "index",
-      },
-      rollupOptions: {
-        external: ["react", "react-dom"],
-        output: {
-          globals: {
-            react: "React",
-            antd: "Antd",
-            dayjs: "Dayjs",
-            "react-dom": "ReactDOM",
-            "@ant-design/icons": "AntDesignIcons",
-            "lodash-es": "LodashEs",
-          },
-        },
-      },
-    },
-  }[mode]!;
-};
-
-const getDtsBuildConfig = (mode: string): PluginOptions => {
-  return {
-    main: {
-      entryRoot: path.resolve(__dirname, "packages"),
-      outDir: path.resolve(__dirname, "dist/types"),
-    },
-    examples: {
-      entryRoot: path.resolve(__dirname, "examples"),
-      outDir: path.resolve(__dirname, "examples/dist/types"),
-    },
-  }[mode]!;
-};
-
-// https://vitejs.dev/config/
-export default defineConfig(({ mode }) => {
-  return {
-    plugins: [react(), dts(getDtsBuildConfig(mode))],
-    resolve: {
-      alias: [
-        { find: "xph-crud", replacement: path.resolve(__dirname, "packages") },
-      ],
-    },
-    build: getLibBuildConfig(mode),
   };
 });
