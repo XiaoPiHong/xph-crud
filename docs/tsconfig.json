@@ -4,6 +4,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "@site/*": ["./*"],
       "xph-crud/*": ["../packages/*"],
       "xph-crud": ["../packages"],
       "examples/*": ["../examples/*"]
