@@ -1,8 +1,10 @@
-import React from "react";
 import ErrorBoundary from "@docusaurus/ErrorBoundary";
+import React, { useRef } from "react";
 
-const IframeWrapper = ({ children }: { children: React.ReactNode }) => {
-  return <ErrorBoundary>{children}</ErrorBoundary>;
+const DemoWrapper: React.FC<any> = ({ children }) => {
+  const divRef = useRef<HTMLDivElement>(null);
+
+  return <div ref={divRef}>{children}</div>;
 };
 
-export default IframeWrapper;
+export default DemoWrapper;
