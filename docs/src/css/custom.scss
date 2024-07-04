@@ -36,10 +36,10 @@
 /** docs内部全局样式影响到antd的样式，这里做一下兼容 */
 :where([class^="ant-"]) {
   table {
-    border-collapse: collapse;
+    border-collapse: unset;
     display: table;
     margin-bottom: unset;
-    overflow: auto;
+    overflow: unset;
 
     thead tr {
       border-bottom: unset;
