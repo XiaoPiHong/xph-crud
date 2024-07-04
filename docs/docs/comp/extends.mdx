@@ -1,0 +1,47 @@
+import { ExtendsFormBase, ExtendsFormItem } from "examples";
+import DemoWrapper from "@site/src/components/DemoWrapper";
+import { default as extendsFormBaseRaw } from "!raw-loader!examples/demo/extends/extendsFormBase.tsx";
+import { default as extendsFormItemRaw } from "!raw-loader!examples/demo/extends/extendsFormItem.tsx";
+import CodeBlock from "@site/src/theme/CodeBlock";
+
+# 扩展自定义组件
+
+## 扩展 XphForm 表单项
+
+### 扩展表单项
+
+如果当前 `XphForm` 组件的所有表单项都满足不了你，`xph-crud` 还提供`XphExtendCompPropsProvider`来扩展表单项，你只需要使用`XphExtendCompPropsProvider`来包裹你的应用，并且为其提供一个表单项的映射对象即可，详细请看下方代码块：
+
+<CodeBlock language={"tsx"}>{extendsFormBaseRaw}</CodeBlock>
+
+<pre>
+  <DemoWrapper>
+    <ExtendsFormBase />
+  </DemoWrapper>
+</pre>
+
+### 扩展表单项的规范
+
+<CodeBlock language={"tsx"}>{extendsFormItemRaw}</CodeBlock>
+
+<pre>
+  <DemoWrapper>
+    <ExtendsFormItem />
+  </DemoWrapper>
+</pre>
+
+### 注意
+
+如果你使用的是 TypeSctipt，扩展表单项后，因为`IXphFormProps`类型中不包含你扩展表单项的类型，所以需要重新定义一下类型来使用，详细可看下方 ts 类型调整。
+
+## 扩展 XphTable 单元格映射内容
+
+待书写。。。
+
+## 扩展 XphActions 操作组映射内容
+
+待书写。。。
+
+## ts 类型调整
+
+待书写。。。

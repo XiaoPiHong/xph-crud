@@ -1,10 +1,22 @@
-// import ErrorBoundary from "@docusaurus/ErrorBoundary";
+import ErrorBoundary from "@docusaurus/ErrorBoundary";
 import React from "react";
-// import styles from "!raw-loader!/node_modules/antd/dist/reset.css";
 
 const DemoWrapper: React.FC<any> = ({ children }) => {
-  // console.log(styles);
-  return <div className={"demo-wrapper"}>{children}</div>;
+  return (
+    <ErrorBoundary
+      fallback={({ error, tryAgain }) => {
+        console.log(error);
+        return (
+          <div>
+            <p>This component crashed because of error: {error.message}.</p>
+            <button onClick={tryAgain}>Try Again!</button>
+          </div>
+        );
+      }}
+    >
+      <div className={"demo-wrapper"}>{children}</div>
+    </ErrorBoundary>
+  );
 };
 
 export default DemoWrapper;
