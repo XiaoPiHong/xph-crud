@@ -16,7 +16,7 @@ const config: Config = {
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: "facebook", // Usually your GitHub org/user name.
+  organizationName: "xiaopihong", // Usually your GitHub org/user name.
   projectName: "xph-crud", // Usually your repo name.
 
   onBrokenLinks: "throw",
@@ -30,6 +30,7 @@ const config: Config = {
     locales: ["zh-Hans"],
   },
   plugins: [
+    "docusaurus-plugin-sass",
     async function examplesAlias(context, options) {
       return {
         name: "examples-alias",
@@ -66,7 +67,7 @@ const config: Config = {
           //   "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
         },
         theme: {
-          customCss: ["./src/css/custom.css"],
+          customCss: ["./src/css/custom.scss"],
         },
       } satisfies Preset.Options,
     ],

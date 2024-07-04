@@ -8,6 +8,7 @@
       "xph-crud/*": ["../packages/*"],
       "xph-crud": ["../packages"],
       "examples/*": ["../examples/*"]
-    }
+    },
+    "types": ["docusaurus-plugin-sass"]
   }
 }
