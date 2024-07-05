@@ -1,15 +1,9 @@
-import {
-  ExtendsFormBase,
-  ExtendsFormItem,
-  ExtendsTableBase,
-  ExtendsTableCellFunc,
-} from "examples";
+import { ExtendsFormBase, ExtendsFormItem, ExtendsTableBase } from "examples";
 import DemoWrapper from "@site/src/components/DemoWrapper";
 import CodeBlock from "@site/src/theme/CodeBlock";
 import { default as extendsFormBaseRaw } from "!raw-loader!examples/demo/extends/extendsFormBase.tsx";
 import { default as extendsFormItemRaw } from "!raw-loader!examples/demo/extends/extendsFormItem.tsx";
 import { default as extendsTableBasaeRaw } from "!raw-loader!examples/demo/extends/extendsTableBase.tsx";
-import { default as extendsTableCellFuncRaw } from "!raw-loader!examples/demo/extends/extendsTableCellFunc.tsx";
 import Mermaid from "@theme/Mermaid";
 
 # 扩展自定义组件
@@ -54,13 +48,11 @@ import Mermaid from "@theme/Mermaid";
 
 <pre>
   <DemoWrapper>
-    <ExtendsTableCellFunc />
+    <ExtendsTableBase />
   </DemoWrapper>
 </pre>
 
 ### 扩展单元格映射内容的规范
-
-<CodeBlock language={"tsx"}>{extendsTableCellFuncRaw}</CodeBlock>
 
 #### 组件处理机制
 
