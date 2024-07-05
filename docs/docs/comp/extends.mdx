@@ -1,10 +1,16 @@
-import { ExtendsFormBase, ExtendsFormItem, ExtendsTableBase } from "examples";
 import DemoWrapper from "@site/src/components/DemoWrapper";
 import CodeBlock from "@site/src/theme/CodeBlock";
+import Mermaid from "@theme/Mermaid";
+import {
+  ExtendsFormBase,
+  ExtendsFormItem,
+  ExtendsTableBase,
+  ExtendsActionsBase,
+} from "examples";
 import { default as extendsFormBaseRaw } from "!raw-loader!examples/demo/extends/extendsFormBase.tsx";
 import { default as extendsFormItemRaw } from "!raw-loader!examples/demo/extends/extendsFormItem.tsx";
 import { default as extendsTableBasaeRaw } from "!raw-loader!examples/demo/extends/extendsTableBase.tsx";
-import Mermaid from "@theme/Mermaid";
+import { default as extendsActionsBaseRaw } from "!raw-loader!examples/demo/extends/extendsActionsBase.tsx";
 
 # 扩展自定义组件
 
@@ -146,7 +152,23 @@ const MyTag = (
 
 ## 扩展 XphActions 操作组映射内容
 
-待书写。。。
+### 扩展操作组映射内容
+
+同理，`XphActions`中的映射内容也是可以自定义的，也是通过给`XphExtendCompPropsProvider`添加操作组映射对象即可的方式。
+
+<CodeBlock language={"tsx"}>{extendsActionsBaseRaw}</CodeBlock>
+
+<pre>
+  <DemoWrapper>
+    <ExtendsActionsBase />
+  </DemoWrapper>
+</pre>
+
+:::tip
+
+如果你使用的是 TypeSctipt，扩展操作组映射内容后，因为`IXphActionsProps`类型中不包含你扩展的类型，所以需要重新定义一下类型来使用，详细可看下方 ts 类型调整。
+
+:::
 
 ## ts 类型调整
 
