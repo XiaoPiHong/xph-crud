@@ -6,11 +6,14 @@ import {
   ExtendsFormItem,
   ExtendsTableBase,
   ExtendsActionsBase,
+  ExtendsFormDts,
 } from "examples";
 import { default as extendsFormBaseRaw } from "!raw-loader!examples/demo/extends/extendsFormBase.tsx";
 import { default as extendsFormItemRaw } from "!raw-loader!examples/demo/extends/extendsFormItem.tsx";
 import { default as extendsTableBasaeRaw } from "!raw-loader!examples/demo/extends/extendsTableBase.tsx";
 import { default as extendsActionsBaseRaw } from "!raw-loader!examples/demo/extends/extendsActionsBase.tsx";
+import { default as extendsFormDtsRaw } from "!raw-loader!examples/demo/extends/extendsFormDts.tsx";
+import { default as xphCrudDtsRaw } from "!raw-loader!examples/xph-crud.d.ts";
 
 # 扩展自定义组件
 
@@ -172,4 +175,20 @@ const MyTag = (
 
 ## ts 类型调整
 
-待书写。。。
+如果你扩展了`xph-crud`中的映射组件，组件的属性类型需要你传入映射对象属性的泛型，否者组件的类型会对应不上。但是在这里我们建议你通过声明全局的类型，再使用全局的类型来进行约束，这样方便很多。
+
+### 创建全局类型 INewXphFormProps
+
+新建 xph-crud.d.ts 于项目中
+
+<CodeBlock language={"tsx"}>{xphCrudDtsRaw}</CodeBlock>
+
+### 例子
+
+<CodeBlock language={"tsx"}>{extendsFormDtsRaw}</CodeBlock>
+
+<pre>
+  <DemoWrapper>
+    <ExtendsFormDts />
+  </DemoWrapper>
+</pre>
