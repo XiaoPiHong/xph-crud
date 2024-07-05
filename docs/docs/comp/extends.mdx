@@ -1,9 +1,16 @@
-import { ExtendsFormBase, ExtendsFormItem, ExtendsTableBase } from "examples";
+import {
+  ExtendsFormBase,
+  ExtendsFormItem,
+  ExtendsTableBase,
+  ExtendsTableCellFunc,
+} from "examples";
 import DemoWrapper from "@site/src/components/DemoWrapper";
 import CodeBlock from "@site/src/theme/CodeBlock";
 import { default as extendsFormBaseRaw } from "!raw-loader!examples/demo/extends/extendsFormBase.tsx";
 import { default as extendsFormItemRaw } from "!raw-loader!examples/demo/extends/extendsFormItem.tsx";
 import { default as extendsTableBasaeRaw } from "!raw-loader!examples/demo/extends/extendsTableBase.tsx";
+import { default as extendsTableCellFuncRaw } from "!raw-loader!examples/demo/extends/extendsTableCellFunc.tsx";
+import Mermaid from "@theme/Mermaid";
 
 # 扩展自定义组件
 
@@ -31,9 +38,11 @@ import { default as extendsTableBasaeRaw } from "!raw-loader!examples/demo/exten
   </DemoWrapper>
 </pre>
 
-### 注意
+:::tip
 
 如果你使用的是 TypeSctipt，扩展表单项后，因为`IXphFormProps`类型中不包含你扩展表单项的类型，所以需要重新定义一下类型来使用，详细可看下方 ts 类型调整。
+
+:::
 
 ## 扩展 XphTable 单元格映射内容
 
@@ -45,9 +54,103 @@ import { default as extendsTableBasaeRaw } from "!raw-loader!examples/demo/exten
 
 <pre>
   <DemoWrapper>
-    <ExtendsTableBase />
+    <ExtendsTableCellFunc />
   </DemoWrapper>
 </pre>
+
+### 扩展单元格映射内容的规范
+
+<CodeBlock language={"tsx"}>{extendsTableCellFuncRaw}</CodeBlock>
+
+#### 组件处理机制
+
+内部的 CellFunc 组件会遍历 cellFunc 这个数组，逐步将最底层的 BottomCellFunc 组件处理成最终渲染在页面的组件，处理顺序如下：
+
+<div style={{ textAlign: "center" }}>
+
+```mermaid
+graph TD;
+BottomCellFunc-->link-->myTag;
+```
+
+</div>
+
+#### 组件渲染机制
+
+由于是按顺序处理完再渲染，所以 cellFunc 数组映射的组件渲染是有顺序之分的，渲染顺序如下：
+
+<div style={{ textAlign: "center" }}>
+
+```mermaid
+graph TD;
+myTag-->link-->BottomCellFunc;
+```
+
+</div>
+
+#### 扩展规范
+
+```tsx
+import React from "react";
+import { IXphMainProps } from "xph-crud";
+
+interface IMyTagProps {
+  children?: string;
+  borderColor?: string;
+}
+
+/**
+ * @params Comp 上一次处理后的组件
+ * @params curCellFuncProps 当前项相关属性
+ * @params mainProps 透传给最底层组件的属性
+ */
+const MyTag = (
+  Comp: React.JSXElementConstructor<any>,
+  curCellFuncProps: { curComponentProps: IMyTagProps },
+  mainProps: IXphMainProps
+) => {
+  /**
+   * curCellFuncProps是包含当前自定义项componentProps的参数，可以从中取到外部透传进来的属性进行业务代码编写
+   */
+  const { curComponentProps } = curCellFuncProps;
+
+  const { borderColor = "blue", children = "" } = curComponentProps!;
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        flexWrap: "wrap",
+        border: `1px solid ${borderColor}`,
+      }}
+    >
+      {/** 
+      1、Comp是保持渲染链的桥梁，只有当Comp组件被渲染时，才能保持渲染链不被中断，所以在写你的自定义组件时，这个Comp属性是必须使用在组件上的(当然特殊情况除外，除非你只想渲染这个自定义的组件) 
+
+      2、mainProps是渲染链中渲染后方传递给最底层BottomCellFunc组件的属性，目的是为了使当前自定义组件能够影响到BottomCellFunc组件的事件和样式，所以mainProps是保持渲染链中事件和样式能够正确执行属性，它必须在扩展组件内部解构传递给Comp组件（注意：如果当前扩展的组件内部需要影响到底层BottomCellFunc，必须要保证其他映射组件的正常调用，XphTable内部的link组件就是一个很好的例子）
+      */}
+      <Comp {...mainProps} />
+      {children}
+    </div>
+  );
+};
+```
+
+:::warning
+
+总的来说规范有三点：
+
+1. 必须保证扩展组件中的首个参数 Comp 被渲染来保持渲染链
+2. 必须保证扩展组件中的第三个参数 mainProps 解构传递给 Comp 组件
+3. 自定义组件在需要传递自己的 mainProps 给底层的 BottomCellFunc 组件时，必须保证其他映射组件的正常调用
+
+:::
+
+:::tip
+
+如果你使用的是 TypeSctipt，扩展单元格映射内容后，因为`TXphTableProps`类型中不包含你扩展的类型，所以需要重新定义一下类型来使用，详细可看下方 ts 类型调整。
+
+:::
 
 ## 扩展 XphActions 操作组映射内容
 

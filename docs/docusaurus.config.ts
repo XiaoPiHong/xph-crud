@@ -47,7 +47,10 @@ const config: Config = {
       };
     },
   ],
-  themes: ["@docusaurus/theme-live-codeblock"],
+  markdown: {
+    mermaid: true, // 开启图表
+  },
+  themes: ["@docusaurus/theme-live-codeblock", "@docusaurus/theme-mermaid"],
   presets: [
     [
       "classic",
