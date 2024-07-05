@@ -20,7 +20,7 @@ interface IDropdownProps extends Omit<ButtonProps, "onClick"> {
     disabled?: boolean;
     icon?: React.ReactNode;
   }[];
-  onClick: MenuProps["onClick"];
+  onClick?: MenuProps["onClick"];
 }
 
 /** 组件类型 */

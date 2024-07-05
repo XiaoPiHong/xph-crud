@@ -8,6 +8,7 @@ import type {
   TApiTableProps as TXphApiTableProps,
   TSearchFormProps as TXphSearchFormProps,
   TCrudFormProps as TXphCrudFormProps,
+  IMainProps as IXphMainProps,
 } from "./src/types";
 
 export {
@@ -19,4 +20,5 @@ export {
   TXphApiTableProps,
   TXphSearchFormProps,
   TXphCrudFormProps,
+  IXphMainProps,
 };

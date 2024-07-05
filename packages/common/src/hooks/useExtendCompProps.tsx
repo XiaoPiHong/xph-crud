@@ -16,7 +16,7 @@ export interface IExtendComp {
   /** 扩展的表单项 */
   form?: { [key: string]: React.FC<any> };
   /** 扩展单元格内容 */
-  tableCellFunc?: { [key: string]: React.FC<any> };
+  tableCellFunc?: { [key: string]: (...args) => React.ReactElement };
   /** 扩展actions项 */
   actions?: { [key: string]: React.FC<any> };
 }
