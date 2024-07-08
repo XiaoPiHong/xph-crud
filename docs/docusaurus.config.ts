@@ -99,6 +99,12 @@ const config: Config = {
           label: "组件",
         },
         {
+          type: "docSidebar",
+          sidebarId: "extends",
+          position: "left",
+          label: "扩展",
+        },
+        {
           href: "https://github.com/XiaoPiHong/xph-crud",
           label: "GitHub",
           position: "right",
@@ -122,7 +128,7 @@ const config: Config = {
           items: [
             {
               label: "组件",
-              to: "/docs/comp/form",
+              to: "/docs/comp/form/base",
             },
           ],
         },

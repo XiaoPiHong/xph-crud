@@ -28,7 +28,12 @@ const sidebars: SidebarsConfig = {
   ],
    */
   guide: ["guide/getStarted"],
-  comp: ["comp/form", "comp/table", "comp/actions", "comp/extends"],
+  comp: {
+    XphForm: ["comp/form/base"],
+    XphTable: ["comp/table/base"],
+    XphActions: ["comp/actions/base"],
+  },
+  extends: ["comp/extends/base"],
 };
 
 export default sidebars;
