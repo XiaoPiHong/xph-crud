@@ -1,11 +1,15 @@
+import { ForwardedRef, useImperativeHandle, forwardRef } from "react";
 import { XphActions } from "../";
 import { IDialogProps } from "./types";
 import { useDialogProps, useDialogFooter } from "./hooks";
 
-const Dialog = (props: IDialogProps) => {
+const Dialog = (props: IDialogProps, ref: ForwardedRef<any>) => {
   const { dialogProps } = useDialogProps(props);
   const { footerActions } = useDialogFooter(dialogProps);
   const { renderFooter, renderTitle, title } = dialogProps;
+
+  useImperativeHandle(ref, () => ({}));
+
   return (
     <div>
       <div
@@ -37,4 +41,8 @@ const Dialog = (props: IDialogProps) => {
   );
 };
 
-export default Dialog;
+const ForwardedDialog = forwardRef(Dialog) as (
+  props: IDialogProps & { ref?: ForwardedRef<any> }
+) => ReturnType<typeof Dialog>;
+
+export default ForwardedDialog;
