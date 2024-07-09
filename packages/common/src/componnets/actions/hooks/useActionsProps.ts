@@ -6,6 +6,7 @@ import { TXphExtendComponentPropsMap } from "../../../types";
 export default function useActionsProps<T extends TXphExtendComponentPropsMap>(
   props: IActionsProps<T>
 ) {
+  const { inherit = true } = props;
   const { extendActionsProps } = useExtendActions();
   const baseActionsProps = {
     items: [],
@@ -13,7 +14,7 @@ export default function useActionsProps<T extends TXphExtendComponentPropsMap>(
   };
 
   const newActionsProps: IActionsProps = {
-    ...merge(merge(baseActionsProps, extendActionsProps), props),
+    ...merge(merge(baseActionsProps, inherit ? extendActionsProps : {}), props),
   };
 
   return {

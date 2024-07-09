@@ -10,6 +10,8 @@ export interface IExtendProps {
   table?: TXphTableProps;
   /** 操作组的属性 */
   actions?: IXphActionsProps;
+  /** 弹窗的属性 */
+  dialog?: any;
 }
 
 export interface IExtendComp {
