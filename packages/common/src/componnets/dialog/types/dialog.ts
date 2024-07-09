@@ -10,4 +10,6 @@ export interface IDialogProps {
   onCancel?: () => void;
   renderFooter?: () => React.ReactElement;
   renderTitle?: () => React.ReactElement;
+  onOpen?: () => void;
+  onClose?: () => void;
 }
