@@ -13,3 +13,8 @@ export interface IDialogProps {
   onOpen?: () => void;
   onClose?: () => void;
 }
+
+export interface IDialogActionType {
+  open: () => void;
+  close: () => void;
+}

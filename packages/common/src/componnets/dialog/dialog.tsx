@@ -1,9 +1,10 @@
 import { ForwardedRef, useImperativeHandle, forwardRef } from "react";
 import { XphActions } from "../";
-import { IDialogProps } from "./types";
+import { IDialogProps, IDialogActionType } from "./types";
 import { useDialogProps, useDialogFooter, useDialogActions } from "./hooks";
+import style from "./dialog.module.css";
 
-const Dialog = (props: IDialogProps, ref: ForwardedRef<any>) => {
+const Dialog = (props: IDialogProps, ref: ForwardedRef<IDialogActionType>) => {
   const { dialogProps } = useDialogProps(props);
   const { footerActions } = useDialogFooter(dialogProps);
   const { renderFooter, renderTitle, title } = dialogProps;
@@ -16,37 +17,32 @@ const Dialog = (props: IDialogProps, ref: ForwardedRef<any>) => {
 
   return (
     <div>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <div>{renderTitle ? renderTitle() : title}</div>
-        <div>
-          <span>缩小</span>
-          <span>放大</span>
-          <span>关闭</span>
+      {/* <div className={style["xph-dialog-modal"]}></div> */}
+      <div className={style["xph-dialog-wrapper"]}>
+        <div className={style["dialog__header"]}>
+          <div>{renderTitle ? renderTitle() : title}</div>
+          <div>
+            <span>缩小</span>
+            <span>放大</span>
+            <span>关闭</span>
+          </div>
         </div>
+        <div className={style["dialog__content"]}>内容</div>
+        {/** 如果是renderFooter，底部的布局由调用方决定  */}
+        {renderFooter ? (
+          renderFooter()
+        ) : (
+          <div className={style["dialog__footer"]}>
+            <XphActions {...footerActions} />
+          </div>
+        )}
       </div>
-      <div>内容</div>
-      {/** 如果是renderFooter，底部的布局由调用方决定  */}
-      {renderFooter ? (
-        renderFooter()
-      ) : (
-        <div
-          style={{ display: "flex", justifyContent: "flex-end", gap: "8px" }}
-        >
-          <XphActions {...footerActions} />
-        </div>
-      )}
     </div>
   );
 };
 
 const ForwardedDialog = forwardRef(Dialog) as (
-  props: IDialogProps & { ref?: ForwardedRef<any> }
+  props: IDialogProps & { ref?: ForwardedRef<IDialogActionType> }
 ) => ReturnType<typeof Dialog>;
 
 export default ForwardedDialog;

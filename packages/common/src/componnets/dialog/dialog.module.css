@@ -1,0 +1,27 @@
+.xph-dialog-modal {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: black;
+  opacity: 0.7;
+  z-index: 999;
+}
+
+.xph-dialog-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.dialog__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dialog__main {
+}
+.dialog__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
