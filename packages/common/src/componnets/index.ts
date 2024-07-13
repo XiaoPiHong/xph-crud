@@ -8,6 +8,7 @@ import type {
   IDialogProps as IXphDialogProps,
   IDialogActionType as IXphDialogActionType,
 } from "./dialog/types";
+import { default as XphPortal } from "./portal/portal";
 
 export {
   XphActions,
@@ -16,4 +17,5 @@ export {
   XphDialog,
   IXphDialogProps,
   IXphDialogActionType,
+  XphPortal,
 };
