@@ -17,7 +17,7 @@ const Dialog = (props: IDialogProps, ref: ForwardedRef<IDialogActionType>) => {
 
   return (
     <div>
-      {/* <div className={style["xph-dialog-modal"]}></div> */}
+      <div className={style["xph-dialog-modal"]}></div>
       <div className={style["xph-dialog-wrapper"]}>
         <div className={style["dialog__header"]}>
           <div>{renderTitle ? renderTitle() : title}</div>
@@ -27,7 +27,7 @@ const Dialog = (props: IDialogProps, ref: ForwardedRef<IDialogActionType>) => {
             <span>关闭</span>
           </div>
         </div>
-        <div className={style["dialog__content"]}>内容</div>
+        <div className={style["dialog__main"]}>内容</div>
         {/** 如果是renderFooter，底部的布局由调用方决定  */}
         {renderFooter ? (
           renderFooter()

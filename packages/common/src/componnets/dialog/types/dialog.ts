@@ -12,6 +12,8 @@ export interface IDialogProps {
   renderTitle?: () => React.ReactElement;
   onOpen?: () => void;
   onClose?: () => void;
+  /** 挂载弹窗的容器，默认是body */
+  getPopperContainer?: () => HTMLElement;
 }
 
 export interface IDialogActionType {
