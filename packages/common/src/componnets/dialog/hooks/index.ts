@@ -6,3 +6,7 @@ export { default as useExtendDialog } from "./useExtendDialog";
 export * from "./useExtendDialog";
 export { default as useDialogActions } from "./useDialogActions";
 export * from "./useDialogActions";
+export { default as useDialogInitSize } from "./useDialogInitSize";
+export * from "./useDialogInitSize";
+export { default as useDialogPosition } from "./useDialogPosition";
+export * from "./useDialogPosition";

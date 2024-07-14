@@ -1,6 +1,8 @@
 import { ButtonProps } from "antd";
 
 export interface IDialogProps {
+  width?: number;
+  height?: number;
   title?: string;
   okProps?: Omit<ButtonProps, "children" | "onClick">;
   cancelProps?: Omit<ButtonProps, "children" | "onClick">;

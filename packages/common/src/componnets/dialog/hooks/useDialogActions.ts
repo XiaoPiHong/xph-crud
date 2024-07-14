@@ -1,9 +1,13 @@
 import { IDialogProps } from "../types";
 
-const useDialogActions = (dialogProps: IDialogProps) => {
+const useDialogActions = (
+  dialogProps: IDialogProps,
+  setVisible: React.Dispatch<React.SetStateAction<boolean>>
+) => {
   const { onOpen, onClose } = dialogProps;
 
   const open = () => {
+    setVisible(true);
     onOpen && onOpen();
   };
   const close = () => {

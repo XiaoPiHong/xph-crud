@@ -13,7 +13,10 @@ const ReactApp: React.FC = () => {
   return (
     <>
       <button onClick={onOpen}>点击打开XphDialog弹窗</button>
-      <XphDialog {...dialogProps} ref={dialogRef} />
+      <XphDialog {...dialogProps} ref={dialogRef}>
+        <>内容</>
+        <div>内容</div>
+      </XphDialog>
     </>
   );
 };

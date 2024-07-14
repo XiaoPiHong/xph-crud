@@ -6,6 +6,7 @@ const useDialogPorps = (dialogProps: IDialogProps) => {
   const { extendDialogProps } = useExtendDialog();
 
   const baseDialogProps: Partial<IDialogProps> = {
+    width: 700,
     okText: "确定",
     cancelText: "取消",
     /** 默认都是挂载在body上 */
@@ -16,6 +17,7 @@ const useDialogPorps = (dialogProps: IDialogProps) => {
   };
   return {
     dialogProps: newDialogProps,
+    baseDialogProps: baseDialogProps,
   };
 };
 
