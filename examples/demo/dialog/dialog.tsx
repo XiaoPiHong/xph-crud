@@ -10,12 +10,21 @@ const ReactApp: React.FC = () => {
   const onOpen = () => {
     dialogRef.current?.open();
   };
+
+  const Content = () => {
+    console.log("渲染Content");
+    return (
+      <>
+        <>内容</>
+        <div>内容</div>
+      </>
+    );
+  };
   return (
     <>
       <button onClick={onOpen}>点击打开XphDialog弹窗</button>
       <XphDialog {...dialogProps} ref={dialogRef}>
-        <>内容</>
-        <div>内容</div>
+        <Content />
       </XphDialog>
     </>
   );
