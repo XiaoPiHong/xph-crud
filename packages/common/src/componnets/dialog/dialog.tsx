@@ -11,12 +11,16 @@ import {
   useDialogProps,
   useDialogFooter,
   useDialogActions,
-  useDialogInitSize,
+  useDialogSize,
   useDialogPosition,
 } from "./hooks";
 import style from "./dialog.module.css";
 
-const Dialog = (props: IDialogProps, ref: ForwardedRef<IDialogActionType>) => {
+const Dialog = (
+  props: IDialogProps & { children?: React.ReactNode },
+  ref: ForwardedRef<IDialogActionType>
+) => {
+  const { children } = props;
   const [visible, setVisible] = useState(false);
   const { baseDialogProps, dialogProps } = useDialogProps(props);
   const { footerActions } = useDialogFooter(dialogProps);
@@ -25,19 +29,18 @@ const Dialog = (props: IDialogProps, ref: ForwardedRef<IDialogActionType>) => {
 
   const dialogRef = useRef<HTMLDivElement>(null);
   const container = getPopperContainer!();
-  const { maxWidth, maxHeight } = useDialogInitSize(
+  const { dialogWidth, dialogHeight } = useDialogSize(
     baseDialogProps,
     dialogProps,
     container
   );
-  const {} = useDialogPosition({
+  const { dialogLeft, dialogTop } = useDialogPosition({
     container,
     dialogRef,
     dialogProps,
     visible,
-    setVisible,
-    maxWidth,
-    maxHeight,
+    dialogWidth,
+    dialogHeight,
   });
 
   useImperativeHandle(ref, () => ({
@@ -58,24 +61,28 @@ const Dialog = (props: IDialogProps, ref: ForwardedRef<IDialogActionType>) => {
           className={style["xph-dialog-wrapper"]}
           style={{
             display: visible ? "block" : "none",
+            left: dialogLeft,
+            top: dialogTop,
           }}
           ref={dialogRef}
         >
           <div
             className={style["dialog__header"]}
             style={{
-              width: maxWidth.current,
-              height: maxHeight.current,
+              width: dialogWidth,
+              height: dialogHeight,
             }}
           >
             <div>{renderTitle ? renderTitle() : title}</div>
             <div>
               <span>缩小</span>
               <span>放大</span>
-              <span>关闭</span>
+              <span onClick={close}>关闭</span>
             </div>
           </div>
-          <div className={style["dialog__main"]}>{visible ? "内容" : null}</div>
+          <div className={style["dialog__main"]}>
+            {visible ? children : null}
+          </div>
           {/** 如果是renderFooter，底部的布局由调用方决定  */}
           {renderFooter ? (
             renderFooter()

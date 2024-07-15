@@ -11,6 +11,7 @@ const useDialogActions = (
     onOpen && onOpen();
   };
   const close = () => {
+    setVisible(false);
     onClose && onClose();
   };
   return {
