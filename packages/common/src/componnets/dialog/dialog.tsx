@@ -30,7 +30,7 @@ const Dialog = (
 
   const dialogRef = useRef<HTMLDivElement>(null);
   const dialogHeaderRef = useRef<HTMLDivElement>(null);
-  const container = getPopperContainer!();
+  const [container, setContainer] = useState<HTMLElement | null>(null);
   const { dialogWidth, dialogHeight } = useDialogSize(
     baseDialogProps,
     dialogProps
