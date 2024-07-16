@@ -10,3 +10,5 @@ export { default as useDialogSize } from "./useDialogSize";
 export * from "./useDialogSize";
 export { default as useDialogPosition } from "./useDialogPosition";
 export * from "./useDialogPosition";
+export { default as useDragDialog } from "./useDragDialog";
+export * from "./useDragDialog";

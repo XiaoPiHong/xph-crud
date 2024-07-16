@@ -7,12 +7,12 @@ import { IDialogProps } from "../types";
  */
 const useDialogInitSize = (
   baseDialogProps: IDialogProps,
-  dialogProps: IDialogProps,
-  container: HTMLElement
+  dialogProps: IDialogProps
 ) => {
   const { width: baseWidth, height: baseHeight } = baseDialogProps;
-  const { width, height } = dialogProps;
+  const { width, height, getPopperContainer } = dialogProps;
   /** clientWidth clientHeight 不包括border */
+  const container = getPopperContainer!();
   const { clientWidth, clientHeight } = container;
 
   const curWidth = width ? width : baseWidth;
@@ -34,6 +34,17 @@ const useDialogInitSize = (
 
   const [dialogWidth, setWidth] = useState(initWidth);
   const [dialogHeight, setHeight] = useState(initHeight);
+
+  useEffect(() => {
+    if (initWidth !== dialogWidth) {
+      console.log("重新设置了宽度");
+      setWidth(initWidth);
+    }
+    if (initHeight !== dialogHeight) {
+      console.log("重新设置了高度");
+      setHeight(initHeight);
+    }
+  }, [initWidth, initHeight]);
 
   return {
     dialogWidth,

@@ -13,6 +13,7 @@ import {
   useDialogActions,
   useDialogSize,
   useDialogPosition,
+  useDragDialog,
 } from "./hooks";
 import style from "./dialog.module.css";
 
@@ -28,26 +29,31 @@ const Dialog = (
   const { open, close } = useDialogActions(dialogProps, setVisible);
 
   const dialogRef = useRef<HTMLDivElement>(null);
+  const dialogHeaderRef = useRef<HTMLDivElement>(null);
   const container = getPopperContainer!();
   const { dialogWidth, dialogHeight } = useDialogSize(
     baseDialogProps,
-    dialogProps,
-    container
+    dialogProps
   );
-  const { dialogLeft, dialogTop } = useDialogPosition({
-    container,
+  const { dialogLeft, dialogTop, setDialogPosition } = useDialogPosition({
+    visible,
     dialogRef,
     dialogProps,
-    visible,
     dialogWidth,
     dialogHeight,
+  });
+
+  const {} = useDragDialog({
+    dialogHeaderRef,
+    dialogRef,
+    dialogProps,
+    setDialogPosition,
   });
 
   useImperativeHandle(ref, () => ({
     open,
     close,
   }));
-  console.log(container.scrollWidth, container.scrollHeight);
   return (
     <XphPortal to={container}>
       <>
@@ -58,21 +64,17 @@ const Dialog = (
           }}
         ></div>
         <div
+          ref={dialogRef}
           className={style["xph-dialog-wrapper"]}
           style={{
             display: visible ? "block" : "none",
             left: dialogLeft,
             top: dialogTop,
+            width: dialogWidth,
+            height: dialogHeight,
           }}
-          ref={dialogRef}
         >
-          <div
-            className={style["dialog__header"]}
-            style={{
-              width: dialogWidth,
-              height: dialogHeight,
-            }}
-          >
+          <div ref={dialogHeaderRef} className={style["dialog__header"]}>
             <div>{renderTitle ? renderTitle() : title}</div>
             <div>
               <span>缩小</span>
