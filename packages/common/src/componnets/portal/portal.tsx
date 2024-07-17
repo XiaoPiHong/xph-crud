@@ -1,16 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { useEffect } from "react";
 
 const Portal = ({
   children,
-  to,
+  getPopperContainer,
 }: {
   children: React.ReactElement;
-  to: HTMLElement;
+  getPopperContainer: () => HTMLElement;
 }) => {
-  // 选择你要渲染的DOM节点
-  const portalRoot = to;
-  return ReactDOM.createPortal(children, portalRoot);
+  const [portalRoot, setPortalRoot] = React.useState<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const to = getPopperContainer();
+    setPortalRoot(to);
+  }, []);
+  return portalRoot ? ReactDOM.createPortal(children, portalRoot) : null;
 };
 
 export default Portal;

@@ -6,17 +6,18 @@ import { IDialogProps } from "../types";
  * @description 首次打开弹窗的时候，限制弹窗的宽高（不得大于弹窗容器可视区域的宽高）
  */
 const useDialogInitSize = (
+  container: HTMLElement,
   baseDialogProps: IDialogProps,
   dialogProps: IDialogProps
 ) => {
   const { width: baseWidth, height: baseHeight } = baseDialogProps;
-  const { width, height, getPopperContainer } = dialogProps;
-  /** clientWidth clientHeight 不包括border */
-  const container = getPopperContainer!();
-  const { clientWidth, clientHeight } = container;
+  const { width, height } = dialogProps;
 
   const curWidth = width ? width : baseWidth;
   const curHeight = height ? height : baseHeight;
+
+  /** clientWidth clientHeight 不包括border */
+  const { clientWidth, clientHeight } = container;
 
   // 初始化最大宽度
   const initWidth = curWidth
@@ -32,8 +33,8 @@ const useDialogInitSize = (
       : curHeight
     : "unset";
 
-  const [dialogWidth, setWidth] = useState(initWidth);
-  const [dialogHeight, setHeight] = useState(initHeight);
+  const [dialogWidth, setWidth] = useState<number | string>(initWidth);
+  const [dialogHeight, setHeight] = useState<number | string>(initHeight);
 
   useEffect(() => {
     if (initWidth !== dialogWidth) {

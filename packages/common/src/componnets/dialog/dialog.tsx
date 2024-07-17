@@ -18,92 +18,101 @@ import {
 import style from "./dialog.module.css";
 
 const Dialog = (
-  props: IDialogProps & { children?: React.ReactNode },
-  ref: ForwardedRef<IDialogActionType>
+  props: IDialogProps & {
+    children?: React.ReactNode;
+    _ref: ForwardedRef<IDialogActionType>;
+  }
 ) => {
-  const { children } = props;
+  console.log("render Dialog==============================================");
+  const { children, _ref } = props;
   const [visible, setVisible] = useState(false);
   const { baseDialogProps, dialogProps } = useDialogProps(props);
   const { footerActions } = useDialogFooter(dialogProps);
   const { title, renderFooter, renderTitle, getPopperContainer } = dialogProps;
   const { open, close } = useDialogActions(dialogProps, setVisible);
-
+  const container = getPopperContainer!();
   const dialogRef = useRef<HTMLDivElement>(null);
   const dialogHeaderRef = useRef<HTMLDivElement>(null);
-  const [container, setContainer] = useState<HTMLElement | null>(null);
   const { dialogWidth, dialogHeight } = useDialogSize(
+    container,
     baseDialogProps,
     dialogProps
   );
   const { dialogLeft, dialogTop, setDialogPosition } = useDialogPosition({
-    visible,
-    dialogRef,
-    dialogProps,
+    container,
     dialogWidth,
     dialogHeight,
   });
-
-  const {} = useDragDialog({
+  useDragDialog({
     dialogHeaderRef,
     dialogRef,
     dialogProps,
     setDialogPosition,
   });
 
-  useImperativeHandle(ref, () => ({
+  useImperativeHandle(_ref, () => ({
     open,
     close,
   }));
   return (
-    <XphPortal to={container}>
-      <>
-        <div
-          className={style["xph-dialog-modal"]}
-          style={{
-            display: visible ? "block" : "none",
-          }}
-        ></div>
-        <div
-          ref={dialogRef}
-          className={style["xph-dialog-wrapper"]}
-          style={{
-            display: visible ? "block" : "none",
-            left: dialogLeft,
-            top: dialogTop,
-            width: dialogWidth,
-            height: dialogHeight,
-          }}
-        >
-          <div ref={dialogHeaderRef} className={style["dialog__header"]}>
-            <div>{renderTitle ? renderTitle() : title}</div>
-            <div>
-              <span>缩小</span>
-              <span>放大</span>
-              <span onClick={close}>关闭</span>
-            </div>
+    <>
+      <div
+        className={style["xph-dialog-modal"]}
+        style={{
+          display: visible ? "block" : "none",
+        }}
+      ></div>
+      <div
+        ref={dialogRef}
+        className={style["xph-dialog-wrapper"]}
+        style={{
+          display: visible ? "block" : "none",
+          left: dialogLeft,
+          top: dialogTop,
+          width: dialogWidth,
+          height: dialogHeight,
+        }}
+      >
+        <div ref={dialogHeaderRef} className={style["dialog__header"]}>
+          <div>{renderTitle ? renderTitle() : title}</div>
+          <div>
+            <span>缩小</span>
+            <span>放大</span>
+            <span onClick={close}>关闭</span>
           </div>
-          <div className={style["dialog__main"]}>
-            {visible ? children : null}
-          </div>
-          {/** 如果是renderFooter，底部的布局由调用方决定  */}
-          {renderFooter ? (
-            renderFooter()
-          ) : (
-            <div className={style["dialog__footer"]}>
-              <XphActions {...footerActions} />
-            </div>
-          )}
         </div>
-      </>
+        <div className={style["dialog__main"]}>{visible ? children : null}</div>
+        {/** 如果是renderFooter，底部的布局由调用方决定  */}
+        {renderFooter ? (
+          renderFooter()
+        ) : (
+          <div className={style["dialog__footer"]}>
+            <XphActions {...footerActions} />
+          </div>
+        )}
+      </div>
+    </>
+  );
+};
+
+/** 确保挂载的节点已经存在再生成弹窗 */
+const XphDialog = (
+  props: IDialogProps & { children?: React.ReactNode },
+  ref: ForwardedRef<IDialogActionType>
+) => {
+  const { getPopperContainer } = props;
+  return (
+    <XphPortal getPopperContainer={getPopperContainer!}>
+      <Dialog _ref={ref} {...props} />
     </XphPortal>
   );
 };
 
-const ForwardedDialog = forwardRef(Dialog) as (
+const ForwardedDialog = forwardRef(XphDialog) as (
   props: IDialogProps & {
     ref?: ForwardedRef<IDialogActionType>;
     children?: React.ReactNode;
   }
-) => ReturnType<typeof Dialog>;
+) => ReturnType<typeof XphDialog>;
 
 export default ForwardedDialog;

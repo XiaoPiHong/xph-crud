@@ -12,7 +12,6 @@ const useDragDialog = ({
   dialogProps: IDialogProps;
   setDialogPosition: (position: { left: number; top: number }) => void;
 }) => {
-  const { getPopperContainer } = dialogProps;
   const spaceX = useRef(0);
   const spaceY = useRef(0);
 
@@ -37,6 +36,7 @@ const useDragDialog = ({
 
   const onDocumentMouseMove = useCallback((e: MouseEvent) => {
     const dialogDiv = dialogRef.current!;
+    const { getPopperContainer } = dialogProps;
     const container = getPopperContainer!();
 
     const { translateX, translateY } = getElementTranslateDistance(dialogDiv);

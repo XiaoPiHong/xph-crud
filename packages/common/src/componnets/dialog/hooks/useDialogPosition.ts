@@ -1,16 +1,11 @@
 import { useEffect, useState } from "react";
-import { IDialogProps } from "../types";
 
 const useDialogPosition = ({
-  dialogRef,
-  dialogProps,
-  visible,
+  container,
   dialogWidth,
   dialogHeight,
 }: {
-  dialogRef: React.RefObject<HTMLDivElement>;
-  dialogProps: IDialogProps;
-  visible: boolean;
+  container: HTMLElement;
   dialogWidth: string | number;
   dialogHeight: string | number;
 }) => {
@@ -19,8 +14,6 @@ const useDialogPosition = ({
 
   /** 首次初始化位置（如果传递过来的宽高变动了，需重新计算） */
   useEffect(() => {
-    const { getPopperContainer } = dialogProps;
-    const container = getPopperContainer!();
     const { clientWidth, clientHeight } = container;
     // 可视区域的50%下取整
     const left = Math.floor(clientWidth / 2);
