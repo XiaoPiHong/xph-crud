@@ -60,6 +60,8 @@ const Dialog = (
         className={style["xph-dialog-modal"]}
         style={{
           display: visible ? "block" : "none",
+          width: container.scrollWidth,
+          height: container.scrollHeight,
         }}
       ></div>
       <div

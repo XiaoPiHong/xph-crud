@@ -46,8 +46,8 @@ const useDragDialog = ({
     // 边界检查
     const minX = -translateX;
     const minY = -translateY;
-    const maxX = container.clientWidth - dialogDiv.offsetWidth - translateX;
-    const maxY = container.clientHeight - dialogDiv.offsetHeight - translateY;
+    const maxX = container.scrollWidth - dialogDiv.offsetWidth - translateX;
+    const maxY = container.scrollHeight - dialogDiv.offsetHeight - translateY;
 
     if (x < minX) x = minX;
     if (x > maxX) x = maxX;
