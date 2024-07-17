@@ -18,15 +18,15 @@ import {
 import style from "./dialog.module.css";
 
 const Dialog = (
-  props: IDialogProps & {
-    children?: React.ReactNode;
+  dialogProps: IDialogProps & {
     _ref: ForwardedRef<IDialogActionType>;
+    baseDialogProps: IDialogProps;
+    children?: React.ReactNode;
   }
 ) => {
   console.log("render Dialog==============================================");
-  const { children, _ref } = props;
+  const { children, baseDialogProps, _ref } = dialogProps;
   const [visible, setVisible] = useState(false);
-  const { baseDialogProps, dialogProps } = useDialogProps(props);
   const { footerActions } = useDialogFooter(dialogProps);
   const { title, renderFooter, renderTitle, getPopperContainer } = dialogProps;
   const { open, close } = useDialogActions(dialogProps, setVisible);
@@ -100,10 +100,12 @@ const XphDialog = (
   props: IDialogProps & { children?: React.ReactNode },
   ref: ForwardedRef<IDialogActionType>
 ) => {
-  const { getPopperContainer } = props;
+  const { baseDialogProps, dialogProps } = useDialogProps(props);
+  const { getPopperContainer } = dialogProps;
+  console.log("render XphDialog==============================================");
   return (
     <XphPortal getPopperContainer={getPopperContainer!}>
-      <Dialog _ref={ref} {...props} />
+      <Dialog {...dialogProps} _ref={ref} baseDialogProps={baseDialogProps} />
     </XphPortal>
   );
 };

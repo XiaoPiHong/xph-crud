@@ -4,7 +4,7 @@ import { XphDialog, IXphDialogProps, IXphDialogActionType } from "xph-crud";
 const ReactApp: React.FC = () => {
   const dialogProps: IXphDialogProps = {
     title: "弹窗标题",
-    getPopperContainer: () => document.getElementById("dialog-box")!,
+    // getPopperContainer: () => document.getElementById("dialog-box")!,
   };
   const dialogRef = useRef<IXphDialogActionType>(null);
 
