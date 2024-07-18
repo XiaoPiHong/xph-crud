@@ -22,8 +22,9 @@ const useDialogContentMaxHeight = ({
       const headerHeight = dialogHeaderRef.current?.offsetHeight;
       const footerHeight = dialogFooterRef.current?.offsetHeight;
       // 盒子为content-box时，getBoundingClientRect获取到的height为border+padding+height
-      const dialogHeight = dialogRef.current?.getBoundingClientRect().height;
-      const mainMaxHeight = dialogHeight! - headerHeight! - footerHeight!;
+      const curDialogHeight = dialogRef.current?.getBoundingClientRect().height;
+      const mainMaxHeight = curDialogHeight! - headerHeight! - footerHeight!;
+
       setContentMaxHeight(mainMaxHeight);
     }
   }, [visible, dialogHeight]);
