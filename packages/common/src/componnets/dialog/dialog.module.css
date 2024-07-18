@@ -1,4 +1,4 @@
-.xph-dialog-modal {
+.xph-dialog-mask {
   position: absolute;
   top: 0;
   left: 0;
@@ -14,6 +14,8 @@
   z-index: 999;
   background-color: #fff;
   transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
 }
 .dialog__header {
   display: flex;
@@ -21,6 +23,9 @@
   align-items: center;
 }
 .dialog__main {
+  flex: 1;
+  height: 0;
+  overflow-y: auto;
 }
 .dialog__footer {
   display: flex;

@@ -12,3 +12,7 @@ export { default as useDialogPosition } from "./useDialogPosition";
 export * from "./useDialogPosition";
 export { default as useDragDialog } from "./useDragDialog";
 export * from "./useDragDialog";
+export { default as useDialogZoom } from "./useDialogZoom";
+export * from "./useDialogZoom";
+export { default as useDialogContentMaxHeight } from "./useDialogContentMaxHeight";
+export * from "./useDialogContentMaxHeight";

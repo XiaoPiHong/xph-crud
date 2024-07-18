@@ -37,7 +37,7 @@ const useDragDialog = ({
   const onDocumentMouseMove = useCallback((e: MouseEvent) => {
     const dialogDiv = dialogRef.current!;
     const { getPopperContainer } = dialogProps;
-    const container = getPopperContainer!();
+    const container = getPopperContainer!() as HTMLElement;
 
     const { translateX, translateY } = getElementTranslateDistance(dialogDiv);
     let x = e.clientX - spaceX.current;
@@ -53,6 +53,9 @@ const useDragDialog = ({
     if (x > maxX) x = maxX;
     if (y < minY) y = minY;
     if (y > maxY) y = maxY;
+
+    const { offsetTop } = dialogRef.current!;
+    console.log(translateY, offsetTop, x);
 
     // 设置新的位置
     setDialogPosition({ left: x, top: y });

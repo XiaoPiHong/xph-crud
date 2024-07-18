@@ -7,7 +7,7 @@ const Portal = ({
   getPopperContainer,
 }: {
   children: React.ReactElement;
-  getPopperContainer: () => HTMLElement;
+  getPopperContainer: () => HTMLElement | null;
 }) => {
   const [portalRoot, setPortalRoot] = React.useState<HTMLElement | null>(null);
 

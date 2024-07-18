@@ -14,6 +14,7 @@ import {
   useDialogSize,
   useDialogPosition,
   useDragDialog,
+  useDialogContentMaxHeight,
 } from "./hooks";
 import style from "./dialog.module.css";
 
@@ -25,14 +26,16 @@ const Dialog = (
   }
 ) => {
   console.log("render Dialog==============================================");
-  const { children, baseDialogProps, _ref } = dialogProps;
+  const { children, baseDialogProps, _ref, mask } = dialogProps;
   const [visible, setVisible] = useState(false);
   const { footerActions } = useDialogFooter(dialogProps);
   const { title, renderFooter, renderTitle, getPopperContainer } = dialogProps;
   const { open, close } = useDialogActions(dialogProps, setVisible);
-  const container = getPopperContainer!();
+  const container = getPopperContainer!() as HTMLElement;
   const dialogRef = useRef<HTMLDivElement>(null);
   const dialogHeaderRef = useRef<HTMLDivElement>(null);
+  const dialogMainRef = useRef<HTMLDivElement>(null);
+  const dialogFooterRef = useRef<HTMLDivElement>(null);
   const { dialogWidth, dialogHeight } = useDialogSize(
     container,
     baseDialogProps,
@@ -42,6 +45,13 @@ const Dialog = (
     container,
     dialogWidth,
     dialogHeight,
+  });
+  const { contentMaxHeight } = useDialogContentMaxHeight({
+    visible,
+    dialogHeight,
+    dialogRef,
+    dialogHeaderRef,
+    dialogFooterRef,
   });
   useDragDialog({
     dialogHeaderRef,
@@ -56,19 +66,21 @@ const Dialog = (
   }));
   return (
     <>
-      <div
-        className={style["xph-dialog-modal"]}
-        style={{
-          display: visible ? "block" : "none",
-          width: container.scrollWidth,
-          height: container.scrollHeight,
-        }}
-      ></div>
+      {mask ? (
+        <div
+          className={style["xph-dialog-mask"]}
+          style={{
+            display: visible ? "block" : "none",
+            width: container.scrollWidth,
+            height: container.scrollHeight,
+          }}
+        ></div>
+      ) : null}
       <div
         ref={dialogRef}
         className={style["xph-dialog-wrapper"]}
         style={{
-          display: visible ? "block" : "none",
+          display: visible ? "flex" : "none",
           left: dialogLeft,
           top: dialogTop,
           width: dialogWidth,
@@ -78,17 +90,25 @@ const Dialog = (
         <div ref={dialogHeaderRef} className={style["dialog__header"]}>
           <div>{renderTitle ? renderTitle() : title}</div>
           <div>
-            <span>缩小</span>
-            <span>放大</span>
-            <span onClick={close}>关闭</span>
+            <button>缩小</button>
+            <button>放大</button>
+            <button onClick={close}>关闭</button>
           </div>
         </div>
-        <div className={style["dialog__main"]}>{visible ? children : null}</div>
+        <div
+          ref={dialogMainRef}
+          className={style["dialog__main"]}
+          style={{
+            maxHeight: contentMaxHeight,
+          }}
+        >
+          {visible ? children : null}
+        </div>
         {/** 如果是renderFooter，底部的布局由调用方决定  */}
         {renderFooter ? (
-          renderFooter()
+          <div ref={dialogFooterRef}>{renderFooter()}</div>
         ) : (
-          <div className={style["dialog__footer"]}>
+          <div ref={dialogFooterRef} className={style["dialog__footer"]}>
             <XphActions {...footerActions} />
           </div>
         )}

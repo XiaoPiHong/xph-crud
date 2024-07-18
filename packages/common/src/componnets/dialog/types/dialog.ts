@@ -3,6 +3,7 @@ import { ButtonProps } from "antd";
 export interface IDialogProps {
   width?: number;
   height?: number;
+  mask?: boolean;
   title?: string;
   okProps?: Omit<ButtonProps, "children" | "onClick">;
   cancelProps?: Omit<ButtonProps, "children" | "onClick">;
@@ -15,7 +16,7 @@ export interface IDialogProps {
   onOpen?: () => void;
   onClose?: () => void;
   /** 挂载弹窗的容器，默认是body */
-  getPopperContainer?: () => HTMLElement;
+  getPopperContainer?: () => HTMLElement | null;
 }
 
 export interface IDialogActionType {
