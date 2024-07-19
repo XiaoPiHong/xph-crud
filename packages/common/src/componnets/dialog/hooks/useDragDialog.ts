@@ -1,15 +1,14 @@
 import { useEffect, useCallback, useRef } from "react";
-import { IDialogProps } from "../types";
 
 const useDragDialog = ({
+  container,
   dialogHeaderRef,
   dialogRef,
-  dialogProps,
   setDialogPosition,
 }: {
+  container: HTMLElement;
   dialogHeaderRef: React.RefObject<HTMLDivElement>;
   dialogRef: React.RefObject<HTMLDivElement>;
-  dialogProps: IDialogProps;
   setDialogPosition: (position: { left: number; top: number }) => void;
 }) => {
   const spaceX = useRef(0);
@@ -36,9 +35,6 @@ const useDragDialog = ({
 
   const onDocumentMouseMove = useCallback((e: MouseEvent) => {
     const dialogDiv = dialogRef.current!;
-    const { getPopperContainer } = dialogProps;
-    const container = getPopperContainer!() as HTMLElement;
-
     const { translateX, translateY } = getElementTranslateDistance(dialogDiv);
     let x = e.clientX - spaceX.current;
     let y = e.clientY - spaceY.current;

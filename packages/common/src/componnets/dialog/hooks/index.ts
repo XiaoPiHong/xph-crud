@@ -16,3 +16,5 @@ export { default as useDialogZoom } from "./useDialogZoom";
 export * from "./useDialogZoom";
 export { default as useDialogContentMaxHeight } from "./useDialogContentMaxHeight";
 export * from "./useDialogContentMaxHeight";
+export { default as useMinimizeDialog } from "./useMinimizeDialog";
+export * from "./useMinimizeDialog";

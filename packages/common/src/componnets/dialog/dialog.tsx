@@ -15,7 +15,9 @@ import {
   useDialogPosition,
   useDragDialog,
   useDialogContentMaxHeight,
+  useMinimizeDialog,
 } from "./hooks";
+import MinimizeDialog from "./components/minimizeDialog";
 import style from "./dialog.module.css";
 
 const Dialog = (
@@ -55,11 +57,30 @@ const Dialog = (
     dialogHeaderRef,
     dialogFooterRef,
   });
+  const {
+    minimizeLeft,
+    minimizeTop,
+    minimizeRef,
+    minimizeVisible,
+    setMinimizeVisible,
+    setMinimizePosition,
+  } = useMinimizeDialog();
+
+  /** 主体窗口拖拽 */
   useDragDialog({
+    container,
     dialogHeaderRef,
     dialogRef,
-    dialogProps,
     setDialogPosition,
+  });
+
+  /** 最小化窗口拖拽 */
+  const useDragMinimizeDialog = useDragDialog;
+  useDragMinimizeDialog({
+    container,
+    dialogHeaderRef: minimizeRef,
+    dialogRef: minimizeRef,
+    setDialogPosition: setMinimizePosition,
   });
 
   useImperativeHandle(_ref, () => ({
@@ -84,12 +105,21 @@ const Dialog = (
         ></div>
       ) : null}
 
+      {/** 弹窗最小化的窗口 */}
+      <MinimizeDialog
+        ref={minimizeRef}
+        left={minimizeLeft}
+        top={minimizeTop}
+        title={title}
+        visible={minimizeVisible}
+      />
+
       {/** 弹窗容器================================================ */}
       <div
         ref={dialogRef}
         className={style["xph-dialog-wrapper"]}
         style={{
-          display: visible ? "flex" : "none",
+          display: visible && !minimizeVisible ? "flex" : "none",
           left: dialogLeft,
           top: dialogTop,
           width: dialogWidth,
@@ -100,8 +130,8 @@ const Dialog = (
         <div ref={dialogHeaderRef} className={style["dialog__header"]}>
           <div>{renderTitle ? renderTitle() : title}</div>
           <div>
-            <button>缩小</button>
-            <button>放大</button>
+            <button>最小化</button>
+            <button>最大化</button>
             <button onClick={close}>关闭</button>
           </div>
         </div>

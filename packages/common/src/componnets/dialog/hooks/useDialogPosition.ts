@@ -11,8 +11,8 @@ const useDialogPosition = ({
   dialogWidth: string | number;
   dialogHeight: string | number;
 }) => {
-  const [left, seLeft] = useState(0);
-  const [top, setTop] = useState(0);
+  const [left, seLeft] = useState(4);
+  const [top, setTop] = useState(4);
 
   /** 首次初始化位置（如果传递过来的宽高变动了，需重新计算） */
   useEffect(() => {
