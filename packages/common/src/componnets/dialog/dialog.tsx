@@ -71,6 +71,8 @@ const Dialog = (
 
   return (
     <>
+      {/** 遮罩层=============================================== */}
+      {/** 由于弹窗之间存在层级关系，所以遮罩层也需要层级关系，所以遮罩层没有设计成全局共用的 */}
       {mask ? (
         <div
           className={style["xph-dialog-mask"]}
@@ -81,6 +83,8 @@ const Dialog = (
           }}
         ></div>
       ) : null}
+
+      {/** 弹窗容器================================================ */}
       <div
         ref={dialogRef}
         className={style["xph-dialog-wrapper"]}
@@ -92,6 +96,7 @@ const Dialog = (
           height: dialogHeight,
         }}
       >
+        {/** 弹窗header========================================================== */}
         <div ref={dialogHeaderRef} className={style["dialog__header"]}>
           <div>{renderTitle ? renderTitle() : title}</div>
           <div>
@@ -100,6 +105,7 @@ const Dialog = (
             <button onClick={close}>关闭</button>
           </div>
         </div>
+        {/** 弹窗主体内容main============================================================ */}
         <div
           ref={dialogMainRef}
           className={style["dialog__main"]}
@@ -109,6 +115,7 @@ const Dialog = (
         >
           {visible ? children : null}
         </div>
+        {/** 弹窗footer============================================================ */}
         {/** 如果是renderFooter，底部的布局由调用方决定  */}
         {renderFooter ? (
           <div ref={dialogFooterRef}>{renderFooter()}</div>
@@ -122,7 +129,7 @@ const Dialog = (
   );
 };
 
-/** 确保挂载的节点已经存在再生成弹窗 */
+/** 确保弹窗挂载的节点已经存在，再生成弹窗 */
 const XphDialog = (
   props: IDialogProps & { children?: React.ReactNode },
   ref: ForwardedRef<IDialogActionType>
