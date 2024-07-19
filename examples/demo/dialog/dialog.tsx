@@ -2,25 +2,39 @@ import React, { useRef } from "react";
 import { XphDialog, IXphDialogProps, IXphDialogActionType } from "xph-crud";
 
 const ReactApp: React.FC = () => {
-  const dialogProps: IXphDialogProps = {
-    mask: true,
-    title: "弹窗标题",
+  const firstDialogRef = useRef<IXphDialogActionType>(null);
+  const secondDialogRef = useRef<IXphDialogActionType>(null);
+  const firstDialogProps: IXphDialogProps = {
+    mask: false,
+    title: "弹窗1标题",
     width: 1000,
     // height: 1200,
     getPopperContainer: () => document.getElementById("dialog-box"),
   };
-  const dialogRef = useRef<IXphDialogActionType>(null);
 
-  const onOpen = () => {
-    dialogRef.current?.open();
+  const secondDialogProps: IXphDialogProps = {
+    mask: false,
+    title: "弹窗2标题",
+    width: 500,
+    // height: 1200,
+    getPopperContainer: () => document.getElementById("dialog-box"),
   };
 
+  const onOpenFirstDialog = () => {
+    firstDialogRef.current?.open();
+  };
+
+  const onOpenSecondDialog = () => {
+    secondDialogRef.current?.open();
+  };
+
+  /** 弹窗1的内容组件 */
   const Content = () => {
     console.log("渲染Content");
     return (
-      <div style={{ height: "1200px" }}>
-        <>内容</>
-        <div>内容</div>
+      <div style={{ height: "400px" }}>
+        <>我是弹窗1</>
+        <div>我是弹窗1</div>
       </div>
     );
   };
@@ -35,10 +49,15 @@ const ReactApp: React.FC = () => {
         position: "relative",
       }}
     >
-      <button onClick={onOpen}>点击打开XphDialog弹窗</button>
+      <button onClick={onOpenFirstDialog}>点击打开XphDialog弹窗1</button>
+      <button onClick={onOpenSecondDialog}>点击打开XphDialog弹窗2</button>
+
       <div style={{ width: "2000px", height: "1000px" }}></div>
-      <XphDialog {...dialogProps} ref={dialogRef}>
+      <XphDialog {...firstDialogProps} ref={firstDialogRef}>
         <Content />
+      </XphDialog>
+      <XphDialog {...secondDialogProps} ref={secondDialogRef}>
+        我是弹窗2
       </XphDialog>
     </div>
   );

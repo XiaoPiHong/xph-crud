@@ -70,7 +70,7 @@ const Dialog = (
   console.log(container.scrollWidth, container.scrollHeight);
 
   return (
-    <>
+    <div>
       {/** 遮罩层=============================================== */}
       {/** 由于弹窗之间存在层级关系，所以遮罩层也需要层级关系，所以遮罩层没有设计成全局共用的 */}
       {mask ? (
@@ -125,7 +125,7 @@ const Dialog = (
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 };
 
