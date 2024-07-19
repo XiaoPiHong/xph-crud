@@ -42,12 +42,14 @@ const Dialog = (
     dialogProps
   );
   const { dialogLeft, dialogTop, setDialogPosition } = useDialogPosition({
+    visible,
     container,
     dialogWidth,
     dialogHeight,
   });
   const { contentMaxHeight } = useDialogContentMaxHeight({
     visible,
+    container,
     dialogHeight,
     dialogRef,
     dialogHeaderRef,
@@ -64,6 +66,9 @@ const Dialog = (
     open,
     close,
   }));
+
+  console.log(container.scrollWidth, container.scrollHeight);
+
   return (
     <>
       {mask ? (

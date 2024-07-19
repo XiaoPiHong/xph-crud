@@ -54,9 +54,6 @@ const useDragDialog = ({
     if (y < minY) y = minY;
     if (y > maxY) y = maxY;
 
-    const { offsetTop } = dialogRef.current!;
-    console.log(translateY, offsetTop, x);
-
     // 设置新的位置
     setDialogPosition({ left: x, top: y });
   }, []);

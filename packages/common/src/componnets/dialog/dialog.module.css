@@ -25,6 +25,8 @@
 .dialog__main {
   flex: 1;
   height: 0;
+  box-sizing: border-box;
+  padding: 8px;
   overflow-y: auto;
 }
 .dialog__footer {

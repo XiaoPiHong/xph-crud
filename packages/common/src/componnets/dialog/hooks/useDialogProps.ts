@@ -7,7 +7,6 @@ const useDialogPorps = (dialogProps: IDialogProps) => {
 
   const baseDialogProps: Partial<IDialogProps> = {
     width: 700,
-    height: 500,
     okText: "确定",
     cancelText: "取消",
     /** 默认都是挂载在body上 */

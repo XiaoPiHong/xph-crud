@@ -5,7 +5,7 @@ const ReactApp: React.FC = () => {
   const dialogProps: IXphDialogProps = {
     mask: true,
     title: "弹窗标题",
-    // width: 1000,
+    width: 1000,
     // height: 1200,
     getPopperContainer: () => document.getElementById("dialog-box"),
   };
