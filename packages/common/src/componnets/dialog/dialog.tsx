@@ -96,7 +96,7 @@ const Dialog = (
           height: dialogHeight,
         }}
       >
-        {/** 弹窗header========================================================== */}
+        {/** 弹窗头部header========================================================== */}
         <div ref={dialogHeaderRef} className={style["dialog__header"]}>
           <div>{renderTitle ? renderTitle() : title}</div>
           <div>
@@ -115,7 +115,7 @@ const Dialog = (
         >
           {visible ? children : null}
         </div>
-        {/** 弹窗footer============================================================ */}
+        {/** 弹窗底部footer============================================================ */}
         {/** 如果是renderFooter，底部的布局由调用方决定  */}
         {renderFooter ? (
           <div ref={dialogFooterRef}>{renderFooter()}</div>
