@@ -21,7 +21,7 @@ const MinimizeDialog = forwardRef<HTMLDivElement, IMinimizeDialogProps>(
         <div className={style["minimize-windows-title"]} title={title}>
           {title}
         </div>
-        <div className={style["minimize-windows-title"]}>
+        <div className={style["minimize-windows-operate"]}>
           <button onClick={maximize}>最大化</button>
           <button onClick={closesquare}>关闭</button>
         </div>

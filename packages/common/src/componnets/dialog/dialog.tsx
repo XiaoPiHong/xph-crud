@@ -107,11 +107,12 @@ const Dialog = (
 
       {/** 弹窗最小化的窗口 */}
       <MinimizeDialog
+        visible={minimizeVisible}
         ref={minimizeRef}
         left={minimizeLeft}
         top={minimizeTop}
         title={title}
-        visible={minimizeVisible}
+        maximize={() => setMinimizeVisible(false)}
       />
 
       {/** 弹窗容器================================================ */}
@@ -130,7 +131,7 @@ const Dialog = (
         <div ref={dialogHeaderRef} className={style["dialog__header"]}>
           <div>{renderTitle ? renderTitle() : title}</div>
           <div>
-            <button>最小化</button>
+            <button onClick={() => setMinimizeVisible(true)}>最小化</button>
             <button>最大化</button>
             <button onClick={close}>关闭</button>
           </div>

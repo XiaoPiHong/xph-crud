@@ -1,7 +1,8 @@
 import { useState, useRef } from "react";
 const useMinimizeDialog = () => {
-  const [left, setLeft] = useState(0);
-  const [top, setTop] = useState(0);
+  /** 这里的初始位置没有设置自适应（目前先写死，如果最小化的宽高改变了，这里也需要调整） */
+  const [left, setLeft] = useState(160);
+  const [top, setTop] = useState(60);
   const minimizeRef = useRef<HTMLDivElement>(null);
   const [minimizeVisible, setMinimizeVisible] = useState(false);
 
