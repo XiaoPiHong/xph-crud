@@ -6,12 +6,12 @@ interface IMinimizeDialogProps {
   top: number;
   visible: boolean;
   title?: string;
-  maximize?: () => void;
-  closesquare?: () => void;
+  onMaximize?: () => void;
+  onClosesquare?: () => void;
 }
 
 const MinimizeDialog = forwardRef<HTMLDivElement, IMinimizeDialogProps>(
-  ({ title, left, top, visible, maximize, closesquare }, ref) => {
+  ({ title, left, top, visible, onMaximize, onClosesquare }, ref) => {
     return (
       <div
         style={{ display: visible ? "flex" : "none", left, top }}
@@ -22,8 +22,8 @@ const MinimizeDialog = forwardRef<HTMLDivElement, IMinimizeDialogProps>(
           {title}
         </div>
         <div className={style["minimize-windows-operate"]}>
-          <button onClick={maximize}>最大化</button>
-          <button onClick={closesquare}>关闭</button>
+          <button onClick={onMaximize}>最大化</button>
+          <button onClick={onClosesquare}>关闭</button>
         </div>
       </div>
     );

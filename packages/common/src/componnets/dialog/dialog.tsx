@@ -16,6 +16,7 @@ import {
   useDragDialog,
   useDialogContentMaxHeight,
   useMinimizeDialog,
+  useDialogZoom,
 } from "./hooks";
 import MinimizeDialog from "./components/minimizeDialog";
 import style from "./dialog.module.css";
@@ -66,6 +67,11 @@ const Dialog = (
     setMinimizePosition,
   } = useMinimizeDialog();
 
+  const { onMaximize, onMinimize, onClose } = useDialogZoom({
+    close,
+    setMinimizeVisible,
+  });
+
   /** 主体窗口拖拽 */
   useDragDialog({
     container,
@@ -85,7 +91,7 @@ const Dialog = (
 
   useImperativeHandle(_ref, () => ({
     open,
-    close,
+    close: onClose,
   }));
 
   console.log(container.scrollWidth, container.scrollHeight);
@@ -112,7 +118,8 @@ const Dialog = (
         left={minimizeLeft}
         top={minimizeTop}
         title={title}
-        maximize={() => setMinimizeVisible(false)}
+        onMaximize={onMaximize}
+        onClosesquare={onClose}
       />
 
       {/** 弹窗容器================================================ */}
@@ -131,9 +138,9 @@ const Dialog = (
         <div ref={dialogHeaderRef} className={style["dialog__header"]}>
           <div>{renderTitle ? renderTitle() : title}</div>
           <div>
-            <button onClick={() => setMinimizeVisible(true)}>最小化</button>
-            <button>最大化</button>
-            <button onClick={close}>关闭</button>
+            <button onClick={onMinimize}>最小化</button>
+            <button onClick={onMaximize}>最大化</button>
+            <button onClick={onClose}>关闭</button>
           </div>
         </div>
         {/** 弹窗主体内容main============================================================ */}
