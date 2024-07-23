@@ -19,8 +19,10 @@ const useTableProps = (props: TTableProps) => {
         showQuickJumper: true,
       },
     },
-    crudForm: {
-      items: [],
+    crudFormDialog: {
+      formProps: {
+        items: [],
+      },
     },
     searchForm: {
       showSearch: true,

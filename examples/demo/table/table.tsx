@@ -422,21 +422,23 @@ const ReactApp: React.FC = () => {
         },
       ],
     },
-    crudForm: {
-      items: [
-        {
-          name: "Input",
-          label: "Input",
-          component: "Input",
-          required: true,
-          initialValue: "Input",
-          componentProps: {
-            onChange: (e) => {
-              console.log(e);
+    crudFormDialog: {
+      formProps: {
+        items: [
+          {
+            name: "Input",
+            label: "Input",
+            component: "Input",
+            required: true,
+            initialValue: "Input",
+            componentProps: {
+              onChange: (e) => {
+                console.log(e);
+              },
             },
           },
-        },
-      ],
+        ],
+      },
     },
   };
 

@@ -7,7 +7,7 @@ import type {
   TColumnProps as TXphColumnProps,
   TApiTableProps as TXphApiTableProps,
   TSearchFormProps as TXphSearchFormProps,
-  TCrudFormProps as TXphCrudFormProps,
+  TCrudFormDialogProps as TXphCrudFormDialogProps,
   IMainProps as IXphMainProps,
 } from "./src/types";
 
@@ -19,6 +19,6 @@ export {
   TXphColumnProps,
   TXphApiTableProps,
   TXphSearchFormProps,
-  TXphCrudFormProps,
+  TXphCrudFormDialogProps,
   IXphMainProps,
 };

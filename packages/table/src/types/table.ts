@@ -1,6 +1,6 @@
 import { TableRef } from "antd/es/table";
 import { TSearchFormProps } from "./searchForm";
-import { TCrudFormProps } from "./crudForm";
+import { TCrudFormDialogProps } from "./crudFormDialog";
 import { TApiTableProps } from "./apiTable";
 import { TXphExtendComponentPropsMap } from "xph-crud/common";
 
@@ -29,8 +29,8 @@ export type TTableProps<
   >;
   /** 搜索表单配置项 */
   searchForm?: TSearchFormProps<FormExtendPropsMap>;
-  /** 新增 / 修改表单配置项 */
-  crudForm?: TCrudFormProps<FormExtendPropsMap>;
+  /** （新增 / 修改）表单弹窗配置项 */
+  crudFormDialog?: TCrudFormDialogProps<FormExtendPropsMap>;
 
   /** 分页改变事件 */
   onPaginationChange?: (page: number, pageSize: number) => void;
