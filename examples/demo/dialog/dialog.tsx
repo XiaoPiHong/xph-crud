@@ -1,19 +1,19 @@
 import React, { useRef } from "react";
+import { Input } from "antd";
 import { XphDialog, IXphDialogProps, IXphDialogActionType } from "xph-crud";
 
 const ReactApp: React.FC = () => {
   const firstDialogRef = useRef<IXphDialogActionType>(null);
   const secondDialogRef = useRef<IXphDialogActionType>(null);
   const firstDialogProps: IXphDialogProps = {
-    mask: false,
+    mask: true,
     title: "弹窗1标题",
     width: 1000,
-    height: 1200,
     getPopperContainer: () => document.getElementById("dialog-box"),
   };
 
   const secondDialogProps: IXphDialogProps = {
-    mask: true,
+    mask: false,
     title: "弹窗2标题",
     width: 500,
     // height: 1200,
@@ -34,7 +34,9 @@ const ReactApp: React.FC = () => {
     return (
       <div style={{ height: "1600px" }}>
         <>我是弹窗1</>
-        <div>我是弹窗1</div>
+        <div>
+          <Input />
+        </div>
       </div>
     );
   };
@@ -57,7 +59,7 @@ const ReactApp: React.FC = () => {
         <Content />
       </XphDialog>
       <XphDialog {...secondDialogProps} ref={secondDialogRef}>
-        我是弹窗2
+        <Input />
       </XphDialog>
     </div>
   );

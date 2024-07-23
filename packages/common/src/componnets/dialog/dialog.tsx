@@ -17,6 +17,7 @@ import {
   useDialogContentMaxHeight,
   useMinimizeDialog,
   useDialogZoom,
+  useTopShowDialog,
 } from "./hooks";
 import MinimizeDialog from "./components/minimizeDialog";
 import style from "./dialog.module.css";
@@ -95,13 +96,16 @@ const Dialog = (
     setDialogPosition: setMinimizePosition,
   });
 
+  /** 弹窗层级切换 */
+  useTopShowDialog({ visible, container, dialogRef });
+
   useImperativeHandle(_ref, () => ({
     open,
     close: onClose,
   }));
 
   return (
-    <div>
+    <div className="xph-dialog">
       {/** 遮罩层=============================================== */}
       {/** 由于弹窗之间存在层级关系，所以遮罩层也需要层级关系，所以遮罩层没有设计成全局共用的 */}
       {mask ? (
