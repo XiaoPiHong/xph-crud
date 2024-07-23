@@ -3,10 +3,12 @@ import { useEffect } from "react";
 const useTopShowDialog = ({
   visible,
   dialogRef,
+  minimizeRef,
   container,
 }: {
   visible: boolean;
   dialogRef: React.RefObject<HTMLDivElement>;
+  minimizeRef: React.RefObject<HTMLDivElement>;
   container: HTMLElement;
 }) => {
   const insertAfterFunny = (newNode, referenceNode) => {
@@ -30,7 +32,7 @@ const useTopShowDialog = ({
     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
   };
 
-  const onClickDialog = (e?: MouseEvent) => {
+  const onMousedownDialog = (e?: MouseEvent) => {
     const allDialog = container.querySelectorAll(".xph-dialog");
     const lastDialog = allDialog[allDialog.length - 1];
     if (dialogRef.current?.parentNode === lastDialog) return;
@@ -45,16 +47,26 @@ const useTopShowDialog = ({
 
   useEffect(() => {
     // 捕获阶段
-    dialogRef.current?.addEventListener("click", onClickDialog, true);
+    dialogRef.current?.addEventListener("mousedown", onMousedownDialog, true);
+    minimizeRef.current?.addEventListener("mousedown", onMousedownDialog, true);
     return () => {
-      dialogRef.current?.removeEventListener("click", onClickDialog, true);
+      dialogRef.current?.removeEventListener(
+        "mousedown",
+        onMousedownDialog,
+        true
+      );
+      minimizeRef.current?.removeEventListener(
+        "mousedown",
+        onMousedownDialog,
+        true
+      );
     };
   }, []);
 
   useEffect(() => {
     /** 每次打开的时候打开的弹窗都是在最上层 */
     if (visible) {
-      onClickDialog();
+      onMousedownDialog();
     }
   }, [visible]);
 };

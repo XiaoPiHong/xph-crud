@@ -6,10 +6,10 @@ const ReactApp: React.FC = () => {
   const firstDialogRef = useRef<IXphDialogActionType>(null);
   const secondDialogRef = useRef<IXphDialogActionType>(null);
   const firstDialogProps: IXphDialogProps = {
-    mask: true,
+    mask: false,
     title: "弹窗1标题",
     width: 1000,
-    getPopperContainer: () => document.getElementById("dialog-box"),
+    // getPopperContainer: () => document.getElementById("dialog-box"),
   };
 
   const secondDialogProps: IXphDialogProps = {
@@ -17,7 +17,7 @@ const ReactApp: React.FC = () => {
     title: "弹窗2标题",
     width: 500,
     // height: 1200,
-    getPopperContainer: () => document.getElementById("dialog-box"),
+    // getPopperContainer: () => document.getElementById("dialog-box"),
   };
 
   const onOpenFirstDialog = () => {

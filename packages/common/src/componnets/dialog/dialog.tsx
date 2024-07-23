@@ -97,7 +97,7 @@ const Dialog = (
   });
 
   /** 弹窗层级切换 */
-  useTopShowDialog({ visible, container, dialogRef });
+  useTopShowDialog({ visible, container, dialogRef, minimizeRef });
 
   useImperativeHandle(_ref, () => ({
     open,
