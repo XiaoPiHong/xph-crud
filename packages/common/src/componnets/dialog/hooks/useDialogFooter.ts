@@ -18,6 +18,7 @@ export default function useDialogFooter(props: IDialogProps) {
       {
         component: "Button",
         componentProps: {
+          type: "primary",
           ...okProps,
           children: okText,
           onClick: onOk,

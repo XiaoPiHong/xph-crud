@@ -20,6 +20,12 @@ import {
 } from "./hooks";
 import MinimizeDialog from "./components/minimizeDialog";
 import style from "./dialog.module.css";
+import { Button } from "antd";
+import {
+  CloseOutlined,
+  FullscreenOutlined,
+  ShrinkOutlined,
+} from "@ant-design/icons";
 
 const Dialog = (
   dialogProps: IDialogProps & {
@@ -94,8 +100,6 @@ const Dialog = (
     close: onClose,
   }));
 
-  console.log(container.scrollWidth, container.scrollHeight);
-
   return (
     <div>
       {/** 遮罩层=============================================== */}
@@ -137,10 +141,43 @@ const Dialog = (
         {/** 弹窗头部header========================================================== */}
         <div ref={dialogHeaderRef} className={style["dialog__header"]}>
           <div>{renderTitle ? renderTitle() : title}</div>
-          <div>
-            <button onClick={onMinimize}>最小化</button>
-            <button onClick={onMaximize}>最大化</button>
-            <button onClick={onClose}>关闭</button>
+          <div className={style["dialog__header-btns"]}>
+            <Button
+              type="link"
+              onClick={onMinimize}
+              icon={
+                <ShrinkOutlined
+                  style={{
+                    fontSize: "22px",
+                    cursor: "pointer",
+                  }}
+                />
+              }
+            />
+            <Button
+              type="link"
+              onClick={onMaximize}
+              icon={
+                <FullscreenOutlined
+                  style={{
+                    fontSize: "22px",
+                    cursor: "pointer",
+                  }}
+                />
+              }
+            />
+            <Button
+              type="link"
+              onClick={onClose}
+              icon={
+                <CloseOutlined
+                  style={{
+                    fontSize: "22px",
+                    cursor: "pointer",
+                  }}
+                />
+              }
+            />
           </div>
         </div>
         {/** 弹窗主体内容main============================================================ */}

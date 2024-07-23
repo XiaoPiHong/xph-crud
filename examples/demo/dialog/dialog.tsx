@@ -8,12 +8,12 @@ const ReactApp: React.FC = () => {
     mask: false,
     title: "弹窗1标题",
     width: 1000,
-    // height: 1200,
+    height: 1200,
     getPopperContainer: () => document.getElementById("dialog-box"),
   };
 
   const secondDialogProps: IXphDialogProps = {
-    mask: false,
+    mask: true,
     title: "弹窗2标题",
     width: 500,
     // height: 1200,
@@ -32,7 +32,7 @@ const ReactApp: React.FC = () => {
   const Content = () => {
     console.log("渲染Content");
     return (
-      <div style={{ height: "400px" }}>
+      <div style={{ height: "1600px" }}>
         <>我是弹窗1</>
         <div>我是弹窗1</div>
       </div>

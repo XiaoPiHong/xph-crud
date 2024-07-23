@@ -1,5 +1,7 @@
 import { forwardRef } from "react";
 import style from "./index.module.css";
+import { Button } from "antd";
+import { CloseOutlined, FullscreenOutlined } from "@ant-design/icons";
 
 interface IMinimizeDialogProps {
   left: number;
@@ -22,8 +24,30 @@ const MinimizeDialog = forwardRef<HTMLDivElement, IMinimizeDialogProps>(
           {title}
         </div>
         <div className={style["minimize-windows-operate"]}>
-          <button onClick={onMaximize}>最大化</button>
-          <button onClick={onClosesquare}>关闭</button>
+          <Button
+            type="link"
+            onClick={onMaximize}
+            icon={
+              <FullscreenOutlined
+                style={{
+                  fontSize: "22px",
+                  cursor: "pointer",
+                }}
+              />
+            }
+          />
+          <Button
+            type="link"
+            onClick={onClosesquare}
+            icon={
+              <CloseOutlined
+                style={{
+                  fontSize: "22px",
+                  cursor: "pointer",
+                }}
+              />
+            }
+          />
         </div>
       </div>
     );
