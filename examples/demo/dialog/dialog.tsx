@@ -20,12 +20,18 @@ const ReactApp: React.FC = () => {
     // getPopperContainer: () => document.getElementById("dialog-box"),
   };
 
+  const inputRef = useRef<any>(null);
+
   const onOpenFirstDialog = () => {
     firstDialogRef.current?.open();
   };
 
   const onOpenSecondDialog = () => {
     secondDialogRef.current?.open();
+  };
+
+  const onConsoleChildrenDom = () => {
+    console.log(inputRef);
   };
 
   /** 弹窗1的内容组件 */
@@ -53,13 +59,14 @@ const ReactApp: React.FC = () => {
     >
       <button onClick={onOpenFirstDialog}>点击打开XphDialog弹窗1</button>
       <button onClick={onOpenSecondDialog}>点击打开XphDialog弹窗2</button>
+      <button onClick={onConsoleChildrenDom}>点击打印子元素</button>
 
       <div style={{ width: "2000px", height: "1000px" }}></div>
       <XphDialog {...firstDialogProps} ref={firstDialogRef}>
         <Content />
       </XphDialog>
       <XphDialog {...secondDialogProps} ref={secondDialogRef}>
-        <Input />
+        <Input ref={inputRef} />
       </XphDialog>
     </div>
   );

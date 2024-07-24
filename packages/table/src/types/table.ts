@@ -1,7 +1,7 @@
-import { TableRef } from "antd/es/table";
 import { TSearchFormProps } from "./searchForm";
+import { ICrudFormDialogActionType } from "./crudFormDialog";
 import { TCrudFormDialogProps } from "./crudFormDialog";
-import { TApiTableProps } from "./apiTable";
+import { TApiTableProps, TApiTableActionType } from "./apiTable";
 import { TXphExtendComponentPropsMap } from "xph-crud/common";
 
 /** 行数据 */
@@ -42,13 +42,4 @@ export type TTableProps<
   ) => void;
 };
 
-export type TTableActionType = {
-  resetAllData: () => Promise<void>;
-  resetData: () => Promise<void>;
-  reloadData: () => Promise<void>;
-} & TableRef;
-
-// export type TRefTable = <RecordType extends TDataSourceItem = TDataSourceItem>(
-//   props: React.PropsWithChildren<TTableProps<RecordType>> &
-//     React.RefAttributes<TTableActionType | undefined>
-// ) => React.ReactElement;
+export type TTableActionType = TApiTableActionType & ICrudFormDialogActionType;

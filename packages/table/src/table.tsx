@@ -21,6 +21,7 @@ const XphTable = <T extends TDataSourceItem>(
 
   useImperativeHandle(ref, () => ({
     ...tableRef.current!,
+    ...crudFormDialogRef.current!,
   }));
 
   return (

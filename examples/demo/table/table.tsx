@@ -346,6 +346,17 @@ const ReactApp: React.FC = () => {
       collapsible: true,
       items: [
         {
+          name: "Button",
+          label: "弹窗",
+          component: "Button",
+          componentProps: {
+            children: "点击打开表格弹窗",
+            onClick: (e) => {
+              xphTableRef.current?.open();
+            },
+          },
+        },
+        {
           name: "Input",
           label: "Input",
           component: "Input",

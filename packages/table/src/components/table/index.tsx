@@ -4,7 +4,7 @@ import { RefObject, forwardRef, useImperativeHandle, useRef } from "react";
 import {
   TTableProps,
   TSearchFormActionType,
-  TTableActionType,
+  TApiTableActionType,
 } from "../../types";
 import {
   useTableColumns,
@@ -17,7 +17,7 @@ import { XphActions as TopToolbar } from "xph-crud/common";
 import style from "./index.module.css";
 
 const Table = forwardRef<
-  TTableActionType,
+  TApiTableActionType,
   {
     fullHeight?: boolean;
     tableProps: TTableProps;

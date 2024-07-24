@@ -1,9 +1,9 @@
 import { TableProps, PaginationProps } from "antd";
+import { TableRef } from "antd/es/table";
 import { TableRowSelection, RowSelectionType } from "antd/lib/table/interface";
-import { IXphActionsProps } from "xph-crud/common";
 import { TDataSourceItem } from "./table";
 import { TColumnProps } from "./column";
-import { TXphExtendComponentPropsMap } from "xph-crud/common";
+import { TXphExtendComponentPropsMap, IXphActionsProps } from "xph-crud/common";
 
 export interface IFunctionToolbarParams<T = TDataSourceItem> {
   loading: boolean;
@@ -44,3 +44,9 @@ export type TApiTableProps<
   /** 内部控制的属性/重写的属性 */
   "rowSelection" | "columns" | "loading" | "dataSource" | "pagination"
 >;
+
+export type TApiTableActionType = {
+  resetAllData: () => Promise<void>;
+  resetData: () => Promise<void>;
+  reloadData: () => Promise<void>;
+} & TableRef;

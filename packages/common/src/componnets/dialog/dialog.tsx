@@ -28,15 +28,15 @@ import {
   ShrinkOutlined,
 } from "@ant-design/icons";
 
-const Dialog = (
-  dialogProps: IDialogProps & {
-    _ref: ForwardedRef<IDialogActionType>;
+const Dialog = forwardRef<
+  IDialogActionType,
+  IDialogProps & {
     baseDialogProps: IDialogProps;
     children?: React.ReactNode;
   }
-) => {
+>((dialogProps, ref) => {
   console.log("render Dialog==============================================");
-  const { children, baseDialogProps, _ref, mask } = dialogProps;
+  const { children, baseDialogProps, mask } = dialogProps;
   const [visible, setVisible] = useState(false);
   const { footerActions } = useDialogFooter(dialogProps);
   const { title, renderFooter, renderTitle, getPopperContainer } = dialogProps;
@@ -99,7 +99,7 @@ const Dialog = (
   /** 弹窗层级切换 */
   useTopShowDialog({ visible, container, dialogRef, minimizeRef });
 
-  useImperativeHandle(_ref, () => ({
+  useImperativeHandle(ref, () => ({
     open,
     close: onClose,
   }));
@@ -206,7 +206,7 @@ const Dialog = (
       </div>
     </div>
   );
-};
+});
 
 /** 确保弹窗挂载的节点已经存在，再生成弹窗 */
 const XphDialog = (
@@ -218,7 +218,7 @@ const XphDialog = (
   console.log("render XphDialog==============================================");
   return (
     <XphPortal getPopperContainer={getPopperContainer!}>
-      <Dialog {...dialogProps} _ref={ref} baseDialogProps={baseDialogProps} />
+      <Dialog {...dialogProps} baseDialogProps={baseDialogProps} ref={ref} />
     </XphPortal>
   );
 };
