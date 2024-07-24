@@ -19,10 +19,10 @@ const SearchForm = forwardRef<
   const [loading, setLoading] = useState(false);
 
   /** 这里可以排除一些扩展的属性 */
-  const getBindProps = useCallback(() => {
+  const getBindProps = () => {
     const { renderActions, ...rest } = props;
     return rest;
-  }, []);
+  };
 
   const onClickSearch = () => {
     const { reloadData } = tableRef.current!;
@@ -34,8 +34,8 @@ const SearchForm = forwardRef<
     resetData();
   };
 
-  /** 代理一下renderActions */
-  const proxyRenderActions = () => {
+  /** 代理一下renderActions（useCallback处理一下防止传递给表单的renderActions引用不一致导致重新渲染表单） */
+  const proxyRenderActions = useCallback(() => {
     return (
       <div style={{ width: "100%", display: "flex" }}>
         <div style={{ flex: 1, width: 0 }}>{renderActions?.()}</div>
@@ -55,10 +55,9 @@ const SearchForm = forwardRef<
         )}
       </div>
     );
-  };
+  }, [showSearch, renderActions]);
 
-  /** useCallback缓存函数，加载时不刷新整个表单（此时无论该文件的任何数据修改，都不会引发CacheForm内部任何变化） */
-  const getBindCacheFormProps = useCallback(() => {
+  const getBindCacheFormProps = () => {
     return {
       setFormLoading: setLoading,
 
@@ -67,10 +66,11 @@ const SearchForm = forwardRef<
         renderActions: proxyRenderActions,
       },
     };
-  }, []);
+  };
 
   return (
     <Spin spinning={loading}>
+      {/** 只要该文件触发渲染，都会触发CacheForm渲染（但是CacheForm内部的XphForm是根据其props浅比较，基本数据类型不一致或者引用不一致时才发生渲染） */}
       <CacheForm ref={ref} getBindProps={getBindCacheFormProps} />
     </Spin>
   );

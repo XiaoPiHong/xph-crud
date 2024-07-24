@@ -1,11 +1,16 @@
 import { memo, useRef, forwardRef, useImperativeHandle } from "react";
 import { TSearchFormActionType } from "../../../../types";
-import { XphForm, IXphFormActionType } from "xph-crud/form";
+import { XphForm as Form, IXphFormActionType } from "xph-crud/form";
+
+const XphForm = memo(Form);
 
 const CacheForm = forwardRef<
   TSearchFormActionType,
   { getBindProps: () => any }
 >(({ getBindProps }, ref) => {
+  console.log(
+    "==============================================================渲染CacheForm"
+  );
   const { formProps, setFormLoading } = getBindProps();
 
   const xphFormRef = useRef<IXphFormActionType>(null);
@@ -18,4 +23,5 @@ const CacheForm = forwardRef<
 
   return <XphForm ref={xphFormRef} {...formProps} />;
 });
-export default memo(CacheForm);
+
+export default CacheForm;
