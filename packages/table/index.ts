@@ -1,4 +1,5 @@
 import XphTable from "./src/table";
+import XphCrudFormDialog from "./src/components/crudFormDialog";
 
 import type {
   TTableProps as TXphTableProps,
@@ -7,8 +8,8 @@ import type {
   TColumnProps as TXphColumnProps,
   TApiTableProps as TXphApiTableProps,
   TSearchFormProps as TXphSearchFormProps,
-  TCrudFormDialogProps as TXphCrudFormDialogProps,
   IMainProps as IXphMainProps,
+  TCrudFormDialogProps as TXphCrudFormDialogProps,
 } from "./src/types";
 
 export {
@@ -19,6 +20,7 @@ export {
   TXphColumnProps,
   TXphApiTableProps,
   TXphSearchFormProps,
-  TXphCrudFormDialogProps,
   IXphMainProps,
+  XphCrudFormDialog,
+  TXphCrudFormDialogProps,
 };

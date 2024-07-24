@@ -1,7 +1,8 @@
 import { forwardRef, useRef, useImperativeHandle, ForwardedRef } from "react";
 import { TTableProps, TTableActionType, TDataSourceItem } from "./types";
 import SearchForm from "./components/searchForm";
-import { useSearchForm, useTableProps } from "./hooks";
+import CrudFormDialog from "./components/crudFormDialog";
+import { useSearchForm, useTableProps, useCrudFormDialog } from "./hooks";
 import Table from "./components/table";
 import style from "./table.module.css";
 import { TXphExtendComponentPropsMap } from "xph-crud/common";
@@ -13,6 +14,7 @@ const XphTable = <T extends TDataSourceItem>(
   const { tableProps } = useTableProps(props);
   const tableRef = useRef<TTableActionType>(null);
   const { searchFormRef, searchFormProps } = useSearchForm(tableProps);
+  const { crudFormDialogRef, crudFormProps } = useCrudFormDialog(tableProps);
   let { fullHeight } = tableProps.table!;
   const { virtual } = tableProps.table!;
   if (virtual) fullHeight = true;
@@ -38,6 +40,9 @@ const XphTable = <T extends TDataSourceItem>(
           tableProps={tableProps}
         />
       </div>
+      {crudFormProps ? (
+        <CrudFormDialog ref={crudFormDialogRef} {...crudFormProps} />
+      ) : null}
     </div>
   );
 };

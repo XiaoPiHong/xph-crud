@@ -19,11 +19,7 @@ const useTableProps = (props: TTableProps) => {
         showQuickJumper: true,
       },
     },
-    crudFormDialog: {
-      formProps: {
-        items: [],
-      },
-    },
+    crudFormDialog: void 0, // 由于该弹窗对性能开销大，所以默认都是不自动生成该弹窗，需要则配置该属性
     searchForm: {
       showSearch: true,
       items: [],

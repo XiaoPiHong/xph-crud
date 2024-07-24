@@ -16,3 +16,5 @@ export { default as useTopToolbar } from "./useTopToolbar";
 export * from "./useTopToolbar";
 export { default as useExtendTable } from "./useExtendTable";
 export * from "./useExtendTable";
+export { default as useCrudFormDialog } from "./useCrudFormDialog";
+export * from "./useCrudFormDialog";
