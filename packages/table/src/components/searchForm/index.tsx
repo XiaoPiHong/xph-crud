@@ -1,12 +1,22 @@
-import { forwardRef, useCallback, useState, RefObject } from "react";
+import {
+  forwardRef,
+  useCallback,
+  useState,
+  RefObject,
+  useImperativeHandle,
+  useRef,
+  memo,
+} from "react";
 import {
   TSearchFormProps,
   TTableActionType,
   TSearchFormActionType,
 } from "../../types";
-import CacheForm from "./components/cacheForm";
 import { Button, Spin } from "antd";
 import { SearchOutlined, ReloadOutlined } from "@ant-design/icons";
+import { XphForm as Form, IXphFormActionType } from "xph-crud/form";
+
+const XphForm = memo(Form);
 
 const SearchForm = forwardRef<
   TSearchFormActionType,
@@ -18,11 +28,7 @@ const SearchForm = forwardRef<
 
   const [loading, setLoading] = useState(false);
 
-  /** 这里可以排除一些扩展的属性 */
-  const getBindProps = () => {
-    const { renderActions, ...rest } = props;
-    return rest;
-  };
+  const xphFormRef = useRef<IXphFormActionType>(null);
 
   const onClickSearch = () => {
     const { reloadData } = tableRef.current!;
@@ -57,21 +63,25 @@ const SearchForm = forwardRef<
     );
   }, [showSearch, renderActions]);
 
-  const getBindCacheFormProps = () => {
-    return {
-      setFormLoading: setLoading,
-
-      formProps: {
-        ...getBindProps(),
-        renderActions: proxyRenderActions,
-      },
+  /** 这里可以排除一些扩展的属性 */
+  const getBindXphFormProps = () => {
+    const { renderActions, ...rest } = props;
+    const newProps = {
+      ...rest,
+      renderActions: proxyRenderActions,
     };
+    return newProps;
   };
+
+  useImperativeHandle(ref, () => ({
+    /** 扩展了loading方法，让table调用 */
+    setFormLoading: setLoading,
+    ...xphFormRef.current!,
+  }));
 
   return (
     <Spin spinning={loading}>
-      {/** 只要该文件触发渲染，都会触发CacheForm渲染（但是CacheForm内部的XphForm是根据其props浅比较，基本数据类型不一致或者引用不一致时才发生渲染） */}
-      <CacheForm ref={ref} getBindProps={getBindCacheFormProps} />
+      <XphForm ref={xphFormRef} {...getBindXphFormProps()} />
     </Spin>
   );
 });
