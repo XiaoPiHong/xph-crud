@@ -213,12 +213,15 @@ const XphDialog = (
   props: IDialogProps & { children?: React.ReactNode },
   ref: ForwardedRef<IDialogActionType>
 ) => {
-  const { baseDialogProps, dialogProps } = useDialogProps(props);
+  const { children, ...rest } = props; // 先把children取出来传递给Dialog，防止useDialogProps对children进行了处理
+  const { baseDialogProps, dialogProps } = useDialogProps(rest);
   const { getPopperContainer } = dialogProps;
   console.log("render XphDialog==============================================");
   return (
     <XphPortal getPopperContainer={getPopperContainer!}>
-      <Dialog {...dialogProps} baseDialogProps={baseDialogProps} ref={ref} />
+      <Dialog {...dialogProps} baseDialogProps={baseDialogProps} ref={ref}>
+        {children}
+      </Dialog>
     </XphPortal>
   );
 };

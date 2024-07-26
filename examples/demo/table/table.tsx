@@ -352,6 +352,7 @@ const ReactApp: React.FC = () => {
           componentProps: {
             children: "点击打开表格弹窗",
             onClick: (e) => {
+              console.log(xphTableRef.current);
               xphTableRef.current?.open();
             },
           },
@@ -434,6 +435,8 @@ const ReactApp: React.FC = () => {
       ],
     },
     crudFormDialog: {
+      title: "弹窗",
+      mask: true,
       formProps: {
         items: [
           {
@@ -447,8 +450,39 @@ const ReactApp: React.FC = () => {
                 console.log(e);
               },
             },
+            colProps: { span: 12 },
+          },
+          {
+            name: "Select",
+            label: "Select",
+            component: "Select",
+            required: true,
+            componentProps: {
+              options: [
+                {
+                  label: "Option1",
+                  value: "Option1",
+                },
+                {
+                  label: "Option2",
+                  value: "Option2",
+                },
+              ],
+              onChange: (e) => {
+                console.log(e);
+              },
+            },
+            colProps: { span: 12 },
           },
         ],
+      },
+      onOk: () => {
+        console.log("onOk");
+        xphTableRef.current?.validator();
+      },
+      onCancel: () => {
+        console.log("onCancel");
+        xphTableRef.current?.close();
       },
     },
   };

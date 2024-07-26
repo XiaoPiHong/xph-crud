@@ -22,20 +22,35 @@ const CrudFormDialog = (
   const dialogRef = useRef<IXphDialogActionType>(null);
   const xphFormRef = useRef<IXphFormActionType>(null);
   const { formProps: xphFormProps } = props;
+
   const getBindDialogProps = () => {
     const { formProps, ...reset } = props;
     return reset;
   };
 
-  /** 由于弹窗内容和弹窗本身的渲染都是异步的，所以这里crudFormDialog暴露的方法需代理 */
+  // 由于表单和弹窗都是异步渲染的，所以其内部的方法需要代理一下
   useImperativeHandle(ref, () => ({
     open: (...args) => {
-      dialogRef.current?.open(...args);
+      return dialogRef.current?.open(...args);
     },
     close: (...args) => {
-      dialogRef.current?.close(...args);
+      return dialogRef.current?.close(...args);
     },
-    ...xphFormRef.current!,
+    getFieldsValue: (...args) => {
+      return xphFormRef.current!.getFieldsValue(...args);
+    },
+    setFieldsValue: (...args) => {
+      return xphFormRef.current!.setFieldsValue(...args);
+    },
+    resetFields: (...args) => {
+      return xphFormRef.current!.resetFields(...args);
+    },
+    validator: (...args) => {
+      return xphFormRef.current!.validator(...args);
+    },
+    scrollToField: (...args) => {
+      return xphFormRef.current!.scrollToField(...args);
+    },
   }));
 
   return (
