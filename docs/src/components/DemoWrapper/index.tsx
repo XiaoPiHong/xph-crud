@@ -1,7 +1,7 @@
 import ErrorBoundary from "@docusaurus/ErrorBoundary";
 import React from "react";
 
-const DemoWrapper: React.FC<any> = ({ children }) => {
+const DemoWrapper: React.FC<any> = ({ children, height = "unset" }) => {
   return (
     <ErrorBoundary
       fallback={({ error, tryAgain }) => {
@@ -14,7 +14,9 @@ const DemoWrapper: React.FC<any> = ({ children }) => {
         );
       }}
     >
-      <div className={"demo-wrapper"}>{children}</div>
+      <div className={"demo-wrapper"} style={{ height: height }}>
+        {children}
+      </div>
     </ErrorBoundary>
   );
 };

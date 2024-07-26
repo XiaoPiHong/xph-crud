@@ -38,7 +38,7 @@ const ReactApp: React.FC = () => {
   const Content = () => {
     console.log("渲染Content");
     return (
-      <div style={{ height: "1600px" }}>
+      <div>
         <>我是弹窗1</>
         <div>
           <Input />
@@ -61,7 +61,6 @@ const ReactApp: React.FC = () => {
       <button onClick={onOpenSecondDialog}>点击打开XphDialog弹窗2</button>
       <button onClick={onConsoleChildrenDom}>点击打印子元素</button>
 
-      <div style={{ width: "2000px", height: "1000px" }}></div>
       <XphDialog {...firstDialogProps} ref={firstDialogRef}>
         <Content />
       </XphDialog>
