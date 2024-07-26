@@ -24,3 +24,5 @@ export { default as useOnPropsSizeChange } from "./useOnPropsSizeChange";
 export * from "./useOnPropsSizeChange";
 export { default as useDialogChangeRecord } from "./useDialogChangeRecord";
 export * from "./useDialogChangeRecord";
+export { default as useResizeDialog } from "./useResizeDialog";
+export * from "./useDialogChangeRecord";

@@ -47,3 +47,35 @@
   justify-content: flex-end;
   gap: 8px;
 }
+/** 拖拽样式============================start */
+.dialog__resize {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  user-select: none;
+}
+
+.dialog__resize-lt {
+  top: 0;
+  left: 0;
+  cursor: nw-resize;
+}
+
+.dialog__resize-rt {
+  top: 0;
+  right: 0;
+  cursor: ne-resize;
+}
+
+.dialog__resize-rb {
+  right: 0;
+  bottom: 0;
+  cursor: nw-resize;
+}
+
+.dialog__resize-lb {
+  bottom: 0;
+  left: 0;
+  cursor: ne-resize;
+}
+/** 拖拽样式============================end */

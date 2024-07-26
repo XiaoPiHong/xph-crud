@@ -20,6 +20,7 @@ import {
   useTopShowDialog,
   useOnPropsSizeChange,
   useDialogChangeRecord,
+  useResizeDialog,
 } from "./hooks";
 import MinimizeDialog from "./components/minimizeDialog";
 import style from "./dialog.module.css";
@@ -121,6 +122,20 @@ const Dialog = forwardRef<
   /** 弹窗层级切换 */
   useTopShowDialog({ visible, container, dialogRef, minimizeRef });
 
+  /** 弹窗拉伸 */
+  const {
+    onMousedownResizeLt,
+    onMousedownResizeRt,
+    onMousedownResizeRb,
+    onMousedownResizeLb,
+  } = useResizeDialog({
+    container,
+    dialogLeft,
+    dialogTop,
+    dialogWidth,
+    dialogHeight,
+  });
+
   useImperativeHandle(ref, () => ({
     open,
     close: onClose,
@@ -129,7 +144,7 @@ const Dialog = forwardRef<
   return (
     <div className="xph-dialog">
       {/** 遮罩层=============================================== */}
-      {/** 由于弹窗之间存在层级关系，所以遮罩层也需要层级关系，所以遮罩层没有设计成全局共用的 */}
+      {/** 由于弹窗之间存在层级关系，所以遮罩层也需要层级关系，所以遮罩层没有设计成全局共用的，而是每个弹窗独立的 */}
       {mask ? (
         <div
           className={style["xph-dialog-mask"]}
@@ -196,6 +211,23 @@ const Dialog = forwardRef<
             <XphActions {...footerActions} />
           </div>
         )}
+
+        <div
+          className={`${style["dialog__resize"]} ${style["dialog__resize-lt"]}`}
+          onMouseDown={onMousedownResizeLt}
+        ></div>
+        <div
+          className={`${style["dialog__resize"]} ${style["dialog__resize-rt"]}`}
+          onMouseDown={onMousedownResizeRt}
+        ></div>
+        <div
+          className={`${style["dialog__resize"]} ${style["dialog__resize-rb"]}`}
+          onMouseDown={onMousedownResizeRb}
+        ></div>
+        <div
+          className={`${style["dialog__resize"]} ${style["dialog__resize-lb"]}`}
+          onMouseDown={onMousedownResizeLb}
+        ></div>
       </div>
     </div>
   );
