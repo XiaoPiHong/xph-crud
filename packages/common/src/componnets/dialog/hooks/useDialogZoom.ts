@@ -35,29 +35,24 @@ const useDialogZoom = ({
       setMinimizeVisible(false);
     }
     if (type === "maximize") {
-      switch (maximizeVisible) {
-        case true: {
-          // 如果当前状态已经是最大化状态，恢复上一次大小，关闭最大化
-          const { top, left, width, height } = dialogChangeRecord.current;
-          setDialogSize({ width, height } as any);
-          setDialogPosition({ top, left } as any);
-          setMaximizeVisible(false);
-          break;
-        }
-        case false: {
-          // 如果当前状态不是最大化状态，设置为最大化状态（注意这里使用scroll系列的宽高）
-          const { scrollWidth, scrollHeight } = container;
-          const width = Math.floor(scrollWidth);
-          const height = Math.floor(scrollHeight);
-          const left = Math.floor(scrollWidth / 2);
-          const top = Math.floor(scrollHeight / 2);
-          setDialogSize({ width, height } as any);
-          setDialogPosition({ top, left } as any);
-          setMaximizeVisible(true);
-          break;
-        }
-      }
+      // 如果当前状态不是最大化状态，设置为最大化状态（注意这里使用scroll系列的宽高）
+      const { scrollWidth, scrollHeight } = container;
+      const width = Math.floor(scrollWidth);
+      const height = Math.floor(scrollHeight);
+      const left = Math.floor(scrollWidth / 2);
+      const top = Math.floor(scrollHeight / 2);
+      setDialogSize({ width, height } as any);
+      setDialogPosition({ top, left } as any);
+      setMaximizeVisible(true);
     }
+  };
+
+  const onRecovery = () => {
+    // 如果当前状态已经是最大化状态，恢复上一次大小，关闭最大化
+    const { top, left, width, height } = dialogChangeRecord.current;
+    setDialogSize({ width, height } as any);
+    setDialogPosition({ top, left } as any);
+    setMaximizeVisible(false);
   };
 
   const onClose = () => {
@@ -71,6 +66,7 @@ const useDialogZoom = ({
     maximizeVisible,
     onMinimize,
     onMaximize,
+    onRecovery,
     onClose,
   };
 };

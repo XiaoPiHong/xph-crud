@@ -23,12 +23,7 @@ import {
 } from "./hooks";
 import MinimizeDialog from "./components/minimizeDialog";
 import style from "./dialog.module.css";
-import { Button } from "antd";
-import {
-  CloseOutlined,
-  FullscreenOutlined,
-  ShrinkOutlined,
-} from "@ant-design/icons";
+import { Maximize, Minimize, Recovery, Close } from "./components/headerBtns";
 
 const Dialog = forwardRef<
   IDialogActionType,
@@ -79,7 +74,14 @@ const Dialog = forwardRef<
   const { minimizeLeft, minimizeTop, minimizeRef, setMinimizePosition } =
     useMinimizeDialog();
 
-  const { minimizeVisible, onMaximize, onMinimize, onClose } = useDialogZoom({
+  const {
+    minimizeVisible,
+    maximizeVisible,
+    onMaximize,
+    onMinimize,
+    onRecovery,
+    onClose,
+  } = useDialogZoom({
     container,
     dialogChangeRecord,
     close,
@@ -166,42 +168,13 @@ const Dialog = forwardRef<
         <div ref={dialogHeaderRef} className={style["dialog__header"]}>
           <div>{renderTitle ? renderTitle() : title}</div>
           <div className={style["dialog__header-btns"]}>
-            <Button
-              type="link"
-              onClick={onMinimize}
-              icon={
-                <ShrinkOutlined
-                  style={{
-                    fontSize: "22px",
-                    cursor: "pointer",
-                  }}
-                />
-              }
-            />
-            <Button
-              type="link"
-              onClick={() => onMaximize("maximize")}
-              icon={
-                <FullscreenOutlined
-                  style={{
-                    fontSize: "22px",
-                    cursor: "pointer",
-                  }}
-                />
-              }
-            />
-            <Button
-              type="link"
-              onClick={onClose}
-              icon={
-                <CloseOutlined
-                  style={{
-                    fontSize: "22px",
-                    cursor: "pointer",
-                  }}
-                />
-              }
-            />
+            <Minimize onClick={onMinimize} />
+            {maximizeVisible ? (
+              <Recovery onClick={onRecovery} />
+            ) : (
+              <Maximize onClick={() => onMaximize("maximize")} />
+            )}
+            <Close onClick={onClose} />
           </div>
         </div>
         {/** 弹窗主体内容main============================================================ */}
