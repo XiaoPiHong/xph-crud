@@ -437,6 +437,8 @@ const ReactApp: React.FC = () => {
     crudFormDialog: {
       title: "弹窗",
       mask: true,
+      // 弹窗挂载的元素
+      getPopperContainer: () => document.getElementById("__docusaurus"),
       formProps: {
         items: [
           {
