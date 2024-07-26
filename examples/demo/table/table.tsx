@@ -438,7 +438,7 @@ const ReactApp: React.FC = () => {
       title: "弹窗",
       mask: true,
       // 弹窗挂载的元素
-      getPopperContainer: () => document.getElementById("__docusaurus"),
+      getPopperContainer: () => document.getElementById("docs-comp-table-base"),
       formProps: {
         items: [
           {
