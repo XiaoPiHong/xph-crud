@@ -20,3 +20,5 @@ export { default as useMinimizeDialog } from "./useMinimizeDialog";
 export * from "./useMinimizeDialog";
 export { default as useTopShowDialog } from "./useTopShowDialog";
 export * from "./useTopShowDialog";
+export { default as useOnPropsSizeChange } from "./useOnPropsSizeChange";
+export * from "./useOnPropsSizeChange";

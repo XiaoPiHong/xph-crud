@@ -1,8 +1,7 @@
-import { useRef, useEffect, useMemo, useState } from "react";
+import { useRef, useState } from "react";
 import { IDialogProps } from "../types";
 
 /**
- *
  * @description 首次打开弹窗的时候，限制弹窗的宽高（不得大于弹窗容器可视区域的宽高）
  */
 const useDialogInitSize = (
@@ -19,39 +18,50 @@ const useDialogInitSize = (
   /** clientWidth clientHeight 不包括border */
   const { clientWidth, clientHeight } = container;
 
-  // 初始化最大宽度
-  const initWidth = curWidth
+  const curPropsWidth = curWidth
     ? curWidth > clientWidth
       ? clientWidth
       : curWidth
     : 0;
 
-  // 初始化最大高度（默认高度是自定义的，但是如果设置了高度则最大高度不得超出可视高度）
-  const initHeight = curHeight
+  const curPropsHeight = curHeight
     ? curHeight > clientHeight
       ? clientHeight
       : curHeight
     : "unset";
 
-  const [dialogWidth, setWidth] = useState<number | string>(initWidth);
-  const [dialogHeight, setHeight] = useState<number | string>(initHeight);
+  /**
+   * 初始化最大宽度、高度（默认高度是自定义的，但是如果props设置了宽高，则最大宽高不可大于可视区域宽高）
+   */
+  const initWidth = useRef<number | string>(curPropsWidth);
+  const initHeight = useRef<number | string>(curPropsHeight);
 
-  useEffect(() => {
-    if (initWidth !== dialogWidth) {
-      console.log("重新设置了宽度");
-      setWidth(initWidth);
-    }
-    if (initHeight !== dialogHeight) {
-      console.log("重新设置了高度");
-      setHeight(initHeight);
-    }
-  }, [initWidth, initHeight]);
+  /** 实际绑定的宽 */
+  const [dialogWidth, setWidth] = useState<number | string>(initWidth.current);
+  /** 实际绑定的高 */
+  const [dialogHeight, setHeight] = useState<number | string>(
+    initHeight.current
+  );
+
+  const setDialogSize = ({
+    width,
+    height,
+  }: {
+    width?: number | string;
+    height?: number | string;
+  }) => {
+    if (width !== void 0) setWidth(width);
+    if (height !== void 0) setHeight(height);
+  };
 
   return {
     dialogWidth,
     dialogHeight,
-    setWidth,
-    setHeight,
+    initWidth,
+    initHeight,
+    curPropsWidth,
+    curPropsHeight,
+    setDialogSize,
   };
 };
 export default useDialogInitSize;

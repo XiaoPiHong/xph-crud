@@ -18,6 +18,7 @@ import {
   useMinimizeDialog,
   useDialogZoom,
   useTopShowDialog,
+  useOnPropsSizeChange,
 } from "./hooks";
 import MinimizeDialog from "./components/minimizeDialog";
 import style from "./dialog.module.css";
@@ -46,16 +47,17 @@ const Dialog = forwardRef<
   const dialogHeaderRef = useRef<HTMLDivElement>(null);
   const dialogMainRef = useRef<HTMLDivElement>(null);
   const dialogFooterRef = useRef<HTMLDivElement>(null);
-  const { dialogWidth, dialogHeight } = useDialogSize(
-    container,
-    baseDialogProps,
-    dialogProps
-  );
-  const { dialogLeft, dialogTop, setDialogPosition } = useDialogPosition({
-    visible,
-    container,
+  const {
+    initWidth,
+    initHeight,
+    curPropsWidth,
+    curPropsHeight,
     dialogWidth,
     dialogHeight,
+    setDialogSize,
+  } = useDialogSize(container, baseDialogProps, dialogProps);
+  const { dialogLeft, dialogTop, setDialogPosition } = useDialogPosition({
+    container,
   });
   const { contentMaxHeight } = useDialogContentMaxHeight({
     visible,
@@ -65,18 +67,24 @@ const Dialog = forwardRef<
     dialogHeaderRef,
     dialogFooterRef,
   });
-  const {
-    minimizeLeft,
-    minimizeTop,
-    minimizeRef,
-    minimizeVisible,
-    setMinimizeVisible,
-    setMinimizePosition,
-  } = useMinimizeDialog();
 
-  const { onMaximize, onMinimize, onClose } = useDialogZoom({
+  useOnPropsSizeChange({
+    visible,
+    container,
+    initWidth,
+    initHeight,
+    curPropsWidth,
+    curPropsHeight,
+    setDialogSize,
+    setDialogPosition,
+  });
+
+  const { minimizeLeft, minimizeTop, minimizeRef, setMinimizePosition } =
+    useMinimizeDialog();
+
+  const { minimizeVisible, onMaximize, onMinimize, onClose } = useDialogZoom({
     close,
-    setMinimizeVisible,
+    setDialogSize,
   });
 
   /** 主体窗口拖拽 */
@@ -126,7 +134,7 @@ const Dialog = forwardRef<
         left={minimizeLeft}
         top={minimizeTop}
         title={title}
-        onMaximize={onMaximize}
+        onMaximize={() => onMaximize("minimize")}
         onClosesquare={onClose}
       />
 
@@ -160,7 +168,7 @@ const Dialog = forwardRef<
             />
             <Button
               type="link"
-              onClick={onMaximize}
+              onClick={() => onMaximize("maximize")}
               icon={
                 <FullscreenOutlined
                   style={{

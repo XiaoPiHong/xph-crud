@@ -4,7 +4,6 @@ const useMinimizeDialog = () => {
   const [left, setLeft] = useState(160);
   const [top, setTop] = useState(60);
   const minimizeRef = useRef<HTMLDivElement>(null);
-  const [minimizeVisible, setMinimizeVisible] = useState(false);
 
   const setMinimizePosition = ({
     left,
@@ -21,8 +20,6 @@ const useMinimizeDialog = () => {
     minimizeTop: top,
     minimizeLeft: left,
     minimizeRef,
-    minimizeVisible,
-    setMinimizeVisible,
     setMinimizePosition,
   };
 };
