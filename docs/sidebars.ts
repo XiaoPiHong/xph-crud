@@ -32,6 +32,7 @@ const sidebars: SidebarsConfig = {
     XphForm: ["comp/form/base"],
     XphTable: ["comp/table/base"],
     XphActions: ["comp/actions/base"],
+    XphDialog: ["comp/dialog/base"],
   },
   extends: ["comp/extends/base"],
 };
