@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { IDialogProps } from "../types";
+import { IDialogChangeRecord } from "../hooks";
 
 /**
  * @description 首次打开弹窗的时候，限制弹窗的宽高（不得大于弹窗容器可视区域的宽高）
@@ -7,7 +8,13 @@ import { IDialogProps } from "../types";
 const useDialogInitSize = (
   container: HTMLElement,
   baseDialogProps: IDialogProps,
-  dialogProps: IDialogProps
+  dialogProps: IDialogProps,
+  setDialogChangeRecord: ({
+    left,
+    top,
+    width,
+    height,
+  }: IDialogChangeRecord) => void
 ) => {
   const { width: baseWidth, height: baseHeight } = baseDialogProps;
   const { width, height } = dialogProps;
@@ -44,14 +51,15 @@ const useDialogInitSize = (
   );
 
   const setDialogSize = ({
-    width,
-    height,
+    width: newWidth,
+    height: newHeight,
   }: {
     width?: number | string;
     height?: number | string;
   }) => {
-    if (width !== void 0) setWidth(width);
-    if (height !== void 0) setHeight(height);
+    setDialogChangeRecord({ width: dialogWidth, height: dialogHeight });
+    if (newWidth !== void 0) setWidth(newWidth);
+    if (newHeight !== void 0) setHeight(newHeight);
   };
 
   return {

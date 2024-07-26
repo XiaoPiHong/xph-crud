@@ -19,6 +19,7 @@ import {
   useDialogZoom,
   useTopShowDialog,
   useOnPropsSizeChange,
+  useDialogChangeRecord,
 } from "./hooks";
 import MinimizeDialog from "./components/minimizeDialog";
 import style from "./dialog.module.css";
@@ -47,6 +48,7 @@ const Dialog = forwardRef<
   const dialogHeaderRef = useRef<HTMLDivElement>(null);
   const dialogMainRef = useRef<HTMLDivElement>(null);
   const dialogFooterRef = useRef<HTMLDivElement>(null);
+  const { dialogChangeRecord, setDialogChangeRecord } = useDialogChangeRecord();
   const {
     initWidth,
     initHeight,
@@ -55,9 +57,15 @@ const Dialog = forwardRef<
     dialogWidth,
     dialogHeight,
     setDialogSize,
-  } = useDialogSize(container, baseDialogProps, dialogProps);
+  } = useDialogSize(
+    container,
+    baseDialogProps,
+    dialogProps,
+    setDialogChangeRecord
+  );
   const { dialogLeft, dialogTop, setDialogPosition } = useDialogPosition({
     container,
+    setDialogChangeRecord,
   });
   const { contentMaxHeight } = useDialogContentMaxHeight({
     visible,
@@ -68,6 +76,18 @@ const Dialog = forwardRef<
     dialogFooterRef,
   });
 
+  const { minimizeLeft, minimizeTop, minimizeRef, setMinimizePosition } =
+    useMinimizeDialog();
+
+  const { minimizeVisible, onMaximize, onMinimize, onClose } = useDialogZoom({
+    container,
+    dialogChangeRecord,
+    close,
+    setDialogSize,
+    setDialogPosition,
+  });
+
+  /** props的宽高变化，触发重新设置（兼容用户动态设置宽高的情况） */
   useOnPropsSizeChange({
     visible,
     container,
@@ -77,14 +97,6 @@ const Dialog = forwardRef<
     curPropsHeight,
     setDialogSize,
     setDialogPosition,
-  });
-
-  const { minimizeLeft, minimizeTop, minimizeRef, setMinimizePosition } =
-    useMinimizeDialog();
-
-  const { minimizeVisible, onMaximize, onMinimize, onClose } = useDialogZoom({
-    close,
-    setDialogSize,
   });
 
   /** 主体窗口拖拽 */

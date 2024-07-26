@@ -36,14 +36,12 @@ const useDialogContentMaxHeight = ({
         headerHeight! -
         footerHeight! -
         (borderTopWidth + borderBottomWidth);
-      console.log(mainMaxHeight, "mainMaxHeight");
       // 临界检查
       const containerMainMaxHeight =
         clientHeight -
         headerHeight! -
         footerHeight! -
         (borderTopWidth + borderBottomWidth);
-      console.log(containerMainMaxHeight, "containerMainMaxHeight");
       if (mainMaxHeight > containerMainMaxHeight) {
         mainMaxHeight = containerMainMaxHeight;
       }

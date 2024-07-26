@@ -22,3 +22,5 @@ export { default as useTopShowDialog } from "./useTopShowDialog";
 export * from "./useTopShowDialog";
 export { default as useOnPropsSizeChange } from "./useOnPropsSizeChange";
 export * from "./useOnPropsSizeChange";
+export { default as useDialogChangeRecord } from "./useDialogChangeRecord";
+export * from "./useDialogChangeRecord";
