@@ -1,5 +1,5 @@
 import { MouseEvent, useRef, useEffect, useCallback } from "react";
-import { IDialogChangeRecord } from "../hooks";
+import { IDialogChangeRecord } from ".";
 
 type TResizeType = "lt" | "rt" | "rb" | "lb";
 
@@ -27,6 +27,25 @@ const useResizeDialog = ({
   }) => void;
   setDialogPosition: (position: { left: number; top: number }) => void;
 }) => {
+  const DashedBox = useCallback(() => {
+    return (
+      <div
+        ref={dashedBoxRef}
+        style={{
+          position: "absolute",
+          border: "4px dashed #ccc",
+          display: "none",
+        }}
+      ></div>
+    );
+  }, []);
+  const dashedBoxRef = useRef<HTMLDivElement>(null);
+  const firstResizeRecord = useRef<null | {
+    left: number;
+    top: number;
+    width: number;
+    height: number;
+  }>(null);
   const resizeType = useRef<TResizeType>();
   const resizing = useRef(false);
   const preClientX = useRef(0);
@@ -39,6 +58,27 @@ const useResizeDialog = ({
     const { clientX, clientY } = event;
     preClientX.current = clientX;
     preClientY.current = clientY;
+
+    const left = parseFloat(dialogRef.current!.style.left);
+    const top = parseFloat(dialogRef.current!.style.top);
+    const width = dialogRef.current!.offsetWidth;
+    const height = dialogRef.current!.offsetHeight;
+
+    dashedBoxRef.current!.style.display = "block";
+    dashedBoxRef.current!.style.left = `${left - 0.5 * width}px`;
+    dashedBoxRef.current!.style.top = `${top - 0.5 * height}px`;
+    dashedBoxRef.current!.style.width = `${width}px`;
+    dashedBoxRef.current!.style.height = `${height}px`;
+
+    /** 记录首次拉伸时候的大小和位置，以后的拉伸最小边界以这个为准 */
+    if (firstResizeRecord.current === null) {
+      firstResizeRecord.current = {
+        left,
+        top,
+        width,
+        height,
+      };
+    }
   };
 
   const dragoverResize = (event: MouseEvent<HTMLBodyElement, MouseEvent>) => {
@@ -49,16 +89,20 @@ const useResizeDialog = ({
       const dragoverY = clientY - preClientY.current;
 
       /** 获取元素的初始样式（注意这种只有内联样式才能获取到style.left和style.top） */
-      const left = parseFloat(dialogRef.current!.style.left);
-      const top = parseFloat(dialogRef.current!.style.top);
-      const width = dialogRef.current!.offsetWidth;
-      const height = dialogRef.current!.offsetHeight;
+      const left = parseFloat(dashedBoxRef.current!.style.left);
+      const top = parseFloat(dashedBoxRef.current!.style.top);
+      const width = dashedBoxRef.current!.offsetWidth;
+      const height = dashedBoxRef.current!.offsetHeight;
 
       /** 限制最小和最大尺寸 */
-      const minWidth = 100;
-      const minHeight = 100;
+      const minWidth = firstResizeRecord.current!.width;
+      const minHeight = firstResizeRecord.current!.height;
       const maxWidth = container.scrollWidth;
       const maxHeight = container.scrollHeight;
+      const minLeft = firstResizeRecord.current!.width * 0.5;
+      const minTop = firstResizeRecord.current!.height * 0.5;
+      const maxLeft = maxWidth - minWidth + minWidth * 0.5;
+      const maxTop = maxHeight - minHeight + minHeight * 0.5;
 
       let newWidth = width;
       let newHeight = height;
@@ -67,6 +111,28 @@ const useResizeDialog = ({
 
       switch (resizeType.current) {
         case "lt": {
+          newWidth = newWidth - dragoverX;
+          newHeight = newHeight - dragoverY;
+          newTop = newTop + dragoverY;
+          newLeft = newLeft + dragoverX;
+          /** 限制最小尺寸 */
+          if (newWidth < minWidth) {
+            newWidth = width;
+            newLeft = left;
+          }
+          if (newHeight < minHeight) {
+            newHeight = height;
+            newTop = top;
+          }
+          /** 限制最大尺寸 */
+          if (newLeft < 0) {
+            newLeft = 0;
+            newWidth = width;
+          }
+          if (newTop < 0) {
+            newTop = 0;
+            newHeight = height;
+          }
           break;
         }
         case "rt": {
@@ -79,6 +145,10 @@ const useResizeDialog = ({
           break;
         }
       }
+      dashedBoxRef.current!.style.left = `${newLeft}px`;
+      dashedBoxRef.current!.style.top = `${newTop}px`;
+      dashedBoxRef.current!.style.width = `${newWidth}px`;
+      dashedBoxRef.current!.style.height = `${newHeight}px`;
 
       preClientX.current = clientX;
       preClientY.current = clientY;
@@ -87,6 +157,7 @@ const useResizeDialog = ({
 
   const dragendResize = () => {
     resizing.current = false;
+    dashedBoxRef.current!.style.display = "none";
   };
 
   /**
@@ -132,6 +203,7 @@ const useResizeDialog = ({
     document.body.addEventListener("mousemove", onBodyMouseMove);
     document.body.addEventListener("mouseup", onBodyMouseUp);
     document.body.addEventListener("mouseleave", onBodyMouseLeave);
+
     return () => {
       document.body.removeEventListener("mousemove", onBodyMouseMove);
       document.body.removeEventListener("mouseup", onBodyMouseUp);
@@ -140,6 +212,7 @@ const useResizeDialog = ({
   }, []);
 
   return {
+    DashedBox,
     onMousedownResizeLt,
     onMousedownResizeRt,
     onMousedownResizeRb,

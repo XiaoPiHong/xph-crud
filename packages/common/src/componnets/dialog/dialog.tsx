@@ -124,6 +124,7 @@ const Dialog = forwardRef<
 
   /** 弹窗拉伸 */
   const {
+    DashedBox,
     onMousedownResizeLt,
     onMousedownResizeRt,
     onMousedownResizeRb,
@@ -233,6 +234,9 @@ const Dialog = forwardRef<
           onMouseDown={onMousedownResizeLb}
         ></div>
       </div>
+
+      {/** 拉伸虚拟框 */}
+      <DashedBox />
     </div>
   );
 });
