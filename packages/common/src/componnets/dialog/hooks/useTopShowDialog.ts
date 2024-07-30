@@ -105,15 +105,36 @@ const useTopShowDialog = ({
         )
         .filter((dialogWrapper) => dialogWrapper !== null) as HTMLElement[];
 
+      const allMinimizeDialogs = allDialogs
+        .map((dialog) =>
+          dialog.querySelector(`.${dialogTopShowClassConfig.xphMinimizeDialog}`)
+        )
+        .filter((dialogWrapper) => dialogWrapper !== null) as HTMLElement[];
+
       const allShowDialogWrapper = allDialogWrappers.filter(
         (dialogWrapper) => dialogWrapper.style.display === "flex"
       );
 
+      const allShowMinimizeDialog = allMinimizeDialogs.filter(
+        (dialogWrapper) => dialogWrapper.style.display === "flex"
+      );
+
+      /** 有显示的弹窗，则打开最后一个显示的弹窗 */
       if (allShowDialogWrapper.length) {
         insertAfterFunny(
           allShowDialogWrapper[allShowDialogWrapper.length - 1].parentNode,
           allDialogs[allDialogs.length - 1]
         );
+        return;
+      }
+
+      /** 有最小化的弹窗，则打开最后一个最小化的弹窗 */
+      if (allShowMinimizeDialog.length) {
+        insertAfterFunny(
+          allShowMinimizeDialog[allShowMinimizeDialog.length - 1].parentNode,
+          allDialogs[allDialogs.length - 1]
+        );
+        return;
       }
     }
   }, [visible]);
