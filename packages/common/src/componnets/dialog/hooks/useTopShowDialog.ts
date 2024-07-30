@@ -24,6 +24,8 @@ const useTopShowDialog = ({
     referenceNode.querySelector(
       `.${dialogTopShowClassConfig.xphDialogWrapper}`
     ).style.opacity = 0.7;
+
+    //==========================================================插入操作start
     // 创建一个透明的占位符
     const placeholder = document.createElement("div");
     placeholder.style.visibility = "hidden";
@@ -41,6 +43,7 @@ const useTopShowDialog = ({
     referenceNode.parentNode.removeChild(placeholder);
 
     // referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+    //==========================================================插入操作end
   };
 
   const onMousedownDialog = (e?: MouseEvent) => {
