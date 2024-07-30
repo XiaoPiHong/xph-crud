@@ -1,26 +1,15 @@
 import { MouseEvent, useRef, useEffect, useCallback } from "react";
-import { IDialogChangeRecord } from ".";
 
 type TResizeType = "lt" | "rt" | "rb" | "lb";
 
 const useResizeDialog = ({
   container,
   dialogRef,
-  dialogLeft,
-  dialogTop,
-  dialogWidth,
-  dialogHeight,
-  dialogChangeRecord,
   setDialogSize,
   setDialogPosition,
 }: {
   container: HTMLElement;
   dialogRef: React.RefObject<HTMLDivElement>;
-  dialogLeft: number;
-  dialogTop: number;
-  dialogWidth: number | string;
-  dialogHeight: number | string;
-  dialogChangeRecord: React.MutableRefObject<IDialogChangeRecord>;
   setDialogSize: (size: {
     width: number | string;
     height: number | string;
@@ -94,15 +83,15 @@ const useResizeDialog = ({
       const width = dashedBoxRef.current!.offsetWidth;
       const height = dashedBoxRef.current!.offsetHeight;
 
-      /** 限制最小和最大尺寸 */
+      /** 最小尺寸和最大尺寸 */
       const minWidth = firstResizeRecord.current!.width;
       const minHeight = firstResizeRecord.current!.height;
       const maxWidth = container.scrollWidth;
       const maxHeight = container.scrollHeight;
-      const minLeft = firstResizeRecord.current!.width * 0.5;
-      const minTop = firstResizeRecord.current!.height * 0.5;
-      const maxLeft = maxWidth - minWidth + minWidth * 0.5;
-      const maxTop = maxHeight - minHeight + minHeight * 0.5;
+      // const minLeft = firstResizeRecord.current!.width * 0.5;
+      // const minTop = firstResizeRecord.current!.height * 0.5;
+      // const maxLeft = maxWidth - minWidth + minWidth * 0.5;
+      // const maxTop = maxHeight - minHeight + minHeight * 0.5;
 
       let newWidth = width;
       let newHeight = height;
@@ -136,12 +125,71 @@ const useResizeDialog = ({
           break;
         }
         case "rt": {
+          newWidth = newWidth + dragoverX;
+          newHeight = newHeight - dragoverY;
+          newTop = newTop + dragoverY;
+          newLeft = left;
+
+          /** 限制最小尺寸 */
+          if (newWidth < minWidth) {
+            newWidth = width;
+          }
+          if (newHeight < minHeight) {
+            newHeight = height;
+            newTop = top;
+          }
+          /** 限制最大尺寸 */
+          if (newWidth > maxWidth - newLeft) {
+            newWidth = maxWidth - newLeft;
+          }
+          if (newTop < 0) {
+            newTop = 0;
+            newHeight = height;
+          }
           break;
         }
         case "rb": {
+          newWidth = newWidth + dragoverX;
+          newHeight = newHeight + dragoverY;
+          newTop = top;
+          newLeft = left;
+          /** 限制最小尺寸 */
+          if (newWidth < minWidth) {
+            newWidth = width;
+          }
+          if (newHeight < minHeight) {
+            newHeight = height;
+          }
+          /** 限制最大尺寸 */
+          if (newWidth > maxWidth - newLeft) {
+            newWidth = maxWidth - newLeft;
+          }
+          if (newHeight > maxHeight - newTop) {
+            newHeight = maxHeight - newTop;
+          }
           break;
         }
         case "lb": {
+          newWidth = newWidth - dragoverX;
+          newHeight = newHeight + dragoverY;
+          newTop = top;
+          newLeft = newLeft + dragoverX;
+          /** 限制最小尺寸 */
+          if (newWidth < minWidth) {
+            newWidth = width;
+            newLeft = left;
+          }
+          if (newHeight < minHeight) {
+            newHeight = height;
+          }
+          /** 限制最大尺寸 */
+          if (newLeft < 0) {
+            newLeft = 0;
+            newWidth = width;
+          }
+          if (newHeight > maxHeight - newTop) {
+            newHeight = maxHeight - newTop;
+          }
           break;
         }
       }
@@ -156,8 +204,20 @@ const useResizeDialog = ({
   };
 
   const dragendResize = () => {
-    resizing.current = false;
-    dashedBoxRef.current!.style.display = "none";
+    if (resizing.current) {
+      resizing.current = false;
+      dashedBoxRef.current!.style.display = "none";
+
+      const { left, top, width, height } = dashedBoxRef.current!.style;
+      /** 因为虚拟块的位置一开始是以container为基点的（left和top都是相对于container的真实位置）， 而弹窗是left和top在基于基于container的基础上再偏移了自身的一半（也就是多减了自身的一半），所以虚拟块的left和top转换到弹窗上时需要再加上自身的一半 */
+      const newLeft = parseFloat(left) + 0.5 * parseFloat(width);
+      const newTop = parseFloat(top) + 0.5 * parseFloat(height);
+      const newWidth = parseFloat(width);
+      const newHeight = parseFloat(height);
+
+      setDialogPosition({ left: newLeft, top: newTop });
+      setDialogSize({ width: newWidth, height: newHeight });
+    }
   };
 
   /**

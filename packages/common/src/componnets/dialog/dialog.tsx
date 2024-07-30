@@ -132,11 +132,6 @@ const Dialog = forwardRef<
   } = useResizeDialog({
     container,
     dialogRef,
-    dialogLeft,
-    dialogTop,
-    dialogWidth,
-    dialogHeight,
-    dialogChangeRecord,
     setDialogSize,
     setDialogPosition,
   });
