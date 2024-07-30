@@ -3,11 +3,13 @@ import { MouseEvent, useRef, useEffect, useCallback } from "react";
 type TResizeType = "lt" | "rt" | "rb" | "lb";
 
 const useResizeDialog = ({
+  visible,
   container,
   dialogRef,
   setDialogSize,
   setDialogPosition,
 }: {
+  visible: boolean; // 传递visible进来的时候是为了每次打开的时候都以当前打开的宽高为最小大小来限制
   container: HTMLElement;
   dialogRef: React.RefObject<HTMLDivElement>;
   setDialogSize: (size: {
@@ -16,6 +18,7 @@ const useResizeDialog = ({
   }) => void;
   setDialogPosition: (position: { left: number; top: number }) => void;
 }) => {
+  /** 虚拟块组件 */
   const DashedBox = useCallback(() => {
     return (
       <div
@@ -28,13 +31,29 @@ const useResizeDialog = ({
       ></div>
     );
   }, []);
-  const dashedBoxRef = useRef<HTMLDivElement>(null);
-  const firstResizeRecord = useRef<null | {
-    left: number;
-    top: number;
+
+  /** 拖拽的最小尺寸 */
+  const minResizeRecord = useRef<null | {
     width: number;
     height: number;
   }>(null);
+
+  useEffect(() => {
+    /** 打开弹窗记录当前尺寸 */
+    if (visible) {
+      const width = dialogRef.current!.offsetWidth;
+      const height = dialogRef.current!.offsetHeight;
+      minResizeRecord.current = {
+        width,
+        height,
+      };
+    } else {
+      /** 关闭弹窗置空尺寸的记录 */
+      minResizeRecord.current = null;
+    }
+  }, [visible]);
+
+  const dashedBoxRef = useRef<HTMLDivElement>(null);
   const resizeType = useRef<TResizeType>();
   const resizing = useRef(false);
   const preClientX = useRef(0);
@@ -58,16 +77,6 @@ const useResizeDialog = ({
     dashedBoxRef.current!.style.top = `${top - 0.5 * height}px`;
     dashedBoxRef.current!.style.width = `${width}px`;
     dashedBoxRef.current!.style.height = `${height}px`;
-
-    /** 记录首次拉伸时候的大小和位置，以后的拉伸最小边界以这个为准 */
-    if (firstResizeRecord.current === null) {
-      firstResizeRecord.current = {
-        left,
-        top,
-        width,
-        height,
-      };
-    }
   };
 
   const dragoverResize = (event: MouseEvent<HTMLBodyElement, MouseEvent>) => {
@@ -84,12 +93,12 @@ const useResizeDialog = ({
       const height = dashedBoxRef.current!.offsetHeight;
 
       /** 最小尺寸和最大尺寸 */
-      const minWidth = firstResizeRecord.current!.width;
-      const minHeight = firstResizeRecord.current!.height;
+      const minWidth = minResizeRecord.current!.width;
+      const minHeight = minResizeRecord.current!.height;
       const maxWidth = container.scrollWidth;
       const maxHeight = container.scrollHeight;
-      // const minLeft = firstResizeRecord.current!.width * 0.5;
-      // const minTop = firstResizeRecord.current!.height * 0.5;
+      // const minLeft = minResizeRecord.current!.width * 0.5;
+      // const minTop = minResizeRecord.current!.height * 0.5;
       // const maxLeft = maxWidth - minWidth + minWidth * 0.5;
       // const maxTop = maxHeight - minHeight + minHeight * 0.5;
 
@@ -214,7 +223,7 @@ const useResizeDialog = ({
       const newTop = parseFloat(top) + 0.5 * parseFloat(height);
       const newWidth = parseFloat(width);
       const newHeight = parseFloat(height);
-
+      console.log(newLeft, newTop, newWidth, newHeight);
       setDialogPosition({ left: newLeft, top: newTop });
       setDialogSize({ width: newWidth, height: newHeight });
     }

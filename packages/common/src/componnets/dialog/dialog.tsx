@@ -130,6 +130,7 @@ const Dialog = forwardRef<
     onMousedownResizeRb,
     onMousedownResizeLb,
   } = useResizeDialog({
+    visible,
     container,
     dialogRef,
     setDialogSize,
