@@ -120,7 +120,12 @@ const Dialog = forwardRef<
   });
 
   /** 弹窗层级切换 */
-  useTopShowDialog({ visible, container, dialogRef, minimizeRef });
+  const { dialogTopShowClassConfig } = useTopShowDialog({
+    visible,
+    container,
+    dialogRef,
+    minimizeRef,
+  });
 
   /** 弹窗拉伸 */
   const {
@@ -144,7 +149,7 @@ const Dialog = forwardRef<
   }));
 
   return (
-    <div className="xph-dialog">
+    <div className={dialogTopShowClassConfig["xphDialog"]}>
       {/** 遮罩层=============================================== */}
       {/** 由于弹窗之间存在层级关系，所以遮罩层也需要层级关系，所以遮罩层没有设计成全局共用的，而是每个弹窗独立的 */}
       {mask ? (
@@ -172,7 +177,7 @@ const Dialog = forwardRef<
       {/** 弹窗容器================================================ */}
       <div
         ref={dialogRef}
-        className={style["xph-dialog-wrapper"]}
+        className={`${style["xph-dialog-wrapper"]} ${dialogTopShowClassConfig["xphDialogWrapper"]}`}
         style={{
           display: visible && !minimizeVisible ? "flex" : "none",
           left: dialogLeft,
@@ -244,7 +249,8 @@ const XphDialog = (
   props: IDialogProps & { children?: React.ReactNode },
   ref: ForwardedRef<IDialogActionType>
 ) => {
-  const { children, ...rest } = props; // 先把children取出来传递给Dialog，防止useDialogProps对children进行了处理
+  /** 先把children取出来传递给Dialog，防止useDialogProps对children进行了处理 */
+  const { children, ...rest } = props;
   const { baseDialogProps, dialogProps } = useDialogProps(rest);
   const { getPopperContainer } = dialogProps;
   console.log("render XphDialog==============================================");
