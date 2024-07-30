@@ -11,9 +11,11 @@ const useTopShowDialog = ({
   minimizeRef: React.RefObject<HTMLDivElement>;
   container: HTMLElement;
 }) => {
+  /** 用于操作dom的标识 */
   const dialogTopShowClassConfig = {
     xphDialog: "xph--dialog",
     xphDialogWrapper: "xph--dialog--wrapper",
+    xphMinimizeDialog: "xph--dialog--minimize",
   };
 
   const insertAfterFunny = (newNode, referenceNode) => {
@@ -21,8 +23,14 @@ const useTopShowDialog = ({
     newNode.querySelector(
       `.${dialogTopShowClassConfig.xphDialogWrapper}`
     ).style.opacity = "unset";
+    newNode.querySelector(
+      `.${dialogTopShowClassConfig.xphMinimizeDialog}`
+    ).style.opacity = "unset";
     referenceNode.querySelector(
       `.${dialogTopShowClassConfig.xphDialogWrapper}`
+    ).style.opacity = 0.7;
+    referenceNode.querySelector(
+      `.${dialogTopShowClassConfig.xphMinimizeDialog}`
     ).style.opacity = 0.7;
 
     //==========================================================插入操作start

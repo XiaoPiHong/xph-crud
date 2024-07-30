@@ -166,6 +166,7 @@ const Dialog = forwardRef<
       {/** 弹窗最小化的窗口 */}
       <MinimizeDialog
         visible={minimizeVisible}
+        className={`${dialogTopShowClassConfig["xphMinimizeDialog"]}`}
         ref={minimizeRef}
         left={minimizeLeft}
         top={minimizeTop}

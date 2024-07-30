@@ -7,16 +7,20 @@ interface IMinimizeDialogProps {
   top: number;
   visible: boolean;
   title?: string;
+  className: string;
   onMaximize?: () => void;
   onClosesquare?: () => void;
 }
 
 const MinimizeDialog = forwardRef<HTMLDivElement, IMinimizeDialogProps>(
-  ({ title, left, top, visible, onMaximize, onClosesquare }, ref) => {
+  (
+    { title, left, top, visible, onMaximize, onClosesquare, className },
+    ref
+  ) => {
     return (
       <div
         style={{ display: visible ? "flex" : "none", left, top }}
-        className={style["minimize-windows"]}
+        className={`${style["minimize-windows"]} ${className}`}
         ref={ref}
       >
         <div className={style["minimize-windows-title"]} title={title}>
