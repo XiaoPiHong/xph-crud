@@ -13,23 +13,28 @@ const useTopShowDialog = ({
 }) => {
   const insertAfterFunny = (newNode, referenceNode) => {
     console.log("触发插入");
-    // // 创建一个透明的占位符
-    // const placeholder = document.createElement("div");
-    // placeholder.style.visibility = "hidden";
 
-    // // 插入占位符
-    // referenceNode.parentNode.insertBefore(
-    //   placeholder,
-    //   referenceNode.nextSibling
-    // );
+    // 最顶层的透明度为1，其余为0.6
+    referenceNode.style.opacity = 0.6;
+    newNode.style.opacity = "unset";
 
-    // // 插入新节点到占位符位置
-    // referenceNode.parentNode.insertBefore(newNode, placeholder);
+    // 创建一个透明的占位符
+    const placeholder = document.createElement("div");
+    placeholder.style.visibility = "hidden";
 
-    // // 移除占位符
-    // referenceNode.parentNode.removeChild(placeholder);
+    // 插入占位符
+    referenceNode.parentNode.insertBefore(
+      placeholder,
+      referenceNode.nextSibling
+    );
 
-    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+    // 插入新节点到占位符位置
+    referenceNode.parentNode.insertBefore(newNode, placeholder);
+
+    // 移除占位符
+    referenceNode.parentNode.removeChild(placeholder);
+
+    // referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
   };
 
   const onMousedownDialog = (e?: MouseEvent) => {
@@ -47,18 +52,22 @@ const useTopShowDialog = ({
 
   useEffect(() => {
     // 捕获阶段
-    dialogRef.current?.addEventListener("mousedown", onMousedownDialog, true);
-    minimizeRef.current?.addEventListener("mousedown", onMousedownDialog, true);
+    dialogRef.current?.addEventListener("mousedown", onMousedownDialog, false);
+    minimizeRef.current?.addEventListener(
+      "mousedown",
+      onMousedownDialog,
+      false
+    );
     return () => {
       dialogRef.current?.removeEventListener(
         "mousedown",
         onMousedownDialog,
-        true
+        false
       );
       minimizeRef.current?.removeEventListener(
         "mousedown",
         onMousedownDialog,
-        true
+        false
       );
     };
   }, []);

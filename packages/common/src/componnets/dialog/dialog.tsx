@@ -179,7 +179,7 @@ const Dialog = forwardRef<
           top: dialogTop,
           width: dialogWidth,
           height: dialogHeight,
-          opacity: resizingState ? 0.2 : 1,
+          opacity: resizingState ? 0.2 : "unset", // 拉伸时候透明度为0.2
         }}
       >
         {/** 弹窗头部header========================================================== */}
