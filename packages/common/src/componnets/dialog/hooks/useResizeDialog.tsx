@@ -1,4 +1,4 @@
-import { MouseEvent, useRef, useEffect, useCallback } from "react";
+import { MouseEvent, useRef, useEffect, useCallback, useState } from "react";
 
 type TResizeType = "lt" | "rt" | "rb" | "lb";
 
@@ -56,11 +56,13 @@ const useResizeDialog = ({
   const dashedBoxRef = useRef<HTMLDivElement>(null);
   const resizeType = useRef<TResizeType>();
   const resizing = useRef(false);
+  const [resizingState, setResizingState] = useState(false);
   const preClientX = useRef(0);
   const preClientY = useRef(0);
 
   const dragstartResize = (event: MouseEvent, type: TResizeType) => {
     resizing.current = true;
+    setResizingState(true);
     resizeType.current = type;
     /** 记录开始移动的坐标 */
     const { clientX, clientY } = event;
@@ -215,6 +217,8 @@ const useResizeDialog = ({
   const dragendResize = () => {
     if (resizing.current) {
       resizing.current = false;
+
+      setResizingState(false);
       dashedBoxRef.current!.style.display = "none";
 
       const { left, top, width, height } = dashedBoxRef.current!.style;
@@ -281,6 +285,7 @@ const useResizeDialog = ({
   }, []);
 
   return {
+    resizingState,
     DashedBox,
     onMousedownResizeLt,
     onMousedownResizeRt,

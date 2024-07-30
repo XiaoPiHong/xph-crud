@@ -124,6 +124,7 @@ const Dialog = forwardRef<
 
   /** 弹窗拉伸 */
   const {
+    resizingState,
     DashedBox,
     onMousedownResizeLt,
     onMousedownResizeRt,
@@ -178,6 +179,7 @@ const Dialog = forwardRef<
           top: dialogTop,
           width: dialogWidth,
           height: dialogHeight,
+          opacity: resizingState ? 0.2 : 1,
         }}
       >
         {/** 弹窗头部header========================================================== */}
