@@ -105,13 +105,13 @@ const useTopShowDialog = ({
         )
         .filter((dialogWrapper) => dialogWrapper !== null) as HTMLElement[];
 
-      const lastShowDialogWrapper = allDialogWrappers.find(
+      const allShowDialogWrapper = allDialogWrappers.filter(
         (dialogWrapper) => dialogWrapper.style.display === "flex"
       );
 
-      if (lastShowDialogWrapper) {
+      if (allShowDialogWrapper.length) {
         insertAfterFunny(
-          lastShowDialogWrapper.parentNode,
+          allShowDialogWrapper[allShowDialogWrapper.length - 1].parentNode,
           allDialogs[allDialogs.length - 1]
         );
       }
