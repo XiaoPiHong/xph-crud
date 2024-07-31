@@ -25,6 +25,9 @@ import {
 import MinimizeDialog from "./components/minimizeDialog";
 import style from "./dialog.module.css";
 import { Maximize, Minimize, Recovery, Close } from "./components/headerBtns";
+import { theme } from "antd";
+
+const { useToken } = theme;
 
 const Dialog = forwardRef<
   IDialogActionType,
@@ -34,6 +37,11 @@ const Dialog = forwardRef<
   }
 >((dialogProps, ref) => {
   console.log("render Dialog==============================================");
+  /** 获取继承过来的样式 */
+  const { token } = useToken();
+  const contentStyle: React.CSSProperties = {
+    borderRadius: token.borderRadiusLG,
+  };
   const { children, baseDialogProps, mask } = dialogProps;
   const [visible, setVisible] = useState(false);
   const { footerActions } = useDialogFooter(dialogProps);
@@ -186,6 +194,7 @@ const Dialog = forwardRef<
           width: dialogWidth,
           height: dialogHeight,
           opacity: resizingState ? 0.2 : "unset", // 拉伸时候透明度为0.2
+          ...contentStyle,
         }}
       >
         {/** 弹窗头部header========================================================== */}
