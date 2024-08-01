@@ -32,7 +32,7 @@ const useResizeDialog = ({
     );
   }, []);
 
-  /** 拖拽的最小尺寸 */
+  /** 拉伸的最小尺寸 */
   const minResizeRecord = useRef<null | {
     width: number;
     height: number;
