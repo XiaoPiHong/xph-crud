@@ -18,6 +18,15 @@ const useTableProps = (props: TTableProps) => {
         showSizeChanger: true,
         showQuickJumper: true,
       },
+      requestFields: {
+        pageSize: "pageSize",
+        current: "current",
+      },
+      responseFields: {
+        current: "current",
+        list: "data",
+        total: "total",
+      },
     },
     crudFormDialog: void 0, // 由于该弹窗对性能开销大，所以默认都是不自动生成该弹窗，需要则配置该属性
     searchForm: {

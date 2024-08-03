@@ -37,6 +37,22 @@ export type TApiTableProps<
   toolbar?:
     | IXphActionsProps<L>
     | ((e: IFunctionToolbarParams<T>) => IXphActionsProps<L>);
+  /** 分页请求参数中传递到接口的属性名 */
+  requestFields?: {
+    /** 当前页 */
+    current?: string;
+    /** 当前页大小 */
+    pageSize?: string;
+  };
+  /** 响应结果中获取数据的属性名 */
+  responseFields?: {
+    /** 当前页 */
+    current?: string;
+    /** 列表 */
+    list?: string;
+    /** 所有页总数 */
+    total?: string;
+  };
   /** 排序、筛选变化时触发 */
   onChange?: (filters: any, sorter: any, extra: any) => void;
 } & Omit<

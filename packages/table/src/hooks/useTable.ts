@@ -25,7 +25,14 @@ export default function useTable(
   props: TTableProps,
   searchFormRef: RefObject<TSearchFormActionType>
 ) {
-  const { api, formatDataSource, autoPagination, onChange } = props.table!;
+  const {
+    api,
+    formatDataSource,
+    autoPagination,
+    onChange,
+    requestFields,
+    responseFields,
+  } = props.table!;
   const onBindTablePaginationChange = props.onPaginationChange;
   const { pagination, lastPaginationState } = usePagination(props);
 
@@ -76,14 +83,27 @@ export default function useTable(
       ...searchFormParams,
       ...{
         /** 没传paginationParams默认就是上一次 */
-        current: (lastPaginationState.current as IPagination).current,
-        pageSize: (lastPaginationState.current as IPagination).pageSize,
-        ...paginationParams,
+        [`${requestFields!.current}`]: (
+          lastPaginationState.current as IPagination
+        ).current,
+        [`${requestFields!.pageSize}`]: (
+          lastPaginationState.current as IPagination
+        ).pageSize,
+        ...(paginationParams
+          ? {
+              [`${requestFields!.current}`]: paginationParams.current,
+              [`${requestFields!.pageSize}`]: paginationParams.pageSize,
+            }
+          : {}),
       },
     };
     return api!(params)
       .then((res) => {
-        const { data, current, total } = res;
+        const {
+          [`${responseFields!.list}`]: data,
+          [`${responseFields!.current}`]: current,
+          [`${responseFields!.total}`]: total,
+        } = res;
         table.update({
           dataSource: formatDataSource ? formatDataSource(data) : data,
         });
