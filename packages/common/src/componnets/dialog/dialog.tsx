@@ -25,6 +25,9 @@ import {
 import MinimizeDialog from "./components/minimizeDialog";
 import style from "./dialog.module.css";
 import { Maximize, Minimize, Recovery, Close } from "./components/headerBtns";
+import { theme } from "antd";
+
+const { useToken } = theme;
 
 const Dialog = forwardRef<
   IDialogActionType,
@@ -34,6 +37,11 @@ const Dialog = forwardRef<
   }
 >((dialogProps, ref) => {
   console.log("render Dialog==============================================");
+  /** 获取继承过来的样式 */
+  const { token } = useToken();
+  const contentStyle: React.CSSProperties = {
+    borderRadius: token.borderRadiusLG,
+  };
   const { children, baseDialogProps, mask } = dialogProps;
   const [visible, setVisible] = useState(false);
   const { footerActions } = useDialogFooter(dialogProps);
@@ -120,22 +128,25 @@ const Dialog = forwardRef<
   });
 
   /** 弹窗层级切换 */
-  useTopShowDialog({ visible, container, dialogRef, minimizeRef });
+  const { dialogTopShowClassConfig } = useTopShowDialog({
+    visible,
+    container,
+    dialogRef,
+    minimizeRef,
+  });
 
   /** 弹窗拉伸 */
   const {
+    resizingState,
+    DashedBox,
     onMousedownResizeLt,
     onMousedownResizeRt,
     onMousedownResizeRb,
     onMousedownResizeLb,
   } = useResizeDialog({
+    visible,
     container,
     dialogRef,
-    dialogLeft,
-    dialogTop,
-    dialogWidth,
-    dialogHeight,
-    dialogChangeRecord,
     setDialogSize,
     setDialogPosition,
   });
@@ -146,7 +157,7 @@ const Dialog = forwardRef<
   }));
 
   return (
-    <div className="xph-dialog">
+    <div className={dialogTopShowClassConfig["xphDialog"]}>
       {/** 遮罩层=============================================== */}
       {/** 由于弹窗之间存在层级关系，所以遮罩层也需要层级关系，所以遮罩层没有设计成全局共用的，而是每个弹窗独立的 */}
       {mask ? (
@@ -163,6 +174,7 @@ const Dialog = forwardRef<
       {/** 弹窗最小化的窗口 */}
       <MinimizeDialog
         visible={minimizeVisible}
+        className={`${dialogTopShowClassConfig["xphMinimizeDialog"]}`}
         ref={minimizeRef}
         left={minimizeLeft}
         top={minimizeTop}
@@ -174,13 +186,15 @@ const Dialog = forwardRef<
       {/** 弹窗容器================================================ */}
       <div
         ref={dialogRef}
-        className={style["xph-dialog-wrapper"]}
+        className={`${style["xph-dialog-wrapper"]} ${dialogTopShowClassConfig["xphDialogWrapper"]}`}
         style={{
           display: visible && !minimizeVisible ? "flex" : "none",
           left: dialogLeft,
           top: dialogTop,
           width: dialogWidth,
           height: dialogHeight,
+          opacity: resizingState ? 0.2 : "unset", // 拉伸时候透明度为0.2
+          ...contentStyle,
         }}
       >
         {/** 弹窗头部header========================================================== */}
@@ -233,6 +247,9 @@ const Dialog = forwardRef<
           onMouseDown={onMousedownResizeLb}
         ></div>
       </div>
+
+      {/** 拉伸虚拟框 */}
+      <DashedBox />
     </div>
   );
 });
@@ -242,7 +259,8 @@ const XphDialog = (
   props: IDialogProps & { children?: React.ReactNode },
   ref: ForwardedRef<IDialogActionType>
 ) => {
-  const { children, ...rest } = props; // 先把children取出来传递给Dialog，防止useDialogProps对children进行了处理
+  /** 先把children取出来传递给Dialog，防止useDialogProps对children进行了处理 */
+  const { children, ...rest } = props;
   const { baseDialogProps, dialogProps } = useDialogProps(rest);
   const { getPopperContainer } = dialogProps;
   console.log("render XphDialog==============================================");

@@ -5,8 +5,9 @@ import { XphDialog, IXphDialogProps, IXphDialogActionType } from "xph-crud";
 const ReactApp: React.FC = () => {
   const firstDialogRef = useRef<IXphDialogActionType>(null);
   const secondDialogRef = useRef<IXphDialogActionType>(null);
+  const thirdDialogRef = useRef<IXphDialogActionType>(null);
   const firstDialogProps: IXphDialogProps = {
-    mask: false,
+    mask: true,
     title: "弹窗1标题",
     width: 1000,
     getPopperContainer: () => document.getElementById("dialog-box"),
@@ -20,6 +21,12 @@ const ReactApp: React.FC = () => {
     getPopperContainer: () => document.getElementById("dialog-box"),
   };
 
+  const thirdDialogProps: IXphDialogProps = {
+    mask: false,
+    title: "弹窗3标题",
+    getPopperContainer: () => document.getElementById("dialog-box"),
+  };
+
   const inputRef = useRef<any>(null);
 
   const onOpenFirstDialog = () => {
@@ -28,6 +35,10 @@ const ReactApp: React.FC = () => {
 
   const onOpenSecondDialog = () => {
     secondDialogRef.current?.open();
+  };
+
+  const onOpenThirdDialog = () => {
+    thirdDialogRef.current?.open();
   };
 
   const onConsoleChildrenDom = () => {
@@ -59,6 +70,7 @@ const ReactApp: React.FC = () => {
     >
       <button onClick={onOpenFirstDialog}>点击打开XphDialog弹窗1</button>
       <button onClick={onOpenSecondDialog}>点击打开XphDialog弹窗2</button>
+      <button onClick={onOpenThirdDialog}>点击打开XphDialog弹窗3</button>
       <button onClick={onConsoleChildrenDom}>点击打印子元素</button>
 
       <XphDialog {...firstDialogProps} ref={firstDialogRef}>
@@ -66,6 +78,9 @@ const ReactApp: React.FC = () => {
       </XphDialog>
       <XphDialog {...secondDialogProps} ref={secondDialogRef}>
         <Input ref={inputRef} />
+      </XphDialog>
+      <XphDialog {...thirdDialogProps} ref={thirdDialogRef}>
+        我是弹窗3
       </XphDialog>
     </div>
   );
