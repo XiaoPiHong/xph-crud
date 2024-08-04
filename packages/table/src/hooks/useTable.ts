@@ -1,6 +1,7 @@
 import { TTableProps, TDataSourceItem, TSearchFormActionType } from "../types";
 import { useState, useRef, RefObject, useEffect } from "react";
 import usePagination, { IPagination } from "./usePagination";
+import { getValuesByPathObj } from "xph-crud/common";
 
 export interface ITable {
   loading: boolean;
@@ -99,13 +100,12 @@ export default function useTable(
     };
     return api!(params)
       .then((res) => {
-        const {
-          [`${responseFields!.list}`]: data,
-          [`${responseFields!.current}`]: current,
-          [`${responseFields!.total}`]: total,
-        } = res;
+        const { current, list, total } = getValuesByPathObj(
+          responseFields!,
+          res
+        );
         table.update({
-          dataSource: formatDataSource ? formatDataSource(data) : data,
+          dataSource: formatDataSource ? formatDataSource(list) : list,
         });
         pagination.update({
           total,
@@ -124,15 +124,16 @@ export default function useTable(
   }: IGetTableDataParams) => {
     const params = { ...searchFormParams };
     return api!(params)
-      .then((data) => {
-        const dataSource = formatDataSource ? formatDataSource(data) : data;
+      .then((res) => {
+        const { list } = getValuesByPathObj(responseFields!, res);
+        const dataSource = formatDataSource ? formatDataSource(list) : list;
         table.update({
           selection: [],
           dataSource,
         });
         pagination.update({
           current: 1,
-          total: data.length,
+          total: list.length,
         });
       })
       .finally(() => {
