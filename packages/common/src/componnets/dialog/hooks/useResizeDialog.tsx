@@ -3,15 +3,18 @@ import { MouseEvent, useRef, useEffect, useCallback, useState } from "react";
 type TResizeType = "lt" | "rt" | "rb" | "lb";
 
 const useResizeDialog = ({
-  visible,
   container,
   dialogRef,
+  minResizeRecord,
   setDialogSize,
   setDialogPosition,
 }: {
-  visible: boolean; // 传递visible进来的时候是为了每次打开的时候都以当前打开的宽高为最小大小来限制
   container: HTMLElement;
   dialogRef: React.RefObject<HTMLDivElement>;
+  minResizeRecord: React.MutableRefObject<{
+    width: number;
+    height: number;
+  } | null>;
   setDialogSize: (size: {
     width: number | string;
     height: number | string;
@@ -31,27 +34,6 @@ const useResizeDialog = ({
       ></div>
     );
   }, []);
-
-  /** 拉伸的最小尺寸 */
-  const minResizeRecord = useRef<null | {
-    width: number;
-    height: number;
-  }>(null);
-
-  useEffect(() => {
-    /** 打开弹窗记录当前尺寸 */
-    if (visible) {
-      const width = dialogRef.current!.offsetWidth;
-      const height = dialogRef.current!.offsetHeight;
-      minResizeRecord.current = {
-        width,
-        height,
-      };
-    } else {
-      /** 关闭弹窗置空尺寸的记录 */
-      minResizeRecord.current = null;
-    }
-  }, [visible]);
 
   const dashedBoxRef = useRef<HTMLDivElement>(null);
   const resizeType = useRef<TResizeType>();
@@ -227,7 +209,6 @@ const useResizeDialog = ({
       const newTop = parseFloat(top) + 0.5 * parseFloat(height);
       const newWidth = parseFloat(width);
       const newHeight = parseFloat(height);
-      console.log(newLeft, newTop, newWidth, newHeight);
       setDialogPosition({ left: newLeft, top: newTop });
       setDialogSize({ width: newWidth, height: newHeight });
     }

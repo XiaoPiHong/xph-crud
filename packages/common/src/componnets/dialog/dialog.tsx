@@ -4,6 +4,7 @@ import React, {
   useImperativeHandle,
   forwardRef,
   useState,
+  useEffect,
 } from "react";
 import { XphActions, XphPortal } from "../";
 import { IDialogProps, IDialogActionType } from "./types";
@@ -21,11 +22,14 @@ import {
   useOnPropsSizeChange,
   useDialogChangeRecord,
   useResizeDialog,
+  useOnContainerSizeChange,
+  useOnVisableChange,
 } from "./hooks";
 import MinimizeDialog from "./components/minimizeDialog";
 import style from "./dialog.module.css";
 import { Maximize, Minimize, Recovery, Close } from "./components/headerBtns";
 import { theme } from "antd";
+import { debounce } from "lodash-es";
 
 const { useToken } = theme;
 
@@ -42,33 +46,48 @@ const Dialog = forwardRef<
   const contentStyle: React.CSSProperties = {
     borderRadius: token.borderRadiusLG,
   };
-  const { children, baseDialogProps, mask } = dialogProps;
+  const {
+    children,
+    baseDialogProps,
+    mask,
+    title,
+    renderFooter,
+    renderTitle,
+    getPopperContainer,
+  } = dialogProps;
+  const container = getPopperContainer!() as HTMLElement;
   const [visible, setVisible] = useState(false);
   const { footerActions } = useDialogFooter(dialogProps);
-  const { title, renderFooter, renderTitle, getPopperContainer } = dialogProps;
   const { open, close } = useDialogActions(dialogProps, setVisible);
-  const container = getPopperContainer!() as HTMLElement;
   const dialogRef = useRef<HTMLDivElement>(null);
   const dialogHeaderRef = useRef<HTMLDivElement>(null);
   const dialogMainRef = useRef<HTMLDivElement>(null);
   const dialogFooterRef = useRef<HTMLDivElement>(null);
-  const { dialogChangeRecord, setDialogChangeRecord } = useDialogChangeRecord();
   const {
+    parentResizeRecord,
+    initLeft,
+    initTop,
     initWidth,
     initHeight,
     curPropsWidth,
     curPropsHeight,
-    dialogWidth,
-    dialogHeight,
-    setDialogSize,
-  } = useDialogSize(
+    minResizeRecord,
+  } = useOnContainerSizeChange({
+    visible,
     container,
-    baseDialogProps,
+    dialogRef,
     dialogProps,
-    setDialogChangeRecord
-  );
+    baseDialogProps,
+  });
+  const { dialogChangeRecord, setDialogChangeRecord } = useDialogChangeRecord();
+  const { dialogWidth, dialogHeight, setDialogSize } = useDialogSize({
+    initWidth,
+    initHeight,
+    setDialogChangeRecord,
+  });
   const { dialogLeft, dialogTop, setDialogPosition } = useDialogPosition({
-    container,
+    initLeft,
+    initTop,
     setDialogChangeRecord,
   });
   const { contentMaxHeight } = useDialogContentMaxHeight({
@@ -98,12 +117,36 @@ const Dialog = forwardRef<
     setDialogPosition,
   });
 
-  /** props的宽高变化，触发重新设置（兼容用户动态设置宽高的情况） */
-  useOnPropsSizeChange({
+  /** 初始化弹窗的函数（做了防抖，避免上次视图都没渲染完就又设置宽度导致的频繁闪烁） */
+  const initDialog = debounce(() => {
+    setDialogSize({ width: initWidth.current, height: initHeight.current });
+    setDialogPosition({ left: initLeft.current, top: initTop.current });
+  }, 300);
+
+  /** 父容器尺寸变化 */
+  useEffect(() => {
+    initDialog();
+  }, [parentResizeRecord]);
+
+  /** 弹窗可见状态变化 */
+  useOnVisableChange({
     visible,
-    container,
     initWidth,
     initHeight,
+    initLeft,
+    initTop,
+    minResizeRecord,
+    dialogRef,
+    setDialogSize,
+    setDialogPosition,
+  });
+
+  /** props的宽高变化（目的是兼容用户动态设置宽高的情况） */
+  useOnPropsSizeChange({
+    initWidth,
+    initHeight,
+    initLeft,
+    initTop,
     curPropsWidth,
     curPropsHeight,
     setDialogSize,
@@ -144,9 +187,9 @@ const Dialog = forwardRef<
     onMousedownResizeRb,
     onMousedownResizeLb,
   } = useResizeDialog({
-    visible,
     container,
     dialogRef,
+    minResizeRecord,
     setDialogSize,
     setDialogPosition,
   });

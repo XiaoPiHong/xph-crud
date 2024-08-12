@@ -2,10 +2,12 @@ import { useState } from "react";
 import { IDialogChangeRecord } from "../hooks";
 
 const useDialogPosition = ({
-  container,
+  initLeft,
+  initTop,
   setDialogChangeRecord,
 }: {
-  container: HTMLElement;
+  initLeft: React.MutableRefObject<number>;
+  initTop: React.MutableRefObject<number>;
   setDialogChangeRecord: ({
     left,
     top,
@@ -13,12 +15,8 @@ const useDialogPosition = ({
     height,
   }: IDialogChangeRecord) => void;
 }) => {
-  const { clientWidth, clientHeight } = container;
-  const initLeft = Math.floor(clientWidth / 2);
-  const initTop = Math.floor(clientHeight / 2);
-
-  const [left, seLeft] = useState(initLeft);
-  const [top, setTop] = useState(initTop);
+  const [left, seLeft] = useState(initLeft.current);
+  const [top, setTop] = useState(initTop.current);
 
   const setDialogPosition = ({
     left: newLeft,

@@ -26,3 +26,7 @@ export { default as useDialogChangeRecord } from "./useDialogChangeRecord";
 export * from "./useDialogChangeRecord";
 export { default as useResizeDialog } from "./useResizeDialog";
 export * from "./useResizeDialog";
+export { default as useOnContainerSizeChange } from "./useOnContainerSizeChange";
+export * from "./useOnContainerSizeChange";
+export { default as useOnVisableChange } from "./useOnVisableChange";
+export * from "./useOnVisableChange";
