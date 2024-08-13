@@ -353,7 +353,10 @@ const ReactApp: React.FC = () => {
             children: "点击打开表格弹窗",
             onClick: (e) => {
               console.log(xphTableRef.current);
-              xphTableRef.current?.open();
+              xphTableRef.current?.open({
+                Input: "我是xiaopihong",
+                Select: "Option1",
+              });
             },
           },
         },

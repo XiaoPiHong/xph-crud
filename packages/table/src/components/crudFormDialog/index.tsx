@@ -30,11 +30,13 @@ const CrudFormDialog = (
 
   // 由于表单和弹窗都是异步渲染的，所以其内部的方法需要代理一下
   useImperativeHandle(ref, () => ({
-    open: (...args) => {
-      return dialogRef.current?.open(...args);
+    open: (data) => {
+      return dialogRef.current!.open().then(() => {
+        data && xphFormRef.current!.setFieldsValue(data);
+      });
     },
     close: (...args) => {
-      return dialogRef.current?.close(...args);
+      return dialogRef.current!.close(...args);
     },
     getFieldsValue: (...args) => {
       return xphFormRef.current!.getFieldsValue(...args);

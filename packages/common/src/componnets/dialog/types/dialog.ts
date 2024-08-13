@@ -24,6 +24,6 @@ export interface IDialogProps {
 }
 
 export interface IDialogActionType {
-  open: () => void;
+  open: () => Promise<void>;
   close: () => void;
 }

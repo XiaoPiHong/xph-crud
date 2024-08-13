@@ -3,7 +3,6 @@ import React, {
   ForwardedRef,
   useImperativeHandle,
   forwardRef,
-  useState,
   useEffect,
 } from "react";
 import { XphActions, XphPortal } from "../";
@@ -30,6 +29,7 @@ import style from "./dialog.module.css";
 import { Maximize, Minimize, Recovery, Close } from "./components/headerBtns";
 import { theme } from "antd";
 import { debounce } from "lodash-es";
+import { useAsyncState } from "xph-crud/common";
 
 const { useToken } = theme;
 
@@ -56,7 +56,7 @@ const Dialog = forwardRef<
     getPopperContainer,
   } = dialogProps;
   const container = getPopperContainer!() as HTMLElement;
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useAsyncState(false);
   const { footerActions } = useDialogFooter(dialogProps);
   const { open, close } = useDialogActions(dialogProps, setVisible);
   const dialogRef = useRef<HTMLDivElement>(null);
