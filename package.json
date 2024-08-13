@@ -1,6 +1,6 @@
 {
   "name": "xph-crud",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
