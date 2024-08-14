@@ -4,7 +4,7 @@ import { XphActions } from "xph-crud/common";
 import style from "../styles/actions.module.css";
 
 const Actions = (
-  Comp: React.ReactElement,
+  Comp: React.JSXElementConstructor<any>,
   curCellFuncProps: ICurCellFuncProps<{}, {}, "actions">,
   mainProps: IMainProps
 ) => {

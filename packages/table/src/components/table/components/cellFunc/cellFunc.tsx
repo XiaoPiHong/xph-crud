@@ -11,9 +11,11 @@ const BottomCellFunc = (
     renderPrams: { text },
   } = cellFuncProps;
 
+  const handleText = mainProps?.mainHandleText?.();
+
   return (
     <span onClick={mainProps?.mainClick} style={mainProps?.mainStyle}>
-      {text}
+      {handleText ?? text}
     </span>
   );
 };

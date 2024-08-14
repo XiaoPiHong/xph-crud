@@ -26,7 +26,12 @@ function addAttributesToNodes(
           const flag = isFunction(cellFunc);
 
           const [text, record, index] = args;
-          const renderParams = { text, record, index };
+          const renderParams = {
+            text,
+            record,
+            index,
+            column: JSON.parse(JSON.stringify(reset)),
+          };
           const dslConfig = flag ? cellFunc(renderParams) : cellFunc;
 
           return <CellFunc dslConfig={dslConfig} renderPrams={renderParams} />;

@@ -1,4 +1,5 @@
 import { IXphActionsProps, TXphExtendComponentPropsMap } from "xph-crud/common";
+import { IComponentColumnProps, TDataSourceItem } from "../../../../../types";
 
 /** cellFunc中每一项对应的组件componentProps属性映射  */
 export type TCellComponentPropsMap<
@@ -12,6 +13,16 @@ export type TCellComponentPropsMap<
     onClick?: () => void;
   };
   actions: IXphActionsProps<ActionsExtendPropsMap>;
+  tag: {
+    /** 标签的枚举 */
+    enums: Array<{
+      label: string;
+      value: any;
+      config?: {
+        color?: string;
+      };
+    }>;
+  };
 } & CellFuncExtendPropsMap;
 
 // ============================================================================== TCellProps start ==================================
@@ -54,14 +65,19 @@ export type TCellProps<
 /** CellFunc组件的props */
 export interface ICellFuncProps<
   /** 行数据类型 */
-  T = unknown,
+  T = TDataSourceItem,
   /** 单元格的扩展组件props映射 */
   J extends TXphExtendComponentPropsMap = {},
   /** 操作组的扩展组件props映射 */
   K extends TXphExtendComponentPropsMap = {}
 > {
   dslConfig: TCellProps<J, K>[];
-  renderPrams: { text: any; record: T; index: number };
+  renderPrams: {
+    text: any;
+    record: T;
+    index: number;
+    column: Omit<IComponentColumnProps<T, K, K>, "cellFunc">;
+  };
 }
 
 /** cellFunc中每一项对应的组件的props */
@@ -74,7 +90,7 @@ export interface ICurCellFuncProps<
   >
 > {
   curComponentProps?: TCellComponentPropsMap<J, K>[T];
-  cellFuncProps: ICellFuncProps<unknown, J, K>;
+  cellFuncProps: ICellFuncProps<TDataSourceItem, J, K>;
 }
 
 /**
@@ -87,4 +103,5 @@ export interface ICurCellFuncProps<
 export interface IMainProps {
   mainClick?: () => void;
   mainStyle?: React.CSSProperties;
+  mainHandleText?: () => any;
 }

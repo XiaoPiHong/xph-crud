@@ -13,5 +13,5 @@ export type TCrudFormDialogProps<T extends TXphExtendComponentPropsMap = {}> =
 export interface ICrudFormDialogActionType
   extends IXphFormActionType,
     IXphDialogActionType {
-  open: (data?: Record<string, any>) => Promise<void>;
+  open: (data?: any) => Promise<void>;
 }
