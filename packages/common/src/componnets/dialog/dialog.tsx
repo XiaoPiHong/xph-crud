@@ -202,7 +202,6 @@ const Dialog = forwardRef<
     close: onClose,
     setLoading,
   }));
-
   return (
     <div className={dialogTopShowClassConfig["xphDialog"]}>
       {/** 遮罩层=============================================== */}
@@ -212,8 +211,6 @@ const Dialog = forwardRef<
           className={style["xph-dialog-mask"]}
           style={{
             display: visible ? "block" : "none",
-            width: container.scrollWidth,
-            height: container.scrollHeight,
           }}
         ></div>
       ) : null}

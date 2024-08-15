@@ -45,7 +45,6 @@ const useDialogContentMaxHeight = ({
       if (mainMaxHeight > containerMainMaxHeight) {
         mainMaxHeight = containerMainMaxHeight;
       }
-
       setContentMaxHeight(mainMaxHeight);
     }
   }, [visible, dialogHeight]);

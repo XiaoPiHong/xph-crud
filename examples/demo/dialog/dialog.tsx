@@ -14,7 +14,7 @@ const ReactApp: React.FC = () => {
   };
 
   const secondDialogProps: IXphDialogProps = {
-    mask: false,
+    mask: true,
     title: "弹窗2标题",
     width: 500,
     // height: 1200,
@@ -49,7 +49,7 @@ const ReactApp: React.FC = () => {
   const Content = () => {
     console.log("渲染Content");
     return (
-      <div>
+      <div style={{ width: "1200px", height: "1200px" }}>
         <>我是弹窗1</>
         <div>
           <Input />
@@ -68,10 +68,12 @@ const ReactApp: React.FC = () => {
         position: "relative",
       }}
     >
+      {/** 用来测试父元素有滚动条的情况 */}
       <button onClick={onOpenFirstDialog}>点击打开XphDialog弹窗1</button>
       <button onClick={onOpenSecondDialog}>点击打开XphDialog弹窗2</button>
       <button onClick={onOpenThirdDialog}>点击打开XphDialog弹窗3</button>
       <button onClick={onConsoleChildrenDom}>点击打印子元素</button>
+      {/* <div style={{ width: "1200px", height: "1200px" }}></div> */}
 
       <XphDialog {...firstDialogProps} ref={firstDialogRef}>
         <Content />
