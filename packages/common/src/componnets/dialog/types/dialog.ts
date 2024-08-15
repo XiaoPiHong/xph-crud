@@ -10,9 +10,9 @@ export interface IDialogProps {
   okText?: string;
   cancelText?: string;
   /** 点击确定按钮触发该事件 */
-  onOk?: () => void;
+  onOk?: (args) => Promise<void>;
   /** 点击取消按钮触发该事件 */
-  onCancel?: () => void;
+  onCancel?: (args) => Promise<void>;
   renderFooter?: () => React.ReactElement;
   renderTitle?: () => React.ReactElement;
   /** 打开的时候会触发该事件 */

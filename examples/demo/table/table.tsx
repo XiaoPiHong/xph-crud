@@ -417,10 +417,17 @@ const ReactApp: React.FC = () => {
           componentProps: {
             children: "点击打开表格弹窗",
             onClick: (e) => {
-              console.log(xphTableRef.current);
               xphTableRef.current?.open({
-                Input: "我是xiaopihong",
-                Select: "Option1",
+                data: {
+                  Input: "我是xiaopihong",
+                  Select: "Option1",
+                },
+                ok: async ({ values }) => {
+                  console.log(values);
+                },
+                cancel: async ({ values }) => {
+                  console.log(values);
+                },
               });
             },
           },
@@ -545,14 +552,6 @@ const ReactApp: React.FC = () => {
             colProps: { span: 12 },
           },
         ],
-      },
-      onOk: () => {
-        console.log("onOk");
-        xphTableRef.current?.validator();
-      },
-      onCancel: () => {
-        console.log("onCancel");
-        xphTableRef.current?.close();
       },
     },
   };

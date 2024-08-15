@@ -5,7 +5,11 @@ import {
   useImperativeHandle,
   memo,
 } from "react";
-import { ICrudFormDialogActionType, TCrudFormDialogProps } from "../../types";
+import {
+  ICrudFormDialogActionType,
+  TCrudFormDialogProps,
+  IOpenActionConfig,
+} from "../../types";
 import {
   XphDialog,
   IXphDialogActionType,
@@ -28,15 +32,89 @@ const CrudFormDialog = (
     return reset;
   };
 
+  const bindDialogProps = getBindDialogProps();
+
+  /** 打开时候的配置项 */
+  const openConfig = useRef<IOpenActionConfig | null>(null);
+
+  const handleOk = async () => {
+    const { onOk, renderFooter } = bindDialogProps;
+    if (!renderFooter) {
+      const { ok, data } = openConfig.current!;
+      /** open中的ok优先级更高 */
+      if (ok) {
+        xphFormRef.current!.validator().then(async (res) => {
+          const result = await ok({
+            values: xphFormRef.current!.getFieldsValue(),
+          });
+          /** 返回false时候不关闭弹窗 */
+          if (result === false) return;
+          dialogRef.current!.close();
+          openConfig.current = null;
+        });
+        return;
+      }
+      if (onOk) {
+        xphFormRef.current!.validator().then(async (res) => {
+          const result = await onOk({
+            values: res,
+            data,
+          });
+          /** 返回false时候不关闭弹窗 */
+          if (result === false) return;
+          dialogRef.current!.close();
+          openConfig.current = null;
+        });
+      }
+      dialogRef.current!.close();
+      openConfig.current = null;
+    }
+  };
+
+  const handleCancel = async () => {
+    const { onCancel, renderFooter } = bindDialogProps;
+    if (!renderFooter) {
+      const { cancel, data } = openConfig.current!;
+      /** open中的cancel优先级更高 */
+      if (cancel) {
+        const result = await cancel({
+          values: xphFormRef.current!.getFieldsValue(),
+        });
+        /** 返回false时候不关闭弹窗 */
+        if (result === false) return;
+        dialogRef.current!.close();
+        openConfig.current = null;
+        return;
+      }
+      if (onCancel) {
+        const result = await onCancel({
+          values: xphFormRef.current!.getFieldsValue(true),
+          data,
+        });
+        /** 返回false时候不关闭弹窗 */
+        if (result === false) return;
+        dialogRef.current!.close();
+        openConfig.current = null;
+      }
+      dialogRef.current!.close();
+      openConfig.current = null;
+    }
+  };
+
   // 由于表单和弹窗都是异步渲染的，所以其内部的方法需要代理一下
   useImperativeHandle(ref, () => ({
-    open: (data) => {
+    open: (config: IOpenActionConfig) => {
+      const { renderFooter } = bindDialogProps;
+      !renderFooter && (openConfig.current = config);
+
+      /** 打开弹窗 */
       return dialogRef.current!.open().then(() => {
-        data && xphFormRef.current!.setFieldsValue(data);
+        /** 回填表单 */
+        xphFormRef.current!.setFieldsValue(config.data || {});
       });
     },
-    close: (...args) => {
-      return dialogRef.current!.close(...args);
+    close: () => {
+      return dialogRef.current!.close();
     },
     getFieldsValue: (...args) => {
       return xphFormRef.current!.getFieldsValue(...args);
@@ -56,7 +134,12 @@ const CrudFormDialog = (
   }));
 
   return (
-    <XphDialog {...getBindDialogProps()} ref={dialogRef}>
+    <XphDialog
+      {...bindDialogProps}
+      ref={dialogRef}
+      onOk={handleOk}
+      onCancel={handleCancel}
+    >
       <XphForm {...xphFormProps} ref={xphFormRef} />
     </XphDialog>
   );

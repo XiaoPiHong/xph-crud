@@ -7,7 +7,13 @@ import {
 import { Button } from "antd";
 
 /** 最小化 */
-const Minimize = ({ onClick }: { onClick?: () => void }) => {
+const Minimize = ({
+  onClick,
+  disabled,
+}: {
+  onClick?: () => void;
+  disabled?: boolean;
+}) => {
   return (
     <Button
       type="link"
@@ -25,7 +31,13 @@ const Minimize = ({ onClick }: { onClick?: () => void }) => {
 };
 
 /** 最大化 */
-const Maximize = ({ onClick }: { onClick?: () => void }) => {
+const Maximize = ({
+  onClick,
+  disabled,
+}: {
+  onClick?: () => void;
+  disabled?: boolean;
+}) => {
   return (
     <Button
       type="link"
@@ -43,7 +55,13 @@ const Maximize = ({ onClick }: { onClick?: () => void }) => {
 };
 
 /** 恢复 */
-const Recovery = ({ onClick }: { onClick?: () => void }) => {
+const Recovery = ({
+  onClick,
+  disabled,
+}: {
+  onClick?: () => void;
+  disabled?: boolean;
+}) => {
   return (
     <Button
       type="link"
@@ -61,7 +79,13 @@ const Recovery = ({ onClick }: { onClick?: () => void }) => {
 };
 
 /** 关闭 */
-const Close = ({ onClick }: { onClick?: () => void }) => {
+const Close = ({
+  onClick,
+  disabled,
+}: {
+  onClick?: () => void;
+  disabled?: boolean;
+}) => {
   return (
     <Button
       type="link"
