@@ -30,3 +30,5 @@ export { default as useOnContainerSizeChange } from "./useOnContainerSizeChange"
 export * from "./useOnContainerSizeChange";
 export { default as useOnVisableChange } from "./useOnVisableChange";
 export * from "./useOnVisableChange";
+export { default as useDialogMask } from "./useDialogMask";
+export * from "./useDialogMask";

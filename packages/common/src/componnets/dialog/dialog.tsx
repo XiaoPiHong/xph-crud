@@ -24,6 +24,7 @@ import {
   useResizeDialog,
   useOnContainerSizeChange,
   useOnVisableChange,
+  useDialogMask,
 } from "./hooks";
 import MinimizeDialog from "./components/minimizeDialog";
 import style from "./dialog.module.css";
@@ -101,6 +102,12 @@ const Dialog = forwardRef<
     dialogHeaderRef,
     dialogFooterRef,
   });
+  const { showMask } = useDialogMask(
+    container,
+    contentMaxHeight,
+    dialogWidth,
+    dialogHeight
+  );
 
   const { minimizeLeft, minimizeTop, minimizeRef, setMinimizePosition } =
     useMinimizeDialog();
@@ -206,11 +213,13 @@ const Dialog = forwardRef<
     <div className={dialogTopShowClassConfig["xphDialog"]}>
       {/** 遮罩层=============================================== */}
       {/** 由于弹窗之间存在层级关系，所以遮罩层也需要层级关系，所以遮罩层没有设计成全局共用的，而是每个弹窗独立的 */}
-      {mask ? (
+      {mask && showMask ? (
         <div
           className={style["xph-dialog-mask"]}
           style={{
             display: visible ? "block" : "none",
+            width: container.scrollWidth,
+            height: container.scrollHeight,
           }}
         ></div>
       ) : null}
