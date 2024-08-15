@@ -94,8 +94,6 @@ const getEnumsTagColorConfigMap = (enums, column, tokenColorConfigMap) => {
     const key = `${column.dataIndex}${item.value}`;
     const color = item.config?.color;
 
-    console.log(globalColorConfigMap[index]);
-
     /**
      * 有color就先用color去匹配tokenColorConfigMap，匹配到就用，匹配不到就用color
      *

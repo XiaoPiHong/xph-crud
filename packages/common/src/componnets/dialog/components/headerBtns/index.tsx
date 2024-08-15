@@ -9,7 +9,6 @@ import { Button } from "antd";
 /** 最小化 */
 const Minimize = ({
   onClick,
-  disabled,
 }: {
   onClick?: () => void;
   disabled?: boolean;
@@ -33,7 +32,6 @@ const Minimize = ({
 /** 最大化 */
 const Maximize = ({
   onClick,
-  disabled,
 }: {
   onClick?: () => void;
   disabled?: boolean;
@@ -57,7 +55,6 @@ const Maximize = ({
 /** 恢复 */
 const Recovery = ({
   onClick,
-  disabled,
 }: {
   onClick?: () => void;
   disabled?: boolean;
@@ -90,6 +87,7 @@ const Close = ({
     <Button
       type="link"
       onClick={onClick}
+      disabled={disabled}
       icon={
         <CloseOutlined
           style={{

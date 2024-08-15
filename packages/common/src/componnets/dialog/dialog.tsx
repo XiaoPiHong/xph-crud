@@ -4,6 +4,7 @@ import React, {
   useImperativeHandle,
   forwardRef,
   useEffect,
+  useState,
 } from "react";
 import { XphActions, XphPortal } from "../";
 import { IDialogProps, IDialogActionType } from "./types";
@@ -30,6 +31,7 @@ import { Maximize, Minimize, Recovery, Close } from "./components/headerBtns";
 import { theme } from "antd";
 import { debounce } from "lodash-es";
 import { useAsyncState } from "xph-crud/common";
+import { Spin } from "antd";
 
 const { useToken } = theme;
 
@@ -57,8 +59,9 @@ const Dialog = forwardRef<
   } = dialogProps;
   const container = getPopperContainer!() as HTMLElement;
   const [visible, setVisible] = useAsyncState(false);
-  const { footerActions } = useDialogFooter(dialogProps);
-  const { open, close } = useDialogActions(dialogProps, setVisible);
+  const [loading, setLoading] = useState(false);
+  const { open, close } = useDialogActions(dialogProps, setVisible, setLoading);
+  const { footerActions } = useDialogFooter(dialogProps, loading);
   const dialogRef = useRef<HTMLDivElement>(null);
   const dialogHeaderRef = useRef<HTMLDivElement>(null);
   const dialogMainRef = useRef<HTMLDivElement>(null);
@@ -197,6 +200,7 @@ const Dialog = forwardRef<
   useImperativeHandle(ref, () => ({
     open,
     close: onClose,
+    setLoading,
   }));
 
   return (
@@ -218,6 +222,7 @@ const Dialog = forwardRef<
       <MinimizeDialog
         visible={minimizeVisible}
         className={`${dialogTopShowClassConfig["xphMinimizeDialog"]}`}
+        loading={loading}
         ref={minimizeRef}
         left={minimizeLeft}
         top={minimizeTop}
@@ -250,7 +255,7 @@ const Dialog = forwardRef<
             ) : (
               <Maximize onClick={() => onMaximize("maximize")} />
             )}
-            <Close onClick={onClose} />
+            <Close onClick={onClose} disabled={loading} />
           </div>
         </div>
         {/** 弹窗主体内容main============================================================ */}
@@ -261,12 +266,12 @@ const Dialog = forwardRef<
             maxHeight: contentMaxHeight,
           }}
         >
-          {visible ? children : null}
+          <Spin spinning={loading}>{visible ? children : null}</Spin>
         </div>
         {/** 弹窗底部footer============================================================ */}
         {/** 如果是renderFooter，底部的布局由调用方决定  */}
         {renderFooter ? (
-          <div ref={dialogFooterRef}>{renderFooter()}</div>
+          <div ref={dialogFooterRef}>{renderFooter({ loading })}</div>
         ) : (
           <div ref={dialogFooterRef} className={style["dialog__footer"]}>
             <XphActions {...footerActions} />

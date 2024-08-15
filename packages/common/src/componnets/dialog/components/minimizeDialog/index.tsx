@@ -8,6 +8,7 @@ interface IMinimizeDialogProps {
   top: number;
   visible: boolean;
   title?: string;
+  loading?: boolean;
   className: string;
   onMaximize?: () => void;
   onClosesquare?: () => void;
@@ -17,7 +18,16 @@ const { useToken } = theme;
 
 const MinimizeDialog = forwardRef<HTMLDivElement, IMinimizeDialogProps>(
   (
-    { title, left, top, visible, onMaximize, onClosesquare, className },
+    {
+      title,
+      left,
+      top,
+      visible,
+      loading,
+      onMaximize,
+      onClosesquare,
+      className,
+    },
     ref
   ) => {
     /** 获取继承过来的样式 */
@@ -42,7 +52,7 @@ const MinimizeDialog = forwardRef<HTMLDivElement, IMinimizeDialogProps>(
         </div>
         <div className={style["minimize-windows-operate"]}>
           <Maximize onClick={onMaximize} />
-          <Close onClick={onClosesquare} />
+          <Close onClick={onClosesquare} disabled={loading} />
         </div>
       </div>
     );

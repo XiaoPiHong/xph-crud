@@ -423,7 +423,11 @@ const ReactApp: React.FC = () => {
                   Select: "Option1",
                 },
                 ok: async ({ values }) => {
-                  console.log(values);
+                  return new Promise((resolve) => {
+                    setTimeout(() => {
+                      resolve(values);
+                    }, 20000);
+                  });
                 },
                 cancel: async ({ values }) => {
                   console.log(values);

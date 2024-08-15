@@ -1,6 +1,10 @@
 import { IDialogProps } from "../types";
 
-const useDialogActions = (dialogProps: IDialogProps, setVisible: Function) => {
+const useDialogActions = (
+  dialogProps: IDialogProps,
+  setVisible: Function,
+  setLoading: Function
+) => {
   const { onOpen, onClose } = dialogProps;
   /** open做成promise可以在弹窗渲染完后执行某些操作（比如增删改查表单的内容回填） */
   const open = async () => {
@@ -10,8 +14,10 @@ const useDialogActions = (dialogProps: IDialogProps, setVisible: Function) => {
   };
   const close = () => {
     setVisible(false);
+    setLoading(false);
     onClose && onClose();
   };
+
   return {
     open,
     close,

@@ -13,7 +13,7 @@ export interface IDialogProps {
   onOk?: (args) => Promise<void>;
   /** 点击取消按钮触发该事件 */
   onCancel?: (args) => Promise<void>;
-  renderFooter?: () => React.ReactElement;
+  renderFooter?: ({ loading }: { loading: boolean }) => React.ReactElement;
   renderTitle?: () => React.ReactElement;
   /** 打开的时候会触发该事件 */
   onOpen?: () => void;
@@ -26,4 +26,5 @@ export interface IDialogProps {
 export interface IDialogActionType {
   open: () => Promise<void>;
   close: () => void;
+  setLoading: (loading: boolean) => void;
 }
