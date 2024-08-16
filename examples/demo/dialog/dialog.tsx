@@ -73,7 +73,7 @@ const ReactApp: React.FC = () => {
       <button onClick={onOpenSecondDialog}>点击打开XphDialog弹窗2</button>
       <button onClick={onOpenThirdDialog}>点击打开XphDialog弹窗3</button>
       <button onClick={onConsoleChildrenDom}>点击打印子元素</button>
-      {/* <div style={{ width: "1200px", height: "1200px" }}></div> */}
+      <div style={{ width: "1200px", height: "1200px" }}></div>
 
       <XphDialog {...firstDialogProps} ref={firstDialogRef}>
         <Content />

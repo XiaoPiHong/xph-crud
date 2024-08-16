@@ -102,12 +102,7 @@ const Dialog = forwardRef<
     dialogHeaderRef,
     dialogFooterRef,
   });
-  const { showMask } = useDialogMask(
-    container,
-    contentMaxHeight,
-    dialogWidth,
-    dialogHeight
-  );
+  const { showMask } = useDialogMask(contentMaxHeight, visible);
 
   const { minimizeLeft, minimizeTop, minimizeRef, setMinimizePosition } =
     useMinimizeDialog();
@@ -217,7 +212,6 @@ const Dialog = forwardRef<
         <div
           className={style["xph-dialog-mask"]}
           style={{
-            display: visible ? "block" : "none",
             width: container.scrollWidth,
             height: container.scrollHeight,
           }}

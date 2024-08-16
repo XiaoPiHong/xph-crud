@@ -18,7 +18,6 @@ const useOnContainerSizeChange = ({
   const [parentResizeRecord, setParentResizeRecord] = useState(0);
 
   const handleResize = () => {
-    console.log("触发了尺寸拉伸============================");
     setParentResizeRecord((prevRecord) => prevRecord + 1);
   };
 
