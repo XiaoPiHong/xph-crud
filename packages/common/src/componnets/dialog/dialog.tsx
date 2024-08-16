@@ -25,6 +25,7 @@ import {
   useOnContainerSizeChange,
   useOnVisableChange,
   useDialogMask,
+  useMinResizeRecord,
 } from "./hooks";
 import MinimizeDialog from "./components/minimizeDialog";
 import style from "./dialog.module.css";
@@ -75,11 +76,8 @@ const Dialog = forwardRef<
     initHeight,
     curPropsWidth,
     curPropsHeight,
-    minResizeRecord,
   } = useOnContainerSizeChange({
-    visible,
     container,
-    dialogRef,
     dialogProps,
     baseDialogProps,
   });
@@ -103,6 +101,11 @@ const Dialog = forwardRef<
     dialogFooterRef,
   });
   const { showMask } = useDialogMask(contentMaxHeight, visible);
+  const { minResizeRecord } = useMinResizeRecord(
+    dialogRef,
+    contentMaxHeight,
+    visible
+  );
 
   const { minimizeLeft, minimizeTop, minimizeRef, setMinimizePosition } =
     useMinimizeDialog();

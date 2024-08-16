@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { isNumber } from "lodash-es";
 
 const useDialogContentMaxHeight = ({
   visible,
@@ -26,7 +27,7 @@ const useDialogContentMaxHeight = ({
       const borderBottomWidth = 0;
 
       // 每次打开弹窗的时候，都根据弹窗的高度设置最大高度
-      const { clientHeight } = container;
+      const { clientHeight, scrollHeight } = container;
       const headerHeight = dialogHeaderRef.current?.offsetHeight;
       const footerHeight = dialogFooterRef.current?.offsetHeight;
       // 盒子为content-box时，getBoundingClientRect获取到的height为border+padding+height
@@ -38,7 +39,10 @@ const useDialogContentMaxHeight = ({
         (borderTopWidth + borderBottomWidth);
       // 临界检查
       const containerMainMaxHeight =
-        clientHeight -
+        //  如果dialogHeight大于了clientHeight，那么就需要取scrollHeight的高度去设置最大高度
+        (isNumber(dialogHeight) && dialogHeight > clientHeight
+          ? scrollHeight
+          : clientHeight) -
         headerHeight! -
         footerHeight! -
         (borderTopWidth + borderBottomWidth);

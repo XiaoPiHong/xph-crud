@@ -32,3 +32,5 @@ export { default as useOnVisableChange } from "./useOnVisableChange";
 export * from "./useOnVisableChange";
 export { default as useDialogMask } from "./useDialogMask";
 export * from "./useDialogMask";
+export { default as useMinResizeRecord } from "./useMinResizeRecord";
+export * from "./useMinResizeRecord";

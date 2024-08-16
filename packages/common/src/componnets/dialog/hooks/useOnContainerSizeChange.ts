@@ -2,15 +2,11 @@ import { useEffect, useState, useRef } from "react";
 import { IDialogProps } from "../types";
 
 const useOnContainerSizeChange = ({
-  visible,
   container,
-  dialogRef,
   dialogProps,
   baseDialogProps,
 }: {
-  visible: boolean;
   container: HTMLElement;
-  dialogRef: React.RefObject<HTMLDivElement>;
   dialogProps: IDialogProps;
   baseDialogProps: IDialogProps;
 }) => {
@@ -66,13 +62,6 @@ const useOnContainerSizeChange = ({
   const initLeft = useRef<number>(Math.floor(clientWidth / 2));
   const initTop = useRef<number>(Math.floor(clientHeight / 2));
 
-  //=====================================拉伸的
-  /** 拉伸的最小尺寸 */
-  const minResizeRecord = useRef<null | {
-    width: number;
-    height: number;
-  }>(null);
-
   // ======================================================= 一些会受拉伸影响的初始属性 end
 
   useEffect(() => {
@@ -80,16 +69,6 @@ const useOnContainerSizeChange = ({
     initHeight.current = curPropsHeight;
     initLeft.current = Math.floor(clientWidth / 2);
     initTop.current = Math.floor(clientHeight / 2);
-
-    /** 拉伸最小尺寸在打开状态下才需要重新设置 */
-    if (visible) {
-      const width = dialogRef.current!.offsetWidth;
-      const height = dialogRef.current!.offsetHeight;
-      minResizeRecord.current = {
-        width,
-        height,
-      };
-    }
   }, [parentResizeRecord]);
 
   return {
@@ -100,7 +79,6 @@ const useOnContainerSizeChange = ({
     initHeight,
     curPropsWidth,
     curPropsHeight,
-    minResizeRecord,
   };
 };
 
