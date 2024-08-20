@@ -47,9 +47,13 @@ const CrudFormDialog = (
         xphFormRef.current!.validator().then(async (res) => {
           const result = await ok({
             values: xphFormRef.current!.getFieldsValue(),
-          }).finally(() => {
-            dialogRef.current!.setLoading(false);
-          });
+          })
+            .then((okResult) => {
+              return okResult;
+            })
+            .finally(() => {
+              dialogRef.current!.setLoading(false);
+            });
           /** 返回false时候不关闭弹窗 */
           if (result === false) return;
           dialogRef.current!.close();
@@ -62,9 +66,13 @@ const CrudFormDialog = (
           const result = await onOk({
             values: res,
             data,
-          }).finally(() => {
-            dialogRef.current!.setLoading(false);
-          });
+          })
+            .then((onOkResult) => {
+              return onOkResult;
+            })
+            .finally(() => {
+              dialogRef.current!.setLoading(false);
+            });
           /** 返回false时候不关闭弹窗 */
           if (result === false) return;
           dialogRef.current!.close();
@@ -84,7 +92,7 @@ const CrudFormDialog = (
       /** open中的cancel优先级更高 */
       if (cancel) {
         const result = await cancel({
-          values: xphFormRef.current!.getFieldsValue(),
+          values: xphFormRef.current!.getFieldsValue(true),
         });
         /** 返回false时候不关闭弹窗 */
         if (result === false) return;
