@@ -515,7 +515,7 @@ const ReactApp: React.FC = () => {
     },
     crudFormDialog: {
       title: "弹窗",
-      mask: true,
+      // mask: true,
       // 弹窗挂载的元素
       getPopperContainer: () => document.getElementById("docs-comp-table-base"),
       formProps: {
