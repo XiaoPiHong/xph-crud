@@ -7,7 +7,6 @@ const ReactApp: React.FC = () => {
   const secondDialogRef = useRef<IXphDialogActionType>(null);
   const thirdDialogRef = useRef<IXphDialogActionType>(null);
   const firstDialogProps: IXphDialogProps = {
-    mask: true,
     title: "弹窗1标题",
     width: 1000,
     height: 1200,
