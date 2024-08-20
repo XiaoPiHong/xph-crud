@@ -12,11 +12,21 @@ const useDialogPorps = (dialogProps: IDialogProps) => {
     /** 默认都是挂载在body上 */
     getPopperContainer: () => document.body,
   };
+
   const newDialogProps: IDialogProps = {
     ...merge(merge(baseDialogProps, extendDialogProps), dialogProps),
   };
+
+  const getPopperContainer = () => {
+    /** 开启遮罩层时挂载在body */
+    const container = newDialogProps.getPopperContainer!() as HTMLElement;
+    return newDialogProps.mask ? document.body : container;
+  };
   return {
-    dialogProps: newDialogProps,
+    dialogProps: {
+      ...newDialogProps,
+      getPopperContainer,
+    },
     baseDialogProps: baseDialogProps,
   };
 };

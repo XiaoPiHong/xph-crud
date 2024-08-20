@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { IDialogChangeRecord } from "../hooks";
+import { IDialogChangeRecord, IContainerSizeTarget } from "../hooks";
 
 const useDialogZoom = ({
-  container,
+  containerSizeTarget,
   dialogChangeRecord,
   close,
   setDialogSize,
   setDialogPosition,
 }: {
-  container: HTMLElement;
+  containerSizeTarget: React.MutableRefObject<IContainerSizeTarget>;
   dialogChangeRecord: React.MutableRefObject<IDialogChangeRecord>;
   close: () => void;
   setDialogSize: (size: {
@@ -36,7 +36,7 @@ const useDialogZoom = ({
     }
     if (type === "maximize") {
       // 如果当前状态不是最大化状态，设置为最大化状态（注意这里使用scroll系列的宽高）
-      const { scrollWidth, scrollHeight } = container;
+      const { scrollWidth, scrollHeight } = containerSizeTarget.current;
       const width = Math.floor(scrollWidth);
       const height = Math.floor(scrollHeight);
       const left = Math.floor(scrollWidth / 2);

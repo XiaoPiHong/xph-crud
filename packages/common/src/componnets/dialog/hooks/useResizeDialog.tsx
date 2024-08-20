@@ -1,15 +1,16 @@
 import { MouseEvent, useRef, useEffect, useCallback, useState } from "react";
+import { IContainerSizeTarget } from "../hooks";
 
 type TResizeType = "lt" | "rt" | "rb" | "lb";
 
 const useResizeDialog = ({
-  container,
+  containerSizeTarget,
   dialogRef,
   minResizeRecord,
   setDialogSize,
   setDialogPosition,
 }: {
-  container: HTMLElement;
+  containerSizeTarget: React.MutableRefObject<IContainerSizeTarget>;
   dialogRef: React.RefObject<HTMLDivElement>;
   minResizeRecord: React.MutableRefObject<{
     width: number;
@@ -79,8 +80,8 @@ const useResizeDialog = ({
       /** 最小尺寸和最大尺寸 */
       const minWidth = minResizeRecord.current!.width;
       const minHeight = minResizeRecord.current!.height;
-      const maxWidth = container.scrollWidth;
-      const maxHeight = container.scrollHeight;
+      const maxWidth = containerSizeTarget.current.scrollWidth;
+      const maxHeight = containerSizeTarget.current.scrollHeight;
       // const minLeft = minResizeRecord.current!.width * 0.5;
       // const minTop = minResizeRecord.current!.height * 0.5;
       // const maxLeft = maxWidth - minWidth + minWidth * 0.5;

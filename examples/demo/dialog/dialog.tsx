@@ -10,13 +10,15 @@ const ReactApp: React.FC = () => {
     mask: true,
     title: "弹窗1标题",
     width: 1000,
+    height: 1200,
     getPopperContainer: () => document.getElementById("dialog-box"),
   };
 
   const secondDialogProps: IXphDialogProps = {
-    mask: true,
+    // mask: true,
     title: "弹窗2标题",
     width: 500,
+    height: 500,
     // height: 1200,
     getPopperContainer: () => document.getElementById("dialog-box"),
   };
@@ -24,6 +26,7 @@ const ReactApp: React.FC = () => {
   const thirdDialogProps: IXphDialogProps = {
     mask: false,
     title: "弹窗3标题",
+    height: 300,
     getPopperContainer: () => document.getElementById("dialog-box"),
   };
 

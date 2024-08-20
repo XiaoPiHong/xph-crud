@@ -1,12 +1,13 @@
 import { useEffect, useCallback, useRef } from "react";
+import { IContainerSizeTarget } from "../hooks";
 
 const useDragDialog = ({
-  container,
+  containerSizeTarget,
   dialogHeaderRef,
   dialogRef,
   setDialogPosition,
 }: {
-  container: HTMLElement;
+  containerSizeTarget: React.MutableRefObject<IContainerSizeTarget>;
   dialogHeaderRef: React.RefObject<HTMLDivElement>;
   dialogRef: React.RefObject<HTMLDivElement>;
   setDialogPosition: (position: { left: number; top: number }) => void;
@@ -42,8 +43,14 @@ const useDragDialog = ({
     // 边界检查
     const minX = -translateX;
     const minY = -translateY;
-    const maxX = container.scrollWidth - dialogDiv.offsetWidth - translateX;
-    const maxY = container.scrollHeight - dialogDiv.offsetHeight - translateY;
+    const maxX =
+      containerSizeTarget.current.scrollWidth -
+      dialogDiv.offsetWidth -
+      translateX;
+    const maxY =
+      containerSizeTarget.current.scrollHeight -
+      dialogDiv.offsetHeight -
+      translateY;
 
     if (x < minX) x = minX;
     if (x > maxX) x = maxX;

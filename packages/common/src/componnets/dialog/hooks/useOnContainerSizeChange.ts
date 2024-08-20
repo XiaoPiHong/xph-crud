@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { IDialogProps } from "../types";
+import { usePopperContainerSize } from "../hooks";
 
 const useOnContainerSizeChange = ({
   container,
@@ -18,6 +19,7 @@ const useOnContainerSizeChange = ({
   };
 
   useEffect(() => {
+    /** 初始化的时候new ResizeObserver也会执行一次handleResize，所以parentResizeRecord会改变两次 */
     const observer = new ResizeObserver(handleResize);
     observer.observe(container);
 
@@ -28,6 +30,11 @@ const useOnContainerSizeChange = ({
   }, [container]);
 
   // ======================================================= 一些会受拉伸影响的初始属性 start
+  // =================================父容器尺寸的
+  const { containerSizeTarget, setContainerSizeTarget } =
+    usePopperContainerSize({
+      container,
+    });
 
   //=================================尺寸的
   const { width: baseWidth, height: baseHeight } = baseDialogProps;
@@ -36,9 +43,7 @@ const useOnContainerSizeChange = ({
   const curWidth = width ? width : baseWidth;
   const curHeight = height ? height : baseHeight;
 
-  /** clientWidth clientHeight 不包括border */
-  const { clientWidth, clientHeight } = container;
-
+  const { clientWidth, clientHeight } = containerSizeTarget.current;
   const curPropsWidth = curWidth
     ? curWidth > clientWidth
       ? clientWidth
@@ -56,22 +61,37 @@ const useOnContainerSizeChange = ({
    */
   const initWidth = useRef<number | string>(curPropsWidth);
   const initHeight = useRef<number | string>(curPropsHeight);
+  const setInitSize = (size: {
+    width: number | string;
+    height: number | string;
+  }) => {
+    initWidth.current = size.width;
+    initHeight.current = size.height;
+  };
 
   //=====================================定位的
   /** 初始化位置 */
   const initLeft = useRef<number>(Math.floor(clientWidth / 2));
   const initTop = useRef<number>(Math.floor(clientHeight / 2));
+  const setInitPosition = (position: { left: number; top: number }) => {
+    initLeft.current = position.left;
+    initTop.current = position.top;
+  };
 
   // ======================================================= 一些会受拉伸影响的初始属性 end
-
   useEffect(() => {
-    initWidth.current = curPropsWidth;
-    initHeight.current = curPropsHeight;
-    initLeft.current = Math.floor(clientWidth / 2);
-    initTop.current = Math.floor(clientHeight / 2);
+    if (parentResizeRecord === 0) return;
+    console.log("触发了内部parentResizeRecord");
+    setContainerSizeTarget();
+    setInitSize({ width: curPropsWidth, height: curPropsHeight });
+    setInitPosition({
+      left: Math.floor(clientWidth / 2),
+      top: Math.floor(clientHeight / 2),
+    });
   }, [parentResizeRecord]);
 
   return {
+    containerSizeTarget,
     parentResizeRecord,
     initLeft,
     initTop,
@@ -79,6 +99,8 @@ const useOnContainerSizeChange = ({
     initHeight,
     curPropsWidth,
     curPropsHeight,
+    setInitPosition,
+    setInitSize,
   };
 };
 

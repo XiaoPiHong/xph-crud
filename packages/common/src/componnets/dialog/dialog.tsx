@@ -23,15 +23,12 @@ import {
   useDialogChangeRecord,
   useResizeDialog,
   useOnContainerSizeChange,
-  useOnVisableChange,
-  useDialogMask,
   useMinResizeRecord,
 } from "./hooks";
 import MinimizeDialog from "./components/minimizeDialog";
 import style from "./dialog.module.css";
 import { Maximize, Minimize, Recovery, Close } from "./components/headerBtns";
 import { theme } from "antd";
-import { debounce } from "lodash-es";
 import { useAsyncState } from "xph-crud/common";
 import { Spin } from "antd";
 
@@ -69,6 +66,7 @@ const Dialog = forwardRef<
   const dialogMainRef = useRef<HTMLDivElement>(null);
   const dialogFooterRef = useRef<HTMLDivElement>(null);
   const {
+    containerSizeTarget,
     parentResizeRecord,
     initLeft,
     initTop,
@@ -88,23 +86,23 @@ const Dialog = forwardRef<
     setDialogChangeRecord,
   });
   const { dialogLeft, dialogTop, setDialogPosition } = useDialogPosition({
-    initLeft,
     initTop,
+    initLeft,
     setDialogChangeRecord,
   });
-  const { contentMaxHeight } = useDialogContentMaxHeight({
+  const { dialogMaxHeight, contentMaxHeight } = useDialogContentMaxHeight({
     visible,
-    container,
+    containerSizeTarget,
     dialogHeight,
     dialogRef,
     dialogHeaderRef,
     dialogFooterRef,
   });
-  const { showMask } = useDialogMask(contentMaxHeight, visible);
   const { minResizeRecord } = useMinResizeRecord(
+    visible,
     dialogRef,
-    contentMaxHeight,
-    visible
+    dialogWidth,
+    dialogHeight
   );
 
   const { minimizeLeft, minimizeTop, minimizeRef, setMinimizePosition } =
@@ -118,36 +116,27 @@ const Dialog = forwardRef<
     onRecovery,
     onClose,
   } = useDialogZoom({
-    container,
+    containerSizeTarget,
     dialogChangeRecord,
     close,
     setDialogSize,
     setDialogPosition,
   });
 
-  /** 初始化弹窗的函数（做了防抖，避免上次视图都没渲染完就又设置宽度导致的频繁闪烁） */
-  const initDialog = debounce(() => {
+  /** 初始化弹窗的函数 */
+  const initDialog = () => {
+    console.log("触发了initDialog");
     setDialogSize({ width: initWidth.current, height: initHeight.current });
     setDialogPosition({ left: initLeft.current, top: initTop.current });
-  }, 300);
+    setMinimizePosition({ left: 160, top: 60 });
+  };
 
-  /** 父容器尺寸变化 */
+  /** 父容器尺寸变化，初始化弹窗（首次的初始化也是这里） */
   useEffect(() => {
+    if (parentResizeRecord === 0) return;
+    console.log("触发了外部parentResizeRecord");
     initDialog();
   }, [parentResizeRecord]);
-
-  /** 弹窗可见状态变化 */
-  useOnVisableChange({
-    visible,
-    initWidth,
-    initHeight,
-    initLeft,
-    initTop,
-    minResizeRecord,
-    dialogRef,
-    setDialogSize,
-    setDialogPosition,
-  });
 
   /** props的宽高变化（目的是兼容用户动态设置宽高的情况） */
   useOnPropsSizeChange({
@@ -163,7 +152,7 @@ const Dialog = forwardRef<
 
   /** 主体窗口拖拽 */
   useDragDialog({
-    container,
+    containerSizeTarget,
     dialogHeaderRef,
     dialogRef,
     setDialogPosition,
@@ -172,7 +161,7 @@ const Dialog = forwardRef<
   /** 最小化窗口拖拽 */
   const useDragMinimizeDialog = useDragDialog;
   useDragMinimizeDialog({
-    container,
+    containerSizeTarget,
     dialogHeaderRef: minimizeRef,
     dialogRef: minimizeRef,
     setDialogPosition: setMinimizePosition,
@@ -195,7 +184,7 @@ const Dialog = forwardRef<
     onMousedownResizeRb,
     onMousedownResizeLb,
   } = useResizeDialog({
-    container,
+    containerSizeTarget,
     dialogRef,
     minResizeRecord,
     setDialogSize,
@@ -210,15 +199,9 @@ const Dialog = forwardRef<
   return (
     <div className={dialogTopShowClassConfig["xphDialog"]}>
       {/** 遮罩层=============================================== */}
-      {/** 由于弹窗之间存在层级关系，所以遮罩层也需要层级关系，所以遮罩层没有设计成全局共用的，而是每个弹窗独立的 */}
-      {mask && showMask ? (
-        <div
-          className={style["xph-dialog-mask"]}
-          style={{
-            width: container.scrollWidth,
-            height: container.scrollHeight,
-          }}
-        ></div>
+      {/** 开启遮罩层默认是置于body处 */}
+      {mask && visible ? (
+        <div className={style["xph-dialog-mask"]}></div>
       ) : null}
 
       {/** 弹窗最小化的窗口 */}
@@ -244,6 +227,7 @@ const Dialog = forwardRef<
           top: dialogTop,
           width: dialogWidth,
           height: dialogHeight,
+          maxHeight: dialogMaxHeight,
           opacity: resizingState ? 0.2 : "unset", // 拉伸时候透明度为0.2
           ...contentStyle,
         }}
