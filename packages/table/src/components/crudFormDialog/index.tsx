@@ -70,6 +70,7 @@ const CrudFormDialog = (
           dialogRef.current!.close();
           openConfig.current = null;
         });
+        return;
       }
       dialogRef.current!.close();
       openConfig.current = null;
@@ -100,6 +101,7 @@ const CrudFormDialog = (
         if (result === false) return;
         dialogRef.current!.close();
         openConfig.current = null;
+        return;
       }
       dialogRef.current!.close();
       openConfig.current = null;
