@@ -12,24 +12,24 @@ const globalColorConfigMap = {
     border: "1px solid orange",
   },
   1: {
+    color: "purple",
+    backgroundColor: "unset",
+    border: "1px solid purple",
+  },
+  2: {
     color: "blue",
     backgroundColor: "unset",
     border: "1px solid blue",
   },
-  2: {
+  3: {
     color: "green",
     backgroundColor: "unset",
     border: "1px solid green",
   },
-  3: {
+  4: {
     color: "red",
     backgroundColor: "unset",
     border: "1px solid red",
-  },
-  4: {
-    color: "purple",
-    backgroundColor: "unset",
-    border: "1px solid purple",
   },
   5: {
     color: "pink",
