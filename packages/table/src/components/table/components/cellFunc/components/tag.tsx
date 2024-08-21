@@ -168,7 +168,8 @@ const Tag = (
     tokenColorConfigMap
   );
 
-  const colorConfig = colorConfigMap[`${column.dataIndex}${text}`] || {}; // 兼容一下匹配不到的情况
+  const colorConfig =
+    colorConfigMap[`${String(column.dataIndex)}${text}`] || {}; // 兼容一下匹配不到的情况
 
   const mainStyle: React.CSSProperties = {
     padding: "0 8px",
