@@ -59,7 +59,12 @@ const Dialog = forwardRef<
   const container = getPopperContainer!() as HTMLElement;
   const [visible, setVisible] = useAsyncState(false);
   const [loading, setLoading] = useState(false);
-  const { open, close } = useDialogActions(dialogProps, setVisible, setLoading);
+  const { open, close } = useDialogActions(
+    visible,
+    dialogProps,
+    setVisible,
+    setLoading
+  );
   const { footerActions } = useDialogFooter(dialogProps, loading);
   const dialogRef = useRef<HTMLDivElement>(null);
   const dialogHeaderRef = useRef<HTMLDivElement>(null);
@@ -195,6 +200,7 @@ const Dialog = forwardRef<
     open,
     close: onClose,
     setLoading,
+    getVisible: () => visible,
   }));
   return (
     <div className={dialogTopShowClassConfig["xphDialog"]}>

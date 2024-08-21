@@ -27,4 +27,5 @@ export interface IDialogActionType {
   open: () => Promise<void>;
   close: () => void;
   setLoading: (loading: boolean) => void;
+  getVisible: () => boolean;
 }

@@ -120,7 +120,11 @@ const CrudFormDialog = (
 
   // 由于表单和弹窗都是异步渲染的，所以其内部的方法需要代理一下
   useImperativeHandle(ref, () => ({
-    open: (config: IOpenActionConfig) => {
+    open: async (config: IOpenActionConfig) => {
+      /** 如果已经打开了，不能做任何操作 */
+      const visable = dialogRef.current!.getVisible();
+      if (visable) return;
+
       const { renderFooter } = bindDialogProps;
       !renderFooter && (openConfig.current = config);
 
@@ -135,6 +139,9 @@ const CrudFormDialog = (
     },
     setLoading: (...args) => {
       return dialogRef.current!.setLoading(...args);
+    },
+    getVisible: (...args) => {
+      return dialogRef.current!.getVisible(...args);
     },
     getFieldsValue: (...args) => {
       return xphFormRef.current!.getFieldsValue(...args);
