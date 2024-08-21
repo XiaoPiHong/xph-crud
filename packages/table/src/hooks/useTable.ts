@@ -110,6 +110,7 @@ export default function useTable(
         pagination.update({
           total,
           current,
+          pageSize: params[`${requestFields!.pageSize}`],
         });
       })
       .finally(() => {
