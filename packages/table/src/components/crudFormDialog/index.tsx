@@ -39,12 +39,12 @@ const CrudFormDialog = (
 
   const handleOk = async () => {
     const { onOk, renderFooter } = bindDialogProps;
-    dialogRef.current!.setLoading(true);
     if (!renderFooter) {
       const { ok, data } = openConfig.current!;
       /** open中的ok优先级更高 */
       if (ok) {
         xphFormRef.current!.validator().then(async (res) => {
+          dialogRef.current!.setLoading(true);
           const result = await ok({
             values: xphFormRef.current!.getFieldsValue(),
           })
@@ -63,11 +63,13 @@ const CrudFormDialog = (
       }
       if (onOk) {
         xphFormRef.current!.validator().then(async (res) => {
+          dialogRef.current!.setLoading(true);
           const result = await onOk({
             values: res,
             data,
           })
             .then((onOkResult) => {
+              console.log(onOkResult);
               return onOkResult;
             })
             .finally(() => {
