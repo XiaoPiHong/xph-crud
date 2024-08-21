@@ -15,7 +15,7 @@ importers:
         specifier: ^5.14.2
         version: 5.20.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       dayjs:
-        specifier: ^1.11.10
+        specifier: ^1.11.13
         version: 1.11.13
       lodash-es:
         specifier: ^4.17.21
@@ -94,7 +94,7 @@ importers:
         specifier: ^2.0.0
         version: 2.1.1
       dayjs:
-        specifier: ^1.11.10
+        specifier: ^1.11.13
         version: 1.11.13
       docusaurus-plugin-sass:
         specifier: ^0.2.5
@@ -143,7 +143,7 @@ importers:
         specifier: ^5.14.2
         version: 5.20.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       dayjs:
-        specifier: ^1.11.10
+        specifier: ^1.11.13
         version: 1.11.13
       lodash-es:
         specifier: ^4.17.21
