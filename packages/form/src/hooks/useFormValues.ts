@@ -220,7 +220,7 @@ const useFormValues = (
     for (const item of Object.entries(values)) {
       let [, value] = item;
       const [key] = item;
-      if (!key || (isArray(value) && value.length === 0) || isFunction(value)) {
+      if (!key || isFunction(value)) {
         continue;
       }
 
@@ -230,6 +230,7 @@ const useFormValues = (
         formItemRefs.current?.get(key)?.current?.componentProps;
       const valueFormat = componentProps?.valueFormat;
 
+      // 数组也会进来这里
       if (isObject(value)) {
         const objValue: Recordable<any> = value;
         // day类型
@@ -261,7 +262,7 @@ const useFormValues = (
       // }
       res[key] = value;
     }
-
+    console.log(handleRangeTimeValue(res, formProps));
     return handleRangeTimeValue(res, formProps);
   };
 
