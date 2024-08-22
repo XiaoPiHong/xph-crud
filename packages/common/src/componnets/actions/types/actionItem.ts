@@ -3,7 +3,7 @@ import { TXphExtendComponentPropsMap } from "../../../types";
 
 export interface IBaseActionProps {
   /** 唯一标识 */
-  key?: string;
+  code?: string;
 }
 
 export type TComponentType<T extends TXphExtendComponentPropsMap = {}> = {

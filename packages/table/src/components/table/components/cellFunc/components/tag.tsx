@@ -91,7 +91,7 @@ const globalColorConfigMap = {
 const getEnumsTagColorConfigMap = (enums, column, tokenColorConfigMap) => {
   return enums.reduce((acc, item, index) => {
     /** 处理一下key防止出现负数或者其他奇葩的情况 */
-    const key = `${column.dataIndex}${item.value}`;
+    const key = `${String(column.dataIndex)}${item.value}`;
     const color = item.config?.color;
 
     /**
