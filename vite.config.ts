@@ -25,13 +25,14 @@ export default defineConfig(({ mode }) => {
         fileName: "index",
       },
       rollupOptions: {
-        external: ["react", "react-dom", "antd", "@ant-design/icons"],
+        external: ["react", "react-dom", "antd", "@ant-design/icons", "dayjs"],
         output: {
           globals: {
             react: "React",
             "react-dom": "ReactDOM",
             "@ant-design/icons": "AntDesignIcons",
             antd: "Antd",
+            dayjs: "Dayjs",
           },
         },
       },
