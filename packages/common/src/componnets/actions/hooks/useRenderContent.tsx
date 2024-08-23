@@ -24,7 +24,7 @@ export default function useRenderContent(): {
 
       if (isComponent) {
         const Component = componentMap.get(item.component)!;
-        return <Component key={index} {...item} />;
+        return <Component {...item} key={index} />;
       }
       if (isRender) {
         return <div key={index}>{item.render}</div>;

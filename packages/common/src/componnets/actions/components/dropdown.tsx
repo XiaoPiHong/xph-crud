@@ -17,7 +17,7 @@ const Dropdown = (props: IComponentActionProps<"Dropdown">) => {
     <ADropdown
       disabled={bindProps.disabled}
       menu={{
-        items: componentProps?.dropDownItems || [],
+        items: componentProps?.dropDownItems,
         onClick: componentProps?.onClick,
       }}
       trigger={["click"]}

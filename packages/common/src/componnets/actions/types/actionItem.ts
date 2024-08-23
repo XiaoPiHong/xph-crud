@@ -3,7 +3,9 @@ import { TXphExtendComponentPropsMap } from "../../../types";
 
 export interface IBaseActionProps {
   /** 唯一标识 */
-  code?: string;
+  key?: string;
+  /** 是否显示 */
+  ifShow?: boolean | (() => any);
 }
 
 export type TComponentType<T extends TXphExtendComponentPropsMap = {}> = {
@@ -19,6 +21,8 @@ interface IDropdownProps extends Omit<ButtonProps, "onClick"> {
     /** 注意：父级如果disabled为true，子级无法展开（所以相当于是变向的父级禁用，子级也禁用了） */
     disabled?: boolean;
     icon?: React.ReactNode;
+    /** 是否显示 */
+    ifShow?: boolean | (() => any);
   }[];
   onClick?: MenuProps["onClick"];
 }

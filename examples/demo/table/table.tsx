@@ -370,7 +370,7 @@ const ReactApp: React.FC = () => {
         max: 2,
         items: [
           {
-            code: "add",
+            key: "add",
             component: "Button",
             componentProps: {
               children: "我是按钮",
@@ -380,7 +380,7 @@ const ReactApp: React.FC = () => {
             },
           },
           {
-            code: "more",
+            key: "more",
             component: "Dropdown",
             componentProps: {
               children: "我是下拉",
@@ -400,7 +400,7 @@ const ReactApp: React.FC = () => {
             },
           },
           {
-            code: "render",
+            key: "render",
             render: <div>我是自定义render</div>,
           },
         ],

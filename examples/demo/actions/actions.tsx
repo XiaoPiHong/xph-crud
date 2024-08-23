@@ -7,7 +7,7 @@ const ReactApp: React.FC = () => {
     max: 1,
     items: [
       {
-        code: "add",
+        key: "add",
         component: "Button",
         componentProps: {
           children: "我是按钮",
@@ -15,9 +15,10 @@ const ReactApp: React.FC = () => {
             console.log(e);
           },
         },
+        ifShow: true,
       },
       {
-        code: "more",
+        key: "more",
         component: "Dropdown",
         componentProps: {
           children: "我是下拉",
@@ -25,10 +26,12 @@ const ReactApp: React.FC = () => {
             {
               key: "1",
               label: "我是下拉1",
+              ifShow: true,
             },
             {
               key: "2",
               label: "我是下拉2",
+              ifShow: true,
             },
           ],
           onClick: (e) => {
@@ -37,8 +40,9 @@ const ReactApp: React.FC = () => {
         },
       },
       {
-        code: "render",
+        key: "render",
         render: <div>我是自定义render</div>,
+        ifShow: true,
       },
     ],
   };
