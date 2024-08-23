@@ -6,6 +6,8 @@ export interface IBaseActionProps {
   key?: string;
   /** 是否显示 */
   ifShow?: boolean | (() => any);
+  /** 权限标识 */
+  auth?: string | Array<string>;
 }
 
 export type TComponentType<T extends TXphExtendComponentPropsMap = {}> = {
@@ -23,6 +25,8 @@ interface IDropdownProps extends Omit<ButtonProps, "onClick"> {
     icon?: React.ReactNode;
     /** 是否显示 */
     ifShow?: boolean | (() => any);
+    /** 权限标识 */
+    auth?: string | Array<string>;
   }[];
   onClick?: MenuProps["onClick"];
 }
