@@ -3,23 +3,45 @@ import {
   TActionItemProps,
   isComponentActionItemProps,
 } from "../types";
-import { isNumber, isFunction } from "lodash-es";
+import { isNumber, isFunction, isArray } from "lodash-es";
 
-export default function useActionItems(props: IActionsProps): {
+export default function useActionItems(
+  props: IActionsProps,
+  auth: Function
+): {
   showActionItems: TActionItemProps[];
   ellipsisActionItems: TActionItemProps[];
 } {
   const { type, disabled, items, max } = props;
 
-  /** 处理是否显示（权限也可以集成在里面） */
-  const handleIfShow = (item) => {
+  /** 处理权限 */
+  const handleAuth = (item): boolean => {
+    const { auth: authKeys } = item;
+    let flag = false;
+    /** 需要权限验证 */
+    if (authKeys) {
+      /** 空数组的时候every返回true */
+      if (isArray(authKeys)) {
+        flag = authKeys.every((k) => auth(k));
+      } else {
+        flag = auth(authKeys);
+      }
+      /** 不需要权限验证 */
+    } else {
+      flag = true;
+    }
+    return flag;
+  };
+
+  /** 处理是否显示（权限也集成在里面了） */
+  const handleIfShow = (item): boolean => {
     let { ifShow = true } = item;
     ifShow = ifShow && isFunction(ifShow) ? ifShow() : ifShow;
-    return ifShow;
+    return ifShow && handleAuth(item);
   };
 
   /** 根据组件属性处理是否显示 */
-  const handleComponentShow = (item) => {
+  const handleComponentShow = (item): boolean => {
     const { component, render, componentProps } = item;
     if (component) {
       switch (component) {

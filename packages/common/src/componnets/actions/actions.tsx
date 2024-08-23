@@ -7,9 +7,14 @@ import { TXphExtendComponentPropsMap } from "../../types";
 const Actions = <T extends TXphExtendComponentPropsMap = {}>(
   props: IActionsProps<T>
 ) => {
-  const { actionsProps } = useActionsProps(props);
+  const { actionsProps, authProps } = useActionsProps(props);
+  const { auth } = authProps;
 
-  const { showActionItems, ellipsisActionItems } = useActionItems(actionsProps);
+  const { showActionItems, ellipsisActionItems } = useActionItems(
+    actionsProps,
+    auth
+  );
+
   const { renderContent } = useRenderContent();
 
   /** 组件的布局由调用方决定 */

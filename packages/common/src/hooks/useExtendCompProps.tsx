@@ -2,7 +2,7 @@ import React, { createContext, useContext } from "react";
 import { IXphActionsProps } from "../componnets";
 import { IXphFormProps } from "xph-crud/form";
 import { TXphTableProps } from "xph-crud/table";
-import { IXphDialogProps } from "xph-crud/common";
+import { IXphDialogProps, IXphAuthProps } from "xph-crud/common";
 
 export interface IExtendProps {
   /** 表单的属性 */
@@ -13,6 +13,8 @@ export interface IExtendProps {
   actions?: IXphActionsProps;
   /** 弹窗的属性 */
   dialog?: IXphDialogProps;
+  /** 权限的属性 */
+  auth?: Omit<IXphAuthProps, "children" | "key">;
 }
 
 export interface IExtendComp {

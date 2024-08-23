@@ -13,6 +13,7 @@ const useExtendActions = () => {
   };
 
   return {
+    extendAuthProps: extendProps?.auth,
     extendActionsProps: extendProps?.actions,
     setExtendActionsComp,
   };

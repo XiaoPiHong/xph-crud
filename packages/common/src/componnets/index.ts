@@ -9,6 +9,8 @@ import type {
   IDialogActionType as IXphDialogActionType,
 } from "./dialog/types";
 import { default as XphPortal } from "./portal/portal";
+import { default as XphAuth } from "./auth/auth";
+import type { IAuthProps as IXphAuthProps } from "./auth/types";
 
 export {
   XphActions,
@@ -18,4 +20,6 @@ export {
   IXphDialogProps,
   IXphDialogActionType,
   XphPortal,
+  XphAuth,
+  IXphAuthProps,
 };
