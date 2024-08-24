@@ -116,6 +116,7 @@ const Dialog = forwardRef<
   const {
     minimizeVisible,
     maximizeVisible,
+    setMaximizeVisible,
     onMaximize,
     onMinimize,
     onRecovery,
@@ -131,15 +132,18 @@ const Dialog = forwardRef<
   /** 初始化弹窗的函数 */
   const initDialog = () => {
     console.log("触发了initDialog");
+    /** 重新设置尺寸 */
     setDialogSize({ width: initWidth.current, height: initHeight.current });
+    /** 重新设置位置 */
     setDialogPosition({ left: initLeft.current, top: initTop.current });
+    /** 重新设置最小化位置 */
     setMinimizePosition({ left: 160, top: 60 });
+    /** 关闭最大化 */
+    setMaximizeVisible(false);
   };
 
   /** 父容器尺寸变化，初始化弹窗（首次的初始化也是这里） */
   useEffect(() => {
-    // if (parentResizeRecord === 0) return;
-    console.log("触发了外部parentResizeRecord");
     initDialog();
   }, [parentResizeRecord]);
 

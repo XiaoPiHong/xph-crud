@@ -64,6 +64,8 @@ const useDialogZoom = ({
   return {
     minimizeVisible,
     maximizeVisible,
+    setMinimizeVisible,
+    setMaximizeVisible,
     onMinimize,
     onMaximize,
     onRecovery,

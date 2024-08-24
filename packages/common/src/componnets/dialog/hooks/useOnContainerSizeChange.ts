@@ -25,17 +25,6 @@ const useOnContainerSizeChange = ({
     };
   }, []);
 
-  // useEffect(() => {
-  //   /** 初始化的时候new ResizeObserver也会执行一次handleResize，所以parentResizeRecord会改变两次 */
-  //   const observer = new ResizeObserver(handleResize);
-  //   observer.observe(container);
-
-  //   return () => {
-  //     observer.unobserve(container); // 停止观察特定元素
-  //     observer.disconnect(); // 完全停止观察并清除所有已注册的观察目标
-  //   };
-  // }, [container]);
-
   // ======================================================= 一些会受拉伸影响的初始属性 start
   // =================================父容器尺寸的
   const { containerSizeTarget, setContainerSizeTarget } =
@@ -87,8 +76,6 @@ const useOnContainerSizeChange = ({
 
   // ======================================================= 一些会受拉伸影响的初始属性 end
   useEffect(() => {
-    // if (parentResizeRecord === 0) return;
-    console.log("触发了内部parentResizeRecord");
     setContainerSizeTarget();
     setInitSize({ width: curPropsWidth, height: curPropsHeight });
     setInitPosition({
