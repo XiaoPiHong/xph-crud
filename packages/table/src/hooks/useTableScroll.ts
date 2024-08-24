@@ -14,6 +14,8 @@ export default function useTableScroll(
   useEffect(() => {
     const handleResize = () => {
       if (divRef.current) {
+        console.log(divRef.current);
+        console.log("触发了表格的resize");
         setWidth(divRef.current.offsetWidth);
         setHeight(divRef.current.offsetHeight);
       }

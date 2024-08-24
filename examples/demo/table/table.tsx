@@ -147,7 +147,6 @@ const ReactApp: React.FC = () => {
       ],
       autoPagination: true,
       api: async (params) => {
-        console.log(params);
         return new Promise((resolve) => {
           setTimeout(() => {
             resolve([

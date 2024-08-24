@@ -262,7 +262,6 @@ const useFormValues = (
       // }
       res[key] = value;
     }
-    console.log(handleRangeTimeValue(res, formProps));
     return handleRangeTimeValue(res, formProps);
   };
 

@@ -58,8 +58,6 @@ export default function useTableColumns(props: TTableProps): {
 
   const newColumns = addAttributesToNodes(columns!);
 
-  console.log(newColumns);
-
   /** 递归columns生成对应的内容 */
   return {
     columns: newColumns,
