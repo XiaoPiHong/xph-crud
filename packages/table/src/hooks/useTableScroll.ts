@@ -13,18 +13,31 @@ export default function useTableScroll(
 
   const handleResize = () => {
     if (divRef.current) {
+      console.log("触发了table的handleResize");
       setWidth(divRef.current.offsetWidth);
       setHeight(divRef.current.offsetHeight);
     }
   };
 
   useEffect(() => {
-    handleResize();
+    // 会默认触发一次
+    // Create a ResizeObserver to monitor the div's size changes
+    const observer = new ResizeObserver(handleResize);
+    if (divRef.current) {
+      observer.observe(divRef.current);
+    }
 
-    window.addEventListener("resize", handleResize);
+    // Clean up observer on component unmount
     return () => {
-      window.removeEventListener("resize", handleResize);
+      if (observer && divRef.current) {
+        observer.unobserve(divRef.current);
+      }
     };
+
+    // window.addEventListener("resize", handleResize);
+    // return () => {
+    //   window.removeEventListener("resize", handleResize);
+    // };
   }, []);
 
   const newScroll = useMemo(() => {
