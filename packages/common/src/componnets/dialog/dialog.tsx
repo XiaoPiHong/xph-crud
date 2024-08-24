@@ -138,7 +138,7 @@ const Dialog = forwardRef<
 
   /** 父容器尺寸变化，初始化弹窗（首次的初始化也是这里） */
   useEffect(() => {
-    if (parentResizeRecord === 0) return;
+    // if (parentResizeRecord === 0) return;
     console.log("触发了外部parentResizeRecord");
     initDialog();
   }, [parentResizeRecord]);
