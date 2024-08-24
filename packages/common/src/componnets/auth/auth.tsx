@@ -1,6 +1,5 @@
 import { IAuthProps } from "./types";
 import { useAuthProps } from "./hooks";
-import { useMemo } from "react";
 import { isArray } from "lodash-es";
 
 const Auth = (props: IAuthProps) => {
@@ -8,7 +7,7 @@ const Auth = (props: IAuthProps) => {
   const { authProps } = useAuthProps(reset);
   const { auth, authCode } = authProps;
 
-  const hasAuth = useMemo(() => {
+  const hasAuth = () => {
     let flag = false;
     if (authCode && auth) {
       if (isArray(authCode)) {
@@ -18,9 +17,9 @@ const Auth = (props: IAuthProps) => {
       }
     }
     return flag;
-  }, [auth, authCode]);
+  };
 
-  return hasAuth ? children : null;
+  return hasAuth() ? children : null;
 };
 
 export default Auth;

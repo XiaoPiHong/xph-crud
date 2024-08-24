@@ -14,7 +14,7 @@ export interface IExtendProps {
   /** 弹窗的属性 */
   dialog?: IXphDialogProps;
   /** 权限的属性 */
-  auth?: Omit<IXphAuthProps, "children" | "key">;
+  auth?: Omit<IXphAuthProps, "children" | "authCode">;
 }
 
 export interface IExtendComp {
