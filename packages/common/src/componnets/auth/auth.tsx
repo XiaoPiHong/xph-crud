@@ -6,19 +6,19 @@ import { isArray } from "lodash-es";
 const Auth = (props: IAuthProps) => {
   const { children, ...reset } = props;
   const { authProps } = useAuthProps(reset);
-  const { auth, key } = authProps;
+  const { auth, authCode } = authProps;
 
   const hasAuth = useMemo(() => {
     let flag = false;
-    if (key && auth) {
-      if (isArray(key)) {
-        flag = key.every((k) => auth(k));
+    if (authCode && auth) {
+      if (isArray(authCode)) {
+        flag = authCode.every((k) => auth(k));
       } else {
-        flag = auth(key);
+        flag = auth(authCode);
       }
     }
     return flag;
-  }, [auth, key]);
+  }, [auth, authCode]);
 
   return hasAuth ? children : null;
 };
