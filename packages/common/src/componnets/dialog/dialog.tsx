@@ -72,13 +72,14 @@ const Dialog = forwardRef<
   const dialogFooterRef = useRef<HTMLDivElement>(null);
   const {
     containerSizeTarget,
-    parentResizeRecord,
+    parentInitRecord,
     initLeft,
     initTop,
     initWidth,
     initHeight,
     curPropsWidth,
     curPropsHeight,
+    setParentInitRecord,
   } = useOnContainerSizeChange({
     container,
     dialogProps,
@@ -145,18 +146,15 @@ const Dialog = forwardRef<
   /** 父容器尺寸变化，初始化弹窗（首次的初始化也是这里） */
   useEffect(() => {
     initDialog();
-  }, [parentResizeRecord]);
+  }, [parentInitRecord]);
 
   /** props的宽高变化（目的是兼容用户动态设置宽高的情况） */
   useOnPropsSizeChange({
     initWidth,
     initHeight,
-    initLeft,
-    initTop,
     curPropsWidth,
     curPropsHeight,
-    setDialogSize,
-    setDialogPosition,
+    setParentInitRecord,
   });
 
   /** 主体窗口拖拽 */

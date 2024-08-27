@@ -12,10 +12,10 @@ const useOnContainerSizeChange = ({
   baseDialogProps: IDialogProps;
 }) => {
   /** 父容器尺寸改变的时候，触发当前记录改变，触发组件render */
-  const [parentResizeRecord, setParentResizeRecord] = useState(0);
+  const [parentInitRecord, setParentInitRecord] = useState(0);
 
   const handleResize = () => {
-    setParentResizeRecord((prevRecord) => prevRecord + 1);
+    setParentInitRecord((prevRecord) => prevRecord + 1);
   };
 
   useEffect(() => {
@@ -82,11 +82,11 @@ const useOnContainerSizeChange = ({
       left: Math.floor(clientWidth / 2),
       top: Math.floor(clientHeight / 2),
     });
-  }, [parentResizeRecord]);
+  }, [parentInitRecord]);
 
   return {
     containerSizeTarget,
-    parentResizeRecord,
+    parentInitRecord,
     initLeft,
     initTop,
     initWidth,
@@ -95,6 +95,7 @@ const useOnContainerSizeChange = ({
     curPropsHeight,
     setInitPosition,
     setInitSize,
+    setParentInitRecord,
   };
 };
 

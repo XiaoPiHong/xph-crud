@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import {
   XphTable,
   TXphTableProps,
@@ -15,6 +15,8 @@ interface DataType {
 }
 
 const ReactApp: React.FC = () => {
+  const [crudDialogWidth, setCrudDialogWidth] = useState(500);
+
   const props: TXphTableProps<DataType> = {
     table: {
       rowSelection: {
@@ -436,6 +438,17 @@ const ReactApp: React.FC = () => {
           },
         },
         {
+          name: "Button",
+          label: "改变crud弹窗宽度",
+          component: "Button",
+          componentProps: {
+            children: "改变crud弹窗宽度",
+            onClick: (e) => {
+              setCrudDialogWidth(800);
+            },
+          },
+        },
+        {
           name: "Input",
           label: "Input",
           component: "Input",
@@ -513,6 +526,7 @@ const ReactApp: React.FC = () => {
       ],
     },
     crudFormDialog: {
+      width: crudDialogWidth,
       title: "弹窗",
       // mask: true,
       // 弹窗挂载的元素
