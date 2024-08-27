@@ -78,3 +78,31 @@
   cursor: ne-resize;
 }
 /** 拖拽样式============================end */
+
+/* 滚动条样式============================ start */
+/* WebKit 浏览器（Chrome, Safari） */
+.dialog__main::-webkit-scrollbar {
+  width: 12px; /* 垂直滚动条的宽度 */
+  height: 12px; /* 水平滚动条的高度 */
+}
+
+.dialog__main::-webkit-scrollbar-track {
+  background: #f1f1f1; /* 轨道颜色 */
+  border-radius: 10px; /* 轨道圆角 */
+}
+
+.dialog__main::-webkit-scrollbar-thumb {
+  background: #888; /* 滑块颜色 */
+  border-radius: 10px; /* 滑块圆角 */
+}
+
+.dialog__main::-webkit-scrollbar-thumb:hover {
+  background: #555; /* 滑块悬停时颜色 */
+}
+
+/* Firefox */
+.dialog__main {
+  scrollbar-width: thin; /* 滚动条宽度（thin, auto, none） */
+  scrollbar-color: #888 #f1f1f1; /* 滚动条滑块和轨道颜色 */
+}
+/* 滚动条样式============================ end */
