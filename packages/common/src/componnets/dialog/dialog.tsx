@@ -104,12 +104,7 @@ const Dialog = forwardRef<
     dialogHeaderRef,
     dialogFooterRef,
   });
-  const { minResizeRecord } = useMinResizeRecord(
-    visible,
-    dialogRef,
-    dialogWidth,
-    dialogHeight
-  );
+  const { minResizeRecord, setMinResizeRecord } = useMinResizeRecord();
 
   const { minimizeLeft, minimizeTop, minimizeRef, setMinimizePosition } =
     useMinimizeDialog();
@@ -141,6 +136,8 @@ const Dialog = forwardRef<
     setMinimizePosition({ left: 160, top: 60 });
     /** 关闭最大化 */
     setMaximizeVisible(false);
+    /** 重置拉伸最小尺寸（最小拉伸尺寸在首次拉的时候确定） */
+    setMinResizeRecord(null);
   };
 
   /** 父容器尺寸变化，初始化弹窗（首次的初始化也是这里） */
@@ -196,6 +193,7 @@ const Dialog = forwardRef<
     minResizeRecord,
     setDialogSize,
     setDialogPosition,
+    setMinResizeRecord,
   });
 
   useImperativeHandle(ref, () => ({

@@ -9,6 +9,7 @@ const useResizeDialog = ({
   minResizeRecord,
   setDialogSize,
   setDialogPosition,
+  setMinResizeRecord,
 }: {
   containerSizeTarget: React.MutableRefObject<IContainerSizeTarget>;
   dialogRef: React.RefObject<HTMLDivElement>;
@@ -21,6 +22,9 @@ const useResizeDialog = ({
     height: number | string;
   }) => void;
   setDialogPosition: (position: { left: number; top: number }) => void;
+  setMinResizeRecord: (
+    record: { width: number; height: number } | null
+  ) => void;
 }) => {
   /** 虚拟块组件 */
   const DashedBox = useCallback(() => {
@@ -44,6 +48,14 @@ const useResizeDialog = ({
   const preClientY = useRef(0);
 
   const dragstartResize = (event: MouseEvent, type: TResizeType) => {
+    /** 首次拉以首次的大小为最小拉伸尺寸 */
+    if (!minResizeRecord.current) {
+      setMinResizeRecord({
+        width: dialogRef.current!.offsetWidth,
+        height: dialogRef.current!.offsetHeight,
+      });
+    }
+
     resizing.current = true;
     setResizingState(true);
     resizeType.current = type;
