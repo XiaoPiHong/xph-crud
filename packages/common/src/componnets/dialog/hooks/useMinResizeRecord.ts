@@ -11,13 +11,15 @@ const useMinResizeRecord = (
   }>(null);
   useEffect(() => {
     if (visible) {
-      /** 拉伸最小尺寸在打开状态下才需要重新设置 */
-      const width = dialogRef.current!.offsetWidth;
-      const height = dialogRef.current!.offsetHeight;
-      minResizeRecord.current = {
-        width,
-        height,
-      };
+      setTimeout(() => {
+        /** 拉伸最小尺寸在打开状态下才需要重新设置 */
+        const width = dialogRef.current!.offsetWidth;
+        const height = dialogRef.current!.offsetHeight;
+        minResizeRecord.current = {
+          width,
+          height,
+        };
+      }, 0);
     } else {
       minResizeRecord.current = null;
     }
