@@ -75,6 +75,8 @@ const ReactApp: React.FC = () => {
           title: "地址",
           dataIndex: "address",
           key: "address",
+          width: 300,
+          ellipsis: true,
         },
         {
           title: "年龄",
@@ -100,6 +102,8 @@ const ReactApp: React.FC = () => {
         {
           title: "操作",
           dataIndex: "actions",
+          fixed: "right",
+          width: 300,
           cellFunc: ({ record }) => [
             {
               component: "actions",
@@ -156,7 +160,8 @@ const ReactApp: React.FC = () => {
                 key: "1",
                 name: "胡彦斌",
                 age: 32,
-                address: "西湖区湖底公园1号",
+                address:
+                  "new york street 1 new york street 1 new york street 1 new york street 1 new york street 1 new york street 1 new york street 1 new york street 1", // 超长英文
                 gender: "male",
               },
               {

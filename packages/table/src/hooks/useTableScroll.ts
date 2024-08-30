@@ -40,15 +40,15 @@ export default function useTableScroll(
     // };
   }, []);
 
+  /** 此处x不能设置为max-content和true否则td会出现被内容撑开的情况，因为加了这两个属性会给元素table加上width:max-content/width:auto导致td无法知道准确的宽度，从而内容会撑开td */
   const newScroll = useMemo(() => {
     if (fullHeight) {
       /** 官方文档开启虚拟滚动时候，x和y必须是number */
       if (virtual) return { x: width, y: height - 70, ...scroll };
-      return { x: "max-content", y: height - 70, ...scroll };
+      return { y: height - 70, ...scroll };
     }
     /** 自适应高度 */
     return {
-      x: "max-content",
       ...scroll,
     };
   }, [height]);
