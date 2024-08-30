@@ -1,0 +1,22 @@
+import { Auth } from "examples";
+import DemoWrapper from "@site/src/components/DemoWrapper";
+import { default as rawExamples } from "!raw-loader!examples/demo/auth/auth.tsx";
+import CodeBlock from "@site/src/theme/CodeBlock";
+
+# XphAuth 鉴权组件
+
+## 基本使用
+
+<CodeBlock language={"tsx"}>{rawExamples}</CodeBlock>
+
+## Typescript 案例
+
+<pre>
+  <DemoWrapper>
+    <Auth />
+  </DemoWrapper>
+</pre>
+
+## 在 CodeSandbox 尝试
+
+[![Edit XiaoPiHong/xph-crud/codesandbox](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/github/XiaoPiHong/xph-crud/codesandbox?embed=1&file=%2Fexamples%2Froutes%2Findex.tsx)

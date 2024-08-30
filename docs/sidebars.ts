@@ -33,6 +33,7 @@ const sidebars: SidebarsConfig = {
     XphTable: ["comp/table/base"],
     XphActions: ["comp/actions/base"],
     XphDialog: ["comp/dialog/base"],
+    XphAuth: ["comp/auth/base"],
   },
   extends: ["comp/extends/base"],
 };
