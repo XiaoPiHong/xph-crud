@@ -6,7 +6,7 @@ const ReactApp: React.FC = () => {
   /** 当前拥有的权限 */
   const [myPermissions, setMyPermissions] = useState<string[]>([]);
 
-  /** 鉴权的函数 */
+  /** 鉴权的函数（可以通过在XphExtendCompPropsProvider中配置公共的鉴权函数） */
   const auth = (key) => {
     return myPermissions.includes(key);
   };
