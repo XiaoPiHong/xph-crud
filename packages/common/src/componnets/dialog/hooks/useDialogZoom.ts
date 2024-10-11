@@ -57,7 +57,6 @@ const useDialogZoom = ({
 
   const onClose = () => {
     setMinimizeVisible(false);
-    setMaximizeVisible(false);
     close();
   };
 
