@@ -26,4 +26,4 @@ return { current: 1, pageSize: 10 }
 
 ## Defined in
 
-[common/src/utils/getValueByPath.ts:22](https://github.com/XiaoPiHong/xph-crud/blob/7515b2133578ebc5c9e01d24589011620605cd71/packages/common/src/utils/getValueByPath.ts#L22)
+[packages/common/src/utils/getValueByPath.ts:22](https://github.com/XiaoPiHong/xph-crud/blob/300d288b2cb7d1d481589252292dd1816109678d/packages/common/src/utils/getValueByPath.ts#L22)

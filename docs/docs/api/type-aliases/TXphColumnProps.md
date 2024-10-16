@@ -1,6 +1,6 @@
 # Type Alias: TXphColumnProps\<T, J, K\>
 
-> **TXphColumnProps**\<`T`, `J`, `K`\>: `XOR`\<[`IComponentColumnProps`\<`T`, `J`, `K`\>, `IRenderColumnProps`\<`T`\>, `IGroupColumnProps`\<`T`, `J`, `K`\>]\>
+> **TXphColumnProps**\<`T`, `J`, `K`\>: `XOR`\<[[`IComponentColumnProps`](../interfaces/IComponentColumnProps.md)\<`T`, `J`, `K`\>, [`IRenderColumnProps`](../interfaces/IRenderColumnProps.md)\<`T`\>, [`IGroupColumnProps`](../interfaces/IGroupColumnProps.md)\<`T`, `J`, `K`\>]\>
 
 ## Type Parameters
 
@@ -12,4 +12,4 @@
 
 ## Defined in
 
-[table/src/types/column.ts:50](https://github.com/XiaoPiHong/xph-crud/blob/7515b2133578ebc5c9e01d24589011620605cd71/packages/table/src/types/column.ts#L50)
+[packages/table/src/types/column.ts:50](https://github.com/XiaoPiHong/xph-crud/blob/300d288b2cb7d1d481589252292dd1816109678d/packages/table/src/types/column.ts#L50)

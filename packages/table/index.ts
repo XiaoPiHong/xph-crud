@@ -12,6 +12,8 @@ import type {
   TCrudFormDialogProps as TXphCrudFormDialogProps,
 } from "./src/types";
 
+export * from "./src/types";
+
 export {
   XphTable,
   TXphTableProps,

@@ -12,6 +12,10 @@ import { default as XphPortal } from "./portal/portal";
 import { default as XphAuth } from "./auth/auth";
 import type { IAuthProps as IXphAuthProps } from "./auth/types";
 
+export * from "./actions/types";
+export * from "./auth/types";
+export * from "./dialog/types";
+
 export {
   XphActions,
   TXphActionItemProps,

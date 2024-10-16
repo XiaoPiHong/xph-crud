@@ -6,6 +6,8 @@ import type {
 } from "./src/types";
 import { useForm as useXphForm } from "./src/hooks";
 
+export * from "./src/types";
+
 export {
   XphForm,
   IXphFormProps,

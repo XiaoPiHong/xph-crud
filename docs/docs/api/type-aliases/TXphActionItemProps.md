@@ -1,6 +1,6 @@
 # Type Alias: TXphActionItemProps\<T\>
 
-> **TXphActionItemProps**\<`T`\>: `XOR`\<[`TMapComponentActionProps`\<`T`\>, `IRenderActionProps`]\>
+> **TXphActionItemProps**\<`T`\>: `XOR`\<[`TMapComponentActionProps`\<`T`\>, [`IRenderActionProps`](../interfaces/IRenderActionProps.md)]\>
 
 ## Type Parameters
 
@@ -12,4 +12,4 @@
 
 ## Defined in
 
-[common/src/components/actions/types/actionItem.ts:124](https://github.com/XiaoPiHong/xph-crud/blob/7515b2133578ebc5c9e01d24589011620605cd71/packages/common/src/components/actions/types/actionItem.ts#L124)
+[packages/common/src/components/actions/types/actionItem.ts:124](https://github.com/XiaoPiHong/xph-crud/blob/300d288b2cb7d1d481589252292dd1816109678d/packages/common/src/components/actions/types/actionItem.ts#L124)

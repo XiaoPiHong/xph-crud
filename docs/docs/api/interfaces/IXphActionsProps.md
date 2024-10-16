@@ -16,7 +16,7 @@
 
 #### Defined in
 
-[common/src/components/actions/types/actions.ts:17](https://github.com/XiaoPiHong/xph-crud/blob/7515b2133578ebc5c9e01d24589011620605cd71/packages/common/src/components/actions/types/actions.ts#L17)
+[packages/common/src/components/actions/types/actions.ts:17](https://github.com/XiaoPiHong/xph-crud/blob/300d288b2cb7d1d481589252292dd1816109678d/packages/common/src/components/actions/types/actions.ts#L17)
 
 ***
 
@@ -30,13 +30,13 @@
 
 #### Defined in
 
-[common/src/components/actions/types/actions.ts:29](https://github.com/XiaoPiHong/xph-crud/blob/7515b2133578ebc5c9e01d24589011620605cd71/packages/common/src/components/actions/types/actions.ts#L29)
+[packages/common/src/components/actions/types/actions.ts:29](https://github.com/XiaoPiHong/xph-crud/blob/300d288b2cb7d1d481589252292dd1816109678d/packages/common/src/components/actions/types/actions.ts#L29)
 
 ***
 
 ### items?
 
-> `optional` **items**: `IRenderActionProps` \| `TMapComponentActionProps`\<`T`\> *extends* `object` ? `IRenderActionProps` \| `TMapComponentActionProps`\<`T`\> \| `Without`\<`TMapComponentActionProps`\<`T`\>, keyof `IRenderActionProps`\> & `IRenderActionProps` \| `Without`\<`IRenderActionProps`, keyof `TMapComponentActionProps`\<`T`\>\> & `TMapComponentActionProps`\<`T`\> : `IRenderActionProps` \| `TMapComponentActionProps`\<`T`\>[]
+> `optional` **items**: [`IRenderActionProps`](IRenderActionProps.md) \| `TMapComponentActionProps`\<`T`\> *extends* `object` ? [`IRenderActionProps`](IRenderActionProps.md) \| `TMapComponentActionProps`\<`T`\> \| `Without`\<`TMapComponentActionProps`\<`T`\>, keyof [`IRenderActionProps`](IRenderActionProps.md)\> & [`IRenderActionProps`](IRenderActionProps.md) \| `Without`\<[`IRenderActionProps`](IRenderActionProps.md), keyof `TMapComponentActionProps`\<`T`\>\> & `TMapComponentActionProps`\<`T`\> : [`IRenderActionProps`](IRenderActionProps.md) \| `TMapComponentActionProps`\<`T`\>[]
 
 #### Description
 
@@ -44,7 +44,7 @@
 
 #### Defined in
 
-[common/src/components/actions/types/actions.ts:13](https://github.com/XiaoPiHong/xph-crud/blob/7515b2133578ebc5c9e01d24589011620605cd71/packages/common/src/components/actions/types/actions.ts#L13)
+[packages/common/src/components/actions/types/actions.ts:13](https://github.com/XiaoPiHong/xph-crud/blob/300d288b2cb7d1d481589252292dd1816109678d/packages/common/src/components/actions/types/actions.ts#L13)
 
 ***
 
@@ -58,7 +58,7 @@
 
 #### Defined in
 
-[common/src/components/actions/types/actions.ts:25](https://github.com/XiaoPiHong/xph-crud/blob/7515b2133578ebc5c9e01d24589011620605cd71/packages/common/src/components/actions/types/actions.ts#L25)
+[packages/common/src/components/actions/types/actions.ts:25](https://github.com/XiaoPiHong/xph-crud/blob/300d288b2cb7d1d481589252292dd1816109678d/packages/common/src/components/actions/types/actions.ts#L25)
 
 ***
 
@@ -72,7 +72,7 @@
 
 #### Defined in
 
-[common/src/components/actions/types/actions.ts:21](https://github.com/XiaoPiHong/xph-crud/blob/7515b2133578ebc5c9e01d24589011620605cd71/packages/common/src/components/actions/types/actions.ts#L21)
+[packages/common/src/components/actions/types/actions.ts:21](https://github.com/XiaoPiHong/xph-crud/blob/300d288b2cb7d1d481589252292dd1816109678d/packages/common/src/components/actions/types/actions.ts#L21)
 
 ***
 
@@ -86,4 +86,4 @@
 
 #### Defined in
 
-[common/src/components/actions/types/actions.ts:9](https://github.com/XiaoPiHong/xph-crud/blob/7515b2133578ebc5c9e01d24589011620605cd71/packages/common/src/components/actions/types/actions.ts#L9)
+[packages/common/src/components/actions/types/actions.ts:9](https://github.com/XiaoPiHong/xph-crud/blob/300d288b2cb7d1d481589252292dd1816109678d/packages/common/src/components/actions/types/actions.ts#L9)

@@ -16,7 +16,7 @@
 
 #### Defined in
 
-[common/src/components/auth/types/index.ts:3](https://github.com/XiaoPiHong/xph-crud/blob/7515b2133578ebc5c9e01d24589011620605cd71/packages/common/src/components/auth/types/index.ts#L3)
+[packages/common/src/components/auth/types/index.ts:3](https://github.com/XiaoPiHong/xph-crud/blob/300d288b2cb7d1d481589252292dd1816109678d/packages/common/src/components/auth/types/index.ts#L3)
 
 ***
 
@@ -26,7 +26,7 @@
 
 #### Defined in
 
-[common/src/components/auth/types/index.ts:4](https://github.com/XiaoPiHong/xph-crud/blob/7515b2133578ebc5c9e01d24589011620605cd71/packages/common/src/components/auth/types/index.ts#L4)
+[packages/common/src/components/auth/types/index.ts:4](https://github.com/XiaoPiHong/xph-crud/blob/300d288b2cb7d1d481589252292dd1816109678d/packages/common/src/components/auth/types/index.ts#L4)
 
 ***
 
@@ -36,4 +36,4 @@
 
 #### Defined in
 
-[common/src/components/auth/types/index.ts:2](https://github.com/XiaoPiHong/xph-crud/blob/7515b2133578ebc5c9e01d24589011620605cd71/packages/common/src/components/auth/types/index.ts#L2)
+[packages/common/src/components/auth/types/index.ts:2](https://github.com/XiaoPiHong/xph-crud/blob/300d288b2cb7d1d481589252292dd1816109678d/packages/common/src/components/auth/types/index.ts#L2)

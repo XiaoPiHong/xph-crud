@@ -12,7 +12,7 @@
 
 #### Defined in
 
-[common/src/components/dialog/types/dialog.ts:83](https://github.com/XiaoPiHong/xph-crud/blob/7515b2133578ebc5c9e01d24589011620605cd71/packages/common/src/components/dialog/types/dialog.ts#L83)
+[packages/common/src/components/dialog/types/dialog.ts:83](https://github.com/XiaoPiHong/xph-crud/blob/300d288b2cb7d1d481589252292dd1816109678d/packages/common/src/components/dialog/types/dialog.ts#L83)
 
 ***
 
@@ -26,7 +26,7 @@
 
 #### Defined in
 
-[common/src/components/dialog/types/dialog.ts:85](https://github.com/XiaoPiHong/xph-crud/blob/7515b2133578ebc5c9e01d24589011620605cd71/packages/common/src/components/dialog/types/dialog.ts#L85)
+[packages/common/src/components/dialog/types/dialog.ts:85](https://github.com/XiaoPiHong/xph-crud/blob/300d288b2cb7d1d481589252292dd1816109678d/packages/common/src/components/dialog/types/dialog.ts#L85)
 
 ***
 
@@ -40,7 +40,7 @@
 
 #### Defined in
 
-[common/src/components/dialog/types/dialog.ts:82](https://github.com/XiaoPiHong/xph-crud/blob/7515b2133578ebc5c9e01d24589011620605cd71/packages/common/src/components/dialog/types/dialog.ts#L82)
+[packages/common/src/components/dialog/types/dialog.ts:82](https://github.com/XiaoPiHong/xph-crud/blob/300d288b2cb7d1d481589252292dd1816109678d/packages/common/src/components/dialog/types/dialog.ts#L82)
 
 ***
 
@@ -58,4 +58,4 @@
 
 #### Defined in
 
-[common/src/components/dialog/types/dialog.ts:84](https://github.com/XiaoPiHong/xph-crud/blob/7515b2133578ebc5c9e01d24589011620605cd71/packages/common/src/components/dialog/types/dialog.ts#L84)
+[packages/common/src/components/dialog/types/dialog.ts:84](https://github.com/XiaoPiHong/xph-crud/blob/300d288b2cb7d1d481589252292dd1816109678d/packages/common/src/components/dialog/types/dialog.ts#L84)

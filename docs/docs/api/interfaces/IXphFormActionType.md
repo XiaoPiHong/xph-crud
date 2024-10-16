@@ -1,10 +1,14 @@
 # Interface: IXphFormActionType
 
+## Extended by
+
+- [`ICrudFormDialogActionType`](ICrudFormDialogActionType.md)
+
 ## Properties
 
 ### getFieldsValue()
 
-> **getFieldsValue**: (...`values`) => `Recordable`\<`any`\>
+> **getFieldsValue**: (...`values`) => [`Recordable`](../type-aliases/Recordable.md)\<`any`\>
 
 #### Parameters
 
@@ -12,11 +16,11 @@
 
 #### Returns
 
-`Recordable`\<`any`\>
+[`Recordable`](../type-aliases/Recordable.md)\<`any`\>
 
 #### Defined in
 
-[form/src/types/form.ts:133](https://github.com/XiaoPiHong/xph-crud/blob/7515b2133578ebc5c9e01d24589011620605cd71/packages/form/src/types/form.ts#L133)
+[packages/form/src/types/form.ts:133](https://github.com/XiaoPiHong/xph-crud/blob/300d288b2cb7d1d481589252292dd1816109678d/packages/form/src/types/form.ts#L133)
 
 ***
 
@@ -30,7 +34,7 @@
 
 #### Defined in
 
-[form/src/types/form.ts:135](https://github.com/XiaoPiHong/xph-crud/blob/7515b2133578ebc5c9e01d24589011620605cd71/packages/form/src/types/form.ts#L135)
+[packages/form/src/types/form.ts:135](https://github.com/XiaoPiHong/xph-crud/blob/300d288b2cb7d1d481589252292dd1816109678d/packages/form/src/types/form.ts#L135)
 
 ***
 
@@ -50,7 +54,7 @@
 
 #### Defined in
 
-[form/src/types/form.ts:137](https://github.com/XiaoPiHong/xph-crud/blob/7515b2133578ebc5c9e01d24589011620605cd71/packages/form/src/types/form.ts#L137)
+[packages/form/src/types/form.ts:137](https://github.com/XiaoPiHong/xph-crud/blob/300d288b2cb7d1d481589252292dd1816109678d/packages/form/src/types/form.ts#L137)
 
 ***
 
@@ -60,7 +64,7 @@
 
 #### Parameters
 
-• **values**: `Recordable`\<`any`\>
+• **values**: [`Recordable`](../type-aliases/Recordable.md)\<`any`\>
 
 #### Returns
 
@@ -68,7 +72,7 @@
 
 #### Defined in
 
-[form/src/types/form.ts:134](https://github.com/XiaoPiHong/xph-crud/blob/7515b2133578ebc5c9e01d24589011620605cd71/packages/form/src/types/form.ts#L134)
+[packages/form/src/types/form.ts:134](https://github.com/XiaoPiHong/xph-crud/blob/300d288b2cb7d1d481589252292dd1816109678d/packages/form/src/types/form.ts#L134)
 
 ***
 
@@ -86,4 +90,4 @@
 
 #### Defined in
 
-[form/src/types/form.ts:136](https://github.com/XiaoPiHong/xph-crud/blob/7515b2133578ebc5c9e01d24589011620605cd71/packages/form/src/types/form.ts#L136)
+[packages/form/src/types/form.ts:136](https://github.com/XiaoPiHong/xph-crud/blob/300d288b2cb7d1d481589252292dd1816109678d/packages/form/src/types/form.ts#L136)
