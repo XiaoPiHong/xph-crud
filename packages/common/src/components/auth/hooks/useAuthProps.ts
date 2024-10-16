@@ -1,6 +1,6 @@
 import { IAuthProps } from "../types";
 import { merge } from "lodash-es";
-import { useExtendAuth } from "../hooks";
+import { useExtendAuth } from ".";
 
 export default function useActionsProps(props: Omit<IAuthProps, "children">) {
   const { extendAuthProps } = useExtendAuth();

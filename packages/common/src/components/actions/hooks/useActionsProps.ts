@@ -1,6 +1,6 @@
 import { IActionsProps } from "../types";
 import { merge } from "lodash-es";
-import { useExtendActions } from "../hooks";
+import { useExtendActions } from ".";
 import { TXphExtendComponentPropsMap } from "../../../types";
 
 export default function useActionsProps<T extends TXphExtendComponentPropsMap>(

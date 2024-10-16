@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { IDialogProps } from "../types";
-import { usePopperContainerSize } from "../hooks";
+import { usePopperContainerSize } from ".";
 
 const useOnContainerSizeChange = ({
   container,

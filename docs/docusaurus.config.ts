@@ -46,6 +46,18 @@ const config: Config = {
         },
       };
     },
+    [
+      "docusaurus-plugin-typedoc",
+      {
+        id: "api/index",
+        entryPoints: [path.resolve(__dirname, "../packages/index.ts")],
+        out: "./docs/api",
+        tsconfig: "../tsconfig.json",
+        readme: "none",
+        exclude: ["**/*.md"],
+        excludeExternals: true, // 排除外部声明
+      },
+    ],
   ],
   markdown: {
     mermaid: true, // 开启图表
@@ -97,6 +109,12 @@ const config: Config = {
           sidebarId: "comp",
           position: "left",
           label: "组件",
+        },
+        {
+          type: "docSidebar",
+          sidebarId: "api",
+          position: "left",
+          label: "API",
         },
         {
           type: "docSidebar",

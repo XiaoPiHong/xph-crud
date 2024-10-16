@@ -4,38 +4,53 @@ import { TCrudFormDialogProps } from "./crudFormDialog";
 import { TApiTableProps, TApiTableActionType } from "./apiTable";
 import { TXphExtendComponentPropsMap } from "xph-crud/common";
 
-/** 行数据 */
+/**
+ * @description  行数据
+ */
 export type TDataSourceItem = Record<PropertyKey, any>;
 
-/** 整个组件的配置 */
+/**
+ * @description 整个组件的配置
+ */
 export type TTableProps<
-  /** 行数据类型 */
+  // 行数据类型
   RecordType = TDataSourceItem,
-  /** 单元格扩展组件props映射 */
+  // 单元格扩展组件props映射
   CellFuncExtendPropsMap extends TXphExtendComponentPropsMap = {},
-  /** 操作组扩展组件props映射 */
+  // 操作组扩展组件props映射
   ActionsExtendPropsMap extends TXphExtendComponentPropsMap = {},
-  /** 顶部操作栏扩展组件props映射 */
+  // 顶部操作栏扩展组件props映射
   ToolbarExtendPropsMap extends TXphExtendComponentPropsMap = {},
-  /** 表单扩展组件props映射（包括：搜素表单 & 新增/修改表单） */
+  // 表单扩展组件props映射（包括：搜素表单 & 新增/修改表单）
   FormExtendPropsMap extends TXphExtendComponentPropsMap = {}
 > = {
-  /** 表格配置 */
+  /**
+   * @description 表格配置
+   */
   table?: TApiTableProps<
     RecordType,
     CellFuncExtendPropsMap,
     ActionsExtendPropsMap,
     ToolbarExtendPropsMap
   >;
-  /** 搜索表单配置项 */
+  /**
+   * @description 搜索表单配置项
+   */
   searchForm?: TSearchFormProps<FormExtendPropsMap>;
-  /** （新增 / 修改）表单弹窗配置项 */
+
+  /**
+   * @description （新增 / 修改）表单弹窗配置项
+   */
   crudFormDialog?: TCrudFormDialogProps<FormExtendPropsMap>;
 
-  /** 分页改变事件 */
+  /**
+   * @description 分页改变事件
+   */
   onPaginationChange?: (page: number, pageSize: number) => void;
 
-  /** 列表选中事件 */
+  /**
+   * @description 列表选中事件
+   */
   onRowSelectionChange?: (
     selectedRowKeys: React.Key[],
     selectedRows: RecordType[]

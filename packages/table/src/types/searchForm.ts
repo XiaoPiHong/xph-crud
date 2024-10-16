@@ -7,6 +7,8 @@ export type TSearchFormActionType = IXphFormActionType & {
 
 export type TSearchFormProps<T extends TXphExtendComponentPropsMap = {}> =
   IXphFormProps<T> & {
-    /** 是否显示搜索 & 重置按钮 */
+    /**
+     * @description 是否显示搜索 & 重置按钮
+     */
     showSearch?: boolean;
   };

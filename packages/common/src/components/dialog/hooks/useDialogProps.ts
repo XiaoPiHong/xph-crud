@@ -1,6 +1,6 @@
 import { IDialogProps } from "../types";
 import { merge } from "lodash-es";
-import { useExtendDialog } from "../hooks";
+import { useExtendDialog } from ".";
 
 const useDialogPorps = (dialogProps: IDialogProps) => {
   const { extendDialogProps } = useExtendDialog();

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IDialogChangeRecord } from "../hooks";
+import { IDialogChangeRecord } from ".";
 
 const useDialogInitSize = ({
   initWidth,

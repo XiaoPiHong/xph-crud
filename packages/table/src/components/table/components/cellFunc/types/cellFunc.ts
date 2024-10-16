@@ -1,20 +1,28 @@
 import { IXphActionsProps, TXphExtendComponentPropsMap } from "xph-crud/common";
 import { IComponentColumnProps, TDataSourceItem } from "../../../../../types";
 
-/** cellFunc中每一项对应的组件componentProps属性映射  */
+/**
+ * @description cellFunc中每一项对应的组件componentProps属性映射
+ */
 export type TCellComponentPropsMap<
   CellFuncExtendPropsMap extends TXphExtendComponentPropsMap = {},
   ActionsExtendPropsMap extends TXphExtendComponentPropsMap = {}
 > = {
   link: {
-    /** 超链接，点击超链接跳转 */
+    /**
+     * @description 超链接，点击超链接跳转
+     */
     url?: string;
-    /** 点击事件（优先级最高） */
+    /**
+     * @description 点击事件（优先级最高）
+     */
     onClick?: () => void;
   };
   actions: IXphActionsProps<ActionsExtendPropsMap>;
   tag: {
-    /** 标签的枚举 */
+    /**
+     * @description 标签的枚举
+     */
     enums: Array<{
       label: string;
       value: any;
@@ -39,7 +47,9 @@ type XOR<T extends any[]> = T extends [infer A, infer B, ...infer Rest]
   ? A
   : never;
 
-/** cellFunc中每一项的配置  */
+/**
+ * @description cellFunc中每一项的配置
+ */
 interface ICellProps<
   T extends keyof TCellComponentPropsMap<J, K>,
   J extends TXphExtendComponentPropsMap = {},
@@ -62,13 +72,15 @@ export type TCellProps<
 > = XOR<[TCellFuncPropsMap<J, K>]>;
 // ============================================================================== TCellProps end ===========================================
 
-/** CellFunc组件的props */
+/**
+ * @description CellFunc组件的props
+ */
 export interface ICellFuncProps<
-  /** 行数据类型 */
+  // 行数据类型
   T = TDataSourceItem,
-  /** 单元格的扩展组件props映射 */
+  // 单元格的扩展组件props映射
   J extends TXphExtendComponentPropsMap = {},
-  /** 操作组的扩展组件props映射 */
+  // 操作组的扩展组件props映射
   K extends TXphExtendComponentPropsMap = {}
 > {
   dslConfig: TCellProps<J, K>[];
@@ -80,7 +92,9 @@ export interface ICellFuncProps<
   };
 }
 
-/** cellFunc中每一项对应的组件的props */
+/**
+ * @description cellFunc中每一项对应的组件的props
+ */
 export interface ICurCellFuncProps<
   J extends TXphExtendComponentPropsMap = {},
   K extends TXphExtendComponentPropsMap = {},
@@ -94,9 +108,7 @@ export interface ICurCellFuncProps<
 }
 
 /**
- *
- * 因为渲染是从cellFuncs中的最后一项开始的，所以mainClick是排在后面的组件传递到前面的
- *
+ * @description 因为渲染是从cellFuncs中的最后一项开始的，所以mainClick是排在后面的组件传递到前面的
  * 目的：目的是为了将自定义组件的点击事件交给最底层的组件进行调用
  * 注意：因为多个自定义组件可能都有mainClick，所以也需要保证其他组件的正常调用（即：传递给子组件Comp的时候，需要把父组件传递过来的mainClick给手动执行一下）
  */

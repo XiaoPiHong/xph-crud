@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IDialogChangeRecord, IContainerSizeTarget } from "../hooks";
+import { IDialogChangeRecord, IContainerSizeTarget } from ".";
 
 const useDialogZoom = ({
   containerSizeTarget,

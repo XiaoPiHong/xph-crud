@@ -1,5 +1,5 @@
 import { useEffect, useCallback, useRef } from "react";
-import { IContainerSizeTarget } from "../hooks";
+import { IContainerSizeTarget } from ".";
 
 const useDragDialog = ({
   containerSizeTarget,

@@ -6,7 +6,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { XphActions, XphPortal } from "../";
+import { XphActions, XphPortal } from "..";
 import { IDialogProps, IDialogActionType } from "./types";
 import {
   useDialogProps,

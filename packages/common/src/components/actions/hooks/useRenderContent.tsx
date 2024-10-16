@@ -5,7 +5,7 @@ import {
   isRenderActionItemProps,
 } from "../types";
 import { componentMap } from "../components";
-import { useExtendActions } from "../hooks";
+import { useExtendActions } from ".";
 
 export default function useRenderContent(): {
   renderContent: (

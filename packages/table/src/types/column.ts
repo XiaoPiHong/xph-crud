@@ -3,7 +3,9 @@ import { TDataSourceItem } from "./table";
 import { TCellProps } from "../components/table/components/cellFunc/types";
 import { TXphExtendComponentPropsMap } from "xph-crud/common";
 
-/** 扩展一下antd column的属性，不一定要扩展，只是预留 */
+/**
+ * @description 扩展一下antd column的属性，不一定要扩展，只是预留
+ */
 type TBaseColumnType<T> = {} & ColumnType<T>;
 
 export interface IComponentColumnProps<
@@ -11,7 +13,9 @@ export interface IComponentColumnProps<
   J extends TXphExtendComponentPropsMap = {},
   K extends TXphExtendComponentPropsMap = {}
 > extends Omit<TBaseColumnType<T>, "render"> {
-  /** 单元格渲染属性（原理也是使用render渲染不同的内容） */
+  /**
+   * @description 单元格渲染属性（原理也是使用render渲染不同的内容）
+   */
   cellFunc:
     | ((props: { text: any; record: T; index: number }) => TCellProps<J, K>[]) // =============================此处类型校验还有缺陷，如果cellFunc写成函数形式，ICellProps的componentProps校验映射会存在问题（如：componentProps中没有的属性也会校验通过，也就是无法深入校验componentProps）
     | TCellProps<J, K>[];

@@ -2,11 +2,17 @@ import { ButtonProps, MenuProps } from "antd";
 import { TXphExtendComponentPropsMap } from "../../../types";
 
 export interface IBaseActionProps {
-  /** 唯一标识 */
+  /**
+   * @description 唯一标识
+   */
   key?: string;
-  /** 是否显示 */
+  /**
+   * @description 是否显示
+   */
   ifShow?: boolean | (() => any);
-  /** 权限标识 */
+  /**
+   * @description 权限标识
+   */
   auth?: string | Array<string>;
 }
 
@@ -18,45 +24,69 @@ export type TComponentType<T extends TXphExtendComponentPropsMap = {}> = {
 interface IButtonProps extends ButtonProps {}
 interface IDropdownProps extends Omit<ButtonProps, "onClick"> {
   dropDownItems: {
+    /**
+     * @description 唯一标识
+     */
     key: string;
+    /**
+     * @description 显示文本
+     */
     label: string;
-    /** 注意：父级如果disabled为true，子级无法展开（所以相当于是变向的父级禁用，子级也禁用了） */
+    /**
+     * @description 是否禁用，注意：父级如果disabled为true，子级无法展开（所以相当于是变向的父级禁用，子级也禁用了）
+     */
     disabled?: boolean;
+    /**
+     * @description 图标
+     */
     icon?: React.ReactNode;
-    /** 是否显示 */
+    /**
+     * @description 是否显示
+     */
     ifShow?: boolean | (() => any);
-    /** 权限标识 */
+    /**
+     * @description 权限标识
+     */
     auth?: string | Array<string>;
   }[];
   onClick?: MenuProps["onClick"];
 }
 
-/** 组件类型 */
+/**
+ * @description 组件类型action
+ */
 export interface IComponentActionProps<
   T extends keyof TComponentType<K>,
   K extends TXphExtendComponentPropsMap = {}
 > extends IBaseActionProps {
-  /** 组件 */
+  /**
+   * @description 组件
+   */
   component: T;
-  /** 组件属性 */
+  /**
+   * @description 组件属性
+   */
   componentProps?: TComponentType<K>[T];
 }
 
-/** 自定义内容 */
+/**
+ * @description 自定义内容action
+ */
 export interface IRenderActionProps extends IBaseActionProps {
-  /** 自定义内容 */
+  /**
+   * @description 自定义内容函数
+   */
   render: React.ReactElement;
 }
 
 /**
- *
- * 这个类型接受两个泛型参数 T 和 K。它使用了 TypeScript 中的映射类型，并从 T 中移除 K 对应的属性。这样做的结果是，返回的类型会继承 T，但移除了 K 对应的属性
+ * @description 这个类型接受两个泛型参数 T 和 K。它使用了 TypeScript 中的映射类型，并从 T 中移除 K 对应的属性。这样做的结果是，返回的类型会继承 T，但移除了 K 对应的属性
  */
 type Without<T, K> = { [P in Exclude<keyof T, K>]?: never };
 
 /**
- * 
- * 这个 `XOR` 类型的定义是一个 TypeScript 中的条件类型，用于实现对多个类型的互斥组合。现在，我会逐步解释这个类型的定义：
+ * @description
+这个 `XOR` 类型的定义是一个 TypeScript 中的条件类型，用于实现对多个类型的互斥组合。现在，我会逐步解释这个类型的定义：
 
 1. `T extends [infer A, infer B, ...infer Rest]`：这个条件判断首先检查泛型类型 `T` 是否是一个元组类型。如果是的话，它会将元组的第一个类型赋值给 `A`，第二个类型赋值给 `B`，并将剩余的类型赋值给 `Rest`。如果 `T` 不是元组类型，则跳到下一个条件。
 
@@ -68,7 +98,7 @@ type Without<T, K> = { [P in Exclude<keyof T, K>]?: never };
 
 5. `: never`：如果 `T` 不是一个元组，并且不止一个元素，则返回 `never` 类型，表示无法匹配任何类型。
 
-综上所述，这个 `XOR` 类型的定义通过条件类型实现了对多个类型的互斥组合，并确保在同一时间只能使用其中一个类型。
+综上所述，这个 `XOR` 类型的定义通过条件类型实现了对多个类型的互斥组合，并确保在同一时间只能使用其中一个类型
  */
 type XOR<T extends any[]> = T extends [infer A, infer B, ...infer Rest]
   ? A | B extends object
@@ -81,23 +111,32 @@ type XOR<T extends any[]> = T extends [infer A, infer B, ...infer Rest]
   ? A
   : never;
 
-// 将组件类型映射为 IComponentActionProps
+/**
+ * @description 将组件类型映射为 IComponentActionProps
+ */
 type TMapComponentActionProps<T extends TXphExtendComponentPropsMap> = {
   [K in keyof TComponentType<T>]: IComponentActionProps<K, T>;
 }[keyof TComponentType<T>];
 
-// 合并 IComponentActionProps 和 IRenderActionProps
+/**
+ * @description 合并 IComponentActionProps 和 IRenderActionProps
+ */
 export type TActionItemProps<T extends TXphExtendComponentPropsMap = {}> = XOR<
   [TMapComponentActionProps<T>, IRenderActionProps]
 >;
 
-/** 判断是哪种类型的action */
+/**
+ * @description 判断是否为组件类型action
+ */
 export function isComponentActionItemProps(
   item: TActionItemProps
 ): item is IComponentActionProps<"Button"> {
   return "component" in item;
 }
 
+/**
+ * @description 判断是否为自定义内容action
+ */
 export function isRenderActionItemProps(
   item: TActionItemProps
 ): item is IRenderActionProps {

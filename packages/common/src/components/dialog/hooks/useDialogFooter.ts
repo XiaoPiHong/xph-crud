@@ -1,5 +1,5 @@
 import { IDialogProps } from "../types";
-import { IXphActionsProps } from "../../";
+import { IXphActionsProps } from "../..";
 
 export default function useDialogFooter(props: IDialogProps, loading: boolean) {
   const { okText, cancelText, onCancel, onOk, okProps, cancelProps } = props;

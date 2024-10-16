@@ -10,54 +10,119 @@ export interface IFunctionToolbarParams<T = TDataSourceItem> {
   selection: T[];
 }
 
-/** 扩展antd table的属性 */
+/**
+ * @description 扩展antd table的属性
+ */
 export type TApiTableProps<
   T = TDataSourceItem,
   J extends TXphExtendComponentPropsMap = {},
   K extends TXphExtendComponentPropsMap = {},
   L extends TXphExtendComponentPropsMap = {}
 > = {
-  /** 列配置项 */
+  /**
+   * @default []
+   * @description 列配置项
+   */
   columns?: TColumnProps<T, J, K>[];
-  /** 首次是否自动请求 */
+
+  /**
+   * @default true
+   * @description 首次是否自动请求
+   */
   autoRequest?: boolean;
-  /** 获取datasource的api */
+
+  /**
+   * @default -
+   * @description 获取datasource的api
+   */
   api?: (params: any) => Promise<any>;
-  /** 格式化返回的datasource */
+
+  /**
+   * @default -
+   * @description 格式化返回的datasource
+   */
   formatDataSource?: (data: any) => any[];
-  /** 是否开启前端自动分页（当api不支持分页时可用） */
+
+  /**
+   * @default -
+   * @description 是否开启前端自动分页（当api不支持分页时可用）
+   */
   autoPagination?: boolean;
-  /** 单选 / 多选 */
+
+  /**
+   * @default -
+   * @description 单选 / 多选
+   */
   rowSelection?: RowSelectionType | TableRowSelection<T>;
-  /** 分页配置（因为分页器是独立出来的，使用table的分页器布局需要修改样式） */
+
+  /**
+   * @default { pageSize: 20, total: 0, showTotal: (total) => `共：${total} 条`, current: 1, pageSizeOptions: [10, 20, 50, 100], showSizeChanger: true, showQuickJumper: true, }
+   * @description 分页配置（因为分页器是独立出来的，使用table的分页器布局需要修改样式）
+   */
   pagination?: false | PaginationProps;
-  /** 表格撑满父容器（virtual为true时，默认fullHeight为true） */
+
+  /**
+   * @default false
+   * @description 表格撑满父容器（virtual为true时，默认fullHeight为true）
+   */
   fullHeight?: boolean;
-  /** 顶部操作栏配置，函数时可以传递参数，参数是什么由调用方决定 */
+
+  /**
+   * @default -
+   * @description 顶部操作栏配置，函数时可以传递参数，参数是什么由调用方决定
+   */
   toolbar?:
     | IXphActionsProps<L>
     | ((e: IFunctionToolbarParams<T>) => IXphActionsProps<L>);
-  /** 分页请求参数中传递到接口的属性名 */
+
+  /**
+   * @default { pageSize: "pageSize", current: "current", }
+   * @description 分页请求参数中传递到接口的属性名
+   */
   requestFields?: {
-    /** 当前页 */
+    /**
+     * @default "current"
+     * @description 当前页
+     */
     current?: string;
-    /** 当前页大小 */
+
+    /**
+     * @default "pageSize"
+     * @description 当前页大小
+     */
     pageSize?: string;
   };
-  /** 响应结果中获取数据的属性名 */
+
+  /**
+   * @default { current: "current", list: "data", total: "total", }
+   * @description 响应结果中获取数据的属性名
+   */
   responseFields?: {
-    /** 当前页 */
+    /**
+     * @default "current"
+     * @description 当前页
+     */
     current?: string;
-    /** 列表 */
+    /**
+     * @default "data"
+     * @description 列表
+     */
     list?: string;
-    /** 所有页总数 */
+    /**
+     * @default "total"
+     * @description 所有页总数
+     */
     total?: string;
   };
-  /** 排序、筛选变化时触发 */
+
+  /**
+   * @default -
+   * @description 排序、筛选变化时触发
+   */
   onChange?: (filters: any, sorter: any, extra: any) => void;
 } & Omit<
   TableProps<T>,
-  /** 内部控制的属性/重写的属性 */
+  // 内部控制的属性/重写的属性
   "rowSelection" | "columns" | "loading" | "dataSource" | "pagination"
 >;
 

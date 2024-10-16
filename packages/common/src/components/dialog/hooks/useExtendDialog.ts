@@ -1,4 +1,4 @@
-import { useXphExtendCompProps } from "../../../../";
+import { useXphExtendCompProps } from "../../../..";
 
 const useExtendDialog = () => {
   const { extendProps } = useXphExtendCompProps();

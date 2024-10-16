@@ -1,5 +1,5 @@
 import { MouseEvent, useRef, useEffect, useCallback, useState } from "react";
-import { IContainerSizeTarget } from "../hooks";
+import { IContainerSizeTarget } from ".";
 
 type TResizeType = "lt" | "rt" | "rb" | "lb";
 

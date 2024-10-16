@@ -36,6 +36,17 @@ const sidebars: SidebarsConfig = {
     XphAuth: ["comp/auth/base"],
   },
   extends: ["comp/extends/base"],
+  api: [
+    {
+      type: "category",
+      label: "API",
+      link: {
+        type: "doc",
+        id: "api/index",
+      },
+      items: require("./docs/api/typedoc-sidebar.cjs"),
+    },
+  ],
 };
 
 export default sidebars;

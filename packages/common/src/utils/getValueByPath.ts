@@ -14,10 +14,10 @@ export const getValueByPath = (obj: Record<string, any>, path: string): any => {
 
 /**
  * @description 通过属性为包含.的字符串的对象从值对象中获取值
- * @param fields = { current: 'data.current', pageSize: 'data.pageSize' }
- * @param values = { data: { current: 1, pageSize: 10 } }
- * @returns = { current: 1, pageSize: 10 }
- *
+ * @example
+ * fields { current: 'data.current', pageSize: 'data.pageSize' }
+ * values { data: { current: 1, pageSize: 10 } }
+ * return { current: 1, pageSize: 10 }
  */
 export const getValuesByPathObj = (
   fields: Record<string, string>,

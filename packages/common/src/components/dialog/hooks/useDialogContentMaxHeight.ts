@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { IContainerSizeTarget } from "../hooks";
+import { IContainerSizeTarget } from ".";
 
 const useDialogContentMaxHeight = ({
   visible,
