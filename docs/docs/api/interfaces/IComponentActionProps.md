@@ -30,7 +30,7 @@
 
 #### Defined in
 
-[packages/common/src/components/actions/types/actionItem.ts:16](https://github.com/XiaoPiHong/xph-crud/blob/300d288b2cb7d1d481589252292dd1816109678d/packages/common/src/components/actions/types/actionItem.ts#L16)
+[packages/common/src/components/actions/types/actionItem.ts:16](https://github.com/XiaoPiHong/xph-crud/blob/1453d1f4b2490c13545a9d7404efaaabc2a2fd0f/packages/common/src/components/actions/types/actionItem.ts#L16)
 
 ***
 
@@ -44,7 +44,7 @@
 
 #### Defined in
 
-[packages/common/src/components/actions/types/actionItem.ts:65](https://github.com/XiaoPiHong/xph-crud/blob/300d288b2cb7d1d481589252292dd1816109678d/packages/common/src/components/actions/types/actionItem.ts#L65)
+[packages/common/src/components/actions/types/actionItem.ts:65](https://github.com/XiaoPiHong/xph-crud/blob/1453d1f4b2490c13545a9d7404efaaabc2a2fd0f/packages/common/src/components/actions/types/actionItem.ts#L65)
 
 ***
 
@@ -58,7 +58,7 @@
 
 #### Defined in
 
-[packages/common/src/components/actions/types/actionItem.ts:69](https://github.com/XiaoPiHong/xph-crud/blob/300d288b2cb7d1d481589252292dd1816109678d/packages/common/src/components/actions/types/actionItem.ts#L69)
+[packages/common/src/components/actions/types/actionItem.ts:69](https://github.com/XiaoPiHong/xph-crud/blob/1453d1f4b2490c13545a9d7404efaaabc2a2fd0f/packages/common/src/components/actions/types/actionItem.ts#L69)
 
 ***
 
@@ -76,7 +76,7 @@
 
 #### Defined in
 
-[packages/common/src/components/actions/types/actionItem.ts:12](https://github.com/XiaoPiHong/xph-crud/blob/300d288b2cb7d1d481589252292dd1816109678d/packages/common/src/components/actions/types/actionItem.ts#L12)
+[packages/common/src/components/actions/types/actionItem.ts:12](https://github.com/XiaoPiHong/xph-crud/blob/1453d1f4b2490c13545a9d7404efaaabc2a2fd0f/packages/common/src/components/actions/types/actionItem.ts#L12)
 
 ***
 
@@ -94,4 +94,4 @@
 
 #### Defined in
 
-[packages/common/src/components/actions/types/actionItem.ts:8](https://github.com/XiaoPiHong/xph-crud/blob/300d288b2cb7d1d481589252292dd1816109678d/packages/common/src/components/actions/types/actionItem.ts#L8)
+[packages/common/src/components/actions/types/actionItem.ts:8](https://github.com/XiaoPiHong/xph-crud/blob/1453d1f4b2490c13545a9d7404efaaabc2a2fd0f/packages/common/src/components/actions/types/actionItem.ts#L8)

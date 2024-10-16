@@ -16,7 +16,7 @@
 
 #### Defined in
 
-[packages/common/src/components/actions/types/actions.ts:17](https://github.com/XiaoPiHong/xph-crud/blob/300d288b2cb7d1d481589252292dd1816109678d/packages/common/src/components/actions/types/actions.ts#L17)
+[packages/common/src/components/actions/types/actions.ts:17](https://github.com/XiaoPiHong/xph-crud/blob/1453d1f4b2490c13545a9d7404efaaabc2a2fd0f/packages/common/src/components/actions/types/actions.ts#L17)
 
 ***
 
@@ -30,7 +30,7 @@
 
 #### Defined in
 
-[packages/common/src/components/actions/types/actions.ts:29](https://github.com/XiaoPiHong/xph-crud/blob/300d288b2cb7d1d481589252292dd1816109678d/packages/common/src/components/actions/types/actions.ts#L29)
+[packages/common/src/components/actions/types/actions.ts:29](https://github.com/XiaoPiHong/xph-crud/blob/1453d1f4b2490c13545a9d7404efaaabc2a2fd0f/packages/common/src/components/actions/types/actions.ts#L29)
 
 ***
 
@@ -44,7 +44,7 @@
 
 #### Defined in
 
-[packages/common/src/components/actions/types/actions.ts:13](https://github.com/XiaoPiHong/xph-crud/blob/300d288b2cb7d1d481589252292dd1816109678d/packages/common/src/components/actions/types/actions.ts#L13)
+[packages/common/src/components/actions/types/actions.ts:13](https://github.com/XiaoPiHong/xph-crud/blob/1453d1f4b2490c13545a9d7404efaaabc2a2fd0f/packages/common/src/components/actions/types/actions.ts#L13)
 
 ***
 
@@ -58,7 +58,7 @@
 
 #### Defined in
 
-[packages/common/src/components/actions/types/actions.ts:25](https://github.com/XiaoPiHong/xph-crud/blob/300d288b2cb7d1d481589252292dd1816109678d/packages/common/src/components/actions/types/actions.ts#L25)
+[packages/common/src/components/actions/types/actions.ts:25](https://github.com/XiaoPiHong/xph-crud/blob/1453d1f4b2490c13545a9d7404efaaabc2a2fd0f/packages/common/src/components/actions/types/actions.ts#L25)
 
 ***
 
@@ -72,7 +72,7 @@
 
 #### Defined in
 
-[packages/common/src/components/actions/types/actions.ts:21](https://github.com/XiaoPiHong/xph-crud/blob/300d288b2cb7d1d481589252292dd1816109678d/packages/common/src/components/actions/types/actions.ts#L21)
+[packages/common/src/components/actions/types/actions.ts:21](https://github.com/XiaoPiHong/xph-crud/blob/1453d1f4b2490c13545a9d7404efaaabc2a2fd0f/packages/common/src/components/actions/types/actions.ts#L21)
 
 ***
 
@@ -86,4 +86,4 @@
 
 #### Defined in
 
-[packages/common/src/components/actions/types/actions.ts:9](https://github.com/XiaoPiHong/xph-crud/blob/300d288b2cb7d1d481589252292dd1816109678d/packages/common/src/components/actions/types/actions.ts#L9)
+[packages/common/src/components/actions/types/actions.ts:9](https://github.com/XiaoPiHong/xph-crud/blob/1453d1f4b2490c13545a9d7404efaaabc2a2fd0f/packages/common/src/components/actions/types/actions.ts#L9)
