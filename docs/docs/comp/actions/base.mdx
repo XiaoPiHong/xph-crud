@@ -1,22 +1,15 @@
 import { Actions } from "examples";
-import DemoWrapper from "@site/src/components/DemoWrapper";
-import { default as rawExamples } from "!raw-loader!examples/demo/actions/actions.tsx";
-import CodeBlock from "@site/src/theme/CodeBlock";
+import { default as actionsRaw } from "!raw-loader!examples/demo/actions/actions.tsx";
 import IXphActionsPropsApi from "@site/docs/api/interfaces/IXphActionsProps.md";
+import ExpandDemoWrapper from "@site/src/components/ExpandDemoWrapper";
 
 # XphActions 可配置操作组
 
 ## 基本使用
 
-<CodeBlock language={"tsx"}>{rawExamples}</CodeBlock>
-
-## Typescript 案例
-
-<pre>
-  <DemoWrapper>
-    <Actions />
-  </DemoWrapper>
-</pre>
+<ExpandDemoWrapper rawStr={actionsRaw}>
+  <Actions />
+</ExpandDemoWrapper>
 
 <IXphActionsPropsApi />
 

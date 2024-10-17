@@ -1,22 +1,15 @@
 import { Auth } from "examples";
-import DemoWrapper from "@site/src/components/DemoWrapper";
-import { default as rawExamples } from "!raw-loader!examples/demo/auth/auth.tsx";
-import CodeBlock from "@site/src/theme/CodeBlock";
+import { default as authRaw } from "!raw-loader!examples/demo/auth/auth.tsx";
 import IXphAuthPropsApi from "@site/docs/api/interfaces/IXphAuthProps.md";
+import ExpandDemoWrapper from "@site/src/components/ExpandDemoWrapper";
 
 # XphAuth 鉴权组件
 
 ## 基本使用
 
-<CodeBlock language={"tsx"}>{rawExamples}</CodeBlock>
-
-## Typescript 案例
-
-<pre>
-  <DemoWrapper>
-    <Auth />
-  </DemoWrapper>
-</pre>
+<ExpandDemoWrapper rawStr={authRaw}>
+  <Auth />
+</ExpandDemoWrapper>
 
 <IXphAuthPropsApi />
 

@@ -1,4 +1,4 @@
-import DemoWrapper from "@site/src/components/DemoWrapper";
+import ExpandDemoWrapper from "@site/src/components/ExpandDemoWrapper";
 import CodeBlock from "@site/src/theme/CodeBlock";
 import Mermaid from "@theme/Mermaid";
 import {
@@ -10,7 +10,7 @@ import {
 } from "examples";
 import { default as extendsFormBaseRaw } from "!raw-loader!examples/demo/extends/extendsFormBase.tsx";
 import { default as extendsFormItemRaw } from "!raw-loader!examples/demo/extends/extendsFormItem.tsx";
-import { default as extendsTableBasaeRaw } from "!raw-loader!examples/demo/extends/extendsTableBase.tsx";
+import { default as extendsTableBaseRaw } from "!raw-loader!examples/demo/extends/extendsTableBase.tsx";
 import { default as extendsActionsBaseRaw } from "!raw-loader!examples/demo/extends/extendsActionsBase.tsx";
 import { default as extendsFormDtsRaw } from "!raw-loader!examples/demo/extends/extendsFormDts.tsx";
 import { default as xphCrudDtsRaw } from "!raw-loader!examples/xph-crud.d.ts";
@@ -23,23 +23,15 @@ import { default as xphCrudDtsRaw } from "!raw-loader!examples/xph-crud.d.ts";
 
 如果当前 `XphForm` 组件的所有表单项都满足不了你，`xph-crud` 还提供`XphExtendCompPropsProvider`来扩展表单项，你只需要使用`XphExtendCompPropsProvider`来包裹你的应用，并且为其提供一个表单项的映射对象即可，详细请看下方代码块：
 
-<CodeBlock language={"tsx"}>{extendsFormBaseRaw}</CodeBlock>
-
-<pre>
-  <DemoWrapper>
-    <ExtendsFormBase />
-  </DemoWrapper>
-</pre>
+<ExpandDemoWrapper rawStr={extendsFormBaseRaw}>
+  <ExtendsFormBase />
+</ExpandDemoWrapper>
 
 ### 扩展表单项的规范
 
-<CodeBlock language={"tsx"}>{extendsFormItemRaw}</CodeBlock>
-
-<pre>
-  <DemoWrapper>
-    <ExtendsFormItem />
-  </DemoWrapper>
-</pre>
+<ExpandDemoWrapper rawStr={extendsFormItemRaw}>
+  <ExtendsFormItem />
+</ExpandDemoWrapper>
 
 :::tip
 
@@ -53,13 +45,9 @@ import { default as xphCrudDtsRaw } from "!raw-loader!examples/xph-crud.d.ts";
 
 同理，`XphTable`中的映射内容也是可以自定义的，也是通过给`XphExtendCompPropsProvider`添加单元格映射对象即可的方式。
 
-<CodeBlock language={"tsx"}>{extendsTableBasaeRaw}</CodeBlock>
-
-<pre>
-  <DemoWrapper>
-    <ExtendsTableBase />
-  </DemoWrapper>
-</pre>
+<ExpandDemoWrapper rawStr={extendsTableBaseRaw}>
+  <ExtendsTableBase />
+</ExpandDemoWrapper>
 
 ### 扩展单元格映射内容的规范
 
@@ -159,13 +147,9 @@ const MyTag = (
 
 同理，`XphActions`中的映射内容也是可以自定义的，也是通过给`XphExtendCompPropsProvider`添加操作组映射对象即可的方式。
 
-<CodeBlock language={"tsx"}>{extendsActionsBaseRaw}</CodeBlock>
-
-<pre>
-  <DemoWrapper>
-    <ExtendsActionsBase />
-  </DemoWrapper>
-</pre>
+<ExpandDemoWrapper rawStr={extendsActionsBaseRaw}>
+  <ExtendsActionsBase />
+</ExpandDemoWrapper>
 
 :::tip
 
@@ -185,10 +169,6 @@ const MyTag = (
 
 ### 例子
 
-<CodeBlock language={"tsx"}>{extendsFormDtsRaw}</CodeBlock>
-
-<pre>
-  <DemoWrapper>
-    <ExtendsFormDts />
-  </DemoWrapper>
-</pre>
+<ExpandDemoWrapper rawStr={extendsFormDtsRaw}>
+  <ExtendsFormDts />
+</ExpandDemoWrapper>

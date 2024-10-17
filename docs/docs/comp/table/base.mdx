@@ -1,24 +1,15 @@
 import { Table } from "examples";
-import DemoWrapper from "@site/src/components/DemoWrapper";
-import { default as rawExamples } from "!raw-loader!examples/demo/table/table.tsx";
-import CodeBlock from "@site/src/theme/CodeBlock";
+import { default as tableRaw } from "!raw-loader!examples/demo/table/table.tsx";
 import TXphTablePropsApi from "@site/docs/api/type-aliases/TXphTableProps.md";
+import ExpandDemoWrapper from "@site/src/components/ExpandDemoWrapper";
 
 # XphTable 可配置列表
 
 ## 基本使用
 
-<CodeBlock language={"tsx"}>{rawExamples}</CodeBlock>
-
-## Typescript 案例
-
-<div id="docs-comp-table-base" style={{ position: "relative" }}>
-  <pre>
-    <DemoWrapper>
-      <Table />
-    </DemoWrapper>
-  </pre>
-</div>
+<ExpandDemoWrapper rawStr={tableRaw}>
+  <Table />
+</ExpandDemoWrapper>
 
 <TXphTablePropsApi />
 

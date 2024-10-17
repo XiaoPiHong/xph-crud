@@ -41,4 +41,4 @@
 
 ## Defined in
 
-[packages/form/src/types/component.ts:24](https://github.com/XiaoPiHong/xph-crud/blob/4f1a30dcf95acc1b0b790144a16f551c2adfa643/packages/form/src/types/component.ts#L24)
+[packages/form/src/types/component.ts:24](https://github.com/XiaoPiHong/xph-crud/blob/6c1615ed1bf3b9b6f01037eaf454f3c74e2cead4/packages/form/src/types/component.ts#L24)
