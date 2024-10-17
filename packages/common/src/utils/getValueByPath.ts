@@ -1,4 +1,6 @@
-// Helper function to get value by path
+/**
+ * @description Helper function to get value by path
+ */
 export const getValueByPath = (obj: Record<string, any>, path: string): any => {
   const keys = path.split(".").filter(Boolean);
   let current = obj;

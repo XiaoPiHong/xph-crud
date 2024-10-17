@@ -4,14 +4,19 @@
 
 ## Parameters
 
-• **obj**: `Record`\<`string`, `any`\>
-
-• **path**: `string`
+| Parameter | Type |
+| ------ | ------ |
+| `obj` | `Record`\<`string`, `any`\> |
+| `path` | `string` |
 
 ## Returns
 
 `any`
 
+## Description
+
+Helper function to get value by path
+
 ## Defined in
 
-[packages/common/src/utils/getValueByPath.ts:2](https://github.com/XiaoPiHong/xph-crud/blob/1453d1f4b2490c13545a9d7404efaaabc2a2fd0f/packages/common/src/utils/getValueByPath.ts#L2)
+[packages/common/src/utils/getValueByPath.ts:4](https://github.com/XiaoPiHong/xph-crud/blob/4f1a30dcf95acc1b0b790144a16f551c2adfa643/packages/common/src/utils/getValueByPath.ts#L4)

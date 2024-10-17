@@ -9,87 +9,85 @@ export interface IRegister {
 
 export interface IFormProps<T extends TXphExtendComponentPropsMap = {}> {
   /**
-   * @default []
-   * @description 表单项配置集合
+   * 表单项配置集合
+   * @defaultValue `[]`
    */
   items: TFormItemProps<T>[];
   /**
-   * @default "horizontal"
-   * @description 表单布局方式，排除了antd的inline，因为可以使用colProps实现inline布局
+   * 表单布局方式，排除了antd的inline，因为可以使用colProps实现inline布局
+   * @defaultValue `"horizontal"`
    */
   layout?: "horizontal" | "vertical";
   /**
-   * @default false
-   * @description 表示是否显示 label 后面的冒号 (只有在属性 layout 为 horizontal 时有效)
+   * 表示是否显示 label 后面的冒号 (只有在属性 layout 为 horizontal 时有效)
+   * @defaultValue `false`
    */
   colon?: boolean;
   /**
-   * @default -
-   * @description 设置表单组件禁用，仅对 antd 组件有效
+   * 设置表单组件禁用，仅对 antd 组件有效
+   * @defaultValue `-`
    */
   disabled?: boolean;
   /**
-   * @default -
-   * @description 表单项组件布局方式(wrapperCol的span与labelCol的span形成24栅格布局)
+   * 表单项组件布局方式(wrapperCol的span与labelCol的span形成24栅格布局)
+   * @defaultValue `-`
    */
   wrapperCol?: ColProps;
   /**
-   * @default true
-   * @description label 标签的文本换行方式
+   * label 标签的文本换行方式
+   * @defaultValue `true`
    */
   labelWrap?: boolean;
   /**
-   * @default -
-   * @description label 标签的文本对齐方式
+   * label 标签的文本对齐方式
+   * @defaultValue `-`
    */
   labelAlign?: "left" | "right";
   /**
-   * @default -
-   * @description 表单项label标签布局方式(wrapperCol的span与labelCol的span形成24栅格布局)
+   * 表单项label标签布局方式(wrapperCol的span与labelCol的span形成24栅格布局)
+   * @defaultValue `-`
    */
   labelCol?: ColProps;
   /**
-   * @default -
-   * @description 表单项的栅格配置
+   * 表单项的栅格配置
+   * @defaultValue `-`
    */
   colProps?: ColProps;
   /**
-   * @default -
-   * @description 提交失败自动滚动到第一个错误字段
+   * 提交失败自动滚动到第一个错误字段
+   * @defaultValue `-`
    */
   scrollToFirstError?: boolean;
   /**
-   * @default -
-   * @description 设置字段组件的尺寸（仅限 antd 组件）
+   * 设置字段组件的尺寸（仅限 antd 组件）
+   * @defaultValue `-`
    */
   size?: "large" | "middle" | "small";
   /**
-   * @default -
-   * @description 是否可折叠，默认超过5个折叠
+   * 是否可折叠，默认超过5个折叠
+   * @defaultValue `-`
    */
   collapsible?: boolean;
   /**
-   * @default 5
-   * @description 超过多少进行折叠，collapsible为true才生效
+   * 超过多少进行折叠，collapsible为true才生效
+   * @defaultValue `5`
    */
   collapseNum?: number;
   /**
-   * @default -
-   * @description 渲染操作组，用于渲染表单项的操作，这是一个预留项，是否需要操作组由业务自己决定（会跟折叠同行显示）
+   * 渲染操作组，用于渲染表单项的操作，这是一个预留项，是否需要操作组由业务自己决定（会跟折叠同行显示）
+   * @defaultValue `-`
    */
   renderActions?: () => React.ReactElement;
   /**
-   * @default (date: any, format: string) => { return date?.format?.(format || "YYYY-MM-DD HH:mm:ss") ?? date; }
-   * @description 时间返回统一处理函数
+   * 时间返回统一处理函数
+   * @defaultValue `(date: any, format: string) => { return date?.format?.(format \|\| "YYYY-MM-DD HH:mm:ss") ?? date }`
    */
   transformDateFunc?: (date: any, format: string) => string;
   /**
-   * @default -
-   * @description 用于将表单内时间区域的应设成 2 个字段，见下方案例
+   * 用于将表单内时间区域的应设成 2 个字段
+   * @defaultValue `-`
    * @example
-   *
-   * // 场景：如果表单内有时间区间组件，获取到的值是一个数组，但是往往我们传递到后台需要是 2 个字段
-   *
+   * 场景：如果表单内有时间区间组件，获取到的值是一个数组，但是往往我们传递到后台需要是 2 个字段
    * fieldMapToTime: [
    *    // data为时间组件在表单内的字段，startTime，endTime为转化后的开始时间与结束时间
    *    // 'YYYY-MM-DD'为时间格式，参考moment
@@ -121,18 +119,34 @@ export interface IFormProps<T extends TXphExtendComponentPropsMap = {}> {
    *     endTime: 1597449600,
    * }
    */
+
   fieldMapToTime?: [string, [string, string], (string | [string, string])?][];
   /**
-   * @default -
-   * @description 注册事件（useForm使用，form组件会在挂载后调用）
+   * 注册事件（useForm使用，form组件会在挂载后调用）
+   * @defaultValue `-`
    */
   register?: IRegister;
 }
 
 export interface IFormActionType {
+  /**
+   * 获取表单值
+   */
   getFieldsValue: (...values) => Recordable<any>;
+  /**
+   * 设置表单值
+   */
   setFieldsValue: (values: Recordable<any>) => void;
+  /**
+   * 重置表单值
+   */
   resetFields: () => Promise<void>;
+  /**
+   * 表单校验
+   */
   validator: (nameList?: NamePath[]) => Promise<any>;
+  /**
+   * 滚动到指定字段
+   */
   scrollToField: (name: NamePath, options?: ScrollOptions) => Promise<void>;
 }

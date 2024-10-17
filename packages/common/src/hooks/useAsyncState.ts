@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 
 /**
- * 自定义 Hook 用于异步更新状态
- * @param initialState 初始状态
+ * @description 自定义 Hook 用于异步更新状态
+ * @param initialState - 初始状态
  * @returns [state, setAsyncState] state 是当前状态，setAsyncState 是更新状态的函数
  */
 export const useAsyncState = <T>(

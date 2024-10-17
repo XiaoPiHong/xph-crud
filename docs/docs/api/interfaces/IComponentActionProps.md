@@ -10,88 +10,17 @@
 
 ## Type Parameters
 
-• **T** *extends* keyof [`TComponentType`](../type-aliases/TComponentType.md)\<`K`\>
-
-• **K** *extends* [`TXphExtendComponentPropsMap`](../type-aliases/TXphExtendComponentPropsMap.md) = `object`
+| Type Parameter | Default type |
+| ------ | ------ |
+| `T` *extends* keyof [`TComponentType`](../type-aliases/TComponentType.md)\<`K`\> | - |
+| `K` *extends* [`TXphExtendComponentPropsMap`](../type-aliases/TXphExtendComponentPropsMap.md) | `object` |
 
 ## Properties
 
-### auth?
-
-> `optional` **auth**: `string` \| `string`[]
-
-#### Description
-
-权限标识
-
-#### Inherited from
-
-[`IBaseActionProps`](IBaseActionProps.md).[`auth`](IBaseActionProps.md#auth)
-
-#### Defined in
-
-[packages/common/src/components/actions/types/actionItem.ts:16](https://github.com/XiaoPiHong/xph-crud/blob/1453d1f4b2490c13545a9d7404efaaabc2a2fd0f/packages/common/src/components/actions/types/actionItem.ts#L16)
-
-***
-
-### component
-
-> **component**: `T`
-
-#### Description
-
-组件
-
-#### Defined in
-
-[packages/common/src/components/actions/types/actionItem.ts:65](https://github.com/XiaoPiHong/xph-crud/blob/1453d1f4b2490c13545a9d7404efaaabc2a2fd0f/packages/common/src/components/actions/types/actionItem.ts#L65)
-
-***
-
-### componentProps?
-
-> `optional` **componentProps**: [`TComponentType`](../type-aliases/TComponentType.md)\<`K`\>\[`T`\]
-
-#### Description
-
-组件属性
-
-#### Defined in
-
-[packages/common/src/components/actions/types/actionItem.ts:69](https://github.com/XiaoPiHong/xph-crud/blob/1453d1f4b2490c13545a9d7404efaaabc2a2fd0f/packages/common/src/components/actions/types/actionItem.ts#L69)
-
-***
-
-### ifShow?
-
-> `optional` **ifShow**: `boolean` \| () => `any`
-
-#### Description
-
-是否显示
-
-#### Inherited from
-
-[`IBaseActionProps`](IBaseActionProps.md).[`ifShow`](IBaseActionProps.md#ifshow)
-
-#### Defined in
-
-[packages/common/src/components/actions/types/actionItem.ts:12](https://github.com/XiaoPiHong/xph-crud/blob/1453d1f4b2490c13545a9d7404efaaabc2a2fd0f/packages/common/src/components/actions/types/actionItem.ts#L12)
-
-***
-
-### key?
-
-> `optional` **key**: `string`
-
-#### Description
-
-唯一标识
-
-#### Inherited from
-
-[`IBaseActionProps`](IBaseActionProps.md).[`key`](IBaseActionProps.md#key)
-
-#### Defined in
-
-[packages/common/src/components/actions/types/actionItem.ts:8](https://github.com/XiaoPiHong/xph-crud/blob/1453d1f4b2490c13545a9d7404efaaabc2a2fd0f/packages/common/src/components/actions/types/actionItem.ts#L8)
+| Property | Type | Description |
+| ------ | ------ | ------ |
+| `auth?` | `string` \| `string`[] | 权限标识 |
+| `component` | `T` | 组件 |
+| `componentProps?` | [`TComponentType`](../type-aliases/TComponentType.md)\<`K`\>\[`T`\] | 组件属性 |
+| `ifShow?` | `boolean` \| () => `any` | 是否显示 |
+| `key?` | `string` | 唯一标识 |

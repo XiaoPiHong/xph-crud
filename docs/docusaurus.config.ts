@@ -56,6 +56,18 @@ const config: Config = {
         readme: "none",
         exclude: ["**/*.md"],
         excludeExternals: true, // 排除外部声明
+        propertyMembersFormat: "table",
+        interfacePropertiesFormat: "table",
+        typeDeclarationFormat: "table",
+        parametersFormat: "table",
+        enumMembersFormat: "table",
+        classPropertiesFormat: "table",
+        tableColumnSettings: {
+          hideInherited: true,
+          hideModifiers: true,
+          hideOverrides: true,
+          hideSources: true,
+        },
       },
     ],
   ],

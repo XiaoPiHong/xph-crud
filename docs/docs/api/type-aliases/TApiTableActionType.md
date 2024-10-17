@@ -4,30 +4,12 @@
 
 ## Type declaration
 
-### reloadData()
-
-> **reloadData**: () => `Promise`\<`void`\>
-
-#### Returns
-
-`Promise`\<`void`\>
-
-### resetAllData()
-
-> **resetAllData**: () => `Promise`\<`void`\>
-
-#### Returns
-
-`Promise`\<`void`\>
-
-### resetData()
-
-> **resetData**: () => `Promise`\<`void`\>
-
-#### Returns
-
-`Promise`\<`void`\>
+| Name | Type | Description |
+| ------ | ------ | ------ |
+| `reloadData` | () => `Promise`\<`void`\> | 刷新数据 |
+| `resetAllData` | () => `Promise`\<`void`\> | 重置事件（重置页码、表单后重新请求） |
+| `resetData` | () => `Promise`\<`void`\> | 重置事件（重置表单后重新请求） |
 
 ## Defined in
 
-[packages/table/src/types/apiTable.ts:129](https://github.com/XiaoPiHong/xph-crud/blob/1453d1f4b2490c13545a9d7404efaaabc2a2fd0f/packages/table/src/types/apiTable.ts#L129)
+[packages/table/src/types/apiTable.ts:99](https://github.com/XiaoPiHong/xph-crud/blob/4f1a30dcf95acc1b0b790144a16f551c2adfa643/packages/table/src/types/apiTable.ts#L99)

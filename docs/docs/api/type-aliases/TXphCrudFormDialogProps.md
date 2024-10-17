@@ -4,46 +4,18 @@
 
 ## Type declaration
 
-### formProps
-
-> **formProps**: [`IXphFormProps`](../interfaces/IXphFormProps.md)\<`T`\>
-
-### onCancel()?
-
-> `optional` **onCancel**: (`event`) => `Promise`\<`any`\>
-
-#### Parameters
-
-• **event**
-
-• **event.data**: `any`
-
-• **event.values**: `any`
-
-#### Returns
-
-`Promise`\<`any`\>
-
-### onOk()?
-
-> `optional` **onOk**: (`event`) => `Promise`\<`any`\>
-
-#### Parameters
-
-• **event**
-
-• **event.data**: `any`
-
-• **event.values**: `any`
-
-#### Returns
-
-`Promise`\<`any`\>
+| Name | Type | Description |
+| ------ | ------ | ------ |
+| `formProps` | [`IXphFormProps`](../interfaces/IXphFormProps.md)\<`T`\> | crud弹窗的form配置 |
+| `onCancel`? | (`event`) => `Promise`\<`any`\> | crud弹窗点击取消回调 |
+| `onOk`? | (`event`) => `Promise`\<`any`\> | crud弹窗点击确定的回调 |
 
 ## Type Parameters
 
-• **T** *extends* [`TXphExtendComponentPropsMap`](TXphExtendComponentPropsMap.md) = `object`
+| Type Parameter | Default type |
+| ------ | ------ |
+| `T` *extends* [`TXphExtendComponentPropsMap`](TXphExtendComponentPropsMap.md) | `object` |
 
 ## Defined in
 
-[packages/table/src/types/crudFormDialog.ts:8](https://github.com/XiaoPiHong/xph-crud/blob/1453d1f4b2490c13545a9d7404efaaabc2a2fd0f/packages/table/src/types/crudFormDialog.ts#L8)
+[packages/table/src/types/crudFormDialog.ts:8](https://github.com/XiaoPiHong/xph-crud/blob/4f1a30dcf95acc1b0b790144a16f551c2adfa643/packages/table/src/types/crudFormDialog.ts#L8)

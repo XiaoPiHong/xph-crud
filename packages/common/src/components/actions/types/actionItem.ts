@@ -3,15 +3,15 @@ import { TXphExtendComponentPropsMap } from "../../../types";
 
 export interface IBaseActionProps {
   /**
-   * @description 唯一标识
+   * 唯一标识
    */
   key?: string;
   /**
-   * @description 是否显示
+   * 是否显示
    */
   ifShow?: boolean | (() => any);
   /**
-   * @description 权限标识
+   * 权限标识
    */
   auth?: string | Array<string>;
 }
@@ -25,27 +25,27 @@ interface IButtonProps extends ButtonProps {}
 interface IDropdownProps extends Omit<ButtonProps, "onClick"> {
   dropDownItems: {
     /**
-     * @description 唯一标识
+     * 唯一标识
      */
     key: string;
     /**
-     * @description 显示文本
+     * 显示文本
      */
     label: string;
     /**
-     * @description 是否禁用，注意：父级如果disabled为true，子级无法展开（所以相当于是变向的父级禁用，子级也禁用了）
+     * 是否禁用，注意：父级如果disabled为true，子级无法展开（所以相当于是变向的父级禁用，子级也禁用了）
      */
     disabled?: boolean;
     /**
-     * @description 图标
+     * 图标
      */
     icon?: React.ReactNode;
     /**
-     * @description 是否显示
+     * 是否显示
      */
     ifShow?: boolean | (() => any);
     /**
-     * @description 权限标识
+     * 权限标识
      */
     auth?: string | Array<string>;
   }[];
@@ -60,11 +60,11 @@ export interface IComponentActionProps<
   K extends TXphExtendComponentPropsMap = {}
 > extends IBaseActionProps {
   /**
-   * @description 组件
+   * 组件
    */
   component: T;
   /**
-   * @description 组件属性
+   * 组件属性
    */
   componentProps?: TComponentType<K>[T];
 }
@@ -74,7 +74,7 @@ export interface IComponentActionProps<
  */
 export interface IRenderActionProps extends IBaseActionProps {
   /**
-   * @description 自定义内容函数
+   * 自定义内容函数
    */
   render: React.ReactElement;
 }

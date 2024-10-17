@@ -4,12 +4,12 @@
 
 ## Type Parameters
 
-• **T** = [`TXphDataSourceItem`](TXphDataSourceItem.md)
-
-• **J** *extends* [`TXphExtendComponentPropsMap`](TXphExtendComponentPropsMap.md) = `object`
-
-• **K** *extends* [`TXphExtendComponentPropsMap`](TXphExtendComponentPropsMap.md) = `object`
+| Type Parameter | Default type |
+| ------ | ------ |
+| `T` | [`TXphDataSourceItem`](TXphDataSourceItem.md) |
+| `J` *extends* [`TXphExtendComponentPropsMap`](TXphExtendComponentPropsMap.md) | `object` |
+| `K` *extends* [`TXphExtendComponentPropsMap`](TXphExtendComponentPropsMap.md) | `object` |
 
 ## Defined in
 
-[packages/table/src/types/column.ts:50](https://github.com/XiaoPiHong/xph-crud/blob/1453d1f4b2490c13545a9d7404efaaabc2a2fd0f/packages/table/src/types/column.ts#L50)
+[packages/table/src/types/column.ts:50](https://github.com/XiaoPiHong/xph-crud/blob/4f1a30dcf95acc1b0b790144a16f551c2adfa643/packages/table/src/types/column.ts#L50)

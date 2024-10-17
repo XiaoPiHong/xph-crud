@@ -25,7 +25,7 @@ export type TTableProps<
   FormExtendPropsMap extends TXphExtendComponentPropsMap = {}
 > = {
   /**
-   * @description 表格配置
+   * 表格配置
    */
   table?: TApiTableProps<
     RecordType,
@@ -34,22 +34,22 @@ export type TTableProps<
     ToolbarExtendPropsMap
   >;
   /**
-   * @description 搜索表单配置项
+   * 搜索表单配置项
    */
   searchForm?: TSearchFormProps<FormExtendPropsMap>;
 
   /**
-   * @description （新增 / 修改）表单弹窗配置项
+   * （新增 / 修改）表单弹窗配置项
    */
   crudFormDialog?: TCrudFormDialogProps<FormExtendPropsMap>;
 
   /**
-   * @description 分页改变事件
+   * 分页改变事件
    */
   onPaginationChange?: (page: number, pageSize: number) => void;
 
   /**
-   * @description 列表选中事件
+   * 列表选中事件
    */
   onRowSelectionChange?: (
     selectedRowKeys: React.Key[],

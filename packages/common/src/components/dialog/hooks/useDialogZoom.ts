@@ -28,7 +28,7 @@ const useDialogZoom = ({
   };
 
   /**
-   * @param type 触发方
+   * @param type - 触发方
    */
   const onMaximize = (type: "minimize" | "maximize") => {
     if (type === "minimize") {

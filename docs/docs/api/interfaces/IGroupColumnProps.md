@@ -6,18 +6,14 @@
 
 ## Type Parameters
 
-• **T**
-
-• **J** *extends* [`TXphExtendComponentPropsMap`](../type-aliases/TXphExtendComponentPropsMap.md) = `object`
-
-• **K** *extends* [`TXphExtendComponentPropsMap`](../type-aliases/TXphExtendComponentPropsMap.md) = `object`
+| Type Parameter | Default type |
+| ------ | ------ |
+| `T` | - |
+| `J` *extends* [`TXphExtendComponentPropsMap`](../type-aliases/TXphExtendComponentPropsMap.md) | `object` |
+| `K` *extends* [`TXphExtendComponentPropsMap`](../type-aliases/TXphExtendComponentPropsMap.md) | `object` |
 
 ## Properties
 
-### children
-
-> **children**: ([`IGroupColumnProps`](IGroupColumnProps.md)\<`T`, `J`, `K`\> \| [`IComponentColumnProps`](IComponentColumnProps.md)\<`T`, `J`, `K`\> \| [`IRenderColumnProps`](IRenderColumnProps.md)\<`T`\> \| `Without`\<[`IComponentColumnProps`](IComponentColumnProps.md)\<`T`, `J`, `K`\>, keyof IRenderColumnProps\<T\>\> & [`IRenderColumnProps`](IRenderColumnProps.md)\<`T`\> \| `Without`\<[`IRenderColumnProps`](IRenderColumnProps.md)\<`T`\>, keyof IComponentColumnProps\<T, J, K\>\> & [`IComponentColumnProps`](IComponentColumnProps.md)\<`T`, `J`, `K`\> \| `Without`\<[`IComponentColumnProps`](IComponentColumnProps.md)\<`T`, `J`, `K`\> \| [`IRenderColumnProps`](IRenderColumnProps.md)\<`T`\>, keyof IGroupColumnProps\<T, J, K\>\> & [`IGroupColumnProps`](IGroupColumnProps.md)\<`T`, `J`, `K`\> \| Without\<IGroupColumnProps\<T, J, K\>, "key" \| "className" \| "hidden" \| "title" \| "fixed" \| "width" \| "responsive" \| "colSpan" \| "dataIndex" \| "shouldCellUpdate" \| ... 28 more ... \| "onFilterDropdownVisibleChange"\> & (IComponentColumnProps\<...\> \| IRenderColumnProps\<...\>))[]
-
-#### Defined in
-
-[packages/table/src/types/column.ts:34](https://github.com/XiaoPiHong/xph-crud/blob/1453d1f4b2490c13545a9d7404efaaabc2a2fd0f/packages/table/src/types/column.ts#L34)
+| Property | Type |
+| ------ | ------ |
+| `children` | ([`IGroupColumnProps`](IGroupColumnProps.md)\<`T`, `J`, `K`\> \| [`IComponentColumnProps`](IComponentColumnProps.md)\<`T`, `J`, `K`\> \| [`IRenderColumnProps`](IRenderColumnProps.md)\<`T`\> \| `Without`\<[`IComponentColumnProps`](IComponentColumnProps.md)\<`T`, `J`, `K`\>, keyof IRenderColumnProps\<T\>\> & [`IRenderColumnProps`](IRenderColumnProps.md)\<`T`\> \| `Without`\<[`IRenderColumnProps`](IRenderColumnProps.md)\<`T`\>, keyof IComponentColumnProps\<T, J, K\>\> & [`IComponentColumnProps`](IComponentColumnProps.md)\<`T`, `J`, `K`\> \| `Without`\<[`IComponentColumnProps`](IComponentColumnProps.md)\<`T`, `J`, `K`\> \| [`IRenderColumnProps`](IRenderColumnProps.md)\<`T`\>, keyof IGroupColumnProps\<T, J, K\>\> & [`IGroupColumnProps`](IGroupColumnProps.md)\<`T`, `J`, `K`\> \| Without\<IGroupColumnProps\<T, J, K\>, "key" \| "className" \| "hidden" \| "title" \| "fixed" \| "width" \| "responsive" \| "colSpan" \| "dataIndex" \| "shouldCellUpdate" \| ... 28 more ... \| "onFilterDropdownVisibleChange"\> & (IComponentColumnProps\<...\> \| IRenderColumnProps\<...\>))[] |

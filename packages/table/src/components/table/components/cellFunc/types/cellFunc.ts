@@ -10,18 +10,18 @@ export type TCellComponentPropsMap<
 > = {
   link: {
     /**
-     * @description 超链接，点击超链接跳转
+     * 超链接，点击超链接跳转
      */
     url?: string;
     /**
-     * @description 点击事件（优先级最高）
+     * 点击事件（优先级最高）
      */
     onClick?: () => void;
   };
   actions: IXphActionsProps<ActionsExtendPropsMap>;
   tag: {
     /**
-     * @description 标签的枚举
+     * 标签的枚举
      */
     enums: Array<{
       label: string;
@@ -113,7 +113,16 @@ export interface ICurCellFuncProps<
  * 注意：因为多个自定义组件可能都有mainClick，所以也需要保证其他组件的正常调用（即：传递给子组件Comp的时候，需要把父组件传递过来的mainClick给手动执行一下）
  */
 export interface IMainProps {
+  /**
+   * 点击事件
+   */
   mainClick?: () => void;
+  /**
+   * 内容样式
+   */
   mainStyle?: React.CSSProperties;
+  /**
+   * 内容
+   */
   mainHandleText?: () => any;
 }

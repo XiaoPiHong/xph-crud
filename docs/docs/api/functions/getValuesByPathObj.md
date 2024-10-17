@@ -4,9 +4,10 @@
 
 ## Parameters
 
-• **fields**: `Record`\<`string`, `string`\>
-
-• **values**: `Record`\<`string`, `any`\>
+| Parameter | Type |
+| ------ | ------ |
+| `fields` | `Record`\<`string`, `string`\> |
+| `values` | `Record`\<`string`, `any`\> |
 
 ## Returns
 
@@ -26,4 +27,4 @@ return { current: 1, pageSize: 10 }
 
 ## Defined in
 
-[packages/common/src/utils/getValueByPath.ts:22](https://github.com/XiaoPiHong/xph-crud/blob/1453d1f4b2490c13545a9d7404efaaabc2a2fd0f/packages/common/src/utils/getValueByPath.ts#L22)
+[packages/common/src/utils/getValueByPath.ts:24](https://github.com/XiaoPiHong/xph-crud/blob/4f1a30dcf95acc1b0b790144a16f551c2adfa643/packages/common/src/utils/getValueByPath.ts#L24)

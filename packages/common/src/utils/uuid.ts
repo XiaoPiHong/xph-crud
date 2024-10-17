@@ -1,9 +1,11 @@
-// 生成随机数
 const hexList: string[] = [];
 for (let i = 0; i <= 15; i++) {
   hexList[i] = i.toString(16);
 }
 
+/**
+ * @description 生成随机数
+ */
 export function buildUUID(): string {
   let uuid = "";
   for (let i = 1; i <= 36; i++) {

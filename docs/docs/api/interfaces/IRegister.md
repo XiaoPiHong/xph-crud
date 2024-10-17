@@ -4,7 +4,9 @@
 
 ## Parameters
 
-• **methods**: [`IXphFormActionType`](IXphFormActionType.md)
+| Parameter | Type |
+| ------ | ------ |
+| `methods` | [`IXphFormActionType`](IXphFormActionType.md) |
 
 ## Returns
 
@@ -12,4 +14,4 @@
 
 ## Defined in
 
-[packages/form/src/types/form.ts:7](https://github.com/XiaoPiHong/xph-crud/blob/1453d1f4b2490c13545a9d7404efaaabc2a2fd0f/packages/form/src/types/form.ts#L7)
+[packages/form/src/types/form.ts:7](https://github.com/XiaoPiHong/xph-crud/blob/4f1a30dcf95acc1b0b790144a16f551c2adfa643/packages/form/src/types/form.ts#L7)

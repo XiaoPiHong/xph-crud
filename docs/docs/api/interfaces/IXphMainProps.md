@@ -8,38 +8,8 @@
 
 ## Properties
 
-### mainClick()?
-
-> `optional` **mainClick**: () => `void`
-
-#### Returns
-
-`void`
-
-#### Defined in
-
-[packages/table/src/components/table/components/cellFunc/types/cellFunc.ts:116](https://github.com/XiaoPiHong/xph-crud/blob/1453d1f4b2490c13545a9d7404efaaabc2a2fd0f/packages/table/src/components/table/components/cellFunc/types/cellFunc.ts#L116)
-
-***
-
-### mainHandleText()?
-
-> `optional` **mainHandleText**: () => `any`
-
-#### Returns
-
-`any`
-
-#### Defined in
-
-[packages/table/src/components/table/components/cellFunc/types/cellFunc.ts:118](https://github.com/XiaoPiHong/xph-crud/blob/1453d1f4b2490c13545a9d7404efaaabc2a2fd0f/packages/table/src/components/table/components/cellFunc/types/cellFunc.ts#L118)
-
-***
-
-### mainStyle?
-
-> `optional` **mainStyle**: `CSSProperties`
-
-#### Defined in
-
-[packages/table/src/components/table/components/cellFunc/types/cellFunc.ts:117](https://github.com/XiaoPiHong/xph-crud/blob/1453d1f4b2490c13545a9d7404efaaabc2a2fd0f/packages/table/src/components/table/components/cellFunc/types/cellFunc.ts#L117)
+| Property | Type | Description |
+| ------ | ------ | ------ |
+| `mainClick?` | () => `void` | 点击事件 |
+| `mainHandleText?` | () => `any` | 内容 |
+| `mainStyle?` | `CSSProperties` | 内容样式 |

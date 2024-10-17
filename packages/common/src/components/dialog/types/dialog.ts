@@ -2,85 +2,97 @@ import { ButtonProps } from "antd";
 
 export interface IDialogProps {
   /**
-   * @default 700
-   * @description 弹窗的宽度
+   * 弹窗的宽度
+   * @defaultValue `700`
    */
   width?: number;
   /**
-   * @default -
-   * @description 弹窗的高度
+   * 弹窗的高度
+   * @defaultValue `-`
    */
   height?: number;
   /**
-   * @default false
-   * @description 是否显示遮罩
+   * 是否显示遮罩
+   * @defaultValue `false`
    */
   mask?: boolean;
   /**
-   * @default -
-   * @description 弹窗的标题
+   * 弹窗的标题
+   * @defaultValue `-`
    */
   title?: string;
   /**
-   * @default -
-   * @description 确定按钮属性
+   * 确定按钮属性
+   * @defaultValue `-`
    */
   okProps?: Omit<ButtonProps, "children" | "onClick">;
   /**
-   * @default -
-   * @description 取消按钮属性
+   * 取消按钮属性
+   * @defaultValue `-`
    */
   cancelProps?: Omit<ButtonProps, "children" | "onClick">;
   /**
-   * @default "确定"
-   * @description 确定按钮文字
+   * 确定按钮文字
+   * @defaultValue `"确定"`
    */
   okText?: string;
   /**
-   * @default "取消"
-   * @description 取消按钮文字
+   * 取消按钮文字
+   * @defaultValue `"取消"`
    */
   cancelText?: string;
   /**
-   * @default -
-   * @description 点击确定按钮触发该事件
+   * 点击确定按钮触发该事件
+   * @defaultValue `-`
    */
   onOk?: (args) => Promise<void>;
   /**
-   * @default -
-   * @description 点击取消按钮触发该事件
+   * 点击取消按钮触发该事件
+   * @defaultValue `-`
    */
   onCancel?: (args) => Promise<void>;
   /**
-   * @default -
-   * @description 底部按钮自定义渲染函数
+   * 底部按钮自定义渲染函数
+   * @defaultValue `-`
    */
   renderFooter?: ({ loading }: { loading: boolean }) => React.ReactElement;
   /**
-   * @default -
-   * @description 顶部标题自定义渲染函数
+   * 顶部标题自定义渲染函数
+   * @defaultValue `-`
    */
   renderTitle?: () => React.ReactElement;
   /**
-   * @default -
-   * @description 打开的时候会触发该事件
+   * 打开的时候会触发该事件
+   * @defaultValue `-`
    */
   onOpen?: () => void;
   /**
-   * @default -
-   * @description 关闭的时候会触发该事件
+   * 关闭的时候会触发该事件
+   * @defaultValue `-`
    */
   onClose?: () => void;
   /**
-   * @default () => document.body
-   * @description 挂载弹窗的容器
+   * 挂载弹窗的容器
+   * @defaultValue `() => document.body`
    */
   getPopperContainer?: () => HTMLElement | null;
 }
 
 export interface IDialogActionType {
+  /**
+   * 打开
+   */
   open: () => Promise<void>;
+  /**
+   * 关闭
+   */
   close: () => void;
+  /**
+   * 设置loading
+   */
   setLoading: (loading: boolean) => void;
+  /**
+   * 获取弹窗状态
+   */
   getVisible: () => boolean;
 }

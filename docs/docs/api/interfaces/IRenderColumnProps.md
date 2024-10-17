@@ -6,26 +6,12 @@
 
 ## Type Parameters
 
-• **T**
+| Type Parameter |
+| ------ |
+| `T` |
 
 ## Properties
 
-### render()?
-
-> `optional` **render**: (`value`, `record`, `index`) => `ReactNode` \| `RenderedCell`\<`T`\>
-
-#### Parameters
-
-• **value**: `any`
-
-• **record**: `T`
-
-• **index**: `number`
-
-#### Returns
-
-`ReactNode` \| `RenderedCell`\<`T`\>
-
-#### Defined in
-
-[packages/table/src/types/column.ts:26](https://github.com/XiaoPiHong/xph-crud/blob/1453d1f4b2490c13545a9d7404efaaabc2a2fd0f/packages/table/src/types/column.ts#L26)
+| Property | Type |
+| ------ | ------ |
+| `render?` | (`value`: `any`, `record`: `T`, `index`: `number`) => `ReactNode` \| `RenderedCell`\<`T`\> |

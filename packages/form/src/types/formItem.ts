@@ -11,73 +11,73 @@ export type TFunction<T> = T | ((args: Recordable<any>) => T);
 
 export interface IBaseFormItemProps {
   /**
-   * @default -
-   * @description 字段名
+   * 字段名
+   * @defaultValue `-`
    */
   name: string;
   /**
-   * @default -
-   * @description 标签名
+   * 标签名
+   * @defaultValue `-`
    */
   label: string;
   /**
-   * @default -
-   * @description 子节点的值的属性，如 Switch、Checkbox 的是 checked
+   * 子节点的值的属性，如 Switch、Checkbox 的是 checked
+   * @defaultValue `-`
    */
   valuePropName?: string;
   /**
-   * @default -
-   * @description 是否显示（相当于display:none）
+   * 是否显示（相当于display:none）
+   * @defaultValue `-`
    */
   show?: TFunction<boolean>;
   /**
-   * @default -
-   * @description 是否显示（会新增或删除节点）
+   * 是否显示（会新增或删除节点）
+   * @defaultValue `-`
    */
   ifShow?: TFunction<boolean>;
   /**
-   * @default -
-   * @description 是否必填
+   * 是否必填
+   * @defaultValue `-`
    */
   required?: TFunction<boolean>;
   /**
-   * @default -
-   * @description 是否禁用（当和 Form 同时设置时，以 Item 为准）
+   * 是否禁用（当和 Form 同时设置时，以 Item 为准）
+   * @defaultValue `-`
    */
   disabled?: TFunction<boolean>;
   /**
-   * @default -
-   * @description 组件属性
+   * 组件属性
+   * @defaultValue `-`
    */
   componentProps?: TFunction<Recordable<any>>;
   /**
-   * @default -
-   * @description 校验规则
+   * 校验规则
+   * @defaultValue `-`
    */
   rules?: Rule[];
   /**
-   * @default -
-   * @description 表单项组件的布局方式（当和 Form 同时设置时，以 Item 为准）
+   * 表单项组件的布局方式（当和 Form 同时设置时，以 Item 为准）
+   * @defaultValue `-`
    */
   wrapperCol?: ColProps;
   /**
-   * @default -
-   * @description 表单项label标签布局方式（当和 Form 同时设置时，以 Item 为准）
+   * 表单项label标签布局方式（当和 Form 同时设置时，以 Item 为准）
+   * @defaultValue `-`
    */
   labelCol?: ColProps;
   /**
-   * @default -
-   * @description 表单项的栅格配置（当和 Form 同时设置时，以 Item 为准）
+   * 表单项的栅格配置（当和 Form 同时设置时，以 Item 为准）
+   * @defaultValue `-`
    */
   colProps?: ColProps;
   /**
-   * @default -
-   * @description 是否强制换一行显示该表单项（强制换行后续会跟随换行表单项）
+   * 是否强制换一行显示该表单项（强制换行后续会跟随换行表单项）
+   * @defaultValue `-`
    */
   forceRow?: boolean;
   /**
-   * @default -
-   * @description 默认值
+   * 默认值
+   * @defaultValue `-`
    */
   initialValue?: any;
 }
@@ -87,23 +87,23 @@ export interface IBaseFormItemProps {
  */
 export interface IFRenderProps {
   /**
-   * @description 当前项name
+   * 当前项name
    */
   name: string;
   /**
-   * @description 当前项状态
+   * 当前项状态
    */
   disabled: boolean;
   /**
-   * @description 组件属性
+   * 组件属性
    */
   componentProps: Recordable<any>;
   /**
-   * @description 表单值
+   * 表单值
    */
   model: any;
   /**
-   * @description 表单方法实例
+   * 表单方法实例
    */
   methods: IFormActionType;
 }
@@ -113,7 +113,8 @@ export interface IFRenderProps {
  */
 export interface IRenderFormItemProps extends IBaseFormItemProps {
   /**
-   * @description 自定义渲染函数
+   * 自定义渲染函数
+   * @defaultValue `-`
    */
   render: (props: IFRenderProps) => React.ReactNode;
 }
@@ -125,7 +126,8 @@ export interface IComponentFormItemProps<
   T extends TXphExtendComponentPropsMap = {}
 > extends IBaseFormItemProps {
   /**
-   * @description 映射组件
+   * 映射组件
+   * @defaultValue `-`
    */
   component: keyof TComponentPropsMap<T>;
 }
