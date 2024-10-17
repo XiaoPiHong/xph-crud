@@ -1,22 +1,17 @@
 import { Form } from "examples";
 import DemoWrapper from "@site/src/components/DemoWrapper";
-import { default as rawExamples } from "!raw-loader!examples/demo/form/form.tsx";
+import { default as formRaw } from "!raw-loader!examples/demo/form/form.tsx";
 import CodeBlock from "@site/src/theme/CodeBlock";
 import IXphFormPropsApi from "@site/docs/api/interfaces/IXphFormProps.md";
+import ExpandDemoWrapper from "@site/src/components/ExpandDemoWrapper";
 
 # XphForm 可配置表单
 
 ## 基本使用
 
-<CodeBlock language={"tsx"}>{rawExamples}</CodeBlock>
-
-## Typescript 案例
-
-<pre>
-  <DemoWrapper>
-    <Form />
-  </DemoWrapper>
-</pre>
+<ExpandDemoWrapper rawStr={formRaw}>
+  <Form />
+</ExpandDemoWrapper>
 
 <IXphFormPropsApi />
 
