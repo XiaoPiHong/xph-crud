@@ -17,4 +17,4 @@
 
 ## Defined in
 
-[packages/common/src/components/actions/types/actionItem.ts:19](https://github.com/XiaoPiHong/xph-crud/blob/f7d69f3e4652fd81809e3295efebb4f500bfd501/packages/common/src/components/actions/types/actionItem.ts#L19)
+[packages/common/src/components/actions/types/actionItem.ts:19](https://github.com/XiaoPiHong/xph-crud/blob/35d86c07c46a3dd83fadda70a3d1fe8dfc4260ac/packages/common/src/components/actions/types/actionItem.ts#L19)

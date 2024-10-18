@@ -112,12 +112,24 @@ const ReactApp: React.FC = () => {
                 max: 1,
                 items: [
                   {
-                    key: "add",
+                    key: "edit",
                     component: "Button",
                     componentProps: {
-                      children: "我是按钮",
+                      children: "编辑",
                       onClick: (e) => {
-                        console.log(e);
+                        xphTableRef.current?.open({
+                          data: record,
+                          ok: async ({ values }) => {
+                            return new Promise((resolve) => {
+                              setTimeout(() => {
+                                resolve(values);
+                              }, 3000);
+                            });
+                          },
+                          cancel: async ({ values }) => {
+                            console.log(values);
+                          },
+                        });
                       },
                     },
                   },
@@ -379,9 +391,21 @@ const ReactApp: React.FC = () => {
             key: "add",
             component: "Button",
             componentProps: {
-              children: "我是按钮",
+              children: "新增",
               onClick: (e) => {
-                console.log(e);
+                xphTableRef.current?.open({
+                  data: null,
+                  ok: async ({ values }) => {
+                    return new Promise((resolve) => {
+                      setTimeout(() => {
+                        resolve(values);
+                      }, 3000);
+                    });
+                  },
+                  cancel: async ({ values }) => {
+                    console.log(values);
+                  },
+                });
               },
             },
           },
@@ -416,32 +440,6 @@ const ReactApp: React.FC = () => {
       colProps: { span: 6 },
       collapsible: true,
       items: [
-        {
-          name: "Button",
-          label: "弹窗",
-          component: "Button",
-          componentProps: {
-            children: "点击打开表格弹窗",
-            onClick: (e) => {
-              xphTableRef.current?.open({
-                data: {
-                  Input: "我是xiaopihong",
-                  Select: "Option1",
-                },
-                ok: async ({ values }) => {
-                  return new Promise((resolve) => {
-                    setTimeout(() => {
-                      resolve(values);
-                    }, 20000);
-                  });
-                },
-                cancel: async ({ values }) => {
-                  console.log(values);
-                },
-              });
-            },
-          },
-        },
         {
           name: "Button",
           label: "改变crud弹窗宽度",
@@ -539,11 +537,11 @@ const ReactApp: React.FC = () => {
       formProps: {
         items: [
           {
-            name: "Input",
-            label: "Input",
+            name: "name",
+            label: "姓名",
             component: "Input",
             required: true,
-            initialValue: "Input",
+            initialValue: "",
             componentProps: {
               onChange: (e) => {
                 console.log(e);
@@ -552,19 +550,19 @@ const ReactApp: React.FC = () => {
             colProps: { span: 12 },
           },
           {
-            name: "Select",
-            label: "Select",
+            name: "gender",
+            label: "性别",
             component: "Select",
             required: true,
             componentProps: {
               options: [
                 {
-                  label: "Option1",
-                  value: "Option1",
+                  label: "男",
+                  value: "male",
                 },
                 {
-                  label: "Option2",
-                  value: "Option2",
+                  label: "女",
+                  value: "female",
                 },
               ],
               onChange: (e) => {
