@@ -1,3 +1,3 @@
-import Actions from "./actions";
+import Base from "./base";
 
-export { Actions };
+export default { Base };

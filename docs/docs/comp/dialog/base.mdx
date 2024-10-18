@@ -1,5 +1,5 @@
-import { Dialog } from "examples";
-import { default as dialogRaw } from "!raw-loader!examples/demo/dialog/dialog.tsx";
+import { DialogDemos } from "examples";
+import { default as dialogRaw } from "!raw-loader!examples/demo/dialog/base.tsx";
 import IXphDialogPropsApi from "@site/docs/api/interfaces/IXphDialogProps.md";
 import ExpandDemoWrapper from "@site/src/components/ExpandDemoWrapper";
 
@@ -8,7 +8,7 @@ import ExpandDemoWrapper from "@site/src/components/ExpandDemoWrapper";
 ## 基本使用
 
 <ExpandDemoWrapper rawStr={dialogRaw} height={"400px"}>
-  <Dialog />
+  <DialogDemos.Base />
 </ExpandDemoWrapper>
 
 <IXphDialogPropsApi />

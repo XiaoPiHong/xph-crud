@@ -1,3 +1,3 @@
-import Dialog from "./dialog";
+import Base from "./base";
 
-export { Dialog };
+export default { Base };

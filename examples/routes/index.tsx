@@ -1,11 +1,18 @@
 import { Navigate } from "react-router-dom";
-import { Form, Table, Actions, Dialog } from "../demo";
+import {
+  FormDemos,
+  TableDemos,
+  ActionsDemos,
+  DialogDemos,
+  AuthDemos,
+} from "../demo";
 
 const routes = [
-  { path: "/form", element: <Form /> },
-  { path: "/table", element: <Table /> },
-  { path: "/actions", element: <Actions /> },
-  { path: "/dialog", element: <Dialog /> },
+  { path: "/form", element: <FormDemos.Base /> },
+  { path: "/table", element: <TableDemos.Base /> },
+  { path: "/actions", element: <ActionsDemos.Base /> },
+  { path: "/auth", element: <AuthDemos.Base /> },
+  { path: "/dialog", element: <DialogDemos.Base /> },
   { path: "/", element: <Navigate to="/form" /> },
 ];
 export default routes;

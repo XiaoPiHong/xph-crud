@@ -1,3 +1,7 @@
-import Form from "./form";
+import Base from "./base";
+import { default as Properties } from "./properties";
 
-export { Form };
+export default {
+  Base,
+  Properties,
+};

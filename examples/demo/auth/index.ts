@@ -1,3 +1,3 @@
-import Auth from "./auth";
+import Base from "./base";
 
-export { Auth };
+export default { Base };

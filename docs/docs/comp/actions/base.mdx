@@ -1,5 +1,5 @@
-import { Actions } from "examples";
-import { default as actionsRaw } from "!raw-loader!examples/demo/actions/actions.tsx";
+import { ActionsDemos } from "examples";
+import { default as actionsRaw } from "!raw-loader!examples/demo/actions/base.tsx";
 import IXphActionsPropsApi from "@site/docs/api/interfaces/IXphActionsProps.md";
 import ExpandDemoWrapper from "@site/src/components/ExpandDemoWrapper";
 
@@ -8,7 +8,7 @@ import ExpandDemoWrapper from "@site/src/components/ExpandDemoWrapper";
 ## 基本使用
 
 <ExpandDemoWrapper rawStr={actionsRaw}>
-  <Actions />
+  <ActionsDemos.Base />
 </ExpandDemoWrapper>
 
 <IXphActionsPropsApi />

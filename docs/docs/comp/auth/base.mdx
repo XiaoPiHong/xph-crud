@@ -1,5 +1,5 @@
-import { Auth } from "examples";
-import { default as authRaw } from "!raw-loader!examples/demo/auth/auth.tsx";
+import { AuthDemos } from "examples";
+import { default as authRaw } from "!raw-loader!examples/demo/auth/base.tsx";
 import IXphAuthPropsApi from "@site/docs/api/interfaces/IXphAuthProps.md";
 import ExpandDemoWrapper from "@site/src/components/ExpandDemoWrapper";
 
@@ -8,7 +8,7 @@ import ExpandDemoWrapper from "@site/src/components/ExpandDemoWrapper";
 ## 基本使用
 
 <ExpandDemoWrapper rawStr={authRaw}>
-  <Auth />
+  <AuthDemos.Base />
 </ExpandDemoWrapper>
 
 <IXphAuthPropsApi />

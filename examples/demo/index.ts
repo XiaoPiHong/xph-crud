@@ -1,6 +1,6 @@
-export * from "./form";
-export * from "./table";
-export * from "./actions";
-export * from "./dialog";
-export * from "./auth";
+export { default as FormDemos } from "./form";
+export { default as TableDemos } from "./table";
+export { default as ActionsDemos } from "./actions";
+export { default as DialogDemos } from "./dialog";
+export { default as AuthDemos } from "./auth";
 export * from "./extends";

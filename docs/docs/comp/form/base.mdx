@@ -1,5 +1,5 @@
-import { Form } from "examples";
-import { default as formRaw } from "!raw-loader!examples/demo/form/form.tsx";
+import { FormDemos } from "examples";
+import { default as formRaw } from "!raw-loader!examples/demo/form/base.tsx";
 import IXphFormPropsApi from "@site/docs/api/interfaces/IXphFormProps.md";
 import ExpandDemoWrapper from "@site/src/components/ExpandDemoWrapper";
 
@@ -8,7 +8,7 @@ import ExpandDemoWrapper from "@site/src/components/ExpandDemoWrapper";
 ## 基本使用
 
 <ExpandDemoWrapper rawStr={formRaw}>
-  <Form />
+  <FormDemos.Base />
 </ExpandDemoWrapper>
 
 <IXphFormPropsApi />

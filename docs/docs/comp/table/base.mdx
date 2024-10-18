@@ -1,5 +1,5 @@
-import { Table } from "examples";
-import { default as tableRaw } from "!raw-loader!examples/demo/table/table.tsx";
+import { TableDemos } from "examples";
+import { default as tableRaw } from "!raw-loader!examples/demo/table/base.tsx";
 import TXphTablePropsApi from "@site/docs/api/type-aliases/TXphTableProps.md";
 import ExpandDemoWrapper from "@site/src/components/ExpandDemoWrapper";
 
@@ -8,7 +8,7 @@ import ExpandDemoWrapper from "@site/src/components/ExpandDemoWrapper";
 ## 基本使用
 
 <ExpandDemoWrapper rawStr={tableRaw}>
-  <Table />
+  <TableDemos.Base />
 </ExpandDemoWrapper>
 
 <TXphTablePropsApi />
