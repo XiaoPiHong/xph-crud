@@ -1,10 +1,8 @@
 import React from "react";
-import { XphForm } from "xph-crud";
+import { XphForm, IXphFormProps } from "xph-crud";
 
 const ReactApp: React.FC = () => {
-  const props = {
-    labelCol: { span: 6 },
-    wrapperCol: { span: 18 },
+  const props: IXphFormProps = {
     items: [
       {
         name: "Input",
