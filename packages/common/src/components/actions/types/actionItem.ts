@@ -114,7 +114,7 @@ type XOR<T extends any[]> = T extends [infer A, infer B, ...infer Rest]
 /**
  * @description 将组件类型映射为 IComponentActionProps
  */
-type TMapComponentActionProps<T extends TXphExtendComponentPropsMap> = {
+export type TMapComponentActionProps<T extends TXphExtendComponentPropsMap> = {
   [K in keyof TComponentType<T>]: IComponentActionProps<K, T>;
 }[keyof TComponentType<T>];
 
