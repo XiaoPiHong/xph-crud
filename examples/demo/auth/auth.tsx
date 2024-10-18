@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { XphAuth } from "xph-crud";
+import { Button } from "antd";
 
 const ReactApp: React.FC = () => {
   /** 当前拥有的权限 */
@@ -23,10 +24,9 @@ const ReactApp: React.FC = () => {
 
   return (
     <div>
-      <button onClick={onClickGetAllPermissionsBtn}>点击获取所有权限</button>
-
-      <button onClick={onClickGetAddPermissionBtn}>点击获取["add"] 权限</button>
-
+      <Button onClick={onClickGetAllPermissionsBtn}>点击获取所有权限</Button>
+      &nbsp;
+      <Button onClick={onClickGetAddPermissionBtn}>点击获取["add"] 权限</Button>
       {/** 显示内容需要的权限是["add", "edit", "delete"] */}
       <XphAuth auth={auth} authCode={["add", "edit", "delete"]}>
         <p>我是需要鉴权的内容</p>

@@ -3,11 +3,12 @@ import { XphForm, XphExtendCompPropsProvider } from "xph-crud";
 
 interface IMyInputProps {
   borderColor?: string;
+  placeholder?: string;
   onChange?: (...args) => void;
 }
 
 const MyInput = (myInputProps: IMyInputProps) => {
-  const { borderColor, onChange } = myInputProps;
+  const { borderColor, onChange, placeholder } = myInputProps;
   const onInputChange = (e) => {
     const {
       target: { value },
@@ -17,6 +18,7 @@ const MyInput = (myInputProps: IMyInputProps) => {
   return (
     <input
       onInput={onInputChange}
+      placeholder={placeholder}
       style={{ borderColor: borderColor ? borderColor : "black" }}
     />
   );
@@ -38,6 +40,7 @@ const ReactApp: React.FC = () => {
         colProps: { span: 8 },
         componentProps: {
           borderColor: "red",
+          placeholder: "我是自定义的输入框",
         },
       },
     ],

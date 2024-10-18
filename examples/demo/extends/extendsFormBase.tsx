@@ -5,8 +5,8 @@ const MyButton = ({ children }) => {
   return <button>{children}</button>;
 };
 
-const MyInput = () => {
-  return <input></input>;
+const MyInput = ({ placeholder }) => {
+  return <input placeholder={placeholder}></input>;
 };
 
 /**
@@ -36,7 +36,9 @@ const ReactApp: React.FC = () => {
         label: "MyInput",
         component: "MyInput",
         colProps: { span: 8 },
-        componentProps: {},
+        componentProps: {
+          placeholder: "我是自定义的输入框",
+        },
       },
     ],
   };

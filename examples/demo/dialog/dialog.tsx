@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Input } from "antd";
+import { Input, Button } from "antd";
 import { XphDialog, IXphDialogProps, IXphDialogActionType } from "xph-crud";
 
 const ReactApp: React.FC = () => {
@@ -22,7 +22,7 @@ const ReactApp: React.FC = () => {
     getPopperContainer: () => document.getElementById("dialog-box"),
   };
 
-  const [thirdWidth, setThirdWidth] = useState(200);
+  const [thirdWidth, setThirdWidth] = useState(300);
   const thirdDialogProps: IXphDialogProps = {
     mask: false,
     title: "弹窗3标题",
@@ -76,12 +76,14 @@ const ReactApp: React.FC = () => {
         position: "relative",
       }}
     >
+      <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+        <Button onClick={onOpenFirstDialog}>点击打开XphDialog弹窗1</Button>
+        <Button onClick={onOpenSecondDialog}>点击打开XphDialog弹窗2</Button>
+        <Button onClick={onOpenThirdDialog}>点击打开XphDialog弹窗3</Button>
+        <Button onClick={onConsoleChildrenDom}>点击打印弹窗2子元素</Button>
+        <Button onClick={onChangeThirdWidth}>点击动态改变弹窗3宽度</Button>
+      </div>
       {/** 用来测试父元素有滚动条的情况 */}
-      <button onClick={onOpenFirstDialog}>点击打开XphDialog弹窗1</button>
-      <button onClick={onOpenSecondDialog}>点击打开XphDialog弹窗2</button>
-      <button onClick={onOpenThirdDialog}>点击打开XphDialog弹窗3</button>
-      <button onClick={onConsoleChildrenDom}>点击打印弹窗2子元素</button>
-      <button onClick={onChangeThirdWidth}>点击动态改变弹窗3宽度</button>
       {/* <div style={{ width: "1200px", height: "1200px" }}></div> */}
 
       <XphDialog {...firstDialogProps} ref={firstDialogRef}>

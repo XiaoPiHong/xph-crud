@@ -9,6 +9,8 @@ import {
 interface IMyInputProps {
   /** input边框的颜色 */
   borderColor?: string;
+  /** 提示语 */
+  placeholder?: string;
   /** onChange是默认透传进来的，如果表单model需要捕获当前自定义项的值，需要在自定义组件内部手动触发onChange事件，并且将值传递给其首个参数 */
   onChange?: (...args) => void;
 }
@@ -18,7 +20,7 @@ interface IMyInputProps {
  * （myInputProps就是初始化时候当前对应项的componentProps）
  */
 const MyInput = (myInputProps: IMyInputProps) => {
-  const { borderColor, onChange } = myInputProps;
+  const { borderColor, onChange, placeholder } = myInputProps;
   const onInputChange = (e) => {
     const {
       target: { value },
@@ -29,6 +31,7 @@ const MyInput = (myInputProps: IMyInputProps) => {
   return (
     <input
       onInput={onInputChange}
+      placeholder={placeholder}
       style={{ borderColor: borderColor ? borderColor : "black" }}
     />
   );
@@ -54,6 +57,7 @@ const ReactApp: React.FC = () => {
         componentProps: {
           /** 此处的属性都会传递给myInputProps */
           borderColor: "red",
+          placeholder: "我是自定义的输入框",
         },
       },
       {
