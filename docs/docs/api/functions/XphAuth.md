@@ -14,4 +14,4 @@
 
 ## Defined in
 
-[packages/common/src/components/auth/auth.tsx:5](https://github.com/XiaoPiHong/xph-crud/blob/35d86c07c46a3dd83fadda70a3d1fe8dfc4260ac/packages/common/src/components/auth/auth.tsx#L5)
+[packages/common/src/components/auth/auth.tsx:5](https://github.com/XiaoPiHong/xph-crud/blob/99ec0ffb61581e75526484c4dd7c2cd81ce44894/packages/common/src/components/auth/auth.tsx#L5)
