@@ -26,4 +26,4 @@
 
 ## Defined in
 
-[packages/common/src/hooks/useAsyncState.ts:8](https://github.com/XiaoPiHong/xph-crud/blob/6c1615ed1bf3b9b6f01037eaf454f3c74e2cead4/packages/common/src/hooks/useAsyncState.ts#L8)
+[packages/common/src/hooks/useAsyncState.ts:8](https://github.com/XiaoPiHong/xph-crud/blob/f7d69f3e4652fd81809e3295efebb4f500bfd501/packages/common/src/hooks/useAsyncState.ts#L8)

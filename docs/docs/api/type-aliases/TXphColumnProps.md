@@ -12,4 +12,4 @@
 
 ## Defined in
 
-[packages/table/src/types/column.ts:50](https://github.com/XiaoPiHong/xph-crud/blob/6c1615ed1bf3b9b6f01037eaf454f3c74e2cead4/packages/table/src/types/column.ts#L50)
+[packages/table/src/types/column.ts:50](https://github.com/XiaoPiHong/xph-crud/blob/f7d69f3e4652fd81809e3295efebb4f500bfd501/packages/table/src/types/column.ts#L50)
