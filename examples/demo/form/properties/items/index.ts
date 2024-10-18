@@ -1,5 +1,5 @@
-import Input from "./Input";
-import Select from "./Select";
+import Input from "./input";
+import Select from "./select";
 
 export default {
   Input,
