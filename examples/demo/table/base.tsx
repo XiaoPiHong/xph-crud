@@ -1,10 +1,35 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, ForwardedRef, forwardRef } from "react";
 import {
   XphTable,
   TXphTableProps,
   TXphTableActionType,
   XphExtendCompPropsProvider,
+  XphCrudFormDialog,
+  TXphCrudFormDialogProps,
+  IXphCrudFormDialogActionType,
 } from "xph-crud";
+
+const ResetPasswordDialog = forwardRef(
+  (_, dialogRef: ForwardedRef<IXphCrudFormDialogActionType>) => {
+    const dialogProps: TXphCrudFormDialogProps = {
+      width: 400,
+      title: "重置密码",
+      getPopperContainer: () => document.getElementById("docs-comp-table-base"),
+      formProps: {
+        items: [
+          {
+            name: "password",
+            label: "密码",
+            required: true,
+            component: "InputPassword",
+          },
+        ],
+      },
+    };
+
+    return <XphCrudFormDialog ref={dialogRef} {...dialogProps} />;
+  }
+);
 
 interface DataType {
   key: React.Key;
@@ -109,7 +134,7 @@ const ReactApp: React.FC = () => {
               component: "actions",
               componentProps: {
                 type: "dashed",
-                max: 1,
+                max: 2,
                 items: [
                   {
                     key: "edit",
@@ -129,6 +154,18 @@ const ReactApp: React.FC = () => {
                           cancel: async ({ values }) => {
                             console.log(values);
                           },
+                        });
+                      },
+                    },
+                  },
+                  {
+                    key: "reset-password",
+                    component: "Button",
+                    componentProps: {
+                      children: "重置密码",
+                      onClick: (e) => {
+                        resetPasswordDialogRef.current?.open({
+                          data: record,
                         });
                       },
                     },
@@ -590,6 +627,8 @@ const ReactApp: React.FC = () => {
 
   const xphTableRef = useRef<TXphTableActionType>(null);
 
+  const resetPasswordDialogRef = useRef<IXphCrudFormDialogActionType>(null);
+
   return (
     <div
       id="docs-comp-table-base"
@@ -605,6 +644,9 @@ const ReactApp: React.FC = () => {
             console.log(selectRowKeys, selectedRows);
           }}
         />
+
+        {/** 重置密码弹窗 */}
+        <ResetPasswordDialog ref={resetPasswordDialogRef} />
       </XphExtendCompPropsProvider>
     </div>
   );

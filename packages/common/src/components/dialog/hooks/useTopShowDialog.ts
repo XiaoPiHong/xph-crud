@@ -55,9 +55,9 @@ const useTopShowDialog = ({
   };
 
   const onMousedownDialog = (e?: MouseEvent) => {
-    const allDialog = container.querySelectorAll(
-      `.${dialogTopShowClassConfig.xphDialog}`
-    );
+    const allDialog = Array.from(
+      container.querySelectorAll(`.${dialogTopShowClassConfig.xphDialog}`)
+    ).filter((item) => item?.parentNode === container);
     const lastDialog = allDialog[allDialog.length - 1];
     if (dialogRef.current?.parentNode === lastDialog) return;
     insertAfterFunny(dialogRef.current?.parentNode, lastDialog);
@@ -91,14 +91,14 @@ const useTopShowDialog = ({
   }, []);
 
   useEffect(() => {
-    /** 每次打开的时候打开的弹窗都是在最上层 */
+    /** 每次打开的时候打开的弹窗都是在最上层（只限父元素相同的弹窗） */
     if (visible) {
       onMousedownDialog();
     } else {
-      /** 每次关闭的时候将显示的弹窗中最后一个弹窗移动到最上层 */
+      /** 每次关闭的时候将显示的弹窗中最后一个弹窗移动到最上层（只限父元素相同的弹窗） */
       const allDialogs = Array.from(
         container.querySelectorAll(`.${dialogTopShowClassConfig.xphDialog}`)
-      );
+      ).filter((item) => item?.parentNode === container);
       const allDialogWrappers = allDialogs
         .map((dialog) =>
           dialog.querySelector(`.${dialogTopShowClassConfig.xphDialogWrapper}`)
