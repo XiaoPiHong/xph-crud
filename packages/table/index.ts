@@ -10,6 +10,7 @@ import type {
   TSearchFormProps as TXphSearchFormProps,
   IMainProps as IXphMainProps,
   TCrudFormDialogProps as TXphCrudFormDialogProps,
+  ICrudFormDialogActionType as IXphCrudFormDialogActionType,
 } from "./src/types";
 
 export * from "./src/types";
@@ -25,4 +26,5 @@ export {
   IXphMainProps,
   XphCrudFormDialog,
   TXphCrudFormDialogProps,
+  IXphCrudFormDialogActionType,
 };

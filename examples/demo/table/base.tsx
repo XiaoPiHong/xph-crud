@@ -571,6 +571,18 @@ const ReactApp: React.FC = () => {
             },
             colProps: { span: 12 },
           },
+          {
+            name: "address",
+            label: "地址",
+            component: "InputTextArea",
+            required: true,
+            componentProps: {
+              autoSize: {
+                minRows: 5,
+                maxRows: 5,
+              },
+            },
+          },
         ],
       },
     },
