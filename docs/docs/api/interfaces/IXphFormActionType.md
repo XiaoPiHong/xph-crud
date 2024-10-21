@@ -2,7 +2,7 @@
 
 ## Extended by
 
-- [`ICrudFormDialogActionType`](ICrudFormDialogActionType.md)
+- [`IXphCrudFormDialogActionType`](IXphCrudFormDialogActionType.md)
 
 ## Properties
 

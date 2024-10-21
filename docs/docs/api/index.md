@@ -14,6 +14,12 @@ Renames and re-exports [IXphAuthProps](interfaces/IXphAuthProps.md)
 
 ***
 
+### ICrudFormDialogActionType
+
+Renames and re-exports [IXphCrudFormDialogActionType](interfaces/IXphCrudFormDialogActionType.md)
+
+***
+
 ### IDialogActionType
 
 Renames and re-exports [IXphDialogActionType](interfaces/IXphDialogActionType.md)
@@ -104,7 +110,6 @@ Renames and re-exports [TXphTableProps](type-aliases/TXphTableProps.md)
 - [IComponentActionProps](interfaces/IComponentActionProps.md)
 - [IComponentColumnProps](interfaces/IComponentColumnProps.md)
 - [IComponentFormItemProps](interfaces/IComponentFormItemProps.md)
-- [ICrudFormDialogActionType](interfaces/ICrudFormDialogActionType.md)
 - [ICurCellFuncProps](interfaces/ICurCellFuncProps.md)
 - [IFRenderProps](interfaces/IFRenderProps.md)
 - [IFunctionToolbarParams](interfaces/IFunctionToolbarParams.md)
@@ -116,6 +121,7 @@ Renames and re-exports [TXphTableProps](type-aliases/TXphTableProps.md)
 - [IRenderFormItemProps](interfaces/IRenderFormItemProps.md)
 - [IXphActionsProps](interfaces/IXphActionsProps.md)
 - [IXphAuthProps](interfaces/IXphAuthProps.md)
+- [IXphCrudFormDialogActionType](interfaces/IXphCrudFormDialogActionType.md)
 - [IXphDialogActionType](interfaces/IXphDialogActionType.md)
 - [IXphDialogProps](interfaces/IXphDialogProps.md)
 - [IXphExtendComponentProps](interfaces/IXphExtendComponentProps.md)

@@ -1,4 +1,4 @@
-# Interface: ICrudFormDialogActionType
+# Interface: IXphCrudFormDialogActionType
 
 ## Extends
 

@@ -26,4 +26,4 @@ cellFunc中每一项对应的组件componentProps属性映射
 
 ## Defined in
 
-[packages/table/src/components/table/components/cellFunc/types/cellFunc.ts:7](https://github.com/XiaoPiHong/xph-crud/blob/99ec0ffb61581e75526484c4dd7c2cd81ce44894/packages/table/src/components/table/components/cellFunc/types/cellFunc.ts#L7)
+[packages/table/src/components/table/components/cellFunc/types/cellFunc.ts:7](https://github.com/XiaoPiHong/xph-crud/blob/9d44883c1fd301bcb6eb021e6a1345bb3cf6b335/packages/table/src/components/table/components/cellFunc/types/cellFunc.ts#L7)
