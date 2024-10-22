@@ -44,7 +44,6 @@ const ReactApp: React.FC = () => {
             console.log("AutoUpload onChange========================", val);
           },
         },
-        colProps: { span: 8 },
         initialValue: [],
         rules: [
           {

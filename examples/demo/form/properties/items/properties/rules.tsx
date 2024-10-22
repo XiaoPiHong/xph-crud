@@ -30,7 +30,6 @@ const ReactApp: React.FC = () => {
           ],
           render: (item) => item.title,
         },
-        colProps: { span: 8 },
         rules: [
           {
             required: true,
