@@ -34,6 +34,7 @@ const sidebars: SidebarsConfig = {
     XphActions: ["comp/actions/base"],
     XphDialog: ["comp/dialog/base"],
     XphAuth: ["comp/auth/base"],
+    XphCrudFormDialog: ["comp/crudFormDialog/base"],
   },
   extends: ["comp/extends/base"],
   api: [

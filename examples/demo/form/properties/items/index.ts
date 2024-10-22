@@ -25,6 +25,7 @@ import ApiTreeSelect from "./api-tree-select";
 import ApiTransfer from "./api-transfer";
 import ApiAutoComplete from "./api-auto-complete";
 import AutoUpload from "./auto-upload";
+import Render from "./render";
 
 export default {
   Input,
@@ -54,4 +55,5 @@ export default {
   ApiTransfer,
   ApiAutoComplete,
   AutoUpload,
+  Render,
 };
