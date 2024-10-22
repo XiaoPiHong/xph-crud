@@ -62,6 +62,7 @@ const config: Config = {
         parametersFormat: "table",
         enumMembersFormat: "table",
         classPropertiesFormat: "table",
+        membersWithOwnFile: ["Enum", "Variable", "Interface", "TypeAlias"],
         tableColumnSettings: {
           hideInherited: true,
           hideModifiers: true,
