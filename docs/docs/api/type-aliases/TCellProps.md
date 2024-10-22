@@ -11,4 +11,4 @@
 
 ## Defined in
 
-[packages/table/src/components/table/components/cellFunc/types/cellFunc.ts:69](https://github.com/XiaoPiHong/xph-crud/blob/f6ec2e3f4d9b4e39c7c3137bd04fa28a5098129b/packages/table/src/components/table/components/cellFunc/types/cellFunc.ts#L69)
+[packages/table/src/components/table/components/cellFunc/types/cellFunc.ts:69](https://github.com/XiaoPiHong/xph-crud/blob/d0b9ee1cd95d9006c7258527005a916fce797974/packages/table/src/components/table/components/cellFunc/types/cellFunc.ts#L69)

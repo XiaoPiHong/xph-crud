@@ -12,4 +12,4 @@
 
 ## Defined in
 
-[packages/table/src/types/apiTable.ts:99](https://github.com/XiaoPiHong/xph-crud/blob/f6ec2e3f4d9b4e39c7c3137bd04fa28a5098129b/packages/table/src/types/apiTable.ts#L99)
+[packages/table/src/types/apiTable.ts:99](https://github.com/XiaoPiHong/xph-crud/blob/d0b9ee1cd95d9006c7258527005a916fce797974/packages/table/src/types/apiTable.ts#L99)
