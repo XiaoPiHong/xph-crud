@@ -14,4 +14,4 @@
 
 ## Defined in
 
-[packages/common/src/components/actions/types/actionItem.ts:124](https://github.com/XiaoPiHong/xph-crud/blob/4c9871f465ad4334c5ddd9896180fb26247d7639/packages/common/src/components/actions/types/actionItem.ts#L124)
+[packages/common/src/components/actions/types/actionItem.ts:124](https://github.com/XiaoPiHong/xph-crud/blob/12801230fead7979832d2ada477f2eb45215b3dc/packages/common/src/components/actions/types/actionItem.ts#L124)
