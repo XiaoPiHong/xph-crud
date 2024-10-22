@@ -18,4 +18,4 @@
 
 ## Defined in
 
-[packages/table/src/types/crudFormDialog.ts:8](https://github.com/XiaoPiHong/xph-crud/blob/9d44883c1fd301bcb6eb021e6a1345bb3cf6b335/packages/table/src/types/crudFormDialog.ts#L8)
+[packages/table/src/types/crudFormDialog.ts:8](https://github.com/XiaoPiHong/xph-crud/blob/59cbdd4fcff26bcc88bce5e7c4ad2ae9fa840045/packages/table/src/types/crudFormDialog.ts#L8)

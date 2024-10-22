@@ -104,6 +104,11 @@ Renames and re-exports [TXphTableProps](type-aliases/TXphTableProps.md)
 
 ## Interfaces
 
+- [IApiAutoCompleteProps](interfaces/IApiAutoCompleteProps.md)
+- [IApiSelectProps](interfaces/IApiSelectProps.md)
+- [IApiTransferProps](interfaces/IApiTransferProps.md)
+- [IApiTreeSelectProps](interfaces/IApiTreeSelectProps.md)
+- [IAutoUploadProps](interfaces/IAutoUploadProps.md)
 - [IBaseActionProps](interfaces/IBaseActionProps.md)
 - [IBaseFormItemProps](interfaces/IBaseFormItemProps.md)
 - [ICellFuncProps](interfaces/ICellFuncProps.md)

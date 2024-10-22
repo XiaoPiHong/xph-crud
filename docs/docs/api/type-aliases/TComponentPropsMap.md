@@ -6,12 +6,12 @@
 
 | Name | Type |
 | ------ | ------ |
-| `ApiAutoComplete` | `IApiAutoCompleteProps` |
-| `ApiSelect` | `IApiSelectProps` |
-| `ApiTransfer` | `IApiTransferProps` |
-| `ApiTreeSelect` | `IApiTreeSelectProps` |
+| `ApiAutoComplete` | [`IApiAutoCompleteProps`](../interfaces/IApiAutoCompleteProps.md) |
+| `ApiSelect` | [`IApiSelectProps`](../interfaces/IApiSelectProps.md) |
+| `ApiTransfer` | [`IApiTransferProps`](../interfaces/IApiTransferProps.md) |
+| `ApiTreeSelect` | [`IApiTreeSelectProps`](../interfaces/IApiTreeSelectProps.md) |
 | `AutoComplete` | `AutoCompleteProps` |
-| `AutoUpload` | `IAutoUploadProps` |
+| `AutoUpload` | [`IAutoUploadProps`](../interfaces/IAutoUploadProps.md) |
 | `Button` | `ButtonProps` |
 | `Cascader` | `CascaderProps` |
 | `Checkbox` | `CheckboxProps` |
@@ -41,4 +41,4 @@
 
 ## Defined in
 
-[packages/form/src/types/component.ts:24](https://github.com/XiaoPiHong/xph-crud/blob/9d44883c1fd301bcb6eb021e6a1345bb3cf6b335/packages/form/src/types/component.ts#L24)
+[packages/form/src/types/component.ts:24](https://github.com/XiaoPiHong/xph-crud/blob/59cbdd4fcff26bcc88bce5e7c4ad2ae9fa840045/packages/form/src/types/component.ts#L24)
