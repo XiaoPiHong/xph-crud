@@ -16,4 +16,4 @@
 
 ## Defined in
 
-[packages/table/src/types/searchForm.ts:11](https://github.com/XiaoPiHong/xph-crud/blob/59cbdd4fcff26bcc88bce5e7c4ad2ae9fa840045/packages/table/src/types/searchForm.ts#L11)
+[packages/table/src/types/searchForm.ts:11](https://github.com/XiaoPiHong/xph-crud/blob/df4afa60d65704448cd1781ed35689440e3aa7c3/packages/table/src/types/searchForm.ts#L11)
