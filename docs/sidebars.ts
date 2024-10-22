@@ -29,7 +29,10 @@ const sidebars: SidebarsConfig = {
    */
   guide: ["guide/getStarted"],
   comp: {
-    XphForm: ["comp/form/base", "comp/form/properties/items/index"],
+    XphForm: [
+      "comp/form/base",
+      "comp/form/properties/items/properties/component/index",
+    ],
     XphTable: ["comp/table/base"],
     XphActions: ["comp/actions/base"],
     XphDialog: ["comp/dialog/base"],
