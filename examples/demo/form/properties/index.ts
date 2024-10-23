@@ -3,6 +3,10 @@ import Collapsible from "./collapsible";
 import ColProps from "./colProps";
 import Layout from "./layout";
 import Disabled from "./disabled";
+import Size from "./size";
+import Register from "./register";
+import RenderActions from "./renderActions";
+import Ref from "./ref";
 
 export default {
   items,
@@ -10,4 +14,8 @@ export default {
   ColProps,
   Layout,
   Disabled,
+  Size,
+  Register,
+  RenderActions,
+  Ref,
 };
