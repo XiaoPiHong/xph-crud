@@ -5,6 +5,8 @@ import IfShow from "./ifShow";
 import Rules from "./rules";
 import ForceRow from "./forceRow";
 import Disabled from "./disabled";
+import ComponentProps from "./componentProps";
+import InitialValue from "./initialValue";
 
 export default {
   component,
@@ -14,4 +16,6 @@ export default {
   Rules,
   ForceRow,
   Disabled,
+  ComponentProps,
+  InitialValue,
 };
