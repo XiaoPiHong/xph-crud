@@ -38,6 +38,25 @@ const ReactApp: React.FC = () => {
           },
         ],
       },
+      {
+        name: "TimePicker",
+        label: "TimePicker",
+        component: "TimePicker",
+        componentProps: {
+          format: "HH:mm",
+          valueFormat: "HH:mm",
+        },
+        rules: [
+          {
+            validator: async (rule, value) => {
+              if (!value) {
+                return Promise.reject("TimePicker必填");
+              }
+              return Promise.resolve();
+            },
+          },
+        ],
+      },
     ],
   };
 
