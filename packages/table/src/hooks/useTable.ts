@@ -58,16 +58,26 @@ export default function useTable(
       setTableState(newModel);
       lastTableState.current = newModel;
 
-      /** 这里是loading表单 */
-      searchFormRef.current?.setFormLoading(newModel.loading);
+      /** 这里是loading表单，存在搜索表单实例才loading */
+      searchFormRef.current &&
+        searchFormRef.current.setFormLoading(newModel.loading);
     },
+  };
+
+  /** 表单实例不一定会生成，所以使用到的表单实例的方法需要做一份默认的 */
+  const defaultSearchFormAction: {
+    validator: TSearchFormActionType["validator"];
+    resetFields: TSearchFormActionType["resetFields"];
+  } = {
+    validator: async () => ({}),
+    resetFields: async () => void 0,
   };
 
   /** 首次请求 */
   const firstGetTableData = async () => {
     useEffect(() => {
       const { autoRequest } = props.table!;
-      const { validator } = searchFormRef.current!;
+      const { validator } = searchFormRef.current || defaultSearchFormAction;
       if (autoRequest)
         validator().then((res) => {
           getTableData({ searchFormParams: res });
@@ -246,7 +256,7 @@ export default function useTable(
 
   /** 分页改变时触发 */
   const onPaginationChange = (page: number, pageSize: number) => {
-    const { validator } = searchFormRef.current!;
+    const { validator } = searchFormRef.current || defaultSearchFormAction;
     validator().then((res) => {
       getTableData({
         searchFormParams: res,
@@ -274,7 +284,8 @@ export default function useTable(
 
   /** 重置事件（重置页码、表单后重新请求） */
   const resetAllData = async () => {
-    const { resetFields, validator } = searchFormRef.current!;
+    const { resetFields, validator } =
+      searchFormRef.current || defaultSearchFormAction;
     return resetFields().then(async () => {
       const params: any = {};
       /** 只有接口分页时才传分页参数 */
@@ -291,7 +302,8 @@ export default function useTable(
 
   /** 重置事件（重置表单后重新请求） */
   const resetData = async () => {
-    const { resetFields, validator } = searchFormRef.current!;
+    const { resetFields, validator } =
+      searchFormRef.current || defaultSearchFormAction;
     return resetFields().then(async () => {
       const searchFormParams = await validator();
       return getTableData({ searchFormParams });
@@ -300,7 +312,7 @@ export default function useTable(
 
   /** 刷新数据 */
   const reloadData = async () => {
-    const { validator } = searchFormRef.current!;
+    const { validator } = searchFormRef.current || defaultSearchFormAction;
     return validator().then((res) => {
       return getTableData({
         searchFormParams: res,

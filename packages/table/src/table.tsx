@@ -26,13 +26,15 @@ const XphTable = <T extends TDataSourceItem>(
 
   return (
     <div className={fullHeight ? style["xph-table-full-wrapper"] : void 0}>
-      <div>
-        <SearchForm
-          ref={searchFormRef}
-          tableRef={tableRef}
-          {...searchFormProps!}
-        />
-      </div>
+      {searchFormProps ? (
+        <div>
+          <SearchForm
+            ref={searchFormRef}
+            tableRef={tableRef}
+            {...searchFormProps!}
+          />
+        </div>
+      ) : null}
       <div className={fullHeight ? style["full-wrapper__table"] : void 0}>
         <Table
           ref={tableRef}

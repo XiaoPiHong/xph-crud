@@ -1,5 +1,5 @@
 import Base from "./base";
-import { default as Properties } from "./properties";
+import Properties from "./properties";
 
 export default {
   Base,

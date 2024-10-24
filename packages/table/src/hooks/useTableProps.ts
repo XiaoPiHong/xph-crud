@@ -29,10 +29,7 @@ const useTableProps = (props: TTableProps) => {
       },
     },
     crudFormDialog: void 0, // 由于该弹窗对性能开销大，所以默认都是不自动生成该弹窗，需要则配置该属性
-    searchForm: {
-      showSearch: true,
-      items: [],
-    },
+    searchForm: void 0, // 由于该表单对性能开销大，所以默认都是不自动生成该表单，需要则配置该属性
   };
 
   /**
