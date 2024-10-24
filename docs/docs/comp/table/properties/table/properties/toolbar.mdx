@@ -1,0 +1,14 @@
+import { TableDemos } from "examples";
+import ExpandDemoWrapper from "@site/src/components/ExpandDemoWrapper";
+import DescribeDemoWrapper from "@site/src/components/DescribeDemoWrapper";
+import { default as raw } from "!raw-loader!examples/demo/table/properties/table/properties/toolbar.tsx";
+
+### 顶部操作项
+
+<ExpandDemoWrapper rawStr={raw}>
+  <TableDemos.Properties.table.Properties.Toolbar />
+  <DescribeDemoWrapper>
+    toolbar 属性继承XphActions组件的API。
+
+  </DescribeDemoWrapper>
+</ExpandDemoWrapper>

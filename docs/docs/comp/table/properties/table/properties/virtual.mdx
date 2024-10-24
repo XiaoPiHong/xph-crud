@@ -1,0 +1,11 @@
+import { TableDemos } from "examples";
+import ExpandDemoWrapper from "@site/src/components/ExpandDemoWrapper";
+import DescribeDemoWrapper from "@site/src/components/DescribeDemoWrapper";
+import { default as raw } from "!raw-loader!examples/demo/table/properties/table/properties/virtual.tsx";
+
+### 虚拟滚动
+
+<ExpandDemoWrapper rawStr={raw}>
+  <TableDemos.Properties.table.Properties.Virtual />
+  <DescribeDemoWrapper>虚拟滚动 column 需给定 width</DescribeDemoWrapper>
+</ExpandDemoWrapper>

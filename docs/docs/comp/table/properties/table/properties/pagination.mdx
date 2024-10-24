@@ -1,0 +1,18 @@
+import { TableDemos } from "examples";
+import ExpandDemoWrapper from "@site/src/components/ExpandDemoWrapper";
+import DescribeDemoWrapper from "@site/src/components/DescribeDemoWrapper";
+import { default as raw } from "!raw-loader!examples/demo/table/properties/table/properties/pagination.tsx";
+
+### 分页配置
+
+<ExpandDemoWrapper rawStr={raw}>
+  <TableDemos.Properties.table.Properties.Pagination />
+  <DescribeDemoWrapper>
+    api响应时，数据源读取的值可根据 responseFields 属性配置；
+
+    pagination 为false时会关闭分页，默认读取api响应对象中的data属性；
+
+    pagination 为对象时，继承antd Pagination组件的API。
+
+  </DescribeDemoWrapper>
+</ExpandDemoWrapper>
