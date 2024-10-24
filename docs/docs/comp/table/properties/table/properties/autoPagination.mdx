@@ -1,0 +1,9 @@
+import { TableDemos } from "examples";
+import ExpandDemoWrapper from "@site/src/components/ExpandDemoWrapper";
+import { default as raw } from "!raw-loader!examples/demo/table/properties/table/properties/autoPagination.tsx";
+
+### 客户端分页（当 api 不支持分页时）
+
+<ExpandDemoWrapper rawStr={raw}>
+  <TableDemos.Properties.table.Properties.AutoPagination />
+</ExpandDemoWrapper>
