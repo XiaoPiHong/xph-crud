@@ -1,0 +1,5 @@
+# Interface: IButtonProps
+
+## Extends
+
+- `ButtonProps`

@@ -16,41 +16,44 @@ export interface IBaseActionProps {
   auth?: string | Array<string>;
 }
 
+export interface IButtonProps extends ButtonProps {}
+
+export interface IDropDownItemProps {
+  /**
+   * 唯一标识
+   */
+  key: string;
+  /**
+   * 显示文本
+   */
+  label: string;
+  /**
+   * 是否禁用，注意：父级如果disabled为true，子级无法展开（所以相当于是变向的父级禁用，子级也禁用了）
+   */
+  disabled?: boolean;
+  /**
+   * 图标
+   */
+  icon?: React.ReactNode;
+  /**
+   * 是否显示
+   */
+  ifShow?: boolean | (() => any);
+  /**
+   * 权限标识
+   */
+  auth?: string | Array<string>;
+}
+
+export interface IDropdownProps extends Omit<ButtonProps, "onClick"> {
+  dropDownItems: IDropDownItemProps[];
+  onClick?: MenuProps["onClick"];
+}
+
 export type TComponentType<T extends TXphExtendComponentPropsMap = {}> = {
   Button: IButtonProps;
   Dropdown: IDropdownProps;
 } & T;
-
-interface IButtonProps extends ButtonProps {}
-interface IDropdownProps extends Omit<ButtonProps, "onClick"> {
-  dropDownItems: {
-    /**
-     * 唯一标识
-     */
-    key: string;
-    /**
-     * 显示文本
-     */
-    label: string;
-    /**
-     * 是否禁用，注意：父级如果disabled为true，子级无法展开（所以相当于是变向的父级禁用，子级也禁用了）
-     */
-    disabled?: boolean;
-    /**
-     * 图标
-     */
-    icon?: React.ReactNode;
-    /**
-     * 是否显示
-     */
-    ifShow?: boolean | (() => any);
-    /**
-     * 权限标识
-     */
-    auth?: string | Array<string>;
-  }[];
-  onClick?: MenuProps["onClick"];
-}
 
 /**
  * @description 组件类型action
