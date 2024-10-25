@@ -1,0 +1,13 @@
+import { TableDemos } from "examples";
+import ExpandDemoWrapper from "@site/src/components/ExpandDemoWrapper";
+import DescribeDemoWrapper from "@site/src/components/DescribeDemoWrapper";
+import { default as raw } from "!raw-loader!examples/demo/table/properties/crudFormDialog.tsx";
+
+### 列表新增/编辑弹窗
+
+<ExpandDemoWrapper rawStr={raw}>
+  <TableDemos.Properties.CrudFormDialog />
+  <DescribeDemoWrapper>
+    crudFormDialog 属性继承XphCrudFormDialog组件的API
+  </DescribeDemoWrapper>
+</ExpandDemoWrapper>
