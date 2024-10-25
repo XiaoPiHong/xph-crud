@@ -1,3 +1,4 @@
 import Base from "./base";
+import Properties from "./properties";
 
-export default { Base };
+export default { Base, Properties };

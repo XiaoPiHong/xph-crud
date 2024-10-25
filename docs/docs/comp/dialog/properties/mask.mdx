@@ -1,0 +1,15 @@
+import { DialogDemos } from "examples";
+import ExpandDemoWrapper from "@site/src/components/ExpandDemoWrapper";
+import DescribeDemoWrapper from "@site/src/components/DescribeDemoWrapper";
+import { default as raw } from "!raw-loader!examples/demo/dialog/properties/mask.tsx";
+
+### 遮罩层
+
+<ExpandDemoWrapper rawStr={raw}>
+  <DialogDemos.Properties.Mask />
+  <DescribeDemoWrapper>
+
+    开启遮罩层，弹窗强制挂载于 body 节点
+
+  </DescribeDemoWrapper>
+</ExpandDemoWrapper>
