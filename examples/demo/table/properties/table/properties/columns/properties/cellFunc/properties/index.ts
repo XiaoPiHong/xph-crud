@@ -1,1 +1,5 @@
-export default {};
+import component from "./component";
+
+export default {
+  component,
+};

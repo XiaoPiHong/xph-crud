@@ -1,0 +1,14 @@
+import { TableDemos } from "examples";
+import ExpandDemoWrapper from "@site/src/components/ExpandDemoWrapper";
+import DescribeDemoWrapper from "@site/src/components/DescribeDemoWrapper";
+import { default as raw } from "!raw-loader!examples/demo/table/properties/table/properties/columns/properties/cellFunc/properties/component/multiComponent.tsx";
+
+## 多组件
+
+<ExpandDemoWrapper rawStr={raw}>
+  <TableDemos.Properties.table.Properties.columns.Properties.cellFunc.Properties.component.MultiComponent />
+  <DescribeDemoWrapper>
+    cellFunc 是个集合，列内容可由多个组件组合而成，使用前请熟悉 [cellFunc 的渲染机制](/docs/comp/extends/base#扩展单元格映射内容的规范)和渲染组件的特性。
+
+  </DescribeDemoWrapper>
+</ExpandDemoWrapper>

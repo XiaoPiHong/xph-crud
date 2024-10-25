@@ -1,0 +1,14 @@
+import { TableDemos } from "examples";
+import ExpandDemoWrapper from "@site/src/components/ExpandDemoWrapper";
+import DescribeDemoWrapper from "@site/src/components/DescribeDemoWrapper";
+import { default as raw } from "!raw-loader!examples/demo/table/properties/table/properties/columns/properties/render.tsx";
+
+### 自定义列内容
+
+<ExpandDemoWrapper rawStr={raw}>
+  <TableDemos.Properties.table.Properties.columns.Properties.Render />
+  <DescribeDemoWrapper>
+    column 的render属性可渲染自定义的内容到列
+
+  </DescribeDemoWrapper>
+</ExpandDemoWrapper>

@@ -1,0 +1,97 @@
+import React from "react";
+import { XphTable, TXphTableProps } from "xph-crud";
+
+interface DataType {
+  key: React.Key;
+  name: string;
+  age: number;
+  address: string;
+  gender: "male" | "female";
+}
+
+/** 模拟分页接口 */
+const getTablePage = async (params) => {
+  console.log(params);
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({
+        data: [
+          {
+            key: "1",
+            name: "胡彦斌",
+            age: 32,
+            address:
+              "new york street 1 new york street 1 new york street 1 new york street 1 new york street 1 new york street 1 new york street 1 new york street 1",
+            gender: "male",
+          },
+          {
+            key: "2",
+            name: "李雷",
+            age: 28,
+            address: "东城区东华门大街2号",
+            gender: "male",
+          },
+          {
+            key: "3",
+            name: "韩梅梅",
+            age: 30,
+            address: "南山区南山路3号",
+            gender: "female",
+          },
+        ],
+        current: 1,
+        pageSize: 20,
+        total: 3,
+        totalPage: 1,
+      });
+    }, 1000);
+  });
+};
+
+const ReactApp: React.FC = () => {
+  const props: TXphTableProps<DataType> = {
+    table: {
+      columns: [
+        {
+          title: "性别",
+          dataIndex: "gender",
+          key: "gender",
+          cellFunc: [
+            {
+              component: "link",
+              componentProps: {
+                url: "https://www.taobao.com",
+              },
+            },
+            {
+              component: "tag",
+              componentProps: {
+                enums: [
+                  {
+                    label: "男",
+                    value: "male",
+                    config: {
+                      color: "info",
+                    },
+                  },
+                  {
+                    label: "女",
+                    value: "female",
+                    config: {
+                      color: "primary",
+                    },
+                  },
+                ],
+              },
+            },
+          ],
+        },
+      ],
+      api: getTablePage,
+    },
+  };
+
+  return <XphTable<DataType> {...props} />;
+};
+
+export default ReactApp;

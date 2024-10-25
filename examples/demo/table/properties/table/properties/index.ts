@@ -6,8 +6,10 @@ import FormatDataSource from "./formatDataSource";
 import Virtual from "./virtual";
 import Pagination from "./pagination";
 import Toolbar from "./toolbar";
+import columns from "./columns";
 
 export default {
+  columns,
   Api,
   FullHeight,
   AutoRequest,

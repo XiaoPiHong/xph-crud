@@ -33,7 +33,10 @@ const sidebars: SidebarsConfig = {
       "comp/form/base",
       "comp/form/properties/items/properties/component/index",
     ],
-    XphTable: ["comp/table/base"],
+    XphTable: [
+      "comp/table/base",
+      "comp/table/properties/table/properties/columns/properties/cellFunc/properties/component/index",
+    ],
     XphActions: ["comp/actions/base"],
     XphDialog: ["comp/dialog/base"],
     XphAuth: ["comp/auth/base"],
