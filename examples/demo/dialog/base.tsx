@@ -10,7 +10,7 @@ const ReactApp: React.FC = () => {
     title: "弹窗1标题",
     width: 1000,
     height: 1200,
-    getPopperContainer: () => document.getElementById("dialog-box"),
+    getPopperContainer: () => document.getElementById("docs-comp-dialog-base"),
   };
 
   const secondDialogProps: IXphDialogProps = {
@@ -19,7 +19,7 @@ const ReactApp: React.FC = () => {
     width: 500,
     height: 500,
     // height: 1200,
-    getPopperContainer: () => document.getElementById("dialog-box"),
+    getPopperContainer: () => document.getElementById("docs-comp-dialog-base"),
   };
 
   const [thirdWidth, setThirdWidth] = useState(300);
@@ -28,7 +28,7 @@ const ReactApp: React.FC = () => {
     title: "弹窗3标题",
     width: thirdWidth,
     height: 300,
-    getPopperContainer: () => document.getElementById("dialog-box"),
+    getPopperContainer: () => document.getElementById("docs-comp-dialog-base"),
   };
 
   const inputRef = useRef<any>(null);
@@ -68,7 +68,7 @@ const ReactApp: React.FC = () => {
 
   return (
     <div
-      id="dialog-box"
+      id="docs-comp-dialog-base"
       style={{
         width: "100%",
         height: "100%",

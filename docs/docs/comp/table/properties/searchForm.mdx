@@ -1,0 +1,11 @@
+import { TableDemos } from "examples";
+import ExpandDemoWrapper from "@site/src/components/ExpandDemoWrapper";
+import DescribeDemoWrapper from "@site/src/components/DescribeDemoWrapper";
+import { default as raw } from "!raw-loader!examples/demo/table/properties/searchForm.tsx";
+
+### 搜索表单
+
+<ExpandDemoWrapper rawStr={raw}>
+  <TableDemos.Properties.SearchForm />
+  <DescribeDemoWrapper>searchForm 属性继承XphForm组件的API</DescribeDemoWrapper>
+</ExpandDemoWrapper>
