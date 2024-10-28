@@ -53,40 +53,17 @@ const ReactApp: React.FC = () => {
     table: {
       columns: [
         {
-          title: "性别",
-          dataIndex: "gender",
-          key: "gender",
+          title: "地址",
+          dataIndex: "address",
+          key: "address",
+          width: 300,
+          ellipsis: true,
           cellFunc: [
             {
-              component: "link",
-              componentProps: {
-                url: "https://www.taobao.com",
-              },
-            },
-            {
-              component: "tag",
-              componentProps: {
-                enums: [
-                  {
-                    label: "男",
-                    value: "male",
-                    config: {
-                      color: "info",
-                    },
-                  },
-                  {
-                    label: "女",
-                    value: "female",
-                    config: {
-                      color: "primary",
-                    },
-                  },
-                ],
-              },
-            },
-            {
               component: "copy",
-              componentProps: {},
+              componentProps: {
+                size: "large",
+              },
             },
           ],
         },
