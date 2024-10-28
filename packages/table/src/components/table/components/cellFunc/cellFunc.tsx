@@ -1,6 +1,7 @@
 import { cellComponentMap } from "./components";
 import { ICellFuncProps, IMainProps } from "./types";
 import { useExtendTable } from "../../../../hooks";
+import { isBoolean } from "lodash-es";
 
 /** 最底层的组件 */
 const BottomCellFunc = (
@@ -8,13 +9,21 @@ const BottomCellFunc = (
   mainProps: IMainProps
 ) => {
   const {
-    renderPrams: { text },
+    renderPrams: { text, column },
   } = cellFuncProps;
 
   const handleText = mainProps?.mainHandleText?.();
 
+  const showTitle = isBoolean(column?.ellipsis)
+    ? column?.ellipsis
+    : column?.ellipsis?.showTitle;
+
   return (
-    <span onClick={mainProps?.mainClick} style={mainProps?.mainStyle}>
+    <span
+      onClick={mainProps?.mainClick}
+      style={mainProps?.mainStyle}
+      title={showTitle ? `${handleText ?? text}` : void 0}
+    >
       {handleText ?? text}
     </span>
   );
@@ -33,6 +42,8 @@ const CellFunc = (props: ICellFuncProps) => {
   let dslIndex = 0;
   while (dslIndex < dslConfig.length) {
     const i = dslIndex++;
+
+    // 目前是从第一个开始处理，渲染从最后一个开始渲染；i改成dslConfig.length - i - 1可从最后一个开始处理，渲染就变成从第一个开始渲染
     const Component = cellComponentMap[dslConfig[i].component];
     // 避免匹配不到.
     if (!Component) continue;

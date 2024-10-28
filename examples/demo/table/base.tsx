@@ -102,6 +102,12 @@ const ReactApp: React.FC = () => {
           key: "address",
           width: 300,
           ellipsis: true,
+          cellFunc: [
+            {
+              component: "copy",
+              componentProps: {},
+            },
+          ],
         },
         {
           title: "年龄",

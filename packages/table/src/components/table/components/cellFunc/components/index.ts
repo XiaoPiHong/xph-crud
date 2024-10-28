@@ -1,6 +1,7 @@
 import Link from "./link";
 import Actions from "./actions";
 import Tag from "./tag";
+import Copy from "./copy";
 
 const cellComponentMap = {
   /** 超链接 */
@@ -14,6 +15,10 @@ const cellComponentMap = {
   /** tag标签 */
   tag: {
     Comp: Tag,
+  },
+  /** 复制 */
+  copy: {
+    Comp: Copy,
   },
 };
 

@@ -18,3 +18,5 @@ export { default as useExtendTable } from "./useExtendTable";
 export * from "./useExtendTable";
 export { default as useCrudFormDialog } from "./useCrudFormDialog";
 export * from "./useCrudFormDialog";
+export { default as useCopyToClipboard } from "./useCopyToClipboard";
+export * from "./useCopyToClipboard";

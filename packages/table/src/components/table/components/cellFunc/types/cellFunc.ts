@@ -31,6 +31,20 @@ export type TCellComponentPropsMap<
       };
     }>;
   };
+  copy: {
+    /**
+     * 复制的文本
+     */
+    text?: string | ((record: any) => string);
+    /**
+     * 大小
+     */
+    size?: "small" | "default" | "large";
+    /**
+     * 自定义点击事件
+     */
+    onClick?: (record: any) => void;
+  };
 } & CellFuncExtendPropsMap;
 
 // ============================================================================== TCellProps start ==================================

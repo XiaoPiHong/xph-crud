@@ -35,6 +35,7 @@ const useResizeDialog = ({
           position: "absolute",
           border: "4px dashed #ccc",
           display: "none",
+          zIndex: 999,
         }}
       ></div>
     );
