@@ -81,7 +81,6 @@ const ReactApp: React.FC = () => {
     },
     /** 顶部的搜索表单 */
     searchForm: {
-      showSearch: true,
       items: [],
     },
   };

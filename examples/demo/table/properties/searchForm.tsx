@@ -94,8 +94,6 @@ const ReactApp: React.FC = () => {
     },
     searchForm: {
       colProps: { span: 7 },
-      /** 显示搜索 & 重置按钮 */
-      showSearch: true,
       items: [
         {
           name: "name",

@@ -24,7 +24,7 @@ const SearchForm = forwardRef<
     tableRef: RefObject<TTableActionType>;
   }
 >((props, ref) => {
-  const { renderActions, showSearch, tableRef } = props;
+  const { renderActions, showSearch = true, tableRef } = props;
 
   const [loading, setLoading] = useState(false);
 

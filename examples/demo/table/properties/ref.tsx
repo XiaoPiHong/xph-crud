@@ -161,7 +161,6 @@ const ReactApp: React.FC = () => {
     },
     searchForm: {
       colProps: { span: 6 },
-      showSearch: true,
       items: [
         {
           name: "name",
