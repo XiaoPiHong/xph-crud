@@ -34,6 +34,7 @@ const config: Config = {
       require.resolve("@cmfcmf/docusaurus-search-local"),
       {
         // Options here
+        language: ["es", "zh"],
       },
     ],
     "docusaurus-plugin-sass",
