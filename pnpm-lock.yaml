@@ -74,7 +74,7 @@ importers:
         version: 5.3.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@cmfcmf/docusaurus-search-local':
         specifier: ^1.2.0
-        version: 1.2.0(@docusaurus/core@3.5.2(@docusaurus/types@3.5.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mdx-js/react@3.0.1(@types/react@18.3.4)(react@18.3.1))(eslint@8.57.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.2.2)(vue-template-compiler@2.7.16))(nodejieba@3.4.3)(search-insights@2.16.3)
+        version: 1.2.0(@docusaurus/core@3.5.2(@docusaurus/types@3.5.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mdx-js/react@3.0.1(@types/react@18.3.4)(react@18.3.1))(eslint@8.57.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.2.2)(vue-template-compiler@2.7.16))(nodejieba@2.6.0)(search-insights@2.16.3)
       '@docusaurus/core':
         specifier: 3.5.2
         version: 3.5.2(@docusaurus/types@3.5.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mdx-js/react@3.0.1(@types/react@18.3.4)(react@18.3.1))(eslint@8.57.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.2.2)(vue-template-compiler@2.7.16)
@@ -106,8 +106,8 @@ importers:
         specifier: ^4.17.21
         version: 4.17.21
       nodejieba:
-        specifier: ^3.4.3
-        version: 3.4.3
+        specifier: ^2.5.0
+        version: 2.6.0
       prism-react-renderer:
         specifier: ^2.3.0
         version: 2.3.1(react@18.3.1)
@@ -4592,8 +4592,8 @@ packages:
   node-releases@2.0.18:
     resolution: {integrity: sha512-d9VeXT4SJ7ZeOqGX6R5EM022wpL+eWPooLI+5UpWn2jCT1aosUQEhQP214x33Wkwx3JQMvIm+tIoVOdodFS40g==}
 
-  nodejieba@3.4.3:
-    resolution: {integrity: sha512-OZnhxsy25k5XRBqI2UUjSu6k3a1+5U9PGm/JMWs949D2HCLfwdt9XIJ0B4YF2ZVQakNKqBUR37Vn5L/9lf4gYg==}
+  nodejieba@2.6.0:
+    resolution: {integrity: sha512-cyEOLRGLjDuxbTuv6nuMAK3NpML4ft9i7st98TFHvXtg+m3RFhIuf4INBHGp3VhUaqPsCTfAkhHB/ZNTFiwJjg==}
     engines: {node: '>= 10.20.0'}
 
   non-layered-tidy-tree-layout@2.0.2:
@@ -7584,7 +7584,7 @@ snapshots:
 
   '@braintree/sanitize-url@6.0.4': {}
 
-  '@cmfcmf/docusaurus-search-local@1.2.0(@docusaurus/core@3.5.2(@docusaurus/types@3.5.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mdx-js/react@3.0.1(@types/react@18.3.4)(react@18.3.1))(eslint@8.57.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.2.2)(vue-template-compiler@2.7.16))(nodejieba@3.4.3)(search-insights@2.16.3)':
+  '@cmfcmf/docusaurus-search-local@1.2.0(@docusaurus/core@3.5.2(@docusaurus/types@3.5.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mdx-js/react@3.0.1(@types/react@18.3.4)(react@18.3.1))(eslint@8.57.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.2.2)(vue-template-compiler@2.7.16))(nodejieba@2.6.0)(search-insights@2.16.3)':
     dependencies:
       '@algolia/autocomplete-js': 1.17.6(@algolia/client-search@4.24.0)(algoliasearch@4.24.0)(search-insights@2.16.3)
       '@algolia/autocomplete-theme-classic': 1.17.6
@@ -7597,7 +7597,7 @@ snapshots:
       mark.js: 8.11.1
       tslib: 2.6.3
     optionalDependencies:
-      nodejieba: 3.4.3
+      nodejieba: 2.6.0
     transitivePeerDependencies:
       - search-insights
 
@@ -12440,7 +12440,7 @@ snapshots:
 
   node-releases@2.0.18: {}
 
-  nodejieba@3.4.3:
+  nodejieba@2.6.0:
     dependencies:
       '@mapbox/node-pre-gyp': 1.0.11
       node-addon-api: 3.2.1
