@@ -30,6 +30,12 @@ const config: Config = {
     locales: ["zh-Hans"],
   },
   plugins: [
+    [
+      require.resolve("@cmfcmf/docusaurus-search-local"),
+      {
+        // Options here
+      },
+    ],
     "docusaurus-plugin-sass",
     async function examplesAlias(context, options) {
       return {
