@@ -30,13 +30,6 @@ const config: Config = {
     locales: ["zh-Hans"],
   },
   plugins: [
-    [
-      require.resolve("@cmfcmf/docusaurus-search-local"),
-      {
-        // Options here
-        language: ["es", "zh"],
-      },
-    ],
     "docusaurus-plugin-sass",
     async function examplesAlias(context, options) {
       return {
@@ -82,7 +75,23 @@ const config: Config = {
   markdown: {
     mermaid: true, // 开启图表
   },
-  themes: ["@docusaurus/theme-live-codeblock", "@docusaurus/theme-mermaid"],
+  themes: [
+    [
+      require.resolve("@easyops-cn/docusaurus-search-local"),
+      /** @type {import("@easyops-cn/docusaurus-search-local").PluginOptions} */
+      {
+        // ... Your options.
+        // `hashed` is recommended as long-term-cache of index file is possible.
+        // hashed: true,
+        // For Docs using Chinese, The `language` is recommended to set to:
+        // ```
+        language: ["en", "zh"],
+        // ```
+      },
+    ],
+    "@docusaurus/theme-live-codeblock",
+    "@docusaurus/theme-mermaid",
+  ],
   presets: [
     [
       "classic",
