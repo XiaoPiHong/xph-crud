@@ -37,5 +37,8 @@ export default defineConfig(({ mode }) => {
         },
       },
     },
+    esbuild: {
+      drop: ["console", "debugger"], // 移除所有 console 和 debugger
+    },
   };
 });

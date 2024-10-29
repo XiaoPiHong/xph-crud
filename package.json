@@ -1,6 +1,6 @@
 {
   "name": "xph-crud",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
@@ -15,6 +15,8 @@
     "build": "tsc && vite build",
     "docs": "cd docs && npm run start",
     "build:docs": "cd docs && npm run build",
+    "version-bump": "node version-bump.mjs",
+    "publish": "npm run version-bump && npm publish",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
   },
   "files": [
