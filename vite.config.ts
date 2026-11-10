@@ -4,7 +4,7 @@ import path from "path";
 import dts from "vite-plugin-dts";
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => {
+export default defineConfig(({ command }) => {
   return {
     plugins: [
       react(),
@@ -38,7 +38,7 @@ export default defineConfig(({ mode }) => {
       },
     },
     esbuild: {
-      drop: ["console", "debugger"], // 移除所有 console 和 debugger
+      drop: command === "build" ? ["console", "debugger"] : [], // 打包时移除，开发时保留调试输出
     },
   };
 });

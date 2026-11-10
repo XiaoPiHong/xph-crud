@@ -1,16 +1,15 @@
 .xph-dialog-mask {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  position: absolute;
+  inset: 0;
   background-color: black;
   opacity: 0.7;
   z-index: 999;
+  pointer-events: auto;
 }
 
 .xph-dialog-wrapper {
   position: absolute;
+  pointer-events: auto;
   z-index: 999;
   background-color: #fff;
   transform: translate(-50%, -50%);

@@ -9,7 +9,9 @@ import { default as raw } from "!raw-loader!examples/demo/dialog/properties/mask
   <DialogDemos.Properties.Mask />
   <DescribeDemoWrapper>
 
-    开启遮罩层，弹窗强制挂载于 body 节点
+    开启遮罩层后，遮罩覆盖 getPopperContainer 指定容器的可视区域，弹窗在容器内居中。
+    未设置 getPopperContainer 时默认挂载于 body，显示全屏遮罩。
+    遮罩显示期间，挂载容器禁止滚动；弹窗内部内容仍可滚动，关闭最后一个带遮罩弹窗后恢复容器滚动。
 
   </DescribeDemoWrapper>
 </ExpandDemoWrapper>

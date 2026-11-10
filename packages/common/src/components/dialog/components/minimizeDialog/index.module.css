@@ -1,5 +1,6 @@
 .minimize-windows {
   position: absolute;
+  pointer-events: auto;
   /* left: 0;
   top: 0; */
   z-index: 999;

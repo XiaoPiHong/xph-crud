@@ -1,7 +1,6 @@
-<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg">
-  <!-- 椭圆形背景 -->
-  <ellipse cx="16" cy="16" rx="15" ry="15" fill="#4a90e2"/>
-  
-  <!-- 文本 XPH -->
-  <text x="50%" y="50%" font-size="12" font-weight="bold" fill="white" text-anchor="middle" dominant-baseline="middle">XPH</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="17" fill="#4a90e2"/>
+  <path d="M17 17h11l19 30H36L17 17Z" fill="#fff"/>
+  <path d="M36 17h11L28 47H17l19-30Z" fill="#fff"/>
+  <path d="M36 17h11l-7 11H29l7-11Z" fill="#bdeee5"/>
 </svg>

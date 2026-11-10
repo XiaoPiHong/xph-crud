@@ -31,6 +31,7 @@ import { Maximize, Minimize, Recovery, Close } from "./components/headerBtns";
 import { theme } from "antd";
 import { useAsyncState } from "xph-crud/common";
 import { Spin } from "antd";
+import useDialogLayer from "./hooks/useDialogLayer";
 
 const { useToken } = theme;
 
@@ -59,6 +60,7 @@ const Dialog = forwardRef<
   const container = getPopperContainer!() as HTMLElement;
   const [visible, setVisible] = useAsyncState(false);
   const [loading, setLoading] = useState(false);
+  const { layerStyle } = useDialogLayer({ container, mask, visible });
   const { open, close } = useDialogActions(
     visible,
     dialogProps,
@@ -96,14 +98,6 @@ const Dialog = forwardRef<
     initLeft,
     setDialogChangeRecord,
   });
-  const { dialogMaxHeight, contentMaxHeight } = useDialogContentMaxHeight({
-    visible,
-    containerSizeTarget,
-    dialogHeight,
-    dialogRef,
-    dialogHeaderRef,
-    dialogFooterRef,
-  });
   const { minResizeRecord, setMinResizeRecord } = useMinResizeRecord();
 
   const { minimizeLeft, minimizeTop, minimizeRef, setMinimizePosition } =
@@ -123,6 +117,16 @@ const Dialog = forwardRef<
     close,
     setDialogSize,
     setDialogPosition,
+  });
+
+  const { dialogMaxHeight, contentMaxHeight } = useDialogContentMaxHeight({
+    // 最小化时主窗口不可测量，恢复显示后再按最新容器尺寸计算。
+    visible: visible && !minimizeVisible,
+    containerSizeTarget,
+    dialogHeight,
+    dialogRef,
+    dialogHeaderRef,
+    dialogFooterRef,
   });
 
   /** 初始化弹窗的函数 */
@@ -147,8 +151,6 @@ const Dialog = forwardRef<
 
   /** props的宽高变化（目的是兼容用户动态设置宽高的情况） */
   useOnPropsSizeChange({
-    initWidth,
-    initHeight,
     curPropsWidth,
     curPropsHeight,
     setParentInitRecord,
@@ -203,9 +205,9 @@ const Dialog = forwardRef<
     getVisible: () => visible,
   }));
   return (
-    <div className={dialogTopShowClassConfig["xphDialog"]}>
+    <div className={dialogTopShowClassConfig["xphDialog"]} style={layerStyle}>
       {/** 遮罩层=============================================== */}
-      {/** 开启遮罩层默认是置于body处 */}
+      {/** 遮罩层和窗口共用挂载容器内的定位、层级 */}
       {mask && visible ? (
         <div className={style["xph-dialog-mask"]}></div>
       ) : null}
@@ -257,6 +259,7 @@ const Dialog = forwardRef<
           className={style["dialog__main"]}
           style={{
             maxHeight: contentMaxHeight,
+            overscrollBehavior: mask ? "contain" : undefined,
           }}
         >
           <Spin spinning={loading}>{visible ? children : null}</Spin>

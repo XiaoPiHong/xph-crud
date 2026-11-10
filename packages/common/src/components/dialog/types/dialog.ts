@@ -12,7 +12,7 @@ export interface IDialogProps {
    */
   height?: number;
   /**
-   * 是否显示遮罩
+   * 是否显示遮罩；覆盖挂载容器的可视区域，显示期间锁定容器滚动，关闭后恢复
    * @defaultValue `false`
    */
   mask?: boolean;
@@ -72,7 +72,7 @@ export interface IDialogProps {
    */
   onClose?: () => void;
   /**
-   * 挂载弹窗的容器
+   * 挂载弹窗的容器；开启 mask 时遮罩也限制在该容器内
    * @defaultValue `() => document.body`
    */
   getPopperContainer?: () => HTMLElement | null;

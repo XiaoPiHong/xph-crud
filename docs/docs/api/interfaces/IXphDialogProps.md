@@ -6,9 +6,9 @@
 | ------ | ------ | ------ | ------ |
 | `cancelProps?` | `Omit`\<`ButtonProps`, `"children"` \| `"onClick"`\> | `-` | 取消按钮属性 |
 | `cancelText?` | `string` | `"取消"` | 取消按钮文字 |
-| `getPopperContainer?` | () => `null` \| `HTMLElement` | `() => document.body` | 挂载弹窗的容器 |
+| `getPopperContainer?` | () => `null` \| `HTMLElement` | `() => document.body` | 挂载弹窗的容器；开启 mask 时遮罩也限制在该容器内 |
 | `height?` | `number` | `-` | 弹窗的高度 |
-| `mask?` | `boolean` | `false` | 是否显示遮罩 |
+| `mask?` | `boolean` | `false` | 是否显示遮罩；覆盖挂载容器的可视区域，显示期间锁定容器滚动，关闭后恢复 |
 | `okProps?` | `Omit`\<`ButtonProps`, `"children"` \| `"onClick"`\> | `-` | 确定按钮属性 |
 | `okText?` | `string` | `"确定"` | 确定按钮文字 |
 | `onCancel?` | (`args`: `any`) => `Promise`\<`void`\> | `-` | 点击取消按钮触发该事件 |

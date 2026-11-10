@@ -7,6 +7,7 @@ const ReactApp: React.FC = () => {
   const dialogProps: IXphDialogProps = {
     title: "弹窗标题",
     mask: true,
+    getPopperContainer: () => document.getElementById("docs-comp-dialog-mask"),
   };
 
   const onClickOpenDialogBtn = () => {
@@ -15,9 +16,10 @@ const ReactApp: React.FC = () => {
 
   return (
     <div
+      id="docs-comp-dialog-mask"
       style={{
         width: "100%",
-        height: "100%",
+        height: "360px",
         overflow: "auto",
         position: "relative",
       }}

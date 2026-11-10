@@ -17,16 +17,8 @@ const useDialogPorps = (dialogProps: IDialogProps) => {
     ...merge(merge(baseDialogProps, extendDialogProps), dialogProps),
   };
 
-  const getPopperContainer = () => {
-    /** 开启遮罩层时挂载在body */
-    const container = newDialogProps.getPopperContainer!() as HTMLElement;
-    return newDialogProps.mask ? document.body : container;
-  };
   return {
-    dialogProps: {
-      ...newDialogProps,
-      getPopperContainer,
-    },
+    dialogProps: newDialogProps,
     baseDialogProps: baseDialogProps,
   };
 };

@@ -5,8 +5,8 @@ import path from "path";
 
 const config: Config = {
   title: "xph-crud",
-  tagline: "基于react的可配置CRUD组件库",
-  favicon: "img/favicon.ico",
+  tagline: "基于 React 与 Ant Design 的可配置 CRUD 组件库",
+  favicon: "img/favicon.svg",
 
   // Set the production url of your site here
   url: "https://xiaopihong.github.io",
@@ -118,12 +118,11 @@ const config: Config = {
   ],
 
   themeConfig: {
-    // Replace with your project's social card
-    image: "img/docusaurus-social-card.jpg",
+    image: "img/xph-crud-social-card.png",
     navbar: {
       title: "xph-crud",
       logo: {
-        alt: "My Site Logo",
+        alt: "xph-crud 标志",
         src: "img/logo.svg",
       },
       items: [
@@ -168,14 +167,26 @@ const config: Config = {
               label: "快速上手",
               to: "/docs/guide/getStarted",
             },
+            {
+              label: "API 参考",
+              to: "/docs/api",
+            },
           ],
         },
         {
           title: "组件",
           items: [
             {
-              label: "组件",
+              label: "配置表单",
               to: "/docs/comp/form/base",
+            },
+            {
+              label: "数据表格",
+              to: "/docs/comp/table/base",
+            },
+            {
+              label: "弹窗交互",
+              to: "/docs/comp/dialog/base",
             },
           ],
         },
@@ -183,13 +194,17 @@ const config: Config = {
           title: "更多",
           items: [
             {
+              label: "组件扩展",
+              to: "/docs/comp/extends/base",
+            },
+            {
               label: "GitHub",
               href: "https://github.com/XiaoPiHong/xph-crud",
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} xph-crud, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} xph-crud.`,
     },
     prism: {
       theme: prismThemes.github,

@@ -1,6 +1,6 @@
-import { useRef } from "react";
+import { useCallback, useRef } from "react";
 
-/** 开启了mask后默认挂载到body，因为mask是固定定位，所以后续的所有计算都是基于innerWidth、innerHeight */
+/** 带遮罩窗口以覆盖层的可视区域为定位和最大化范围。 */
 export interface IContainerSizeTarget {
   clientWidth: number;
   clientHeight: number;
@@ -8,24 +8,38 @@ export interface IContainerSizeTarget {
   scrollHeight: number;
 }
 
-const usePopperContainerSize = ({ container }: { container: HTMLElement }) => {
+const usePopperContainerSize = ({
+  container,
+  mask,
+}: {
+  container: HTMLElement;
+  mask?: boolean;
+}) => {
   const isBody = container === document.body;
-  const containerSizeTarget: React.MutableRefObject<IContainerSizeTarget> =
-    useRef({
-      clientWidth: isBody ? window.innerWidth : container.clientWidth,
-      clientHeight: isBody ? window.innerHeight : container.clientHeight,
-      scrollWidth: isBody ? window.innerWidth : container.scrollWidth,
-      scrollHeight: isBody ? window.innerHeight : container.scrollHeight,
-    });
-
-  const setContainerSizeTarget = () => {
-    containerSizeTarget.current = {
-      clientWidth: isBody ? window.innerWidth : container.clientWidth,
-      clientHeight: isBody ? window.innerHeight : container.clientHeight,
-      scrollWidth: isBody ? window.innerWidth : container.scrollWidth,
-      scrollHeight: isBody ? window.innerHeight : container.scrollHeight,
+  const getContainerSize = useCallback((): IContainerSizeTarget => {
+    const clientWidth = isBody
+      ? mask
+        ? document.documentElement.clientWidth
+        : window.innerWidth
+      : container.clientWidth;
+    const clientHeight = isBody
+      ? mask
+        ? document.documentElement.clientHeight
+        : window.innerHeight
+      : container.clientHeight;
+    return {
+      clientWidth,
+      clientHeight,
+      scrollWidth: mask || isBody ? clientWidth : container.scrollWidth,
+      scrollHeight: mask || isBody ? clientHeight : container.scrollHeight,
     };
-  };
+  }, [container, isBody, mask]);
+  const containerSizeTarget: React.MutableRefObject<IContainerSizeTarget> =
+    useRef(getContainerSize());
+
+  const setContainerSizeTarget = useCallback(() => {
+    containerSizeTarget.current = getContainerSize();
+  }, [getContainerSize]);
   return {
     containerSizeTarget,
     setContainerSizeTarget,

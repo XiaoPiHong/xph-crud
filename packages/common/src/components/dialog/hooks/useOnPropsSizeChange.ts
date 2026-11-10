@@ -1,31 +1,35 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import type { Dispatch, SetStateAction } from "react";
 
 const useOnPropsSizeChange = ({
-  initWidth,
-  initHeight,
   curPropsWidth,
   curPropsHeight,
   setParentInitRecord,
 }: {
-  initWidth: React.MutableRefObject<string | number>;
-  initHeight: React.MutableRefObject<string | number>;
   curPropsWidth: number | string;
   curPropsHeight: number | string;
-  setParentInitRecord: Function;
+  setParentInitRecord: Dispatch<SetStateAction<number>>;
 }) => {
+  // 初始化尺寸的 ref 会被其他 effect 更新，单独记录上一次 props 以判断变化。
+  const previousPropsSize = useRef({
+    width: curPropsWidth,
+    height: curPropsHeight,
+  });
+
   /** props的宽高变化,触发重新设置 */
   useEffect(() => {
-    if (curPropsWidth !== initWidth.current) {
-      console.log("动态设置了宽度");
+    const previous = previousPropsSize.current;
+    previousPropsSize.current = {
+      width: curPropsWidth,
+      height: curPropsHeight,
+    };
+    if (
+      curPropsWidth !== previous.width ||
+      curPropsHeight !== previous.height
+    ) {
       setParentInitRecord((pre) => pre + 1);
-      return;
     }
-    if (curPropsHeight !== initHeight.current) {
-      console.log("动态设置了高度");
-      setParentInitRecord((pre) => pre + 1);
-      return;
-    }
-  }, [curPropsWidth, curPropsHeight]);
+  }, [curPropsWidth, curPropsHeight, setParentInitRecord]);
 };
 
 export default useOnPropsSizeChange;
