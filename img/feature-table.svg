@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 220" fill="none">
+  <title>XphTable 搜索、列表与分页示意</title>
+  <desc>依据表格文档简化展示姓名、性别和操作列。搜索表单、工具栏和编辑操作按需配置；编辑通过实例 open 方法打开表单弹窗。示例为三条数据、单页。</desc>
+  <g font-family="Microsoft YaHei, PingFang SC, system-ui, sans-serif">
+    <rect x="8" y="4" width="344" height="212" rx="8" fill="#fff" stroke="#cadced"/>
+    <text x="20" y="24" font-size="13" font-weight="600" fill="#122b50">XphTable · 列表示意</text>
+    <text x="20" y="48" font-size="11" fill="#52657d">姓名</text>
+    <rect x="50" y="34" width="100" height="22" rx="4" fill="#fff" stroke="#cadced"/>
+    <rect x="158" y="34" width="44" height="22" rx="4" fill="#2467b2"/>
+    <text x="180" y="49" text-anchor="middle" font-size="10" fill="#fff">搜索</text>
+    <rect x="210" y="34" width="44" height="22" rx="4" fill="#fff" stroke="#cadced"/>
+    <text x="232" y="49" text-anchor="middle" font-size="10" fill="#52657d">重置</text>
+    <rect x="20" y="65" width="48" height="20" rx="4" fill="#2467b2"/>
+    <text x="44" y="79" text-anchor="middle" font-size="10" fill="#fff">新增</text>
+    <rect x="20" y="92" width="320" height="20" fill="#f3f7fc"/>
+    <g font-size="11" font-weight="600" fill="#52657d">
+      <text x="30" y="106">姓名</text>
+      <text x="164" y="106">性别</text>
+      <text x="276" y="106">操作</text>
+    </g>
+    <g font-size="11" fill="#314c6c">
+      <text x="30" y="129">胡彦斌</text>
+      <text x="30" y="152">李雷</text>
+      <text x="30" y="175">韩梅梅</text>
+    </g>
+    <path d="M20 137h320M20 160h320M20 183h320" stroke="#e5ecf3"/>
+    <g fill="#eaf3ff">
+      <rect x="164" y="116" width="30" height="18" rx="3"/>
+      <rect x="164" y="139" width="30" height="18" rx="3"/>
+      <rect x="164" y="162" width="30" height="18" rx="3"/>
+    </g>
+    <g font-size="10" fill="#2467b2" text-anchor="middle">
+      <text x="179" y="129">男</text>
+      <text x="179" y="152">男</text>
+      <text x="179" y="175">女</text>
+    </g>
+    <g font-size="11" fill="#2467b2">
+      <text x="276" y="129">编辑</text>
+      <text x="276" y="152">编辑</text>
+      <text x="276" y="175">编辑</text>
+    </g>
+    <text x="20" y="205" font-size="10" fill="#52657d">共 3 条</text>
+    <path d="m284 194-4 4 4 4m44-8 4 4-4 4" stroke="#a4b5c7" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="296" y="188" width="21" height="21" rx="4" fill="#fff" stroke="#2467b2"/>
+    <text x="306.5" y="203" text-anchor="middle" font-size="11" fill="#2467b2">1</text>
+  </g>
+</svg>

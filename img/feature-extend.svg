@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 220" fill="none">
+  <g font-family="Microsoft YaHei, PingFang SC, system-ui, sans-serif">
+    <text x="180" y="21" text-anchor="middle" font-size="12" font-weight="600" fill="#122b50">自定义组件 MyInput</text>
+    <path d="M180 29v12m-5-5 5 5 5-5" stroke="#4a90e2" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="12" y="47" width="336" height="84" rx="6" fill="#fff" stroke="#cadced"/>
+    <text x="24" y="65" font-family="Consolas, Monaco, monospace" font-size="12" font-weight="600" fill="#122b50">XphExtendCompPropsProvider</text>
+    <text x="328" y="65" text-anchor="end" font-size="10.5" fill="#607891">配置片段</text>
+    <g font-family="Consolas, Monaco, monospace" font-size="12">
+      <text x="24" y="85" fill="#53718f">value={{</text>
+      <text x="36" y="103" fill="#53718f">extendComp: { form: { <tspan fill="#267963">MyInput</tspan> } }</text>
+      <text x="24" y="121" fill="#53718f">}}</text>
+    </g>
+    <path d="M180 135v10m-5-5 5 5 5-5" stroke="#4a90e2" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="12" y="151" width="336" height="63" rx="6" fill="#fff" stroke="#cadced"/>
+    <text x="24" y="170" font-size="12" font-weight="600" fill="#122b50">XphForm</text>
+    <text x="328" y="170" text-anchor="end" font-size="10.5" fill="#607891">配置片段</text>
+    <g font-family="Consolas, Monaco, monospace" font-size="12">
+      <text x="24" y="189" fill="#53718f">items: [{ name: <tspan fill="#267963">'MyInput'</tspan>,</text>
+      <text x="36" y="207" fill="#53718f">component: <tspan fill="#267963">'MyInput'</tspan> }]</text>
+    </g>
+  </g>
+</svg>

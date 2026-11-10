@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 220" fill="none">
+  <g font-family="Microsoft YaHei, PingFang SC, system-ui, sans-serif">
+    <text x="12" y="27" font-size="12" font-weight="600" fill="#122b50">items 配置片段</text>
+    <rect x="12" y="43" width="192" height="164" rx="6" fill="#fff" stroke="#cadced"/>
+    <g font-family="Consolas, Monaco, monospace" font-size="12">
+      <text x="24" y="68" fill="#53718f">items: [</text>
+      <text x="36" y="87" fill="#53718f">{</text>
+      <text x="48" y="106" fill="#53718f">name: <tspan fill="#267963">'name'</tspan>,</text>
+      <text x="48" y="125" fill="#53718f">label: <tspan fill="#267963">'姓名'</tspan>,</text>
+      <text x="48" y="144" fill="#53718f">component:</text>
+      <text x="60" y="163" fill="#267963">'Input'</text>
+      <text x="36" y="182" fill="#53718f">}</text>
+      <text x="24" y="198" fill="#53718f">]</text>
+    </g>
+    <path d="M211 137h15m-5-5 5 5-5 5" stroke="#4a90e2" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="238" y="100" font-size="12" font-weight="600" fill="#122b50">XphForm</text>
+    <rect x="234" y="114" width="114" height="46" rx="6" fill="#fff" stroke="#cadced"/>
+    <text x="242" y="141" font-size="11" fill="#314c6c">姓名</text>
+    <rect x="270" y="124" width="68" height="26" rx="4" fill="#fff" stroke="#a9c9eb"/>
+  </g>
+</svg>

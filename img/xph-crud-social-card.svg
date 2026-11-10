@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#f8fbff"/>
+  <g font-family="Microsoft YaHei, PingFang SC, system-ui, sans-serif">
+    <rect x="72" y="68" width="58" height="58" rx="16" fill="#4a90e2"/>
+    <path d="M87.4 83.4h10l17.2 27.2h-10L87.4 83.4Z" fill="#fff"/>
+    <path d="M104.6 83.4h10l-17.2 27.2h-10l17.2-27.2Z" fill="#fff"/>
+    <path d="M104.6 83.4h10l-6.4 10h-10l6.4-10Z" fill="#bdeee5"/>
+    <text x="148" y="111" font-size="39" font-weight="700" letter-spacing="-1" fill="#122b50">xph-crud</text>
+    <text x="75" y="196" font-size="19" font-weight="600" fill="#397dc8">React + Ant Design</text>
+    <text x="70" y="284" font-size="54" font-weight="700" letter-spacing="-1" fill="#122b50">用配置搭建</text>
+    <text x="70" y="359" font-size="54" font-weight="700" letter-spacing="-1" fill="#122b50">业务界面</text>
+    <text x="75" y="414" font-size="21" fill="#607891">面向后台业务的可配置 CRUD 组件库</text>
+    <text x="75" y="527" font-size="21" font-weight="500" fill="#314c6c">表单 · 表格 · 弹窗 · 扩展</text>
+
+    <text x="662" y="123" font-size="25" font-weight="700" fill="#122b50">XphTable</text>
+    <text x="803" y="122" font-size="16" fill="#607891">按需配置，组合使用</text>
+
+    <rect x="662" y="150" width="466" height="97" rx="9" fill="#fff" stroke="#cadced" stroke-width="1.5"/>
+    <text x="682" y="187" font-size="17" font-weight="600" fill="#122b50">搜索表单</text>
+    <text x="682" y="215" font-family="Consolas, Monaco, monospace" font-size="16" fill="#397dc8">searchForm</text>
+    <path d="M847 172v53" stroke="#e1eaf3"/>
+    <text x="867" y="183" font-size="14" fill="#314c6c">姓名</text>
+    <rect x="909" y="165" width="198" height="27" rx="4" fill="#fff" stroke="#ccd9e6"/>
+    <text x="920" y="184" font-size="13" fill="#7d8fa3">请输入姓名</text>
+    <rect x="965" y="206" width="65" height="27" rx="4" fill="#4a90e2"/>
+    <text x="983" y="225" font-size="14" font-weight="600" fill="#fff">搜索</text>
+    <rect x="1042" y="206" width="65" height="27" rx="4" fill="#fff" stroke="#ccd9e6"/>
+    <text x="1060" y="225" font-size="14" fill="#314c6c">重置</text>
+
+    <rect x="662" y="263" width="466" height="128" rx="9" fill="#fff" stroke="#cadced" stroke-width="1.5"/>
+    <text x="682" y="314" font-size="17" font-weight="600" fill="#122b50">数据表格</text>
+    <text x="682" y="342" font-family="Consolas, Monaco, monospace" font-size="16" fill="#397dc8">table</text>
+    <path d="M847 284v85" stroke="#e1eaf3"/>
+    <rect x="867" y="277" width="240" height="23" fill="#f1f6fb"/>
+    <text x="878" y="294" font-size="13" font-weight="600" fill="#607891">姓名</text>
+    <text x="982" y="294" font-size="13" font-weight="600" fill="#607891">性别</text>
+    <text x="1062" y="294" font-size="13" font-weight="600" fill="#607891">操作</text>
+    <text x="878" y="321" font-size="14" fill="#314c6c">胡彦斌</text>
+    <text x="988" y="321" font-size="14" fill="#314c6c">男</text>
+    <text x="1062" y="321" font-size="14" fill="#397dc8">编辑</text>
+    <path d="M867 329h240" stroke="#e6edf5"/>
+    <text x="878" y="346" font-size="14" fill="#314c6c">李雷</text>
+    <text x="988" y="346" font-size="14" fill="#314c6c">男</text>
+    <text x="1062" y="346" font-size="14" fill="#397dc8">编辑</text>
+    <path d="M867 354h240" stroke="#e6edf5"/>
+    <text x="878" y="371" font-size="14" fill="#314c6c">韩梅梅</text>
+    <text x="988" y="371" font-size="14" fill="#314c6c">女</text>
+    <text x="1062" y="371" font-size="14" fill="#397dc8">编辑</text>
+
+    <rect x="662" y="407" width="466" height="116" rx="9" fill="#fff" stroke="#cadced" stroke-width="1.5"/>
+    <text x="682" y="453" font-size="17" font-weight="600" fill="#122b50">表单弹窗</text>
+    <text x="682" y="481" font-family="Consolas, Monaco, monospace" font-size="16" fill="#397dc8">crudFormDialog</text>
+    <path d="M847 428v74" stroke="#e1eaf3"/>
+    <text x="867" y="435" font-size="14" fill="#314c6c">姓名</text>
+    <rect x="909" y="417" width="198" height="27" rx="4" fill="#fff" stroke="#ccd9e6"/>
+    <text x="920" y="436" font-size="14" fill="#314c6c">李雷</text>
+    <text x="867" y="469" font-size="14" fill="#314c6c">性别</text>
+    <rect x="909" y="451" width="198" height="27" rx="4" fill="#fff" stroke="#ccd9e6"/>
+    <text x="920" y="470" font-size="14" fill="#314c6c">男</text>
+    <path d="m1088 462 4 4 4-4" stroke="#8094aa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="965" y="489" width="65" height="24" rx="4" fill="#fff" stroke="#ccd9e6"/>
+    <text x="983" y="506" font-size="14" fill="#314c6c">取消</text>
+    <rect x="1042" y="489" width="65" height="24" rx="4" fill="#4a90e2"/>
+    <text x="1060" y="506" font-size="14" font-weight="600" fill="#fff">确定</text>
+    <text x="662" y="552" font-size="14" fill="#607891">组件组合示意 · 业务逻辑按需接入</text>
+  </g>
+</svg>
