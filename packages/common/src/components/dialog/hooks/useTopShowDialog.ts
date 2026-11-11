@@ -1,4 +1,30 @@
-import { useEffect } from "react";
+import { useLayoutEffect, useState } from "react";
+
+interface DialogLayer {
+  container: HTMLElement;
+  setStack: (stack: { zIndex: number; active: boolean }) => void;
+}
+
+// 统一分配层级以兼容 body 与指定容器混用；视觉激活仍按容器隔离。
+// 注册只存活于打开期间，关闭/卸载清理，绝不移动 Portal 的 DOM。
+const visibleLayers = new Set<DialogLayer>();
+const dialogTopShowClassConfig = {
+  xphDialog: "xph--dialog",
+  xphDialogWrapper: "xph--dialog--wrapper",
+  xphMinimizeDialog: "xph--dialog--minimize",
+};
+
+const updateStack = () => {
+  const ordered = Array.from(visibleLayers);
+  const topByContainer = new Map<HTMLElement, DialogLayer>();
+  ordered.forEach((layer) => topByContainer.set(layer.container, layer));
+  ordered.forEach((layer, index) =>
+    layer.setStack({
+      zIndex: 999 + index,
+      active: topByContainer.get(layer.container) === layer,
+    })
+  );
+};
 
 const useTopShowDialog = ({
   visible,
@@ -11,142 +37,43 @@ const useTopShowDialog = ({
   minimizeRef: React.RefObject<HTMLDivElement>;
   container: HTMLElement;
 }) => {
-  /** 用于操作dom的标识 */
-  const dialogTopShowClassConfig = {
-    xphDialog: "xph--dialog",
-    xphDialogWrapper: "xph--dialog--wrapper",
-    xphMinimizeDialog: "xph--dialog--minimize",
-  };
+  const [stack, setStack] = useState({ zIndex: 999, active: false });
 
-  /** 仅标记窗口的视觉状态，内容透明度不随层级变化。 */
-  const updateActiveStyle = (activeDialog: Element) => {
-    Array.from(container.children).forEach((dialog) => {
-      if (dialog.classList.contains(dialogTopShowClassConfig.xphDialog)) {
-        dialog.setAttribute(
-          "data-xph-dialog-active",
-          String(dialog === activeDialog)
-        );
-      }
-    });
-  };
-
-  const insertAfterFunny = (newNode, referenceNode) => {
-    console.log("触发插入");
-    updateActiveStyle(newNode);
-
-    //==========================================================插入操作start
-    // 创建一个透明的占位符
-    const placeholder = document.createElement("div");
-    placeholder.style.visibility = "hidden";
-
-    // 插入占位符
-    referenceNode.parentNode.insertBefore(
-      placeholder,
-      referenceNode.nextSibling
-    );
-
-    // 插入新节点到占位符位置
-    referenceNode.parentNode.insertBefore(newNode, placeholder);
-
-    // 移除占位符
-    referenceNode.parentNode.removeChild(placeholder);
-
-    // referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-    //==========================================================插入操作end
-  };
-
-  const onMousedownDialog = (e?: MouseEvent) => {
-    const allDialog = Array.from(
-      container.querySelectorAll(`.${dialogTopShowClassConfig.xphDialog}`)
-    ).filter((item) => item?.parentNode === container);
-    const lastDialog = allDialog[allDialog.length - 1];
-    const currentDialog = dialogRef.current?.parentElement;
-    if (!currentDialog || !lastDialog) return;
-    if (currentDialog === lastDialog) {
-      // 单窗口或已经置顶时，也要正确显示激活样式。
-      updateActiveStyle(currentDialog);
+  useLayoutEffect(() => {
+    if (!visible) {
+      setStack((previous) =>
+        previous.active ? { ...previous, active: false } : previous
+      );
       return;
     }
-    insertAfterFunny(currentDialog, lastDialog);
-
-    // 如果点击的是输入框自动聚焦
-    if (e) {
-      const target = e.target as HTMLElement;
-      if (target.tagName === "INPUT" && target.focus) target.focus();
-    }
-  };
-
-  useEffect(() => {
-    dialogRef.current?.addEventListener("mousedown", onMousedownDialog, false);
-    minimizeRef.current?.addEventListener(
-      "mousedown",
-      onMousedownDialog,
-      false
-    );
-    return () => {
-      dialogRef.current?.removeEventListener(
-        "mousedown",
-        onMousedownDialog,
-        false
-      );
-      minimizeRef.current?.removeEventListener(
-        "mousedown",
-        onMousedownDialog,
-        false
-      );
+    const layer: DialogLayer = {
+      container,
+      setStack: (next) => setStack((previous) =>
+        previous.zIndex === next.zIndex && previous.active === next.active
+          ? previous
+          : next
+      ),
     };
-  }, []);
+    const bringToFront = () => {
+      visibleLayers.delete(layer);
+      visibleLayers.add(layer);
+      updateStack();
+    };
+    const dialog = dialogRef.current;
+    const minimized = minimizeRef.current;
+    dialog?.addEventListener("mousedown", bringToFront);
+    minimized?.addEventListener("mousedown", bringToFront);
+    bringToFront();
 
-  useEffect(() => {
-    /** 每次打开的时候打开的弹窗都是在最上层（只限父元素相同的弹窗） */
-    if (visible) {
-      onMousedownDialog();
-    } else {
-      /** 每次关闭的时候将显示的弹窗中最后一个弹窗移动到最上层（只限父元素相同的弹窗） */
-      const allDialogs = Array.from(
-        container.querySelectorAll(`.${dialogTopShowClassConfig.xphDialog}`)
-      ).filter((item) => item?.parentNode === container);
-      const allDialogWrappers = allDialogs
-        .map((dialog) =>
-          dialog.querySelector(`.${dialogTopShowClassConfig.xphDialogWrapper}`)
-        )
-        .filter((dialogWrapper) => dialogWrapper !== null) as HTMLElement[];
+    return () => {
+      dialog?.removeEventListener("mousedown", bringToFront);
+      minimized?.removeEventListener("mousedown", bringToFront);
+      visibleLayers.delete(layer);
+      updateStack();
+    };
+  }, [container, visible, dialogRef, minimizeRef]);
 
-      const allMinimizeDialogs = allDialogs
-        .map((dialog) =>
-          dialog.querySelector(`.${dialogTopShowClassConfig.xphMinimizeDialog}`)
-        )
-        .filter((dialogWrapper) => dialogWrapper !== null) as HTMLElement[];
-
-      const allShowDialogWrapper = allDialogWrappers.filter(
-        (dialogWrapper) => dialogWrapper.style.display === "flex"
-      );
-
-      const allShowMinimizeDialog = allMinimizeDialogs.filter(
-        (dialogWrapper) => dialogWrapper.style.display === "flex"
-      );
-
-      /** 有显示的弹窗，则打开最后一个显示的弹窗 */
-      if (allShowDialogWrapper.length) {
-        insertAfterFunny(
-          allShowDialogWrapper[allShowDialogWrapper.length - 1].parentNode,
-          allDialogs[allDialogs.length - 1]
-        );
-        return;
-      }
-
-      /** 有最小化的弹窗，则打开最后一个最小化的弹窗 */
-      if (allShowMinimizeDialog.length) {
-        insertAfterFunny(
-          allShowMinimizeDialog[allShowMinimizeDialog.length - 1].parentNode,
-          allDialogs[allDialogs.length - 1]
-        );
-        return;
-      }
-    }
-  }, [visible]);
-
-  return { dialogTopShowClassConfig };
+  return { dialogTopShowClassConfig, ...stack };
 };
 
 export default useTopShowDialog;

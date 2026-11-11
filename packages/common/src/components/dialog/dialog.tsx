@@ -32,6 +32,8 @@ import { theme } from "antd";
 import { useAsyncState } from "xph-crud/common";
 import { Spin } from "antd";
 import useDialogLayer from "./hooks/useDialogLayer";
+import useDialogContentScroll from "./hooks/useDialogContentScroll";
+import useDialogPositionBounds from "./hooks/useDialogPositionBounds";
 
 const { useToken } = theme;
 
@@ -39,6 +41,7 @@ const Dialog = forwardRef<
   IDialogActionType,
   IDialogProps & {
     baseDialogProps: IDialogProps;
+    container: HTMLElement;
     children?: React.ReactNode;
   }
 >((dialogProps, ref) => {
@@ -68,11 +71,8 @@ const Dialog = forwardRef<
     title,
     renderFooter,
     renderTitle,
-    getPopperContainer,
+    container,
   } = dialogProps;
-  // Portal 固定挂载到首次取得的容器；缓存页面切走后，选择器可能指向另一个页签。
-  // 尺寸、遮罩与滚动锁必须继续使用实际挂载的容器。
-  const [container] = useState(() => getPopperContainer!() as HTMLElement);
   const [visible, setVisible] = useAsyncState(false);
   const [loading, setLoading] = useState(false);
   const { layerStyle } = useDialogLayer({ container, mask, visible });
@@ -95,8 +95,6 @@ const Dialog = forwardRef<
     initTop,
     initWidth,
     initHeight,
-    curPropsWidth,
-    curPropsHeight,
     setParentInitRecord,
   } = useOnContainerSizeChange({
     container,
@@ -136,13 +134,16 @@ const Dialog = forwardRef<
   });
 
   const { dialogMaxHeight, contentMaxHeight } = useDialogContentMaxHeight({
-    // 最小化或缓存页面脱离布局时不可测量，恢复后重新计算内容高度。
-    visible: visible && !minimizeVisible && containerMeasurable,
     containerSizeTarget,
     dialogHeight,
-    dialogRef,
-    dialogHeaderRef,
-    dialogFooterRef,
+  });
+
+  useDialogContentScroll({
+    container,
+    contentRef: dialogMainRef,
+    visible,
+    minimized: minimizeVisible,
+    containerMeasurable,
   });
 
   /** 初始化弹窗的函数 */
@@ -167,8 +168,8 @@ const Dialog = forwardRef<
 
   /** props的宽高变化（目的是兼容用户动态设置宽高的情况） */
   useOnPropsSizeChange({
-    curPropsWidth,
-    curPropsHeight,
+    dialogProps,
+    baseDialogProps,
     setParentInitRecord,
   });
 
@@ -190,7 +191,7 @@ const Dialog = forwardRef<
   });
 
   /** 弹窗层级切换 */
-  const { dialogTopShowClassConfig } = useTopShowDialog({
+  const { dialogTopShowClassConfig, zIndex, active } = useTopShowDialog({
     visible,
     container,
     dialogRef,
@@ -214,6 +215,17 @@ const Dialog = forwardRef<
     setMinResizeRecord,
   });
 
+  useDialogPositionBounds({
+    container,
+    containerSizeTarget,
+    dialogRef,
+    visible,
+    minimized: minimizeVisible,
+    containerMeasurable,
+    resizing: resizingState,
+    setDialogPosition,
+  });
+
   useImperativeHandle(ref, () => ({
     open,
     close: onClose,
@@ -223,7 +235,8 @@ const Dialog = forwardRef<
   return (
     <div
       className={dialogTopShowClassConfig["xphDialog"]}
-      style={{ ...windowThemeStyle, ...layerStyle }}
+      data-xph-dialog-active={active}
+      style={{ ...windowThemeStyle, ...layerStyle, zIndex }}
     >
       {/** 遮罩层=============================================== */}
       {/** 遮罩层和窗口共用挂载容器内的定位、层级 */}
@@ -293,7 +306,9 @@ const Dialog = forwardRef<
         {/** 弹窗底部footer============================================================ */}
         {/** 如果是renderFooter，底部的布局由调用方决定  */}
         {renderFooter ? (
-          <div ref={dialogFooterRef}>{renderFooter({ loading })}</div>
+          <div ref={dialogFooterRef} style={{ flexShrink: 0 }}>
+            {renderFooter({ loading })}
+          </div>
         ) : (
           <div ref={dialogFooterRef} className={style["dialog__footer"]}>
             <XphActions {...footerActions} />
@@ -336,9 +351,16 @@ const XphDialog = (
   console.log("render XphDialog==============================================");
   return (
     <XphPortal getPopperContainer={getPopperContainer!}>
-      <Dialog {...dialogProps} baseDialogProps={baseDialogProps} ref={ref}>
-        {children}
-      </Dialog>
+      {(container) => (
+        <Dialog
+          {...dialogProps}
+          container={container}
+          baseDialogProps={baseDialogProps}
+          ref={ref}
+        >
+          {children}
+        </Dialog>
+      )}
     </XphPortal>
   );
 };

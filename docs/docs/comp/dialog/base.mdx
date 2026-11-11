@@ -12,9 +12,27 @@ import Ref from "@site/docs/comp/dialog/properties/ref.mdx";
 
 ## 基本使用
 
-<ExpandDemoWrapper rawStr={dialogRaw} height={"400px"}>
+通过 `ref.current?.open()` 打开弹窗，使用 `ref.current?.close()` 关闭。
+示例中的确定和取消回调都显式调用 `close()`，不提交业务数据。
+
+挂载位置与遮罩是两个独立选项：
+
+| 配置 | 挂载位置 | 遮罩范围 |
+| --- | --- | --- |
+| 不设置 `getPopperContainer` 和 `mask` | `document.body` | 无遮罩 |
+| 只设置 `mask: true` | `document.body` | 整个视口 |
+| 指定 `getPopperContainer`，`mask: false` | 指定容器 | 无遮罩 |
+| 指定 `getPopperContainer`，`mask: true` | 指定容器 | 该容器的可视区域 |
+
+上表按组件默认配置说明；项目使用 `XphExtendCompPropsProvider` 时，未传的属性会继承项目配置。
+开启遮罩不会改变挂载容器，点击遮罩也不会关闭弹窗。
+
+<ExpandDemoWrapper rawStr={dialogRaw}>
   <DialogDemos.Base />
 </ExpandDemoWrapper>
+
+可同时打开两个无罩弹窗，体验点击置顶、拖动、缩放、最小化和最大化。
+指定容器使用组件实例的 `ref` 获取，避免同一页面渲染多份示例时因固定 DOM ID 重复而挂错位置。
 
 ## 案例
 

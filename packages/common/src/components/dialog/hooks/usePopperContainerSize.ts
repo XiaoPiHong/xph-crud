@@ -18,14 +18,10 @@ const usePopperContainerSize = ({
   const isBody = container === document.body;
   const getContainerSize = useCallback((): IContainerSizeTarget => {
     const clientWidth = isBody
-      ? mask
-        ? document.documentElement.clientWidth
-        : window.innerWidth
+      ? document.documentElement.clientWidth
       : container.clientWidth;
     const clientHeight = isBody
-      ? mask
-        ? document.documentElement.clientHeight
-        : window.innerHeight
+      ? document.documentElement.clientHeight
       : container.clientHeight;
     return {
       clientWidth,

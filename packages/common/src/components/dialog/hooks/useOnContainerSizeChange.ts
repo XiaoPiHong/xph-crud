@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { IDialogProps } from "../types";
 import { usePopperContainerSize } from ".";
+import { DIALOG_BOUNDARY_GAP } from "./dialogBounds";
 
 const useOnContainerSizeChange = ({
   container,
@@ -13,6 +14,8 @@ const useOnContainerSizeChange = ({
 }) => {
   /** 父容器尺寸改变的时候，触发当前记录改变，触发组件render */
   const [parentInitRecord, setParentInitRecord] = useState(0);
+  const [, setMeasurementRecord] = useState(0);
+  const lastFrameSize = useRef<{ width: number; height: number }>();
 
   // ======================================================= 一些会受拉伸影响的初始属性 start
   // =================================父容器尺寸的
@@ -30,24 +33,49 @@ const useOnContainerSizeChange = ({
   );
 
   useEffect(() => {
+    let initialize = true;
+    const getFrameSize = () => {
+      // 滚动条改变客户区，不代表宿主外框缩放。body 以视口外尺寸为准。
+      if (container === document.body) {
+        return { width: window.innerWidth, height: window.innerHeight };
+      }
+      const { width, height } = container.getBoundingClientRect();
+      return { width, height };
+    };
     const handleResize = () => {
       const previousSize = containerSizeTarget.current;
-      // 滚动范围仍需更新，但只有可视尺寸变化时才重置窗口。
       const measurable = setContainerSizeTarget();
       setContainerMeasurable(measurable);
+      // 缓存页摘除时保留最后一次有效外框，重挂到同尺寸无需重置窗口。
       if (!measurable) return;
+
       const nextSize = containerSizeTarget.current;
+      const nextFrameSize = getFrameSize();
+      const previousFrameSize = lastFrameSize.current;
+      lastFrameSize.current = nextFrameSize;
       if (
-        previousSize.clientWidth === nextSize.clientWidth &&
-        previousSize.clientHeight === nextSize.clientHeight
+        initialize ||
+        !previousFrameSize ||
+        previousFrameSize.width !== nextFrameSize.width ||
+        previousFrameSize.height !== nextFrameSize.height
       ) {
+        initialize = false;
+        setParentInitRecord((prevRecord) => prevRecord + 1);
         return;
       }
-      setParentInitRecord((prevRecord) => prevRecord + 1);
+
+      // 滚动条占位或内容增长仍更新布局约束、拖拽范围，但不重新居中。
+      if (
+        previousSize.clientWidth !== nextSize.clientWidth ||
+        previousSize.clientHeight !== nextSize.clientHeight ||
+        previousSize.scrollWidth !== nextSize.scrollWidth ||
+        previousSize.scrollHeight !== nextSize.scrollHeight
+      ) {
+        setMeasurementRecord((record) => record + 1);
+      }
     };
     // 首次挂载或切换容器、遮罩模式时，按新的测量基准初始化。
-    setContainerMeasurable(setContainerSizeTarget());
-    setParentInitRecord((prevRecord) => prevRecord + 1);
+    handleResize();
     window.addEventListener("resize", handleResize);
     const resizeObserver =
       typeof ResizeObserver === "undefined"
@@ -70,15 +98,17 @@ const useOnContainerSizeChange = ({
   const curHeight = height ? height : baseHeight;
 
   const { clientWidth, clientHeight } = containerSizeTarget.current;
+  const availableWidth = Math.max(0, clientWidth - DIALOG_BOUNDARY_GAP);
+  const availableHeight = Math.max(0, clientHeight - DIALOG_BOUNDARY_GAP);
   const curPropsWidth = curWidth
-    ? curWidth > clientWidth
-      ? clientWidth
+    ? curWidth > availableWidth
+      ? availableWidth
       : curWidth
     : 0;
 
   const curPropsHeight = curHeight
-    ? curHeight > clientHeight
-      ? clientHeight
+    ? curHeight > availableHeight
+      ? availableHeight
       : curHeight
     : "unset";
 

@@ -1,7 +1,49 @@
 import { MouseEvent, useRef, useEffect, useCallback, useState } from "react";
 import { IContainerSizeTarget } from ".";
+import { DIALOG_BOUNDARY_GAP } from "./dialogBounds";
 
 type TResizeType = "lt" | "rt" | "rb" | "lb";
+
+interface IResizeGeometry {
+  left: number;
+  top: number;
+  width: number;
+  height: number;
+}
+
+interface IResizeSession {
+  type: TResizeType;
+  start: IResizeGeometry;
+  startClientX: number;
+  startClientY: number;
+  clientX: number;
+  clientY: number;
+}
+
+const clamp = (value: number, minimum: number, maximum: number) =>
+  Math.min(maximum, Math.max(minimum, value));
+
+/** 固定未拖动的一侧；空间不足时优先保持窗口在可用范围内。 */
+const resizeAxis = (
+  start: number,
+  size: number,
+  delta: number,
+  moveStart: boolean,
+  minimum: number,
+  limit: number
+) => {
+  if (moveStart) {
+    const end = clamp(start + size, 0, limit);
+    const minSize = Math.min(minimum, end);
+    const nextStart = clamp(start + delta, 0, end - minSize);
+    return { start: nextStart, size: end - nextStart };
+  }
+
+  const nextStart = clamp(start, 0, limit);
+  const minSize = Math.min(minimum, limit - nextStart);
+  const end = clamp(start + size + delta, nextStart + minSize, limit);
+  return { start: nextStart, size: end - nextStart };
+};
 
 const useResizeDialog = ({
   containerSizeTarget,
@@ -26,256 +68,186 @@ const useResizeDialog = ({
     record: { width: number; height: number } | null
   ) => void;
 }) => {
-  /** 虚拟块组件 */
-  const DashedBox = useCallback(() => {
-    return (
-      <div
-        ref={dashedBoxRef}
-        style={{
-          position: "absolute",
-          border: "4px dashed #ccc",
-          display: "none",
-          zIndex: 999,
-        }}
-      ></div>
-    );
-  }, []);
-
   const dashedBoxRef = useRef<HTMLDivElement>(null);
-  const resizeType = useRef<TResizeType>();
-  const resizing = useRef(false);
+  const resizeSession = useRef<IResizeSession | null>(null);
   const [resizingState, setResizingState] = useState(false);
-  const preClientX = useRef(0);
-  const preClientY = useRef(0);
+  const actionsRef = useRef({ setDialogSize, setDialogPosition });
+  actionsRef.current = { setDialogSize, setDialogPosition };
 
-  const dragstartResize = (event: MouseEvent, type: TResizeType) => {
-    /** 首次拉以首次的大小为最小拉伸尺寸 */
-    if (!minResizeRecord.current) {
-      setMinResizeRecord({
-        width: dialogRef.current!.offsetWidth,
-        height: dialogRef.current!.offsetHeight,
-      });
-    }
+  /** 虚线边框包含在预览尺寸中，不能逐次把边框宽度加回窗口。 */
+  const DashedBox = useCallback(() => (
+    <div
+      ref={dashedBoxRef}
+      style={{
+        position: "absolute",
+        boxSizing: "border-box",
+        border: "4px dashed #ccc",
+        pointerEvents: "none",
+        display: "none",
+        zIndex: 999,
+      }}
+    />
+  ), []);
 
-    resizing.current = true;
-    setResizingState(true);
-    resizeType.current = type;
-    /** 记录开始移动的坐标 */
-    const { clientX, clientY } = event;
-    preClientX.current = clientX;
-    preClientY.current = clientY;
-
-    const left = parseFloat(dialogRef.current!.style.left);
-    const top = parseFloat(dialogRef.current!.style.top);
-    const width = dialogRef.current!.offsetWidth;
-    const height = dialogRef.current!.offsetHeight;
-
-    dashedBoxRef.current!.style.display = "block";
-    dashedBoxRef.current!.style.left = `${left - 0.5 * width}px`;
-    dashedBoxRef.current!.style.top = `${top - 0.5 * height}px`;
-    dashedBoxRef.current!.style.width = `${width}px`;
-    dashedBoxRef.current!.style.height = `${height}px`;
+  const cancelResize = (updateState = true) => {
+    resizeSession.current = null;
+    if (dashedBoxRef.current) dashedBoxRef.current.style.display = "none";
+    if (updateState) setResizingState(false);
   };
 
-  const dragoverResize = (event: MouseEvent<HTMLBodyElement, MouseEvent>) => {
-    if (resizing.current) {
-      const { clientX, clientY } = event;
-      /** 鼠标位移的距离 */
-      const dragoverX = clientX - preClientX.current;
-      const dragoverY = clientY - preClientY.current;
+  const getResizeElements = () => {
+    const dialog = dialogRef.current;
+    const dashedBox = dashedBoxRef.current;
+    if (!dialog?.isConnected || !dashedBox?.isConnected) return null;
+    const rect = dialog.getBoundingClientRect();
+    // 缓存页被摘除或窗口关闭/最小化后，取消当前拉伸。
+    if (rect.width <= 0 || rect.height <= 0) return null;
+    return { dialog, dashedBox, rect };
+  };
 
-      /** 获取元素的初始样式（注意这种只有内联样式才能获取到style.left和style.top） */
-      const left = parseFloat(dashedBoxRef.current!.style.left);
-      const top = parseFloat(dashedBoxRef.current!.style.top);
-      const width = dashedBoxRef.current!.offsetWidth;
-      const height = dashedBoxRef.current!.offsetHeight;
+  const getResizeGeometry = (session: IResizeSession): IResizeGeometry | null => {
+    const minimum = minResizeRecord.current;
+    const maxWidth = containerSizeTarget.current.scrollWidth - DIALOG_BOUNDARY_GAP;
+    const maxHeight = containerSizeTarget.current.scrollHeight - DIALOG_BOUNDARY_GAP;
+    if (
+      !minimum ||
+      ![minimum.width, minimum.height, maxWidth, maxHeight].every(
+        value => Number.isFinite(value) && value > 0
+      )
+    ) return null;
 
-      /** 最小尺寸和最大尺寸 */
-      const minWidth = minResizeRecord.current!.width;
-      const minHeight = minResizeRecord.current!.height;
-      const maxWidth = containerSizeTarget.current.scrollWidth;
-      const maxHeight = containerSizeTarget.current.scrollHeight;
-      // const minLeft = minResizeRecord.current!.width * 0.5;
-      // const minTop = minResizeRecord.current!.height * 0.5;
-      // const maxLeft = maxWidth - minWidth + minWidth * 0.5;
-      // const maxTop = maxHeight - minHeight + minHeight * 0.5;
+    const x = resizeAxis(
+      session.start.left,
+      session.start.width,
+      session.clientX - session.startClientX,
+      session.type === "lt" || session.type === "lb",
+      minimum.width,
+      maxWidth
+    );
+    const y = resizeAxis(
+      session.start.top,
+      session.start.height,
+      session.clientY - session.startClientY,
+      session.type === "lt" || session.type === "rt",
+      minimum.height,
+      maxHeight
+    );
+    if (
+      ![x.start, y.start, x.size, y.size].every(Number.isFinite) ||
+      x.size <= 0 || y.size <= 0
+    ) return null;
+    return { left: x.start, top: y.start, width: x.size, height: y.size };
+  };
 
-      let newWidth = width;
-      let newHeight = height;
-      let newLeft = left;
-      let newTop = top;
+  const showPreview = (dashedBox: HTMLDivElement, geometry: IResizeGeometry) => {
+    dashedBox.style.display = "block";
+    dashedBox.style.left = `${geometry.left}px`;
+    dashedBox.style.top = `${geometry.top}px`;
+    dashedBox.style.width = `${geometry.width}px`;
+    dashedBox.style.height = `${geometry.height}px`;
+  };
 
-      switch (resizeType.current) {
-        case "lt": {
-          newWidth = newWidth - dragoverX;
-          newHeight = newHeight - dragoverY;
-          newTop = newTop + dragoverY;
-          newLeft = newLeft + dragoverX;
-          /** 限制最小尺寸 */
-          if (newWidth < minWidth) {
-            newWidth = width;
-            newLeft = left;
-          }
-          if (newHeight < minHeight) {
-            newHeight = height;
-            newTop = top;
-          }
-          /** 限制最大尺寸 */
-          if (newLeft < 0) {
-            newLeft = 0;
-            newWidth = width;
-          }
-          if (newTop < 0) {
-            newTop = 0;
-            newHeight = height;
-          }
-          break;
-        }
-        case "rt": {
-          newWidth = newWidth + dragoverX;
-          newHeight = newHeight - dragoverY;
-          newTop = newTop + dragoverY;
-          newLeft = left;
-
-          /** 限制最小尺寸 */
-          if (newWidth < minWidth) {
-            newWidth = width;
-          }
-          if (newHeight < minHeight) {
-            newHeight = height;
-            newTop = top;
-          }
-          /** 限制最大尺寸 */
-          if (newWidth > maxWidth - newLeft) {
-            newWidth = maxWidth - newLeft;
-          }
-          if (newTop < 0) {
-            newTop = 0;
-            newHeight = height;
-          }
-          break;
-        }
-        case "rb": {
-          newWidth = newWidth + dragoverX;
-          newHeight = newHeight + dragoverY;
-          newTop = top;
-          newLeft = left;
-          /** 限制最小尺寸 */
-          if (newWidth < minWidth) {
-            newWidth = width;
-          }
-          if (newHeight < minHeight) {
-            newHeight = height;
-          }
-          /** 限制最大尺寸 */
-          if (newWidth > maxWidth - newLeft) {
-            newWidth = maxWidth - newLeft;
-          }
-          if (newHeight > maxHeight - newTop) {
-            newHeight = maxHeight - newTop;
-          }
-          break;
-        }
-        case "lb": {
-          newWidth = newWidth - dragoverX;
-          newHeight = newHeight + dragoverY;
-          newTop = top;
-          newLeft = newLeft + dragoverX;
-          /** 限制最小尺寸 */
-          if (newWidth < minWidth) {
-            newWidth = width;
-            newLeft = left;
-          }
-          if (newHeight < minHeight) {
-            newHeight = height;
-          }
-          /** 限制最大尺寸 */
-          if (newLeft < 0) {
-            newLeft = 0;
-            newWidth = width;
-          }
-          if (newHeight > maxHeight - newTop) {
-            newHeight = maxHeight - newTop;
-          }
-          break;
-        }
-      }
-      dashedBoxRef.current!.style.left = `${newLeft}px`;
-      dashedBoxRef.current!.style.top = `${newTop}px`;
-      dashedBoxRef.current!.style.width = `${newWidth}px`;
-      dashedBoxRef.current!.style.height = `${newHeight}px`;
-
-      preClientX.current = clientX;
-      preClientY.current = clientY;
+  const dragstartResize = (event: MouseEvent, type: TResizeType) => {
+    if (event.button !== 0) return;
+    const elements = getResizeElements();
+    if (!elements) {
+      cancelResize();
+      return;
     }
+    const { dialog, dashedBox, rect } = elements;
+    const centerX = parseFloat(dialog.style.left);
+    const centerY = parseFloat(dialog.style.top);
+    if (!Number.isFinite(centerX) || !Number.isFinite(centerY)) {
+      cancelResize();
+      return;
+    }
+    if (!minResizeRecord.current) {
+      setMinResizeRecord({ width: rect.width, height: rect.height });
+    }
+
+    const session: IResizeSession = {
+      type,
+      start: {
+        left: centerX - rect.width / 2,
+        top: centerY - rect.height / 2,
+        width: rect.width,
+        height: rect.height,
+      },
+      startClientX: event.clientX,
+      startClientY: event.clientY,
+      clientX: event.clientX,
+      clientY: event.clientY,
+    };
+    const geometry = getResizeGeometry(session);
+    if (!geometry) {
+      cancelResize();
+      return;
+    }
+    event.preventDefault();
+    resizeSession.current = session;
+    setResizingState(true);
+    showPreview(dashedBox, geometry);
+  };
+
+  const dragoverResize = (event: { clientX: number; clientY: number; buttons: number }) => {
+    const session = resizeSession.current;
+    if (!session) return;
+    if (event.buttons === 0) {
+      cancelResize();
+      return;
+    }
+    const elements = getResizeElements();
+    if (!elements) {
+      cancelResize();
+      return;
+    }
+    session.clientX = event.clientX;
+    session.clientY = event.clientY;
+    // 始终从起点加总位移，不读取已经取整或带边框的预览盒子尺寸。
+    const geometry = getResizeGeometry(session);
+    if (!geometry) {
+      cancelResize();
+      return;
+    }
+    showPreview(elements.dashedBox, geometry);
   };
 
   const dragendResize = () => {
-    if (resizing.current) {
-      resizing.current = false;
-
-      setResizingState(false);
-      dashedBoxRef.current!.style.display = "none";
-
-      const { left, top, width, height } = dashedBoxRef.current!.style;
-      /** 因为虚拟块的位置一开始是以container为基点的（left和top都是相对于container的真实位置）， 而弹窗是left和top在基于基于container的基础上再偏移了自身的一半（也就是多减了自身的一半），所以虚拟块的left和top转换到弹窗上时需要再加上自身的一半 */
-      const newLeft = parseFloat(left) + 0.5 * parseFloat(width);
-      const newTop = parseFloat(top) + 0.5 * parseFloat(height);
-      const newWidth = parseFloat(width);
-      const newHeight = parseFloat(height);
-      setDialogPosition({ left: newLeft, top: newTop });
-      setDialogSize({ width: newWidth, height: newHeight });
-    }
+    const session = resizeSession.current;
+    if (!session) return;
+    const geometry = getResizeElements() ? getResizeGeometry(session) : null;
+    cancelResize();
+    if (!geometry) return;
+    actionsRef.current.setDialogPosition({
+      left: geometry.left + geometry.width / 2,
+      top: geometry.top + geometry.height / 2,
+    });
+    actionsRef.current.setDialogSize({ width: geometry.width, height: geometry.height });
   };
 
-  /**
-   * 监听 mousedown 调整左上角
-   */
-  const onMousedownResizeLt = (event: MouseEvent) =>
-    dragstartResize(event, "lt");
+  const onMousedownResizeLt = (event: MouseEvent) => dragstartResize(event, "lt");
+  const onMousedownResizeRt = (event: MouseEvent) => dragstartResize(event, "rt");
+  const onMousedownResizeRb = (event: MouseEvent) => dragstartResize(event, "rb");
+  const onMousedownResizeLb = (event: MouseEvent) => dragstartResize(event, "lb");
 
-  /**
-   * 监听 mousedown 调整右上角
-   */
-  const onMousedownResizeRt = (event: MouseEvent) =>
-    dragstartResize(event, "rt");
-
-  /**
-   * 监听 mousedown 调整右下角
-   */
-  const onMousedownResizeRb = (event: MouseEvent) =>
-    dragstartResize(event, "rb");
-
-  /**
-   * 监听 mousedown 调整左下角
-   */
-  const onMousedownResizeLb = (event: MouseEvent) =>
-    dragstartResize(event, "lb");
-
-  /** 监听body的鼠标移动 */
-  const onBodyMouseMove = useCallback((event) => {
+  const onBodyMouseMove = useCallback((event: globalThis.MouseEvent) => {
     dragoverResize(event);
   }, []);
-
-  /** 监听body的鼠标抬起 */
-  const onBodyMouseUp = useCallback(() => {
-    dragendResize();
-  }, []);
-
-  /** 监听body的鼠标离开 */
-  const onBodyMouseLeave = useCallback(() => {
-    dragendResize();
-  }, []);
+  const onBodyMouseUp = useCallback(() => dragendResize(), []);
+  const onBodyMouseLeave = useCallback(() => dragendResize(), []);
+  const onWindowBlur = useCallback(() => cancelResize(), []);
 
   useEffect(() => {
     document.body.addEventListener("mousemove", onBodyMouseMove);
     document.body.addEventListener("mouseup", onBodyMouseUp);
     document.body.addEventListener("mouseleave", onBodyMouseLeave);
-
+    window.addEventListener("blur", onWindowBlur);
     return () => {
       document.body.removeEventListener("mousemove", onBodyMouseMove);
       document.body.removeEventListener("mouseup", onBodyMouseUp);
       document.body.removeEventListener("mouseleave", onBodyMouseLeave);
+      window.removeEventListener("blur", onWindowBlur);
+      cancelResize(false);
     };
   }, []);
 

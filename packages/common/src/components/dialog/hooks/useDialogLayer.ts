@@ -138,7 +138,16 @@ const useDialogLayer = ({
         pointerEvents: "none",
         display: visible ? undefined : "none",
       }
-    : undefined;
+    : {
+        // body 使用视口坐标，避免文档滚动后窗口偏移到可视区外。
+        // 指定容器仍以内容区原点定位，保留宿主原有的滚动能力。
+        position: isBody ? "fixed" : "absolute",
+        left: 0,
+        top: 0,
+        width: "100%",
+        height: "100%",
+        pointerEvents: "none",
+      };
 
   return { layerStyle };
 };

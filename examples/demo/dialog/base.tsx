@@ -1,140 +1,159 @@
-import React, { useRef, useState } from "react";
-import { Input, Button } from "antd";
-import { XphDialog, IXphDialogProps, IXphDialogActionType } from "xph-crud";
+import { useRef, useState } from "react";
+import { Button, Input, Space, Tag, Typography, theme } from "antd";
+import { XphDialog, type IXphDialogActionType } from "xph-crud";
 
-const ReactApp: React.FC = () => {
-  const firstDialogRef = useRef<IXphDialogActionType>(null);
-  const secondDialogRef = useRef<IXphDialogActionType>(null);
-  const thirdDialogRef = useRef<IXphDialogActionType>(null);
-  const maskDialogRef = useRef<IXphDialogActionType>(null);
+const { Paragraph, Text } = Typography;
+
+function DialogContent({ description }: { description: string }) {
+  return (
+    <Space direction="vertical" size="middle" style={{ width: "100%" }}>
+      <Text>{description}</Text>
+      <Input.TextArea
+        aria-label="示例备注"
+        placeholder="输入一段备注，试试最小化后恢复"
+        autoSize={{ minRows: 2, maxRows: 4 }}
+      />
+      <Text type="secondary">
+        可拖动标题栏、拖动四角调整大小，或使用右上角的最小化和最大化按钮。
+        确定、取消均关闭窗口；本例不提交数据。
+      </Text>
+    </Space>
+  );
+}
+
+export default function DialogBase() {
+  const { token } = theme.useToken();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const bodyDialogRef = useRef<IXphDialogActionType>(null);
   const bodyMaskDialogRef = useRef<IXphDialogActionType>(null);
-  const firstDialogProps: IXphDialogProps = {
-    title: "弹窗1标题",
-    width: 1000,
-    height: 1200,
-    getPopperContainer: () => document.getElementById("docs-comp-dialog-base"),
+  const containerDialogRef = useRef<IXphDialogActionType>(null);
+  const containerMaskDialogRef = useRef<IXphDialogActionType>(null);
+  const [backgroundClicks, setBackgroundClicks] = useState(0);
+
+  const openTwoDialogs = () => {
+    bodyDialogRef.current?.open();
+    containerDialogRef.current?.open();
   };
 
-  const secondDialogProps: IXphDialogProps = {
-    // mask: true,
-    title: "弹窗2标题",
-    width: 500,
-    height: 500,
-    // height: 1200,
-    getPopperContainer: () => document.getElementById("docs-comp-dialog-base"),
-  };
-
-  const [thirdWidth, setThirdWidth] = useState(300);
-  const thirdDialogProps: IXphDialogProps = {
-    mask: false,
-    title: "弹窗3标题",
-    width: thirdWidth,
-    height: 300,
-    getPopperContainer: () => document.getElementById("docs-comp-dialog-base"),
-  };
-
-  const maskDialogProps: IXphDialogProps = {
-    title: "带遮罩的弹窗",
-    width: 400,
-    height: 300,
-    mask: true,
-    getPopperContainer: () => document.getElementById("docs-comp-dialog-base"),
-    onOk: async () => maskDialogRef.current?.close(),
-    onCancel: async () => maskDialogRef.current?.close(),
-  };
-
-  const bodyMaskDialogProps: IXphDialogProps = {
-    title: "全屏遮罩弹窗",
-    width: 400,
-    height: 300,
-    mask: true,
-    // 不配置 getPopperContainer，默认挂载到 document.body。
-    onOk: async () => bodyMaskDialogRef.current?.close(),
-    onCancel: async () => bodyMaskDialogRef.current?.close(),
-  };
-
-  const inputRef = useRef<any>(null);
-
-  const onOpenFirstDialog = () => {
-    firstDialogRef.current?.open();
-  };
-
-  const onOpenSecondDialog = () => {
-    secondDialogRef.current?.open();
-  };
-
-  const onOpenThirdDialog = () => {
-    thirdDialogRef.current?.open();
-  };
-
-  const onOpenMaskDialog = () => {
-    maskDialogRef.current?.open();
-  };
-
-  const onOpenBodyMaskDialog = () => {
-    bodyMaskDialogRef.current?.open();
-  };
-
-  const onConsoleChildrenDom = () => {
-    console.log(inputRef);
-  };
-
-  const onChangeThirdWidth = () => {
-    setThirdWidth(400);
-  };
-
-  /** 弹窗1的内容组件 */
-  const Content = () => {
-    console.log("渲染Content");
-    return (
-      <div style={{ width: "1200px", height: "1200px" }}>
-        <>我是弹窗1</>
-        <div>
-          <Input />
-        </div>
-      </div>
-    );
+  const closeAllDialogs = () => {
+    bodyDialogRef.current?.close();
+    bodyMaskDialogRef.current?.close();
+    containerDialogRef.current?.close();
+    containerMaskDialogRef.current?.close();
   };
 
   return (
     <div
-      id="docs-comp-dialog-base"
       style={{
-        width: "100%",
-        height: "100%",
-        overflow: "auto",
-        position: "relative",
+        display: "flex",
+        flexDirection: "column",
+        gap: 16,
+        padding: 16,
+        whiteSpace: "normal",
+        color: token.colorText,
       }}
     >
-      <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
-        <Button onClick={onOpenFirstDialog}>点击打开XphDialog弹窗1</Button>
-        <Button onClick={onOpenSecondDialog}>点击打开XphDialog弹窗2</Button>
-        <Button onClick={onOpenThirdDialog}>点击打开XphDialog弹窗3</Button>
-        <Button onClick={onOpenMaskDialog}>点击打开带遮罩的弹窗</Button>
-        <Button onClick={onOpenBodyMaskDialog}>点击打开全屏遮罩弹窗</Button>
-        <Button onClick={onConsoleChildrenDom}>点击打印弹窗2子元素</Button>
-        <Button onClick={onChangeThirdWidth}>点击动态改变弹窗3宽度</Button>
+      <div>
+        <Paragraph style={{ marginBottom: 8 }}>
+          <Text strong>挂载位置与遮罩独立配置。</Text>
+          默认挂到 body，不显示遮罩；指定容器后，开启遮罩也只覆盖该容器。
+        </Paragraph>
+        <Space wrap>
+          <Button type="primary" onClick={() => bodyDialogRef.current?.open()}>
+            默认弹窗（body / 无遮罩）
+          </Button>
+          <Button onClick={() => bodyMaskDialogRef.current?.open()}>
+            body / 有遮罩
+          </Button>
+          <Button onClick={openTwoDialogs}>同时打开两个无罩弹窗</Button>
+          <Button onClick={closeAllDialogs}>关闭全部</Button>
+        </Space>
       </div>
-      {/** 用来测试父元素有滚动条的情况 */}
-      <div style={{ width: "1200px", height: "1200px" }}></div>
 
-      <XphDialog {...firstDialogProps} ref={firstDialogRef}>
-        <Content />
+      <div
+        ref={containerRef}
+        role="region"
+        aria-label="指定挂载容器"
+        style={{
+          position: "relative",
+          height: 400,
+          overflow: "auto",
+          border: `1px dashed ${token.colorBorder}`,
+          borderRadius: token.borderRadiusLG,
+          background: token.colorFillAlter,
+        }}
+      >
+        <div style={{ padding: 16 }}>
+          <Space wrap style={{ marginBottom: 12 }}>
+            <Text strong>指定挂载容器</Text>
+            <Tag>getPopperContainer</Tag>
+          </Space>
+          <Paragraph type="secondary">
+            下方两个按钮将弹窗挂到这个区域。开启容器遮罩时，区域外的按钮仍可操作。
+          </Paragraph>
+          <Space wrap>
+            <Button onClick={() => containerDialogRef.current?.open()}>
+              容器内 / 无遮罩
+            </Button>
+            <Button onClick={() => containerMaskDialogRef.current?.open()}>
+              容器内 / 有遮罩
+            </Button>
+            <Button onClick={() => setBackgroundClicks((count) => count + 1)}>
+              背景按钮：已点击 {backgroundClicks} 次
+            </Button>
+          </Space>
+          <Paragraph type="secondary" style={{ marginTop: 24, marginBottom: 0 }}>
+            无遮罩时，可以拖开窗口再点击背景按钮；同时打开多个无罩窗口时，点击其中一个即可置顶。
+          </Paragraph>
+        </div>
+      </div>
+
+      {/* 不传 mask 和 getPopperContainer，使用默认的 body + 无遮罩。 */}
+      <XphDialog
+        ref={bodyDialogRef}
+        title="默认弹窗 · body / 无遮罩"
+        width={480}
+        onOk={async () => bodyDialogRef.current?.close()}
+        onCancel={async () => bodyDialogRef.current?.close()}
+      >
+        <DialogContent description="这个窗口挂在 body 上，没有遮罩，窗口外仍可操作。" />
       </XphDialog>
-      <XphDialog {...secondDialogProps} ref={secondDialogRef}>
-        <Input ref={inputRef} />
+
+      <XphDialog
+        ref={bodyMaskDialogRef}
+        title="body / 有遮罩"
+        width={480}
+        mask
+        onOk={async () => bodyMaskDialogRef.current?.close()}
+        onCancel={async () => bodyMaskDialogRef.current?.close()}
+      >
+        <DialogContent description="这个窗口使用默认的 body 容器，遮罩覆盖整个视口。请通过窗口内的确定、取消或关闭按钮退出。" />
       </XphDialog>
-      <XphDialog {...thirdDialogProps} ref={thirdDialogRef}>
-        我是弹窗3
+
+      {/* 使用当前实例的 ref，避免多个示例共用固定 ID 时挂错容器。 */}
+      <XphDialog
+        ref={containerDialogRef}
+        title="容器内 / 无遮罩"
+        width={400}
+        mask={false}
+        getPopperContainer={() => containerRef.current}
+        onOk={async () => containerDialogRef.current?.close()}
+        onCancel={async () => containerDialogRef.current?.close()}
+      >
+        <DialogContent description="这个窗口挂在虚线区域内，没有遮罩，可以继续操作区域内的背景按钮。" />
       </XphDialog>
-      <XphDialog {...maskDialogProps} ref={maskDialogRef}>
-        我是带遮罩的弹窗
-      </XphDialog>
-      <XphDialog {...bodyMaskDialogProps} ref={bodyMaskDialogRef}>
-        我是默认挂载到 body 的全屏遮罩弹窗
+
+      <XphDialog
+        ref={containerMaskDialogRef}
+        title="容器内 / 有遮罩"
+        width={400}
+        mask
+        getPopperContainer={() => containerRef.current}
+        onOk={async () => containerMaskDialogRef.current?.close()}
+        onCancel={async () => containerMaskDialogRef.current?.close()}
+      >
+        <DialogContent description="遮罩只覆盖虚线区域，并锁定该区域的背景滚动。区域外的按钮仍可操作，开启遮罩不会将窗口改挂到 body。" />
       </XphDialog>
     </div>
   );
-};
-
-export default ReactApp;
+}
