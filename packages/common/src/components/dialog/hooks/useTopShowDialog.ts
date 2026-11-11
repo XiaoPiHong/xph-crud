@@ -18,20 +18,21 @@ const useTopShowDialog = ({
     xphMinimizeDialog: "xph--dialog--minimize",
   };
 
+  /** 仅标记窗口的视觉状态，内容透明度不随层级变化。 */
+  const updateActiveStyle = (activeDialog: Element) => {
+    Array.from(container.children).forEach((dialog) => {
+      if (dialog.classList.contains(dialogTopShowClassConfig.xphDialog)) {
+        dialog.setAttribute(
+          "data-xph-dialog-active",
+          String(dialog === activeDialog)
+        );
+      }
+    });
+  };
+
   const insertAfterFunny = (newNode, referenceNode) => {
     console.log("触发插入");
-    newNode.querySelector(
-      `.${dialogTopShowClassConfig.xphDialogWrapper}`
-    ).style.opacity = "unset";
-    newNode.querySelector(
-      `.${dialogTopShowClassConfig.xphMinimizeDialog}`
-    ).style.opacity = "unset";
-    referenceNode.querySelector(
-      `.${dialogTopShowClassConfig.xphDialogWrapper}`
-    ).style.opacity = 0.7;
-    referenceNode.querySelector(
-      `.${dialogTopShowClassConfig.xphMinimizeDialog}`
-    ).style.opacity = 0.7;
+    updateActiveStyle(newNode);
 
     //==========================================================插入操作start
     // 创建一个透明的占位符
@@ -59,8 +60,14 @@ const useTopShowDialog = ({
       container.querySelectorAll(`.${dialogTopShowClassConfig.xphDialog}`)
     ).filter((item) => item?.parentNode === container);
     const lastDialog = allDialog[allDialog.length - 1];
-    if (dialogRef.current?.parentNode === lastDialog) return;
-    insertAfterFunny(dialogRef.current?.parentNode, lastDialog);
+    const currentDialog = dialogRef.current?.parentElement;
+    if (!currentDialog || !lastDialog) return;
+    if (currentDialog === lastDialog) {
+      // 单窗口或已经置顶时，也要正确显示激活样式。
+      updateActiveStyle(currentDialog);
+      return;
+    }
+    insertAfterFunny(currentDialog, lastDialog);
 
     // 如果点击的是输入框自动聚焦
     if (e) {

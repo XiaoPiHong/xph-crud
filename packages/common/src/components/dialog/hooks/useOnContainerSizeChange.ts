@@ -21,12 +21,21 @@ const useOnContainerSizeChange = ({
       container,
       mask: dialogProps.mask,
     });
+  // 可测量状态独立于尺寸变化：缓存页面恢复时只重测内容，不重置窗口。
+  const [containerMeasurable, setContainerMeasurable] = useState(
+    () =>
+      container.isConnected &&
+      containerSizeTarget.current.clientWidth > 0 &&
+      containerSizeTarget.current.clientHeight > 0
+  );
 
   useEffect(() => {
     const handleResize = () => {
       const previousSize = containerSizeTarget.current;
       // 滚动范围仍需更新，但只有可视尺寸变化时才重置窗口。
-      setContainerSizeTarget();
+      const measurable = setContainerSizeTarget();
+      setContainerMeasurable(measurable);
+      if (!measurable) return;
       const nextSize = containerSizeTarget.current;
       if (
         previousSize.clientWidth === nextSize.clientWidth &&
@@ -37,7 +46,7 @@ const useOnContainerSizeChange = ({
       setParentInitRecord((prevRecord) => prevRecord + 1);
     };
     // 首次挂载或切换容器、遮罩模式时，按新的测量基准初始化。
-    setContainerSizeTarget();
+    setContainerMeasurable(setContainerSizeTarget());
     setParentInitRecord((prevRecord) => prevRecord + 1);
     window.addEventListener("resize", handleResize);
     const resizeObserver =
@@ -106,6 +115,7 @@ const useOnContainerSizeChange = ({
 
   return {
     containerSizeTarget,
+    containerMeasurable,
     parentInitRecord,
     initLeft,
     initTop,

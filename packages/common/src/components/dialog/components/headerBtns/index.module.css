@@ -1,0 +1,46 @@
+/* Keep the window controls stable when Ant Design injects its button styles. */
+.window-control.window-control.window-control {
+  flex: 0 0 32px;
+  width: 32px;
+  min-width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  font-size: 16px;
+  line-height: 1;
+  box-shadow: none;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.window-control.window-control.window-control .window-control-icon {
+  font-size: 16px;
+}
+
+.window-control.window-control.window-control:not(:disabled) {
+  color: var(--xph-dialog-chrome-color, #595959);
+  background-color: transparent;
+}
+
+.window-control.window-control.window-control:not(:disabled):hover,
+.window-control.window-control.window-control:not(:disabled):active {
+  color: var(--xph-dialog-chrome-color, #595959);
+  background-color: var(--xph-dialog-control-hover-bg, rgba(0, 0, 0, 0.06));
+}
+
+.window-control.window-control.window-control.window-control-close:not(:disabled):hover,
+.window-control.window-control.window-control.window-control-close:not(:disabled):active {
+  color: var(--xph-dialog-close-color, #fff);
+  background-color: var(--xph-dialog-close-hover-bg, #d13438);
+}
+
+.window-control.window-control.window-control:focus-visible {
+  outline: 2px solid var(--xph-dialog-active-border, #91caff);
+  outline-offset: -2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .window-control.window-control.window-control {
+    transition: none;
+  }
+}

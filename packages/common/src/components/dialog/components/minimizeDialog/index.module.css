@@ -1,8 +1,7 @@
 .minimize-windows {
+  --xph-dialog-chrome-color: var(--xph-dialog-muted-text, #666);
   position: absolute;
   pointer-events: auto;
-  /* left: 0;
-  top: 0; */
   z-index: 999;
   display: flex;
   flex-wrap: nowrap;
@@ -12,15 +11,27 @@
   width: 250px;
   transform: translate(-50%, -50%);
   padding: 4px;
-  background-color: #fff;
+  background-color: var(--xph-dialog-bg, #fff);
+  color: var(--xph-dialog-chrome-color);
   cursor: move;
   user-select: none;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  /* border-radius: 4px; */
-  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.1),
-    0 2px 4px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--xph-dialog-border, #d9d9d9);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 160ms ease, border-color 160ms ease,
+    background-color 160ms ease, color 160ms ease;
+}
+
+:global(.xph--dialog[data-xph-dialog-active="true"]) > .minimize-windows {
+  --xph-dialog-chrome-color: var(--xph-dialog-text, #1f1f1f);
+  background-color: var(--xph-dialog-header-active-bg, #e6f4ff);
+  border-color: var(--xph-dialog-active-border, #91caff);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
 }
 .minimize-windows-title {
+  flex: 1;
+  min-width: 0;
+  padding-left: 8px;
+  font-weight: 600;
   /* 超出省略 */
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -29,6 +40,13 @@
 .minimize-windows-operate {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
   flex-wrap: nowrap;
+  flex-shrink: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .minimize-windows {
+    transition: none;
+  }
 }

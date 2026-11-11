@@ -1,10 +1,11 @@
 import {
   CloseOutlined,
-  FullscreenOutlined,
-  ShrinkOutlined,
-  FullscreenExitOutlined,
+  BorderOutlined,
+  MinusOutlined,
+  CopyOutlined,
 } from "@ant-design/icons";
 import { Button } from "antd";
+import style from "./index.module.css";
 
 /** 最小化 */
 const Minimize = ({
@@ -15,16 +16,12 @@ const Minimize = ({
 }) => {
   return (
     <Button
-      type="link"
+      type="text"
+      className={style["window-control"]}
+      aria-label="最小化"
+      title="最小化"
       onClick={onClick}
-      icon={
-        <ShrinkOutlined
-          style={{
-            fontSize: "22px",
-            cursor: "pointer",
-          }}
-        />
-      }
+      icon={<MinusOutlined className={style["window-control-icon"]} />}
     />
   );
 };
@@ -38,16 +35,12 @@ const Maximize = ({
 }) => {
   return (
     <Button
-      type="link"
+      type="text"
+      className={style["window-control"]}
+      aria-label="最大化"
+      title="最大化"
       onClick={onClick}
-      icon={
-        <FullscreenOutlined
-          style={{
-            fontSize: "22px",
-            cursor: "pointer",
-          }}
-        />
-      }
+      icon={<BorderOutlined className={style["window-control-icon"]} />}
     />
   );
 };
@@ -61,16 +54,12 @@ const Recovery = ({
 }) => {
   return (
     <Button
-      type="link"
+      type="text"
+      className={style["window-control"]}
+      aria-label="还原"
+      title="还原"
       onClick={onClick}
-      icon={
-        <FullscreenExitOutlined
-          style={{
-            fontSize: "22px",
-            cursor: "pointer",
-          }}
-        />
-      }
+      icon={<CopyOutlined className={style["window-control-icon"]} />}
     />
   );
 };
@@ -85,17 +74,13 @@ const Close = ({
 }) => {
   return (
     <Button
-      type="link"
+      type="text"
+      className={`${style["window-control"]} ${style["window-control-close"]}`}
+      aria-label="关闭"
+      title="关闭"
       onClick={onClick}
       disabled={disabled}
-      icon={
-        <CloseOutlined
-          style={{
-            fontSize: "22px",
-            cursor: "pointer",
-          }}
-        />
-      }
+      icon={<CloseOutlined className={style["window-control-icon"]} />}
     />
   );
 };

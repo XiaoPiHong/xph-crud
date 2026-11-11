@@ -48,6 +48,19 @@ const Dialog = forwardRef<
   const contentStyle: React.CSSProperties = {
     borderRadius: token.borderRadiusLG,
   };
+  const windowThemeStyle = {
+    "--xph-dialog-bg": token.colorBgElevated,
+    "--xph-dialog-text": token.colorText,
+    "--xph-dialog-muted-text": token.colorTextSecondary,
+    "--xph-dialog-header-bg": token.colorFillAlter,
+    "--xph-dialog-header-active-bg": token.colorPrimaryBg,
+    "--xph-dialog-border": token.colorBorder,
+    "--xph-dialog-separator": token.colorBorderSecondary,
+    "--xph-dialog-active-border": token.colorPrimaryBorder,
+    "--xph-dialog-control-hover-bg": token.colorFillSecondary,
+    "--xph-dialog-close-hover-bg": token.colorError,
+    "--xph-dialog-close-color": token.colorTextLightSolid,
+  } as React.CSSProperties;
   const {
     children,
     baseDialogProps,
@@ -57,7 +70,9 @@ const Dialog = forwardRef<
     renderTitle,
     getPopperContainer,
   } = dialogProps;
-  const container = getPopperContainer!() as HTMLElement;
+  // Portal 固定挂载到首次取得的容器；缓存页面切走后，选择器可能指向另一个页签。
+  // 尺寸、遮罩与滚动锁必须继续使用实际挂载的容器。
+  const [container] = useState(() => getPopperContainer!() as HTMLElement);
   const [visible, setVisible] = useAsyncState(false);
   const [loading, setLoading] = useState(false);
   const { layerStyle } = useDialogLayer({ container, mask, visible });
@@ -74,6 +89,7 @@ const Dialog = forwardRef<
   const dialogFooterRef = useRef<HTMLDivElement>(null);
   const {
     containerSizeTarget,
+    containerMeasurable,
     parentInitRecord,
     initLeft,
     initTop,
@@ -120,8 +136,8 @@ const Dialog = forwardRef<
   });
 
   const { dialogMaxHeight, contentMaxHeight } = useDialogContentMaxHeight({
-    // 最小化时主窗口不可测量，恢复显示后再按最新容器尺寸计算。
-    visible: visible && !minimizeVisible,
+    // 最小化或缓存页面脱离布局时不可测量，恢复后重新计算内容高度。
+    visible: visible && !minimizeVisible && containerMeasurable,
     containerSizeTarget,
     dialogHeight,
     dialogRef,
@@ -205,7 +221,10 @@ const Dialog = forwardRef<
     getVisible: () => visible,
   }));
   return (
-    <div className={dialogTopShowClassConfig["xphDialog"]} style={layerStyle}>
+    <div
+      className={dialogTopShowClassConfig["xphDialog"]}
+      style={{ ...windowThemeStyle, ...layerStyle }}
+    >
       {/** 遮罩层=============================================== */}
       {/** 遮罩层和窗口共用挂载容器内的定位、层级 */}
       {mask && visible ? (
@@ -242,7 +261,14 @@ const Dialog = forwardRef<
       >
         {/** 弹窗头部header========================================================== */}
         <div ref={dialogHeaderRef} className={style["dialog__header"]}>
-          <div>{renderTitle ? renderTitle() : title}</div>
+          <div
+            className={`${style["dialog__title"]} ${
+              renderTitle ? "" : style["dialog__title-text"]
+            }`}
+            title={renderTitle ? undefined : title}
+          >
+            {renderTitle ? renderTitle() : title}
+          </div>
           <div className={style["dialog__header-btns"]}>
             <Minimize onClick={onMinimize} />
             {maximizeVisible ? (

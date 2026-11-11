@@ -27,46 +27,62 @@ const useDialogContentMaxHeight = ({
     "unset"
   );
 
+  const canMeasure = useCallback(() => {
+    const dialog = dialogRef.current;
+    return (
+      containerMaxHeight > 0 &&
+      dialog?.isConnected &&
+      dialog.getClientRects().length > 0
+    );
+  }, [containerMaxHeight, dialogRef]);
+
   /** 计算弹窗内容的最大高度 */
   const getMainMaxHeight = useCallback(
     (dialogHeight: number, containerHeight: number) => {
       /** 目前弹窗没有设置边框，所以先为0 */
       const borderTopWidth = 0;
       const borderBottomWidth = 0;
-      const headerHeight = dialogHeaderRef.current?.offsetHeight;
-      const footerHeight = dialogFooterRef.current?.offsetHeight;
+      const headerHeight = dialogHeaderRef.current?.offsetHeight ?? 0;
+      const footerHeight = dialogFooterRef.current?.offsetHeight ?? 0;
       let mainMaxHeight =
         dialogHeight -
-        headerHeight! -
-        footerHeight! -
+        headerHeight -
+        footerHeight -
         (borderTopWidth + borderBottomWidth);
       /** 临界检查 */
       const containerMainMaxHeight =
         containerHeight -
-        headerHeight! -
-        footerHeight! -
+        headerHeight -
+        footerHeight -
         (borderTopWidth + borderBottomWidth);
       if (mainMaxHeight > containerMainMaxHeight) {
         mainMaxHeight = containerMainMaxHeight;
       }
-      return mainMaxHeight;
+      return Math.max(0, mainMaxHeight);
     },
     [dialogHeaderRef, dialogFooterRef]
   );
 
   /** 根据限制高度后的窗口尺寸，计算内容区的可滚动高度。 */
   useEffect(() => {
-    if (!visible) return;
+    if (!visible || !canMeasure()) return;
     if (dialogMaxHeight === containerMaxHeight) {
       console.log("触发了dialogMaxHeight改变");
       const curDialogHeight = dialogRef.current?.getBoundingClientRect().height;
       setContentMaxHeight(getMainMaxHeight(curDialogHeight!, containerMaxHeight));
       setDialogMaxHeight("unset");
     }
-  }, [visible, dialogMaxHeight, containerMaxHeight, dialogRef, getMainMaxHeight]);
+  }, [
+    visible,
+    dialogMaxHeight,
+    containerMaxHeight,
+    dialogRef,
+    getMainMaxHeight,
+    canMeasure,
+  ]);
 
   useEffect(() => {
-    if (!visible) return;
+    if (!visible || !canMeasure()) return;
     if (dialogHeight !== "unset" && dialogHeight !== 0) {
       console.log("触发了重新设置contentMaxHeight", dialogHeight);
       setContentMaxHeight(
@@ -74,17 +90,20 @@ const useDialogContentMaxHeight = ({
       );
       setDialogMaxHeight("unset");
     }
-  }, [visible, dialogHeight, containerMaxHeight, getMainMaxHeight]);
+  }, [visible, dialogHeight, containerMaxHeight, getMainMaxHeight, canMeasure]);
 
   /** 主窗口显示或容器高度变化时重新测量，关闭或最小化时重置。 */
   useEffect(() => {
     if (visible) {
+      if (!canMeasure()) return;
+      // 重新测量前解除旧内容区上限，避免使用被旧尺寸压缩后的高度。
+      setContentMaxHeight("unset");
       setDialogMaxHeight(containerMaxHeight);
     } else {
       setDialogMaxHeight(0);
       setContentMaxHeight("unset");
     }
-  }, [visible, containerMaxHeight]);
+  }, [visible, containerMaxHeight, canMeasure]);
 
   return {
     dialogMaxHeight,

@@ -8,29 +8,73 @@
 }
 
 .xph-dialog-wrapper {
+  --xph-dialog-chrome-color: var(--xph-dialog-muted-text, #666);
   position: absolute;
   pointer-events: auto;
   z-index: 999;
-  background-color: #fff;
+  background-color: var(--xph-dialog-bg, #fff);
+  color: var(--xph-dialog-text, #1f1f1f);
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.1),
-    0 2px 4px rgba(0, 0, 0, 0.06);
+  /* 内描边不占用布局尺寸，避免影响窗口宽高及拉伸计算。 */
+  outline: 1px solid var(--xph-dialog-border, #d9d9d9);
+  outline-offset: -1px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 160ms ease, outline-color 160ms ease;
 }
+
+:global(.xph--dialog[data-xph-dialog-active="true"]) > .xph-dialog-wrapper {
+  --xph-dialog-chrome-color: var(--xph-dialog-text, #1f1f1f);
+  outline-color: var(--xph-dialog-active-border, #91caff);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2),
+    0 3px 8px rgba(0, 0, 0, 0.08);
+}
+
 .dialog__header {
   display: flex;
-  padding: 8px;
+  padding: 6px 8px 6px 12px;
+  gap: 8px;
   justify-content: space-between;
   align-items: center;
   cursor: move;
   user-select: none;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  border-bottom: 1px solid var(--xph-dialog-separator, #f0f0f0);
+  background-color: var(--xph-dialog-header-bg, #fafafa);
+  color: var(--xph-dialog-chrome-color);
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+:global(.xph--dialog[data-xph-dialog-active="true"])
+  > .xph-dialog-wrapper
+  > .dialog__header {
+  background-color: var(--xph-dialog-header-active-bg, #e6f4ff);
+}
+
+.dialog__title {
+  flex: 1;
+  min-width: 0;
+  font-weight: 600;
+}
+
+.dialog__title-text {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .dialog__header-btns {
   display: flex;
-  gap: 16px;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .xph-dialog-wrapper,
+  .dialog__header {
+    transition: none;
+  }
 }
 .dialog__main {
   flex: 1;
